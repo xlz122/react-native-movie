@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import { followActors, unFollowActors } from '@/api/actor';
-import type { ResponseType } from '@/types/index';
+import type { RootState } from '@/store/index';
+import type { ResponseType, Navigation } from '@/types/index';
 
 type Props = {
   data: Partial<Info>;
@@ -20,10 +23,18 @@ type Info = {
 };
 
 function ActorInfo(props: Props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+  const isLogin = useSelector((state: RootState) => state.routine.isLogin);
+
   const { data } = props;
 
   // 关注/取消关注影人
-  const collectionChange = (is_collection: number): void => {
+  const collectionChange = (is_collection: number): boolean | undefined => {
+    if (!isLogin) {
+      navigation.push('Login');
+      return false;
+    }
+
     if (is_collection === 0) {
       followActors({ id: data.id })
         .then((res: ResponseType<unknown>) => {
