@@ -32,8 +32,7 @@ commitlint提交校验
 
 阿里字体图标
 * react-native-asset
-
-描述文档请查看: [docs/iconfont.md](iconfont.md)。
+* 描述文档请查看: [docs/iconfont.md](docs/iconfont.md)。
 
 
 手势
