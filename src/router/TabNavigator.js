@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -7,34 +7,34 @@ const Tab = createBottomTabNavigator();
 const tabbar = [
   {
     name: 'Find',
-    label: '发现',
+    label: '首页',
     headerShown: false,
-    icon: require('../assets/image/tab/tab-find.png'),
-    selectIcon: require('../assets/image/tab/tab-finded.png'),
+    icon: '\ue908',
+    selectIcon: '\ue908',
     component: require('../views/bolg/Bolg.js').default
   },
   {
     name: 'Bolg',
-    label: '播客',
+    label: '分类',
     headerShown: false,
-    icon: require('../assets/image/tab/tab-bolg.png'),
-    selectIcon: require('../assets/image/tab/tab-bolged.png'),
+    icon: '\ue636',
+    selectIcon: '\ue636',
+    component: require('../views/bolg/Bolg.js').default
+  },
+  {
+    name: 'Follow',
+    label: '短片',
+    headerShown: false,
+    icon: '\ue617',
+    selectIcon: '\ue617',
     component: require('../views/bolg/Bolg.js').default
   },
   {
     name: 'Mine',
     label: '我的',
     headerShown: false,
-    icon: require('../assets/image/tab/tab-mine.png'),
-    selectIcon: require('../assets/image/tab/tab-mineed.png'),
-    component: require('../views/bolg/Bolg.js').default
-  },
-  {
-    name: 'Follow',
-    label: '关注',
-    headerShown: false,
-    icon: require('../assets/image/tab/tab-follow.png'),
-    selectIcon: require('../assets/image/tab/tab-followed.png'),
+    icon: '\ue909',
+    selectIcon: '\ue909',
     component: require('../views/bolg/Bolg.js').default
   }
 ];
@@ -43,10 +43,10 @@ function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarInactiveTintColor: '#b3b3b3',
-        tabBarActiveTintColor: 'red',
+        tabBarInactiveTintColor: '#b7bac3',
+        tabBarActiveTintColor: '#e54847',
         tabBarStyle: {
-          fontSize: 26
+          height: 50
         },
         tabBarLabelStyle: {
           fontSize: 9
@@ -68,10 +68,9 @@ function TabNavigator() {
               headerShown: item.headerShown,
               tabBarIcon: ({ focused }) => {
                 return (
-                  <Image
-                    source={focused ? item.selectIcon : item.icon}
-                    style={[styles.image]}
-                  />
+                  <Text style={[focused ? styles.selectIcon : styles.icon]}>
+                    {focused ? item.selectIcon : item.icon}
+                  </Text>
                 );
               }
             }}
@@ -83,9 +82,15 @@ function TabNavigator() {
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 27,
-    height: 27
+  icon: {
+    fontFamily: 'iconfont',
+    fontSize: 24,
+    color: '#b7bac3'
+  },
+  selectIcon: {
+    fontFamily: 'iconfont',
+    fontSize: 24,
+    color: '#e54847'
   }
 });
 

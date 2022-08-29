@@ -22,8 +22,19 @@
 * React
 * React Native 0.69.5
 * Redux
+* Typescript
 
 ## 插件介绍
+
+commitlint提交校验
+
+* ts-node
+
+阿里字体图标
+* react-native-asset
+
+描述文档请查看: [docs/iconfont.md](iconfont.md)。
+
 
 手势
 * react-native-gesture-handler
@@ -43,10 +54,6 @@
 
 tab导航
 * @react-navigation/bottom-tabs
-
-commitlint提交校验
-
-* ts-node
 
 ## 加入项目
 
