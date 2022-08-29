@@ -11,23 +11,23 @@ const tabbar = [
     headerShown: false,
     icon: '\ue908',
     selectIcon: '\ue908',
-    component: require('../views/bolg/Bolg.js').default
+    component: require('../views/home/Home').default
   },
   {
-    name: 'Bolg',
+    name: 'Movies',
     label: '分类',
     headerShown: false,
     icon: '\ue636',
     selectIcon: '\ue636',
-    component: require('../views/bolg/Bolg.js').default
+    component: require('../views/movies/Movies').default
   },
   {
-    name: 'Follow',
+    name: 'Videos',
     label: '短片',
     headerShown: false,
     icon: '\ue617',
     selectIcon: '\ue617',
-    component: require('../views/bolg/Bolg.js').default
+    component: require('../views/videos/Videos').default
   },
   {
     name: 'Mine',
@@ -35,11 +35,11 @@ const tabbar = [
     headerShown: false,
     icon: '\ue909',
     selectIcon: '\ue909',
-    component: require('../views/bolg/Bolg.js').default
+    component: require('../views/mine/Mine').default
   }
 ];
 
-function TabNavigator() {
+function TabNavigator(): React.ReactElement {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -61,7 +61,6 @@ function TabNavigator() {
           <Tab.Screen
             key={index}
             name={item.name}
-            headerShown={item.headerShown}
             component={item.component}
             options={{
               tabBarLabel: item.label,

@@ -1,4 +1,16 @@
-const router = [
+import type { FunctionComponent } from 'react';
+import type { ViewStyle } from 'react-native';
+
+export type Router = {
+  name: string;
+  title: string;
+  headerShown: boolean;
+  headerStyle?: ViewStyle;
+  headerTitleStyle?: ViewStyle;
+  component: FunctionComponent;
+};
+
+const router: Router[] = [
   {
     name: 'Home', // 跳转路径
     title: '', // 标题
