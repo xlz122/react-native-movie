@@ -5,6 +5,7 @@ import { colorToRgba } from '../../utils/utils';
 import { index } from '../../api/home';
 import Search from './search/Search';
 import Banner from './banner/Banner';
+import Nav from './nav/Nav';
 
 function Home(): React.ReactElement {
   // 轮播图
@@ -51,7 +52,7 @@ function Home(): React.ReactElement {
   }, [banner]);
 
   const bannerChange = (index: number): void => {
-    const color = banner[index].bgcolor;
+    const color = banner[index]?.bgcolor || '#f5f5f5';
 
     handlerGradualChange(color);
   };
@@ -61,6 +62,7 @@ function Home(): React.ReactElement {
       <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
         <Search />
         <Banner banner={banner} onChange={bannerChange} />
+        <Nav />
       </LinearGradinet>
     </View>
   );
