@@ -15,9 +15,11 @@ function Search(): React.ReactElement {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    height: 50,
+    height: 28,
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    marginTop: 11,
+    marginBottom: 11
   },
   input: {
     display: 'flex',
@@ -25,8 +27,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    background: 'rgba(255, 255, 255, 0.8)',
-    borderRadius: 18
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 48
   },
   inputIcon: {
     paddingLeft: 10,
