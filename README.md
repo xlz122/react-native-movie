@@ -84,6 +84,9 @@ react-native-reanimated@^2.9.1:
     string-hash-64 "^1.0.3"
 ```
 
+渐变背景色
+* react-native-linear-gradient
+
 ## 加入项目
 
 如果想加入本项目开发，需将项目fork到自己的仓库下，功能开发完成后，提PR即可。
