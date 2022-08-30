@@ -47,6 +47,9 @@ function Banner(props): React.ReactElement {
         onProgressChange={(_, absoluteProgress) =>
           (progressValue.value = absoluteProgress)
         }
+        onSnapToItem={index => {
+          props.onChange(index);
+        }}
       />
       <Dot list={props.banner} progressValue={progressValue} />
     </View>

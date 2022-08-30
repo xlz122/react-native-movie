@@ -8,16 +8,7 @@ import Banner from './banner/Banner';
 
 function Home(): React.ReactElement {
   // 轮播图
-  const [banner, setBanner] = useState<unknown[]>([]);
-
-  const bgcolorRgba = colorToRgba('#503725', 1);
-  const bgcolorRgba1 = colorToRgba('#503725', 0.88);
-  const bgcolorRgba2 = colorToRgba('#503725', 0.65);
-  const bgcolorRgba3 = colorToRgba('#503725', 0.45);
-  const bgcolorRgba4 = colorToRgba('#503725', 0);
-  console.log(bgcolorRgba);
-  console.log(bgcolorRgba1);
-  console.log(bgcolorRgba2);
+  const [banner, setBanner] = useState<{ bgcolor: string }[]>([]);
 
   const getIndex = () => {
     index()
@@ -34,20 +25,42 @@ function Home(): React.ReactElement {
     getIndex();
   }, []);
 
+  // 渐变背景色
+  const [gradientColor, setGradientColor] = useState<string[]>([
+    '#f5f5f5',
+    '#f5f5f5'
+  ]);
+
+  const handlerGradualChange = (color: string): void => {
+    const result: string[] = [];
+
+    const gradient = [1, 0.88, 0.65, 0.45, 0];
+    gradient.forEach((item: number) => {
+      result.push(colorToRgba(color, item));
+    });
+
+    setGradientColor(result);
+  };
+
+  useEffect(() => {
+    if (banner.length === 0) {
+      return;
+    }
+
+    handlerGradualChange(banner[0].bgcolor);
+  }, [banner]);
+
+  const bannerChange = (index: number): void => {
+    const color = banner[index].bgcolor;
+
+    handlerGradualChange(color);
+  };
+
   return (
     <View style={styles.container}>
-      <LinearGradinet
-        colors={[
-          bgcolorRgba,
-          bgcolorRgba1,
-          bgcolorRgba2,
-          bgcolorRgba3,
-          bgcolorRgba4
-        ]}
-        style={styles.bgcolor}
-      >
+      <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
         <Search />
-        <Banner banner={banner} />
+        <Banner banner={banner} onChange={bannerChange} />
       </LinearGradinet>
     </View>
   );
