@@ -6,7 +6,7 @@ import Banner from './banner/Banner';
 
 function Home(): React.ReactElement {
   // 轮播图
-  const [banner, setBanner] = useState([]);
+  const [banner, setBanner] = useState<unknown[]>([]);
 
   const getIndex = () => {
     index()
@@ -24,7 +24,7 @@ function Home(): React.ReactElement {
 
   return (
     <View style={styles.container}>
-      <View style={styles.bgColor} />
+      <View style={styles.bgcolor} />
       <Search />
       <Banner banner={banner} />
     </View>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f5f5f5'
   },
-  bgColor: {
+  bgcolor: {
     position: 'absolute',
     top: 0,
     left: 0,
