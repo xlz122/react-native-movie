@@ -111,7 +111,11 @@ yarn android
 
 安卓手机教程: [https://blog.csdn.net/weixin_43233914/article/details/119568245](https://blog.csdn.net/weixin_43233914/article/details/119568245)。
 
-### 项目效果图
+## 项目效果图
+
+|首页|分类|短片|我的|
+|---|---|---|---|
+|![](./src/static/design-sketch/home.jpg)|![](./src/static/design-sketch/movies.jpg)|![](./src/static/design-sketch/videos.jpg)|![](./src/static/design-sketch/mine.jpg)|
 
 ## 写在最后
 
