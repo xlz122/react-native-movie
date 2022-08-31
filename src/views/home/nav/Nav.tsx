@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     margin: 10,
     backgroundColor: '#fff',
-    borderRadius: 4
+    borderRadius: 6
   },
   list: {
     display: 'flex',

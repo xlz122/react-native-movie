@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: 0,
     backgroundColor: '#fff',
-    borderRadius: 4
+    borderRadius: 6
   },
   header: {
     display: 'flex',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     marginLeft: 4,
-    fontSize: 16,
+    fontSize: 14,
     color: '#666'
   },
   more: {
@@ -68,12 +68,12 @@ const styles = StyleSheet.create({
     paddingLeft: 4
   },
   moreText: {
-    fontSize: 14,
+    fontSize: 11,
     color: '#666'
   },
   moreIcon: {
     fontFamily: 'iconfont',
-    fontSize: 12,
+    fontSize: 11,
     color: '#666'
   }
 });

@@ -68,30 +68,30 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     width: 94,
-    height: 134,
-    borderRadius: 2
+    height: 130,
+    borderRadius: 3
   },
   itemTag: {
     position: 'absolute',
-    top: 4,
-    right: 4,
-    width: 32,
-    height: 18,
+    top: 6,
+    right: 6,
+    width: 22,
+    height: 13,
     backgroundColor: 'rgba(255, 165, 0, 0.7)',
-    fontSize: 12,
+    fontSize: 9,
     color: '#fff',
     textAlign: 'center',
     borderRadius: 2
   },
   itemRating: {
     position: 'absolute',
-    bottom: 33,
+    bottom: 34,
     right: 4,
-    fontSize: 12,
+    fontSize: 11,
     color: 'orange'
   },
   itemText: {
-    marginTop: 6,
+    marginTop: 5,
     width: 94,
     color: '#333',
     fontSize: 12
