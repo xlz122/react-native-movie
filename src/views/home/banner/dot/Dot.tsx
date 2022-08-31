@@ -13,8 +13,7 @@ type Props = {
 };
 
 function Dot(props: Props): React.ReactElement {
-  const PaginationItem = props => {
-    const { animValue, index, length } = props;
+  const PaginationItem = ({ animValue, index, length }) => {
     const width = 15;
 
     const animStyle = useAnimatedStyle(() => {

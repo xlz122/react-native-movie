@@ -1,29 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
-import { index } from '../../api/home';
+import { indexData } from '../../api/home';
+import type { ResponseType } from '../../types/index';
+import Panel from '../../components/panel/Panel';
 import Search from './search/Search';
 import Banner from './banner/Banner';
 import Nav from './nav/Nav';
+import Category from './category/Category';
+
+type Gathers = {
+  swiper?: { bgcolor: string }[];
+  theater: {
+    data?: unknown[];
+    total?: number;
+  };
+  coming: {
+    data?: unknown[];
+    total?: number;
+  };
+  today: {
+    data?: unknown[];
+    total?: number;
+  };
+};
 
 function Home(): React.ReactElement {
   // 轮播图
-  const [banner, setBanner] = useState<{ bgcolor: string }[]>([]);
+  const [banner, setBanner] = useState<Gathers['swiper']>([]);
+  // 电影分类
+  const [movie, setMovie] = useState<Partial<Gathers>>({
+    theater: {},
+    coming: {},
+    today: {}
+  });
 
-  const getIndex = () => {
-    index()
-      .then((res: any) => {
+  const getIndexData = () => {
+    indexData()
+      .then((res: ResponseType<Gathers>) => {
         if (res.code === 200) {
-          console.log(res);
-          setBanner(res.data.swiper);
+          setBanner(res?.data?.swiper);
+          setMovie({
+            theater: res?.data?.theater,
+            coming: res?.data?.coming,
+            today: res?.data?.today
+          });
         }
       })
       .catch(() => ({}));
   };
 
   useEffect(() => {
-    getIndex();
+    getIndexData();
   }, []);
 
   // 渐变背景色
@@ -44,7 +73,7 @@ function Home(): React.ReactElement {
   };
 
   useEffect(() => {
-    if (banner.length === 0) {
+    if (!banner || banner.length === 0) {
       return;
     }
 
@@ -52,31 +81,55 @@ function Home(): React.ReactElement {
   }, [banner]);
 
   const bannerChange = (index: number): void => {
-    const color = banner[index]?.bgcolor || '#f5f5f5';
+    const color = (banner && banner[index].bgcolor) || '#f5f5f5';
 
     handlerGradualChange(color);
   };
 
   return (
-    <View style={styles.container}>
-      <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
-        <Search />
-        <Banner banner={banner} onChange={bannerChange} />
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+        <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
+          <Search />
+          <Banner banner={banner} onChange={bannerChange} />
+        </LinearGradinet>
         <Nav />
-      </LinearGradinet>
-    </View>
+        <Panel
+          title="正在热映"
+          subtitle={`${movie?.theater?.total}部`}
+          to="/theater"
+        >
+          <Category movie={movie?.theater?.data} />
+        </Panel>
+        <Panel
+          title="即将上映"
+          subtitle={`${movie?.coming?.total}部`}
+          to="/coming"
+        >
+          <Category movie={movie?.coming?.data} />
+        </Panel>
+        <Panel
+          title="那年今日"
+          subtitle={`${movie?.today?.total}部`}
+          to="/today"
+        >
+          <Category movie={movie?.today?.data} />
+        </Panel>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 240,
+    paddingBottom: 10,
     backgroundColor: '#f5f5f5'
   },
   bgcolor: {
     position: 'absolute',
     top: 0,
     left: 0,
-    zIndex: -1,
     width: '100%',
     height: 300
   }
