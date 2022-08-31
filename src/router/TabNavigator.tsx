@@ -49,10 +49,10 @@ function TabNavigator(): React.ReactElement {
           height: 50
         },
         tabBarLabelStyle: {
-          fontSize: 9
+          fontSize: 10
         },
         tabBarItemStyle: {
-          height: 43
+          height: 44
         }
       }}
     >
@@ -83,12 +83,12 @@ function TabNavigator(): React.ReactElement {
 const styles = StyleSheet.create({
   icon: {
     fontFamily: 'iconfont',
-    fontSize: 24,
+    fontSize: 22,
     color: '#b7bac3'
   },
   selectIcon: {
     fontFamily: 'iconfont',
-    fontSize: 24,
+    fontSize: 22,
     color: '#e54847'
   }
 });
