@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 function Nav(): React.ReactElement {
   return (
-    <View style={styles.container}>
+    <View style={styles.nav}>
       <View style={styles.list}>
         <View style={styles.item}>
           <Text style={[styles.itemIcon, styles.hotMovie]}>{'\ue617'}</Text>
@@ -27,7 +27,7 @@ function Nav(): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  nav: {
     display: 'flex',
     paddingTop: 20,
     paddingBottom: 10,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontFamily: 'iconfont',
     fontSize: 22,
     textAlign: 'center',
-    borderRadius: 8
+    borderRadius: 6
   },
   itemText: {
     marginTop: 6,
