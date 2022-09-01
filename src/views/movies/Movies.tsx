@@ -46,7 +46,7 @@ function Movies(): React.ReactElement {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.movie}>
       <Nav onChange={navChange} />
       <View style={styles.list}>
         {movie.map(item => {
@@ -74,13 +74,14 @@ function Movies(): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  movie: {
     minHeight: viewHeight,
     backgroundColor: '#fff'
   },
   list: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     paddingTop: 10,
     paddingBottom: 15,
