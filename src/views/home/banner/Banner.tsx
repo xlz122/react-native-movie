@@ -24,9 +24,9 @@ function Banner(props): React.ReactElement {
         <View style={styles.coverContainer}>
           <View style={styles.cover}>
             <Image
-              style={styles.coverImage}
               source={{ uri: item.banner }}
               resizeMode={'stretch'}
+              style={styles.coverImage}
             />
           </View>
         </View>

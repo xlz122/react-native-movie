@@ -14,9 +14,9 @@ function Category(props): React.ReactElement {
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
         <Image
-          style={[styles.itemImage]}
           source={{ uri: item.poster }}
           resizeMode={'stretch'}
+          style={[styles.itemImage]}
         />
         {item?.category && item?.category !== '电影' && (
           <Text style={styles.itemTag}>{item?.category}</Text>
