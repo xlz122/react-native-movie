@@ -15,7 +15,7 @@
 
 ## 简介
 
-本项目是一个仿写慕影网H5端项目。
+本项目是一个仿写[慕影网H5端](https://github.com/NameLi/muying-h5)项目。
 
 ## 项目使用技术栈
 
@@ -54,7 +54,7 @@ yarn android
 
 ## 查看项目效果
 
-安卓手机教程: [https://blog.csdn.net/weixin_43233914/article/details/119568245](https://blog.csdn.net/weixin_43233914/article/details/119568245)。
+安卓手机教程: [https://blog.csdn.net/weixin_43233914/article/details/119568245](https://blog.csdn.net/weixin_43233914/article/details/119568245)
 
 ## 项目效果图
 
