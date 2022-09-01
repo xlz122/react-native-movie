@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     flex: 1,
+    fontSize: 13,
     color: '#666'
   }
 });

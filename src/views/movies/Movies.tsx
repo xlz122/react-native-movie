@@ -75,7 +75,6 @@ function Movies(): React.ReactElement {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 10,
     minHeight: viewHeight,
     backgroundColor: '#fff'
   },
@@ -84,6 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     paddingTop: 10,
+    paddingBottom: 15,
     paddingLeft: 7,
     paddingRight: 7
   },
@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
   },
   itemRating: {
     position: 'absolute',
+    right: 8,
     bottom: 38,
-    right: 14,
     fontSize: 11,
     color: 'orange'
   },
