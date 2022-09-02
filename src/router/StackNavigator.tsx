@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import type { ParamListBase, RouteProp } from '@react-navigation/native';
 import router from './index';
+import CustomHeader from '../components/custom-header/CustomHeader';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +18,14 @@ const getChildTitle = (route: Route) => {
 
 function StackNavigator(): React.ReactElement {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        // 自定义标头
+        header: ({ navigation, options }) => {
+          return <CustomHeader navigation={navigation} options={options} />;
+        }
+      }}
+    >
       {router.map((item, index) => {
         return (
           <Stack.Screen

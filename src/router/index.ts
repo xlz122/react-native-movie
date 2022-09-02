@@ -20,7 +20,7 @@ const router: Router[] = [
   // 非tabbar页面路径
   {
     name: 'Login',
-    title: '登录',
+    title: '',
     headerShown: false,
     component: require('../views/login/Login').default
   }
