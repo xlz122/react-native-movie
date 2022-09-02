@@ -8,13 +8,9 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
 import { theaterData } from '../../api/theater';
 import type { ResponseType } from '../../types/index';
 import type { TheaterParams } from '../../api/theater';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 type Movie = {
   id: number;
@@ -89,8 +85,7 @@ function Theater(): React.ReactElement {
 
 const styles = StyleSheet.create({
   theater: {
-    marginTop: 8,
-    minHeight: viewHeight,
+    paddingTop: 8,
     backgroundColor: '#fff'
   },
   item: {
