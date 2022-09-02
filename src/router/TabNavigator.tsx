@@ -48,11 +48,11 @@ function TabNavigator(): React.ReactElement {
         tabBarStyle: {
           height: 50
         },
-        tabBarLabelStyle: {
-          fontSize: 10
-        },
         tabBarItemStyle: {
           height: 44
+        },
+        tabBarLabelStyle: {
+          fontSize: 10
         }
       }}
     >
@@ -63,8 +63,8 @@ function TabNavigator(): React.ReactElement {
             name={item.name}
             component={item.component}
             options={{
+              headerShown: item.headerShown, // 选项卡的头部标题栏
               tabBarLabel: item.label,
-              headerShown: item.headerShown,
               tabBarIcon: ({ focused }) => {
                 return (
                   <Text style={[focused ? styles.selectIcon : styles.icon]}>
