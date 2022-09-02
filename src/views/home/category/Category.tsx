@@ -21,7 +21,7 @@ function Category(props): React.ReactElement {
         {item?.category && item?.category !== '电影' && (
           <Text style={styles.itemTag}>{item?.category}</Text>
         )}
-        {item?.rating && (
+        {item?.rating?.length && (
           <Text style={styles.itemRating}>{item?.rating}分</Text>
         )}
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
