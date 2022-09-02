@@ -98,7 +98,7 @@ function Login({ navigation }): React.ReactElement {
 const styles = StyleSheet.create({
   login: {
     minHeight: viewHeight,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#fff'
   },
   close: {
     paddingLeft: 16,
