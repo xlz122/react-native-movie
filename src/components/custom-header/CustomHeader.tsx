@@ -12,10 +12,10 @@ type Props = {
 function CustomHeader(props: Props): React.ReactElement {
   return (
     <View style={styles.header}>
-      <Text style={styles.icon}>{'\ue656'}</Text>
-      <Text onPress={() => props?.navigation?.goBack()} style={styles.text}>
-        {props?.options?.title}
+      <Text onPress={() => props?.navigation?.goBack()} style={styles.icon}>
+        {'\ue656'}
       </Text>
+      <Text style={styles.text}>{props?.options?.title}</Text>
       {props?.children}
     </View>
   );
