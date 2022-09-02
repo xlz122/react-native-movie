@@ -5,7 +5,7 @@ import { getScreenViewHeight } from '../../utils/screen';
 // 获取屏幕内容高度
 const viewHeight = getScreenViewHeight();
 
-function Mine(): React.ReactElement {
+function Mine({ navigation }): React.ReactElement {
   return (
     <View style={styles.mine}>
       <View style={styles.userInfo}>
@@ -14,7 +14,9 @@ function Mine(): React.ReactElement {
           resizeMode={'stretch'}
           style={[styles.avatar]}
         />
-        <Text style={styles.userText}>立即登录</Text>
+        <Text onPress={() => navigation.push('Login')} style={styles.userText}>
+          立即登录
+        </Text>
         <Text style={styles.settingIcon}>{'\ue65e'}</Text>
       </View>
       <View style={styles.menu}>
