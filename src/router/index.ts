@@ -23,6 +23,12 @@ const router: Router[] = [
     title: '',
     headerShown: false,
     component: require('../views/login/Login').default
+  },
+  {
+    name: 'Theater',
+    title: '正在热映',
+    headerShown: true,
+    component: require('../views/theater/Theater').default
   }
 ];
 
