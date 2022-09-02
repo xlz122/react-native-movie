@@ -3,12 +3,16 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
 import { indexData } from '../../api/home';
-import type { ResponseType } from '../../types/index';
+import type { ResponseType, Navigation } from '../../types/index';
 import Panel from '../../components/panel/Panel';
 import Search from './search/Search';
 import Banner from './banner/Banner';
 import Nav from './nav/Nav';
 import Category from './category/Category';
+
+type Props = {
+  navigation: Navigation;
+};
 
 type Gathers = {
   swiper?: { bgcolor: string }[];
@@ -26,7 +30,7 @@ type Gathers = {
   };
 };
 
-function Home(): React.ReactElement {
+function Home({ navigation }: Props): React.ReactElement {
   // 轮播图
   const [banner, setBanner] = useState<Gathers['swiper']>([]);
   // 电影分类
@@ -93,7 +97,7 @@ function Home(): React.ReactElement {
           <Search />
           <Banner banner={banner} onChange={bannerChange} />
         </LinearGradinet>
-        <Nav />
+        <Nav navigation={navigation} />
         <Panel
           title="正在热映"
           subtitle={`${movie?.theater?.total}部`}

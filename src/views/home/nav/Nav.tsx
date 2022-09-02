@@ -1,12 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import type { Navigation } from '../../../types/index';
 
-function Nav(): React.ReactElement {
+type Props = {
+  navigation: Navigation;
+};
+
+function Nav({ navigation }: Props): React.ReactElement {
   return (
     <View style={styles.nav}>
       <View style={styles.list}>
         <View style={styles.item}>
-          <Text style={[styles.itemIcon, styles.hotMovie]}>{'\ue617'}</Text>
+          <Text
+            onPress={() => navigation.push('Theater')}
+            style={[styles.itemIcon, styles.hotMovie]}
+          >
+            {'\ue617'}
+          </Text>
           <Text style={styles.itemText}>热映中</Text>
         </View>
         <View style={styles.item}>

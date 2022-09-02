@@ -1,11 +1,16 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { getScreenViewHeight } from '../../utils/screen';
+import type { Navigation } from '../../types/index';
 
 // 获取屏幕内容高度
 const viewHeight = getScreenViewHeight();
 
-function Mine({ navigation }): React.ReactElement {
+type Props = {
+  navigation: Navigation;
+};
+
+function Mine({ navigation }: Props): React.ReactElement {
   return (
     <View style={styles.mine}>
       <View style={styles.userInfo}>

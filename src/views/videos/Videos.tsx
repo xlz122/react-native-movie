@@ -39,7 +39,7 @@ function Videos(): React.ReactElement {
     per_page: 11
   });
 
-  const getCategoriesData = () => {
+  const getVideosData = () => {
     videosData({ ...videoParams })
       .then((res: ResponseType<Video[]>) => {
         if (res.code === 200) {
@@ -50,7 +50,7 @@ function Videos(): React.ReactElement {
   };
 
   useEffect(() => {
-    getCategoriesData();
+    getVideosData();
   }, [videoParams]);
 
   const renderItem = ({ item }) => (
