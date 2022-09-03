@@ -36,6 +36,12 @@ const router: Router[] = [
     title: '正在热映',
     headerShown: true,
     component: require('../views/theater/Theater').default
+  },
+  {
+    name: 'HighScore',
+    title: 'TOP 100',
+    headerShown: true,
+    component: require('../views/high-score/HighScore').default
   }
 ];
 

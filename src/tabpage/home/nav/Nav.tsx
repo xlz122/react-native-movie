@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import type { Navigation } from '../../../types/index';
 
 type Props = {
@@ -10,19 +10,22 @@ function Nav(props: Props): React.ReactElement {
   return (
     <View style={styles.nav}>
       <View style={styles.list}>
-        <View style={styles.item}>
-          <Text
-            onPress={() => props?.navigation.push('Theater')}
-            style={[styles.itemIcon, styles.hotMovie]}
-          >
-            {'\ue617'}
-          </Text>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => props?.navigation.push('Theater')}
+          style={styles.item}
+        >
+          <Text style={[styles.itemIcon, styles.hotMovie]}>{'\ue617'}</Text>
           <Text style={styles.itemText}>热映中</Text>
-        </View>
-        <View style={styles.item}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => props?.navigation.push('HighScore')}
+          style={styles.item}
+        >
           <Text style={[styles.itemIcon, styles.highScore]}>{'\ue67b'}</Text>
           <Text style={styles.itemText}>高分榜</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.item}>
           <Text style={[styles.itemIcon, styles.prize]}>{'\ue668'}</Text>
           <Text style={styles.itemText}>奖项</Text>

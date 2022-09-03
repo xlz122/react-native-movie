@@ -8,7 +8,7 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import { movieTheater } from '../../api/home';
+import { movieTop } from '../../api/home';
 import type { ResponseType } from '../../types/index';
 import type { PagingParams } from '../../api/home';
 
@@ -21,15 +21,15 @@ type Movie = {
   countries: string;
 };
 
-function Theater(): React.ReactElement {
+function HighScore(): React.ReactElement {
   const [movie, setMovie] = useState<Movie[]>([]);
   const [movieParams] = useState<PagingParams>({
     page: 1,
     per_page: 11
   });
 
-  const getMovieTheater = () => {
-    movieTheater({ ...movieParams })
+  const getMovieTop = () => {
+    movieTop({ ...movieParams })
       .then((res: ResponseType<Movie[]>) => {
         if (res.code === 200) {
           setMovie(res.data!);
@@ -39,7 +39,7 @@ function Theater(): React.ReactElement {
   };
 
   useEffect(() => {
-    getMovieTheater();
+    getMovieTop();
   }, [movieParams]);
 
   const renderItem = ({ item }) => (
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Theater;
+export default HighScore;
