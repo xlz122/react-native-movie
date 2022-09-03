@@ -3,7 +3,11 @@ import type {
   TextInputChangeEventData
 } from 'react-native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import type { ParamListBase } from '@react-navigation/native';
+import type { RouteProp, ParamListBase } from '@react-navigation/native';
+
+export type Navigation = StackNavigationProp<ParamListBase, string, undefined>;
+
+export type Route = RouteProp<ParamListBase, string>;
 
 export type ResponseType<T = any> = {
   code?: number;
@@ -12,5 +16,3 @@ export type ResponseType<T = any> = {
 };
 
 export type TextInputEvent = NativeSyntheticEvent<TextInputChangeEventData>;
-
-export type Navigation = StackNavigationProp<ParamListBase, string, undefined>;

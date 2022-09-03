@@ -1,13 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import type { ParamListBase, RouteProp } from '@react-navigation/native';
-import router from './index';
+import type { Route } from '../types/index';
 import CustomHeader from '../components/custom-header/CustomHeader';
+import router from './index';
 
 const Stack = createStackNavigator();
-
-type Route = RouteProp<ParamListBase, string>;
 
 // 从子导航器获取路由名称
 const getChildTitle = (route: Route) => {
