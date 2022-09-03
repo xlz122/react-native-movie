@@ -13,6 +13,7 @@ export const indexData = () => {
 export type PagingParams = {
   page: number;
   per_page: number;
+  sortby?: string;
 };
 
 /**
@@ -36,6 +37,19 @@ export const movieTop = ({ page, per_page }: PagingParams) => {
 
   return axios.request({
     url: '/movie/top',
+    method: 'get',
+    params
+  });
+};
+
+/**
+ * @description 历史上的今天上映的影片
+ */
+export const movieToday = ({ page, per_page, sortby }: PagingParams) => {
+  const params = { page, per_page, sortby };
+
+  return axios.request({
+    url: '/movie/today',
     method: 'get',
     params
   });

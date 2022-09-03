@@ -42,6 +42,12 @@ const router: Router[] = [
     title: 'TOP 100',
     headerShown: true,
     component: require('../views/high-score/HighScore').default
+  },
+  {
+    name: 'Today',
+    title: '那年今日',
+    headerShown: true,
+    component: require('../views/today/Today').default
   }
 ];
 

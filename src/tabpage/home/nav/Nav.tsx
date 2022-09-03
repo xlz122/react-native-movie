@@ -30,10 +30,14 @@ function Nav(props: Props): React.ReactElement {
           <Text style={[styles.itemIcon, styles.prize]}>{'\ue668'}</Text>
           <Text style={styles.itemText}>奖项</Text>
         </View>
-        <View style={styles.item}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => props?.navigation.push('Today')}
+          style={styles.item}
+        >
           <Text style={[styles.itemIcon, styles.lastYear]}>{'\ue6c4'}</Text>
           <Text style={styles.itemText}>那年今日</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
