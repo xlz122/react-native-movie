@@ -7,7 +7,7 @@ type Props = {
   navigation: Navigation;
 };
 
-function Login({ navigation }: Props): React.ReactElement {
+function Login(props: Props): React.ReactElement {
   // 密码显隐
   const [password, setPassword] = useState({
     secureTextEntry: true,
@@ -39,7 +39,7 @@ function Login({ navigation }: Props): React.ReactElement {
   };
 
   const close = () => {
-    navigation.goBack();
+    props?.navigation.goBack();
   };
 
   return (

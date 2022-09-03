@@ -6,13 +6,13 @@ type Props = {
   navigation: Navigation;
 };
 
-function Nav({ navigation }: Props): React.ReactElement {
+function Nav(props: Props): React.ReactElement {
   return (
     <View style={styles.nav}>
       <View style={styles.list}>
         <View style={styles.item}>
           <Text
-            onPress={() => navigation.push('Theater')}
+            onPress={() => props?.navigation.push('Theater')}
             style={[styles.itemIcon, styles.hotMovie]}
           >
             {'\ue617'}

@@ -30,7 +30,7 @@ type Gathers = {
   };
 };
 
-function Home({ navigation }: Props): React.ReactElement {
+function Home(props: Props): React.ReactElement {
   // 轮播图
   const [banner, setBanner] = useState<Gathers['swiper']>([]);
   // 电影分类
@@ -97,7 +97,7 @@ function Home({ navigation }: Props): React.ReactElement {
           <Search />
           <Banner banner={banner} onChange={bannerChange} />
         </LinearGradinet>
-        <Nav navigation={navigation} />
+        <Nav navigation={props.navigation} />
         <Panel
           title="正在热映"
           subtitle={`${movie?.theater?.total}部`}
