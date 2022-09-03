@@ -1,13 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import type { Navigation } from '../../../types/index';
 
-function Search(): React.ReactElement {
+type Props = {
+  navigation: Navigation;
+};
+
+function Search(props: Props): React.ReactElement {
   return (
     <View style={styles.search}>
-      <View style={styles.input}>
+      <TouchableOpacity
+        onPress={() => props?.navigation.push('Search')}
+        activeOpacity={1}
+        style={styles.input}
+      >
         <Text style={styles.inputIcon}>{'\ue613'}</Text>
         <Text style={styles.inputText}>请输入你要搜索的内容</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

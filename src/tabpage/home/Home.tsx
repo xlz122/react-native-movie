@@ -94,7 +94,7 @@ function Home(props: Props): React.ReactElement {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
-          <Search />
+          <Search navigation={props.navigation} />
           <Banner banner={banner} onChange={bannerChange} />
         </LinearGradinet>
         <Nav navigation={props.navigation} />
