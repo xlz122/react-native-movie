@@ -11,7 +11,7 @@ const tabbar = [
     headerShown: false,
     icon: '\ue908',
     selectIcon: '\ue908',
-    component: require('../views/home/Home').default
+    component: require('../tabpage/home/Home').default
   },
   {
     name: 'Movies',
@@ -19,7 +19,7 @@ const tabbar = [
     headerShown: false,
     icon: '\ue636',
     selectIcon: '\ue636',
-    component: require('../views/movies/Movies').default
+    component: require('../tabpage/movies/Movies').default
   },
   {
     name: 'Videos',
@@ -27,7 +27,7 @@ const tabbar = [
     headerShown: false,
     icon: '\ue617',
     selectIcon: '\ue617',
-    component: require('../views/videos/Videos').default
+    component: require('../tabpage/videos/Videos').default
   },
   {
     name: 'Mine',
@@ -35,7 +35,7 @@ const tabbar = [
     headerShown: false,
     icon: '\ue909',
     selectIcon: '\ue909',
-    component: require('../views/mine/Mine').default
+    component: require('../tabpage/mine/Mine').default
   }
 ];
 
