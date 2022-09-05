@@ -7,7 +7,7 @@ const deviceWidth = getScreenWidth();
 const viewHeight = getScreenViewHeight();
 
 const styles = StyleSheet.create({
-  video: {
+  page: {
     paddingTop: 15,
     paddingBottom: 15,
     height: viewHeight,

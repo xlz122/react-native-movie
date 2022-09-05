@@ -46,7 +46,7 @@ function Movies(): React.ReactElement {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.movie}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
       <Nav onChange={navChange} />
       <View style={styles.list}>
         {movie.map(item => {
@@ -74,7 +74,7 @@ function Movies(): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  movie: {
+  page: {
     minHeight: viewHeight,
     backgroundColor: '#fff'
   },

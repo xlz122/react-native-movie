@@ -9,7 +9,7 @@ type Props = {
 
 function Mine(props: Props): React.ReactElement {
   return (
-    <View style={styles.mine}>
+    <View style={styles.page}>
       <View style={styles.userInfo}>
         <Image
           source={require('../../assets/image/default-avatar.jpg')}

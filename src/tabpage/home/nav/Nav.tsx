@@ -26,16 +26,20 @@ function Nav(props: Props): React.ReactElement {
           <Text style={[styles.itemIcon, styles.highScore]}>{'\ue67b'}</Text>
           <Text style={styles.itemText}>高分榜</Text>
         </TouchableOpacity>
-        <View style={styles.item}>
-          <Text style={[styles.itemIcon, styles.prize]}>{'\ue668'}</Text>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => props?.navigation.push('Awards')}
+          style={styles.item}
+        >
+          <Text style={[styles.itemIcon, styles.awards]}>{'\ue668'}</Text>
           <Text style={styles.itemText}>奖项</Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => props?.navigation.push('Today')}
           style={styles.item}
         >
-          <Text style={[styles.itemIcon, styles.lastYear]}>{'\ue6c4'}</Text>
+          <Text style={[styles.itemIcon, styles.today]}>{'\ue6c4'}</Text>
           <Text style={styles.itemText}>那年今日</Text>
         </TouchableOpacity>
       </View>
@@ -84,11 +88,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 79, 77, 0.15)',
     color: '#ff4f4d'
   },
-  prize: {
+  awards: {
     backgroundColor: 'rgba(65, 172, 255, 0.15)',
     color: '#41acff'
   },
-  lastYear: {
+  today: {
     backgroundColor: 'rgba(145, 109, 255, 0.15)',
     color: '#916dff'
   }

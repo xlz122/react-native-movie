@@ -5,7 +5,7 @@ import { getScreenViewHeight } from '../../utils/screen';
 const viewHeight = getScreenViewHeight();
 
 const styles = StyleSheet.create({
-  mine: {
+  page: {
     minHeight: viewHeight,
     backgroundColor: '#f5f5f5'
   },

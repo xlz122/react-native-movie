@@ -92,7 +92,7 @@ function Home(props: Props): React.ReactElement {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
+      <View style={styles.page}>
         <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
           <Search navigation={props.navigation} />
           <Banner banner={banner} onChange={bannerChange} />
@@ -125,7 +125,7 @@ function Home(props: Props): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     paddingTop: 240,
     paddingBottom: 10,
     backgroundColor: '#f5f5f5'
