@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 16,
-    height: 38,
+    height: 42,
     backgroundColor: '#e54847'
   },
   icon: {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 10,
     fontWeight: 'bold',
-    fontSize: 13,
+    fontSize: 14,
     color: '#fff'
   }
 });
