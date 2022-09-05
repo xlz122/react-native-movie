@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import type { Navigation } from '../../types/index';
 
 type Props = {
+  navigation?: Navigation;
   title?: string;
   subtitle?: string;
   to?: string;
@@ -16,10 +18,14 @@ function Panel(props: Props): React.ReactElement {
           <View style={styles.titleLine} />
           <Text style={styles.titleText}>{props?.title}</Text>
         </View>
-        <View style={styles.more}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => props?.navigation?.push(props?.to || '')}
+          style={styles.more}
+        >
           <Text style={styles.moreText}>{props?.subtitle || '更多'}</Text>
           <Text style={styles.moreIcon}>{'\ue906'}</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <View>{props?.children}</View>
     </View>

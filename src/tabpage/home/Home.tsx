@@ -4,6 +4,7 @@ import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
 import { indexData } from '../../api/home';
 import type { ResponseType, Navigation } from '../../types/index';
+import type { Movie } from './category/Category';
 import Panel from '../../components/panel/Panel';
 import Search from './search/Search';
 import Banner from './banner/Banner';
@@ -14,18 +15,18 @@ type Props = {
   navigation: Navigation;
 };
 
-type Gathers = {
+export type Gathers = {
   swiper?: { bgcolor: string }[];
   theater: {
-    data?: unknown[];
+    data?: Movie[];
     total?: number;
   };
   coming: {
-    data?: unknown[];
+    data?: Movie[];
     total?: number;
   };
   today: {
-    data?: unknown[];
+    data?: Movie[];
     total?: number;
   };
 };
@@ -99,25 +100,31 @@ function Home(props: Props): React.ReactElement {
         </LinearGradinet>
         <Nav navigation={props.navigation} />
         <Panel
+          navigation={props.navigation}
           title="正在热映"
           subtitle={`${movie?.theater?.total}部`}
-          to="/theater"
+          to="Theater"
         >
-          <Category movie={movie?.theater?.data} />
+          <Category
+            navigation={props.navigation}
+            movie={movie?.theater?.data}
+          />
         </Panel>
         <Panel
+          navigation={props.navigation}
           title="即将上映"
           subtitle={`${movie?.coming?.total}部`}
           to="/coming"
         >
-          <Category movie={movie?.coming?.data} />
+          <Category navigation={props.navigation} movie={movie?.coming?.data} />
         </Panel>
         <Panel
+          navigation={props.navigation}
           title="那年今日"
           subtitle={`${movie?.today?.total}部`}
-          to="/today"
+          to="Today"
         >
-          <Category movie={movie?.today?.data} />
+          <Category navigation={props.navigation} movie={movie?.today?.data} />
         </Panel>
       </View>
     </ScrollView>
