@@ -43,6 +43,16 @@ export const movieTop = ({ page, per_page }: PagingParams) => {
 };
 
 /**
+ * @description 影视奖项列表
+ */
+export const movieAwards = () => {
+  return axios.request({
+    url: '/awards',
+    method: 'get'
+  });
+};
+
+/**
  * @description 历史上的今天上映的影片
  */
 export const movieToday = ({ page, per_page, sortby }: PagingParams) => {

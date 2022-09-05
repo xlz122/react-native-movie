@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { categoriesData } from '../../../api/movies';
+import { movieCategories } from '../../../api/movies';
 import type { ResponseType } from '../../../types/index';
 import type { MovieParams } from '../../../api/movies';
 import NavGroup from '../nav-group/NavGroup';
@@ -25,8 +25,8 @@ function Nav(props): React.ReactElement {
     years: []
   });
 
-  const getCategoriesData = () => {
-    categoriesData()
+  const getMovieCategories = () => {
+    movieCategories()
       .then((res: ResponseType<Category>) => {
         if (res.code === 200) {
           res.data?.countries.unshift({ name: '全部' });
@@ -44,7 +44,7 @@ function Nav(props): React.ReactElement {
   };
 
   useEffect(() => {
-    getCategoriesData();
+    getMovieCategories();
   }, []);
 
   // 初始化第二分类

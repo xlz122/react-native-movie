@@ -6,9 +6,9 @@ export type VideoParams = {
 };
 
 /**
- * @description 获取视频列表
+ * @description 视频列表
  */
-export const videosData = ({ page, per_page }: VideoParams) => {
+export const videosList = ({ page, per_page }: VideoParams) => {
   const params = { page, per_page };
 
   return axios.request({

@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { timeStampToDuration } from '../../utils/utils';
-import { videosData } from '../../api/videos';
+import { videosList } from '../../api/videos';
 import type { ResponseType } from '../../types/index';
 import type { VideoParams } from '../../api/videos';
 import styles from './videos.css';
@@ -33,8 +33,8 @@ function Videos(): React.ReactElement {
     per_page: 11
   });
 
-  const getVideosData = () => {
-    videosData({ ...videoParams })
+  const getVideosList = () => {
+    videosList({ ...videoParams })
       .then((res: ResponseType<Video[]>) => {
         if (res.code === 200) {
           setVideo(res.data!);
@@ -44,7 +44,7 @@ function Videos(): React.ReactElement {
   };
 
   useEffect(() => {
-    getVideosData();
+    getVideosList();
   }, [videoParams]);
 
   const renderItem = ({ item }) => (

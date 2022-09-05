@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { getScreenViewHeight } from '../../utils/screen';
-import { moviesData } from '../../api/movies';
+import { moviesList } from '../../api/movies';
 import type { ResponseType } from '../../types/index';
 import type { MovieParams } from '../../api/movies';
 import Nav from './nav/Nav';
@@ -27,8 +27,8 @@ function Movies(): React.ReactElement {
     year: '全部'
   });
 
-  const getCategoriesData = () => {
-    moviesData({ ...movieParams })
+  const getMoviesList = () => {
+    moviesList({ ...movieParams })
       .then((res: ResponseType<Movie[]>) => {
         if (res.code === 200) {
           setMovie(res.data!);
@@ -38,7 +38,7 @@ function Movies(): React.ReactElement {
   };
 
   useEffect(() => {
-    getCategoriesData();
+    getMoviesList();
   }, [movieParams]);
 
   const navChange = (categoryParams: Partial<MovieParams>) => {
