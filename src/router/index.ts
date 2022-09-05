@@ -44,10 +44,22 @@ const router: Router[] = [
     component: require('../views/high-score/HighScore').default
   },
   {
+    name: 'Awards',
+    title: '奖项列表',
+    headerShown: true,
+    component: require('../views/awards/Awards').default
+  },
+  {
     name: 'Today',
     title: '那年今日',
     headerShown: true,
     component: require('../views/today/Today').default
+  },
+  {
+    name: 'MovieDetail',
+    title: '电影',
+    headerShown: true,
+    component: require('../views/movie-detail/MovieDetail').default
   }
 ];
 
