@@ -134,6 +134,8 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     flex: 1,
+    height: 44,
+    lineHeight: 44,
     fontSize: 12,
     color: '#303133',
     textAlign: 'center'
