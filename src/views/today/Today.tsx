@@ -73,9 +73,12 @@ function Today(): React.ReactElement {
             {item.countries}
           </Text>
         </View>
-        <Text style={styles.itemRating}>
-          <Text style={styles.itemRatingWeight}>{item?.rating}</Text>分
-        </Text>
+        {item?.rating.length && (
+          <Text style={styles.itemRating}>
+            <Text style={styles.itemRatingWeight}>{item?.rating}</Text>
+            <Text> 分</Text>
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
