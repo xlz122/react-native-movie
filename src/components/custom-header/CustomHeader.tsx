@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import type { StackNavigationOptions } from '@react-navigation/stack';
 import type { Navigation } from '../../types/index';
 
@@ -12,9 +12,13 @@ type Props = {
 function CustomHeader(props: Props): React.ReactElement {
   return (
     <View style={styles.header}>
-      <Text onPress={() => props?.navigation.goBack()} style={styles.icon}>
-        {'\ue656'}
-      </Text>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => props?.navigation.goBack()}
+        style={styles.arrow}
+      >
+        <Text style={styles.arrowIcon}>{'\ue656'}</Text>
+      </TouchableOpacity>
       <Text style={styles.text}>{props?.options?.title}</Text>
       {props?.children}
     </View>
@@ -26,17 +30,23 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 16,
     height: 42,
     backgroundColor: '#e54847'
   },
-  icon: {
+  arrow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 46,
+    height: 42
+  },
+  arrowIcon: {
     fontFamily: 'iconfont',
     fontSize: 16,
     color: '#fff'
   },
   text: {
-    marginLeft: 10,
     fontWeight: 'bold',
     fontSize: 14,
     color: '#fff'
