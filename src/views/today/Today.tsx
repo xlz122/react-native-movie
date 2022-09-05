@@ -8,9 +8,13 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import { getScreenViewHeight } from '../../utils/screen';
 import { movieToday } from '../../api/home';
 import type { ResponseType } from '../../types/index';
 import type { PagingParams } from '../../api/home';
+
+// 获取屏幕内容高度
+const viewHeight = getScreenViewHeight();
 
 type Movie = {
   id: number;
@@ -23,7 +27,7 @@ type Movie = {
 
 function Today(): React.ReactElement {
   const [movie, setMovie] = useState<Movie[]>([]);
-  const [movieParams] = useState<PagingParams>({
+  const [movieParams, setMovieParams] = useState<PagingParams>({
     page: 1,
     per_page: 11,
     sortby: 'hot'
@@ -42,6 +46,10 @@ function Today(): React.ReactElement {
   useEffect(() => {
     getMovieToday();
   }, [movieParams]);
+
+  const toggleSort = (value: string): void => {
+    setMovieParams({ ...movieParams, sortby: value });
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
@@ -73,10 +81,30 @@ function Today(): React.ReactElement {
   );
 
   return (
-    <SafeAreaView style={styles.theater}>
+    <SafeAreaView style={styles.page}>
       <View style={styles.menu}>
-        <Text style={[styles.menuItem, styles.menuActiveItem]}>热度排序</Text>
-        <Text style={styles.menuItem}>时间排序</Text>
+        <Text
+          onPress={() => toggleSort('hot')}
+          style={[
+            styles.menuItem,
+            movieParams.sortby === 'hot'
+              ? styles.menuActiveItem
+              : styles.menuItem
+          ]}
+        >
+          热度排序
+        </Text>
+        <Text
+          onPress={() => toggleSort('date')}
+          style={[
+            styles.menuItem,
+            movieParams.sortby === 'date'
+              ? styles.menuActiveItem
+              : styles.menuItem
+          ]}
+        >
+          时间排序
+        </Text>
       </View>
       <FlatList
         initialNumToRender={6}
@@ -89,22 +117,24 @@ function Today(): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  theater: {
-    paddingTop: 8,
+  page: {
+    paddingBottom: 18,
+    height: viewHeight,
     backgroundColor: '#fff'
   },
   menu: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    height: 51,
-    borderBottomWidth: 1,
+    height: 44,
+    borderBottomWidth: 0.5,
     borderStyle: 'solid',
     borderColor: '#eee'
   },
   menuItem: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     color: '#303133',
     textAlign: 'center'
   },
@@ -114,10 +144,9 @@ const styles = StyleSheet.create({
   item: {
     display: 'flex',
     flexDirection: 'row',
-    paddingTop: 9,
-    paddingBottom: 9,
-    marginRight: 17,
-    marginLeft: 17
+    paddingTop: 18,
+    marginRight: -20,
+    marginLeft: 16
   },
   itemImage: {
     width: 93,
@@ -131,20 +160,22 @@ const styles = StyleSheet.create({
     marginLeft: 13
   },
   itemTitle: {
+    marginBottom: 1,
     fontSize: 14,
     color: '#333'
   },
   itemText: {
-    marginTop: 6,
-    fontSize: 12,
+    marginTop: 8,
+    fontSize: 11,
     color: '#999'
   },
   itemRating: {
     width: 68,
-    fontSize: 12,
+    fontSize: 8,
     color: '#f16c00'
   },
   itemRatingWeight: {
+    fontSize: 12,
     fontWeight: '700'
   }
 });
