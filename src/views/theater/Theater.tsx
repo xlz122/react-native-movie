@@ -65,14 +65,14 @@ function Theater(): React.ReactElement {
           </Text>
         </View>
         <Text style={styles.itemRating}>
-          <Text style={styles.itemRatingWeight}>{item?.rating}</Text>分
+          <Text style={styles.itemRatingWeight}>{item?.rating}</Text> 分
         </Text>
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView style={styles.theater}>
+    <SafeAreaView style={styles.page}>
       <FlatList
         initialNumToRender={6}
         showsHorizontalScrollIndicator={false}
@@ -84,17 +84,16 @@ function Theater(): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  theater: {
-    paddingTop: 8,
+  page: {
+    paddingBottom: 15,
     backgroundColor: '#fff'
   },
   item: {
     display: 'flex',
     flexDirection: 'row',
-    paddingTop: 9,
-    paddingBottom: 9,
-    marginRight: 17,
-    marginLeft: 17
+    paddingTop: 18,
+    marginRight: -20,
+    marginLeft: 16
   },
   itemImage: {
     width: 93,
@@ -108,20 +107,22 @@ const styles = StyleSheet.create({
     marginLeft: 13
   },
   itemTitle: {
+    marginBottom: 1,
     fontSize: 14,
     color: '#333'
   },
   itemText: {
-    marginTop: 6,
-    fontSize: 12,
+    marginTop: 8,
+    fontSize: 11,
     color: '#999'
   },
   itemRating: {
     width: 68,
-    fontSize: 12,
+    fontSize: 8,
     color: '#f16c00'
   },
   itemRatingWeight: {
+    fontSize: 12,
     fontWeight: '700'
   }
 });
