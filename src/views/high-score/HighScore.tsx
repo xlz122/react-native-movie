@@ -75,7 +75,7 @@ function HighScore(): React.ReactElement {
     <SafeAreaView style={styles.page}>
       <FlatList
         initialNumToRender={6}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         data={movie}
         renderItem={renderItem}
       />

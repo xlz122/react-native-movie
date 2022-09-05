@@ -108,7 +108,7 @@ function Today(): React.ReactElement {
       </View>
       <FlatList
         initialNumToRender={6}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         data={movie}
         renderItem={renderItem}
       />
