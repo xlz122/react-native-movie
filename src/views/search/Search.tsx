@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 34,
+    height: 30,
     backgroundColor: 'whitesmoke',
     borderRadius: 70
   },
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   cancelText: {
     width: 68,
-    fontSize: 14,
+    fontSize: 12.5,
     color: '#777',
     textAlign: 'center'
   }
