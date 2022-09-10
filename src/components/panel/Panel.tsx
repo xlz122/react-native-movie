@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import type { ViewStyle, TextStyle } from 'react-native';
 import type { Navigation } from '../../types/index';
 
 type Props = {
@@ -8,23 +9,35 @@ type Props = {
   subtitle?: string;
   to?: string;
   children?: React.ReactNode;
+  panelStyle?: ViewStyle;
+  headerStyle?: ViewStyle;
+  lineStyle?: ViewStyle;
+  titleTextStyle?: TextStyle;
+  subTitleStyle?: TextStyle;
+  moreIconStyle?: TextStyle;
 };
 
 function Panel(props: Props): React.ReactElement {
   return (
-    <View style={styles.panel}>
-      <View style={styles.header}>
+    <View style={[styles.panel, props?.panelStyle]}>
+      <View style={[styles.header, props?.headerStyle]}>
         <View style={styles.title}>
-          <View style={styles.titleLine} />
-          <Text style={styles.titleText}>{props?.title}</Text>
+          <View style={[styles.titleLine, props?.lineStyle]} />
+          <Text style={[styles.titleText, props?.titleTextStyle]}>
+            {props?.title}
+          </Text>
         </View>
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => props?.navigation?.push(props?.to || '')}
           style={styles.more}
         >
-          <Text style={styles.moreText}>{props?.subtitle || '更多'}</Text>
-          <Text style={styles.moreIcon}>{'\ue906'}</Text>
+          <Text style={[styles.moreText, props?.subTitleStyle]}>
+            {props?.subtitle || ''}
+          </Text>
+          <Text style={[styles.moreIcon, props?.moreIconStyle]}>
+            {'\ue906'}
+          </Text>
         </TouchableOpacity>
       </View>
       <View>{props?.children}</View>
@@ -57,13 +70,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   titleLine: {
+    marginRight: 4,
     width: 3,
     height: 14,
     backgroundColor: '#e54847',
     borderRadius: 4
   },
   titleText: {
-    marginLeft: 4,
     fontSize: 13,
     color: '#666'
   },
