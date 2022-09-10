@@ -9,28 +9,20 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-function Category(props): React.ReactElement {
+function Cast(props): React.ReactElement {
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
         <Image
-          source={{ uri: item.poster }}
+          source={{ uri: item.avatar }}
           resizeMode={'stretch'}
           style={[styles.itemImage]}
         />
-        {item?.category && item?.category !== '电影' && (
-          <Text style={styles.itemTag}>{item?.category}</Text>
-        )}
-        {item?.rating?.length && (
-          <Text style={styles.itemRating}>{item?.rating}分</Text>
-        )}
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-          {item.title}
+        <Text style={styles.itemText}>{item.name}</Text>
+        <Text style={styles.labelText}>
+          {item?.profession === '导演' ? item?.profession : ''}
+          {item?.act ? `饰: ${item?.act}` : ''}
         </Text>
-        {/* 上映时间 */}
-        {item?.release_date && (
-          <Text style={styles.itemDate}>{item?.release_date}</Text>
-        )}
       </View>
     </TouchableOpacity>
   );
@@ -43,7 +35,7 @@ function Category(props): React.ReactElement {
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.union_id}
       />
     </SafeAreaView>
   );
@@ -56,7 +48,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: 11,
-    backgroundColor: '#fff',
     borderRadius: 4
   },
   item: {
@@ -71,36 +62,15 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 3
   },
-  itemTag: {
-    position: 'absolute',
-    top: 6,
-    right: 6,
-    width: 22,
-    height: 13,
-    backgroundColor: 'rgba(255, 165, 0, 0.7)',
-    fontSize: 9,
-    color: '#fff',
-    textAlign: 'center',
-    borderRadius: 2
-  },
-  itemRating: {
-    position: 'absolute',
-    right: 4,
-    bottom: 34,
-    fontSize: 10.5,
-    color: 'orange'
-  },
   itemText: {
     marginTop: 5,
-    width: 94,
-    color: '#333',
+    color: '#fff',
     fontSize: 12
   },
-  itemDate: {
-    marginTop: 2,
-    fontSize: 10.5,
-    color: '#888'
+  labelText: {
+    color: 'hsla(0,0%,96.1%,.75)',
+    fontSize: 10
   }
 });
 
-export default Category;
+export default Cast;
