@@ -137,9 +137,7 @@ function MovieInfo(props: Props): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  page: {
-    backgroundColor: '#262c38'
-  },
+  page: {},
   movieInfo: {
     display: 'flex',
     flexDirection: 'row',
