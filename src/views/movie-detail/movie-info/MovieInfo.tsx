@@ -61,7 +61,7 @@ function MovieInfo(props: Props): React.ReactElement {
               <Text>{data?.countries?.join(' / ')}</Text>
               <Text>·</Text>
               <Text>{data?.year}</Text>
-              {data?.durations?.length && (
+              {data?.durations && data?.durations[0] && (
                 <Text>{`·${data?.durations?.join(' / ')}`}</Text>
               )}
             </Text>
@@ -79,7 +79,7 @@ function MovieInfo(props: Props): React.ReactElement {
         </View>
       </View>
       <View style={styles.rating}>
-        {data?.thrid_rating?.douban?.rating.length && (
+        {Boolean(data?.thrid_rating?.douban?.rating) && (
           <>
             <View style={styles.ratingCover}>
               <Text style={styles.ratingText}>豆瓣评分</Text>
@@ -94,7 +94,7 @@ function MovieInfo(props: Props): React.ReactElement {
             </Text>
           </>
         )}
-        {!data?.thrid_rating?.douban?.rating.length && (
+        {!data?.thrid_rating?.douban?.rating && (
           <Text style={styles.noRating}>暂无评分</Text>
         )}
       </View>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   operate: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     marginTop: 17
   },
   operateItem: {
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 18,
     width: 104,
     height: 26,
     backgroundColor: 'rgba(0, 0, 0, .25)',
