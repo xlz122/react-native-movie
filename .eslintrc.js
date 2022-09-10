@@ -37,6 +37,8 @@ module.exports = {
     // 检查 Hook 的规则(不允许在if for里面使用)
     'react-hooks/rules-of-hooks': [2],
     // 检查 effect 的依赖
-    'react-hooks/exhaustive-deps': [0]
+    'react-hooks/exhaustive-deps': [0],
+
+    'react-native/no-inline-styles': [0]
   }
 };
