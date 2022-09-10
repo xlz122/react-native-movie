@@ -9,18 +9,28 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-function Category(props): React.ReactElement {
+function SimilarMovie(props): React.ReactElement {
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
         <Image
-          source={{ uri: item.avatar }}
+          source={{ uri: item.poster }}
           resizeMode={'stretch'}
           style={[styles.itemImage]}
         />
+        {item?.category && item?.category !== '电影' && (
+          <Text style={styles.itemTag}>{item?.category}</Text>
+        )}
+        {item?.rating?.length && (
+          <Text style={styles.itemRating}>{item?.rating}分</Text>
+        )}
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-          {item.name}
+          {item.title}
         </Text>
+        {/* 上映时间 */}
+        {item?.release_date && (
+          <Text style={styles.itemDate}>{item?.release_date}</Text>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -33,7 +43,6 @@ function Category(props): React.ReactElement {
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
       />
     </SafeAreaView>
   );
@@ -93,4 +102,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Category;
+export default SimilarMovie;
