@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import type { ViewStyle } from 'react-native';
 import type { StackNavigationOptions } from '@react-navigation/stack';
 import type { Navigation } from '../../types/index';
 
@@ -7,11 +8,13 @@ type Props = {
   navigation: Navigation;
   options?: StackNavigationOptions;
   children?: React.ReactNode;
+  headerTitleAlign?: boolean;
+  headerStyle?: ViewStyle;
 };
 
 function CustomHeader(props: Props): React.ReactElement {
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, props?.headerStyle]}>
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => props?.navigation.goBack()}
@@ -19,7 +22,14 @@ function CustomHeader(props: Props): React.ReactElement {
       >
         <Text style={styles.arrowIcon}>{'\ue656'}</Text>
       </TouchableOpacity>
-      <Text style={styles.text}>{props?.options?.title}</Text>
+      <Text
+        style={[
+          styles.titleText,
+          props.headerTitleAlign ? styles.titleCenter : styles.titleText
+        ]}
+      >
+        {props?.options?.title}
+      </Text>
       {props?.children}
     </View>
   );
@@ -27,6 +37,7 @@ function CustomHeader(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   header: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -46,10 +57,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff'
   },
-  text: {
+  titleText: {
     fontWeight: 'bold',
     fontSize: 14,
     color: '#fff'
+  },
+  titleCenter: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -10 }, { translateY: -10 }]
   }
 });
 
