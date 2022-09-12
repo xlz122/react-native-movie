@@ -22,16 +22,32 @@ tab导航
 * @react-navigation/bottom-tabs
 
 轮播图
-* react-native-reanimated(2.9.1)
-* react-native-reanimated-carousel(3.0.3)
+* react-native-reanimated
+* react-native-reanimated-carousel
 
-轮播图2.10.0版本及以上，启动项目时会进行下载一个124M的东西，下载极慢，所以选择了2.9.1版本。
-需更改babel.config.js、yarn.lock文件，如下：
+更改babel.config.js、yarn.lock文件，如下:
 
 babel.config.js
 ```
 plugins: ['react-native-reanimated/plugin']
 ```
+
+轮播图2.10.0版本及以上，启动项目时会进行下载boost_1_76_0.tar.gz，如下:
+
+```
+> Task :react-native-reanimated:downloadGlog FAILED
+<===========--> 85% EXECUTING [4m 37s]
+> IDLE
+> IDLE
+> IDLE
+> IDLE
+> :react-native-reanimated:downloadBoost > boost_1_76_0.tar.gz > 77.67 MB/124.24 MB downloaded
+```
+
+如果出现下载极慢的情况，请选择2.9.1版本，并更改yarn.lock文件如下:
+
+* react-native-reanimated(2.9.1)
+* react-native-reanimated-carousel(3.0.3)
 
 yarn.lock
 ```
