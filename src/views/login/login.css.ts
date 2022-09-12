@@ -34,7 +34,10 @@ const styles = StyleSheet.create({
   },
   formItem: {
     position: 'relative',
-    height: 68
+    height: 68,
+    borderBottomWidth: 0.5,
+    borderStyle: 'solid',
+    borderColor: '#eee'
   },
   itemInput: {
     marginTop: 22,
@@ -50,14 +53,6 @@ const styles = StyleSheet.create({
   },
   activeIcon: {
     color: '#e54847'
-  },
-  itemLine: {
-    position: 'absolute',
-    left: 0,
-    bottom: 2,
-    width: '100%',
-    height: 0.8,
-    backgroundColor: '#eee'
   },
   submit: {
     paddingTop: 34
