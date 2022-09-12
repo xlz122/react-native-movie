@@ -1,6 +1,6 @@
 ## 环境要求
 
-需要 NodeJS 14.0.0+ 环境
+需要 NodeJS 16.0.0+ 环境
 
 ![](./src/assets/design-sketch/npm-7.10.0.svg)
 ![](./src/assets/design-sketch/node-16.0.0.svg)
@@ -16,8 +16,6 @@
 ## 简介
 
 本项目是一个仿写[慕影网H5端](https://github.com/NameLi/muying-h5)项目。
-
-升级至0.70.0后，轮播图插件不可用，项目开发将与0.69.5分支保持一致，直至轮播图插件可用。
 
 ## 项目使用技术栈
 
