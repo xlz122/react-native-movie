@@ -84,7 +84,10 @@ const styles = StyleSheet.create({
     paddingTop: 13,
     paddingBottom: 13,
     marginRight: 17,
-    marginLeft: 17
+    marginLeft: 17,
+    borderBottomWidth: 0.5,
+    borderStyle: 'solid',
+    borderColor: '#eee'
   },
   cellItemIcon: {
     marginRight: 6,
@@ -104,13 +107,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgb(153, 153, 153)'
   },
-  cellItemLine: {
-    position: 'absolute',
-    left: '5%',
-    bottom: 0,
-    width: '90%',
-    height: 0.38,
-    backgroundColor: '#eee'
+  cellLastItem: {
+    borderBottomWidth: 0
   }
 });
 

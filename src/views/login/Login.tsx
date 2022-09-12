@@ -60,7 +60,6 @@ function Login(props: Props): React.ReactElement {
             placeholder="请输入手机号"
             style={styles.itemInput}
           />
-          <View style={styles.itemLine} />
         </View>
         <View style={styles.formItem}>
           <TextInput
@@ -82,7 +81,6 @@ function Login(props: Props): React.ReactElement {
           >
             {'\ue639'}
           </Text>
-          <View style={styles.itemLine} />
         </View>
         <View style={styles.submit}>
           <Button title="登 录" onPress={submit} />

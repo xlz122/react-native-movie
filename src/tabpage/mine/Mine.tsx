@@ -47,21 +47,18 @@ function Mine(props: Props): React.ReactElement {
           <Text style={styles.cellItemIcon}>{'\ue601'}</Text>
           <Text style={styles.cellItemText}>意见反馈</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
-          <View style={styles.cellItemLine} />
         </View>
         <View style={styles.cellItem}>
           <Text style={styles.cellItemIcon}>{'\ue634'}</Text>
           <Text style={styles.cellItemText}>关于作者</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
-          <View style={styles.cellItemLine} />
         </View>
         <View style={styles.cellItem}>
           <Text style={styles.cellItemIcon}>{'\ue655'}</Text>
           <Text style={styles.cellItemText}>关于项目</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
-          <View style={styles.cellItemLine} />
         </View>
-        <View style={styles.cellItem}>
+        <View style={[styles.cellItem, styles.cellLastItem]}>
           <Text style={styles.cellItemIcon}>{'\ue60b'}</Text>
           <Text style={styles.cellItemText}>更新日志</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
