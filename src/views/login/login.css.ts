@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   formItem: {
     position: 'relative',
     height: 68,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.4,
     borderStyle: 'solid',
     borderColor: '#eee'
   },
