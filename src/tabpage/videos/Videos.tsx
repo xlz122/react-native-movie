@@ -88,7 +88,7 @@ function Videos(): React.ReactElement {
   return (
     <SafeAreaView style={styles.page}>
       <FlatList
-        initialNumToRender={6}
+        initialNumToRender={4}
         showsHorizontalScrollIndicator={false}
         data={video}
         renderItem={renderItem}
