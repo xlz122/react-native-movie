@@ -106,12 +106,14 @@ function MovieDeail(props: Props): React.ReactElement {
       >
         <MoviePhoto movie={detail?.photos} />
       </Panel>
-      <Panel title="相似影视" to="" moreIconStyle={{ display: 'none' }}>
-        <MovieSimilar
-          navigation={props.navigation}
-          movie={detail?.like_movies}
-        />
-      </Panel>
+      {detail?.like_movies && detail?.like_movies?.length > 0 && (
+        <Panel title="相似影视" to="" moreIconStyle={{ display: 'none' }}>
+          <MovieSimilar
+            navigation={props.navigation}
+            movie={detail?.like_movies}
+          />
+        </Panel>
+      )}
     </ScrollView>
   );
 }
