@@ -31,7 +31,7 @@ function Cast(props): React.ReactElement {
     <SafeAreaView style={styles.list}>
       <FlatList
         horizontal
-        initialNumToRender={6}
+        initialNumToRender={4}
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
