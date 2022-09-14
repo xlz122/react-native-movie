@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   list: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     flexWrap: 'wrap',
     paddingTop: 10,
     paddingBottom: 15,
