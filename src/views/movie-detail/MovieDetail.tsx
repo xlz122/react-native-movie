@@ -6,6 +6,7 @@ import { getScreenViewHeight } from '../../utils/screen';
 import { moviesDetail } from '../../api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '../../types/index';
+import type { Movie } from './movie-similar/MovieSimilar';
 import CustomHeader from '../../components/custom-header/CustomHeader';
 import MovieInfo from './movie-info/MovieInfo';
 import Panel from '../../components/panel/Panel';
@@ -24,7 +25,7 @@ type Detail = {
   bgcolor: string;
   cast: unknown[];
   photos: unknown[];
-  like_movies: unknown[];
+  like_movies: Movie[];
 };
 
 function MovieDeail(props: Props): React.ReactElement {
@@ -36,7 +37,6 @@ function MovieDeail(props: Props): React.ReactElement {
     moviesDetail({ id })
       .then((res: ResponseType<Partial<Detail>>) => {
         if (res.code === 200) {
-          console.log(res);
           setDetail(res.data!);
         }
       })
@@ -107,7 +107,10 @@ function MovieDeail(props: Props): React.ReactElement {
         <MoviePhoto movie={detail?.photos} />
       </Panel>
       <Panel title="相似影视" to="" moreIconStyle={{ display: 'none' }}>
-        <MovieSimilar movie={detail?.like_movies} />
+        <MovieSimilar
+          navigation={props.navigation}
+          movie={detail?.like_movies}
+        />
       </Panel>
     </ScrollView>
   );

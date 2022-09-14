@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity
+} from 'react-native';
 import { getScreenViewHeight } from '../../utils/screen';
 import { moviesList } from '../../api/movies';
-import type { ResponseType } from '../../types/index';
+import type { Navigation, ResponseType } from '../../types/index';
 import type { MovieParams } from '../../api/movies';
 import Nav from './nav/Nav';
 
 // 获取屏幕内容高度
 const viewHeight = getScreenViewHeight();
+
+type Props = {
+  navigation: Navigation;
+};
 
 type Movie = {
   id: number;
@@ -16,7 +27,7 @@ type Movie = {
   rating: number;
 };
 
-function Movies(): React.ReactElement {
+function Movies(props: Props): React.ReactElement {
   const [movie, setMovie] = useState<Movie[]>([]);
   const [movieParams, setMovieParams] = useState<MovieParams>({
     page: 1,
@@ -51,7 +62,14 @@ function Movies(): React.ReactElement {
       <View style={styles.list}>
         {movie.map(item => {
           return (
-            <View key={item.id} style={styles.item}>
+            <TouchableOpacity
+              key={item.id}
+              activeOpacity={1}
+              onPress={() =>
+                props?.navigation.push('MovieDetail', { id: item.id })
+              }
+              style={styles.item}
+            >
               <Image
                 source={{ uri: item.poster }}
                 resizeMode={'stretch'}
@@ -65,7 +83,7 @@ function Movies(): React.ReactElement {
               >
                 {item.title}
               </Text>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </View>
