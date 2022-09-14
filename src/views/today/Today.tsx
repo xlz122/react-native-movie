@@ -10,11 +10,15 @@ import {
 } from 'react-native';
 import { getScreenViewHeight } from '../../utils/screen';
 import { movieToday } from '../../api/home';
-import type { ResponseType } from '../../types/index';
+import type { Navigation, ResponseType } from '../../types/index';
 import type { PagingParams } from '../../api/home';
 
 // 获取屏幕内容高度
 const viewHeight = getScreenViewHeight();
+
+type Props = {
+  navigation: Navigation;
+};
 
 type Movie = {
   id: number;
@@ -25,7 +29,7 @@ type Movie = {
   countries: string;
 };
 
-function Today(): React.ReactElement {
+function Today(props: Props): React.ReactElement {
   const [movie, setMovie] = useState<Movie[]>([]);
   const [movieParams, setMovieParams] = useState<PagingParams>({
     page: 1,
@@ -52,7 +56,10 @@ function Today(): React.ReactElement {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity activeOpacity={1}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+    >
       <View style={styles.item}>
         <Image
           source={{ uri: item.poster }}

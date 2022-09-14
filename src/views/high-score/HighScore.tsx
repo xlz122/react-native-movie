@@ -9,8 +9,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { movieTop } from '../../api/home';
-import type { ResponseType } from '../../types/index';
+import type { Navigation, ResponseType } from '../../types/index';
 import type { PagingParams } from '../../api/home';
+
+type Props = {
+  navigation: Navigation;
+};
 
 type Movie = {
   id: number;
@@ -21,7 +25,7 @@ type Movie = {
   countries: string;
 };
 
-function HighScore(): React.ReactElement {
+function HighScore(props: Props): React.ReactElement {
   const [movie, setMovie] = useState<Movie[]>([]);
   const [movieParams] = useState<PagingParams>({
     page: 1,
@@ -43,7 +47,10 @@ function HighScore(): React.ReactElement {
   }, [movieParams]);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity activeOpacity={1}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+    >
       <View style={styles.item}>
         <Image
           source={{ uri: item.poster }}
