@@ -31,6 +31,7 @@ function Awards(): React.ReactElement {
         {awards.map((item, index) => {
           return (
             <View
+              key={index}
               style={[
                 styles.item,
                 index % 1 === 0 ? styles.itemLine : styles.item
