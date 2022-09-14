@@ -36,7 +36,6 @@ function MovieDeail(props: Props): React.ReactElement {
     moviesDetail({ id })
       .then((res: ResponseType<Partial<Detail>>) => {
         if (res.code === 200) {
-          console.log(res);
           setDetail(res.data!);
         }
       })
