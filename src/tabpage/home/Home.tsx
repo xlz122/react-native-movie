@@ -7,7 +7,7 @@ import type { ResponseType, Navigation } from '../../types/index';
 import type { Movie } from './category/Category';
 import Panel from '../../components/panel/Panel';
 import Search from './search/Search';
-import Banner from './banner/Banner';
+// import Banner from './banner/Banner';
 import Nav from './nav/Nav';
 import Category from './category/Category';
 
@@ -85,18 +85,18 @@ function Home(props: Props): React.ReactElement {
     handlerGradualChange(banner[0].bgcolor);
   }, [banner]);
 
-  const bannerChange = (index: number): void => {
-    const color = (banner && banner[index].bgcolor) || '#f5f5f5';
+  // const bannerChange = (index: number): void => {
+  //   const color = (banner && banner[index].bgcolor) || '#f5f5f5';
 
-    handlerGradualChange(color);
-  };
+  //   handlerGradualChange(color);
+  // };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
         <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
           <Search navigation={props.navigation} />
-          <Banner banner={banner} onChange={bannerChange} />
+          {/* <Banner banner={banner} onChange={bannerChange} /> */}
         </LinearGradinet>
         <Nav navigation={props.navigation} />
         <Panel
