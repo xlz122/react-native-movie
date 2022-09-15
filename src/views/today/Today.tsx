@@ -92,14 +92,12 @@ function Today(props: Props): React.ReactElement {
 
   return (
     <SafeAreaView style={styles.page}>
-      <View style={styles.menu}>
+      <View style={styles.tab}>
         <Text
           onPress={() => toggleSort('hot')}
           style={[
-            styles.menuItem,
-            movieParams.sortby === 'hot'
-              ? styles.menuActiveItem
-              : styles.menuItem
+            styles.tabItem,
+            movieParams.sortby === 'hot' ? styles.tabActiveItem : styles.tabItem
           ]}
         >
           热度排序
@@ -107,10 +105,10 @@ function Today(props: Props): React.ReactElement {
         <Text
           onPress={() => toggleSort('date')}
           style={[
-            styles.menuItem,
+            styles.tabItem,
             movieParams.sortby === 'date'
-              ? styles.menuActiveItem
-              : styles.menuItem
+              ? styles.tabActiveItem
+              : styles.tabItem
           ]}
         >
           时间排序
@@ -132,7 +130,7 @@ const styles = StyleSheet.create({
     height: viewHeight,
     backgroundColor: '#fff'
   },
-  menu: {
+  tab: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -142,7 +140,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: '#eee'
   },
-  menuItem: {
+  tabItem: {
     flex: 1,
     height: 44,
     lineHeight: 44,
@@ -150,7 +148,7 @@ const styles = StyleSheet.create({
     color: '#303133',
     textAlign: 'center'
   },
-  menuActiveItem: {
+  tabActiveItem: {
     color: '#e54847'
   },
   item: {

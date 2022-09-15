@@ -24,7 +24,9 @@ type Props = {
 type Detail = {
   bgcolor: string;
   cast: unknown[];
-  photos: unknown[];
+  photos: {
+    url: string;
+  }[];
   like_movies: Movie[];
 };
 
@@ -100,9 +102,11 @@ function MovieDeail(props: Props): React.ReactElement {
         <MovieInfo navigation={props.navigation} data={detail} />
       </LinearGradinet>
       <Panel
+        navigation={props.navigation}
         title="相册"
         subtitle={`全部${detail?.photos?.length}`}
-        to="/today"
+        to="Photos"
+        params={{ movieId: id }}
       >
         <MoviePhoto movie={detail?.photos} />
       </Panel>
