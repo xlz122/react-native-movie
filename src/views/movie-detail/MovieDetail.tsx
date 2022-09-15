@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
@@ -73,6 +73,24 @@ function MovieDeail(props: Props): React.ReactElement {
 
     handlerGradualChange(detail.bgcolor);
   }, [detail]);
+
+  useLayoutEffect(() => {
+    // 设置加载时标头
+    props.navigation.setOptions({
+      header: ({ navigation, options }) => {
+        return (
+          <CustomHeader
+            navigation={navigation}
+            options={options}
+            headerTitleAlign={true}
+            headerStyle={{
+              backgroundColor: 'transparent'
+            }}
+          />
+        );
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (gradientColor.length === 2) {
