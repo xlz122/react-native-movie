@@ -99,33 +99,45 @@ function Home(props: Props): React.ReactElement {
           <Banner banner={banner} onChange={bannerChange} />
         </LinearGradinet>
         <Nav navigation={props.navigation} />
-        <Panel
-          title="正在热映"
-          subtitle={`${movie?.theater?.total}部`}
-          navigation={props.navigation}
-          to={{ path: 'Theater' }}
-        >
-          <Category
+        {movie?.theater?.total && movie?.theater?.total > 0 && (
+          <Panel
+            title="正在热映"
+            subtitle={`${movie?.theater?.total}部`}
             navigation={props.navigation}
-            movie={movie?.theater?.data}
-          />
-        </Panel>
-        <Panel
-          title="即将上映"
-          subtitle={`${movie?.coming?.total}部`}
-          navigation={props.navigation}
-          to={{ path: 'coming' }}
-        >
-          <Category navigation={props.navigation} movie={movie?.coming?.data} />
-        </Panel>
-        <Panel
-          title="那年今日"
-          subtitle={`${movie?.today?.total}部`}
-          navigation={props.navigation}
-          to={{ path: 'Today' }}
-        >
-          <Category navigation={props.navigation} movie={movie?.today?.data} />
-        </Panel>
+            to={{ path: 'Theater' }}
+          >
+            <Category
+              navigation={props.navigation}
+              movie={movie?.theater?.data}
+            />
+          </Panel>
+        )}
+        {movie?.coming?.total && movie?.coming?.total > 0 && (
+          <Panel
+            title="即将上映"
+            subtitle={`${movie?.coming?.total}部`}
+            navigation={props.navigation}
+            to={{ path: 'coming' }}
+          >
+            <Category
+              navigation={props.navigation}
+              movie={movie?.coming?.data}
+            />
+          </Panel>
+        )}
+        {movie?.today?.total && movie?.today?.total > 0 && (
+          <Panel
+            title="那年今日"
+            subtitle={`${movie?.today?.total}部`}
+            navigation={props.navigation}
+            to={{ path: 'Today' }}
+          >
+            <Category
+              navigation={props.navigation}
+              movie={movie?.today?.data}
+            />
+          </Panel>
+        )}
       </View>
     </ScrollView>
   );
