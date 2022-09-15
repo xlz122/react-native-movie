@@ -7,6 +7,8 @@ export type VideoParams = {
 
 /**
  * @description 视频列表
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
  */
 export const videosList = ({ page, per_page }: VideoParams) => {
   const params = { page, per_page };
