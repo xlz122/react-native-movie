@@ -18,8 +18,10 @@ function MovieCast(props): React.ReactElement {
           resizeMode={'stretch'}
           style={[styles.itemImage]}
         />
-        <Text style={styles.itemText}>{item.name}</Text>
-        <Text style={styles.labelText}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
+          {item.name}
+        </Text>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.labelText}>
           {item?.profession === '导演' ? item?.profession : ''}
           {item?.act ? `饰: ${item?.act}` : ''}
         </Text>
@@ -54,10 +56,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     paddingBottom: 7,
-    marginRight: 8
+    marginRight: 8,
+    width: 94
   },
   itemImage: {
-    width: 94,
     height: 130,
     borderRadius: 3
   },
