@@ -8,6 +8,7 @@ type Props = {
   title?: string;
   subtitle?: string;
   to?: string;
+  params?: Readonly<object | undefined>;
   children?: React.ReactNode;
   panelStyle?: ViewStyle;
   headerStyle?: ViewStyle;
@@ -29,7 +30,7 @@ function Panel(props: Props): React.ReactElement {
         </View>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => props?.navigation?.push(props?.to || '')}
+          onPress={() => props?.navigation?.push(props?.to || '', props.params)}
           style={styles.more}
         >
           <Text style={[styles.moreText, props?.subTitleStyle]}>
