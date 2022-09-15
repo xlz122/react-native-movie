@@ -18,6 +18,8 @@ export type PagingParams = {
 
 /**
  * @description 正在热映影片
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
  */
 export const movieTheater = ({ page, per_page }: PagingParams) => {
   const params = { page, per_page };
@@ -31,6 +33,8 @@ export const movieTheater = ({ page, per_page }: PagingParams) => {
 
 /**
  * @description 最受欢迎的100部影片
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
  */
 export const movieTop = ({ page, per_page }: PagingParams) => {
   const params = { page, per_page };
@@ -54,6 +58,9 @@ export const movieAwards = () => {
 
 /**
  * @description 历史上的今天上映的影片
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ * @param { String } sortby - 排序方式
  */
 export const movieToday = ({ page, per_page, sortby }: PagingParams) => {
   const params = { page, per_page, sortby };

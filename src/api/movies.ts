@@ -21,6 +21,12 @@ export type MovieParams = {
 
 /**
  * @description 影视列表
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ * @param { String } category - 类别
+ * @param { String } genre - 分类
+ * @param { String } country - 国家
+ * @param { String } year - 年份
  */
 export const moviesList = ({
   page,
@@ -41,12 +47,41 @@ export const moviesList = ({
 
 /**
  * @description 获取影视详情
+ * @param { Number } id - 影视id
  */
 export const moviesDetail = ({ id }: { id: number }) => {
   const params = { id };
 
   return axios.request({
     url: `/movies/${id}`,
+    method: 'get',
+    params
+  });
+};
+
+export type MoviePhotosParams = {
+  id: number;
+  type: string;
+  page: number;
+  per_page: number;
+};
+
+/**
+ * @description 获取图片详情
+ * @param { String } type - 照片类型
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ */
+export const moviePhotosDetail = ({
+  id,
+  type,
+  page,
+  per_page
+}: MoviePhotosParams) => {
+  const params = { id, type, page, per_page };
+
+  return axios.request({
+    url: `/movies/${id}/photos`,
     method: 'get',
     params
   });
