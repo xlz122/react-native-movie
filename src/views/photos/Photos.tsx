@@ -4,158 +4,115 @@ import {
   Text,
   Image,
   StyleSheet,
-  SafeAreaView,
-  FlatList,
+  ScrollView,
   TouchableOpacity
 } from 'react-native';
 import { getScreenViewHeight } from '../../utils/screen';
-import { movieToday } from '../../api/home';
+import { moviePhotos } from '../../api/movies';
+import type { RouteProp } from '@react-navigation/native';
 import type { Navigation, ResponseType } from '../../types/index';
-import type { PagingParams } from '../../api/home';
+import type { MoviePhotosParams } from '../../api/movies';
 
 // 获取屏幕内容高度
 const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
+  route: RouteProp<{ params: { movieId: number } }>;
 };
 
-type Movie = {
-  id: number;
-  title: string;
-  poster: string;
-  year: string;
-  genres: string;
-  countries: string;
+type Photo = {
+  url: string;
 };
 
-function Today(props: Props): React.ReactElement {
-  const [movie, setMovie] = useState<Movie[]>([]);
-  const [movieParams, setMovieParams] = useState<PagingParams>({
+function Photos(props: Props): React.ReactElement {
+  const { movieId } = props.route.params;
+
+  const [tab] = useState([
+    { title: '全部', type: 'all' },
+    { title: '海报', type: 'poster' },
+    { title: '剧照', type: 'still' },
+    { title: '截图', type: 'cut' },
+    { title: '其他', type: 'other' }
+  ]);
+  const [photo, setPhoto] = useState<Photo[]>([]);
+  const [photoParams, setPhotoParams] = useState<MoviePhotosParams>({
+    id: 0,
     page: 1,
     per_page: 11,
-    sortby: 'hot'
+    type: 'all'
   });
 
-  const getMovieToday = () => {
-    movieToday({ ...movieParams })
-      .then((res: ResponseType<Movie[]>) => {
+  useEffect(() => {
+    if (!movieId) {
+      return;
+    }
+
+    setPhotoParams({ ...photoParams, id: movieId });
+  }, [movieId]);
+
+  const getMoviePhotos = () => {
+    moviePhotos({ ...photoParams })
+      .then((res: ResponseType<Photo[]>) => {
         if (res.code === 200) {
-          setMovie(res.data!);
+          setPhoto(res.data!);
         }
       })
       .catch(() => ({}));
   };
 
   useEffect(() => {
-    getMovieToday();
-  }, [movieParams]);
+    getMoviePhotos();
+  }, [photoParams]);
 
   const toggleSort = (value: string): void => {
-    setMovieParams({ ...movieParams, sortby: value });
+    setPhotoParams({ ...photoParams, type: value });
   };
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      activeOpacity={1}
-      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
-    >
-      <View style={styles.item}>
-        <Image
-          source={{ uri: item.poster }}
-          resizeMode={'stretch'}
-          style={[styles.itemImage]}
-        />
-        <View style={styles.itemInfo}>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemTitle}>
-            {item.title}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            {item.year}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            {item.genres}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            {item.countries}
-          </Text>
-        </View>
-        {item?.rating.length && (
-          <Text style={styles.itemRating}>
-            <Text style={styles.itemRatingWeight}>{item?.rating}</Text>
-            <Text> 分</Text>
-          </Text>
-        )}
-      </View>
-    </TouchableOpacity>
-  );
-
   return (
-    <SafeAreaView style={styles.page}>
-      <View style={styles.menu}>
-        <Text
-          onPress={() => toggleSort('hot')}
-          style={[
-            styles.menuItem,
-            movieParams.sortby === 'hot'
-              ? styles.menuActiveItem
-              : styles.menuItem
-          ]}
-        >
-          全部
-        </Text>
-        <Text
-          onPress={() => toggleSort('date')}
-          style={[
-            styles.menuItem,
-            movieParams.sortby === 'date'
-              ? styles.menuActiveItem
-              : styles.menuItem
-          ]}
-        >
-          海报
-        </Text>
-        <Text
-          onPress={() => toggleSort('date')}
-          style={[
-            styles.menuItem,
-            movieParams.sortby === 'date'
-              ? styles.menuActiveItem
-              : styles.menuItem
-          ]}
-        >
-          剧照
-        </Text>
-        <Text
-          onPress={() => toggleSort('date')}
-          style={[
-            styles.menuItem,
-            movieParams.sortby === 'date'
-              ? styles.menuActiveItem
-              : styles.menuItem
-          ]}
-        >
-          截图
-        </Text>
-        <Text
-          onPress={() => toggleSort('date')}
-          style={[
-            styles.menuItem,
-            movieParams.sortby === 'date'
-              ? styles.menuActiveItem
-              : styles.menuItem
-          ]}
-        >
-          其他
-        </Text>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+      <View style={styles.tab}>
+        {tab.map((item, index) => {
+          return (
+            <TouchableOpacity
+              key={index}
+              activeOpacity={1}
+              onPress={() => toggleSort(item.type)}
+              style={styles.tabItem}
+            >
+              <Text
+                style={[
+                  styles.itemText,
+                  photoParams.type === item.type
+                    ? styles.activeText
+                    : styles.itemText
+                ]}
+              >
+                {item.title}
+              </Text>
+              <View
+                style={
+                  photoParams.type === item.type ? styles.activeLine : null
+                }
+              />
+            </TouchableOpacity>
+          );
+        })}
       </View>
-      <FlatList
-        initialNumToRender={6}
-        showsVerticalScrollIndicator={false}
-        data={movie}
-        renderItem={renderItem}
-      />
-    </SafeAreaView>
+      <View style={styles.list}>
+        {photo.map((item, index) => {
+          return (
+            <TouchableOpacity key={index} activeOpacity={1} style={styles.item}>
+              <Image
+                source={{ uri: item.url }}
+                resizeMode={'stretch'}
+                style={[styles.itemImage]}
+              />
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -165,64 +122,57 @@ const styles = StyleSheet.create({
     height: viewHeight,
     backgroundColor: '#fff'
   },
-  menu: {
+  tab: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
     height: 44,
     borderBottomWidth: 0.5,
     borderStyle: 'solid',
     borderColor: '#eee'
   },
-  menuItem: {
+  tabItem: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
-    height: 44,
-    lineHeight: 44,
+    height: '100%'
+  },
+  itemText: {
     fontSize: 12,
-    color: '#303133',
+    color: '#7d7e80',
     textAlign: 'center'
   },
-  menuActiveItem: {
+  activeText: {
     color: '#e54847'
+  },
+  activeLine: {
+    position: 'absolute',
+    left: '50%',
+    bottom: 2.8,
+    marginLeft: -12,
+    width: 24,
+    height: 4,
+    backgroundColor: 'rgb(229, 72, 71)',
+    borderRadius: 6
+  },
+  list: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    padding: 10
   },
   item: {
     display: 'flex',
     flexDirection: 'row',
-    paddingTop: 18,
-    marginRight: -20,
-    marginLeft: 16
+    marginBottom: 10
   },
   itemImage: {
     width: 93,
     height: 124,
     borderRadius: 3
-  },
-  itemInfo: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: 13
-  },
-  itemTitle: {
-    marginBottom: 1,
-    fontSize: 14,
-    color: '#333'
-  },
-  itemText: {
-    marginTop: 8,
-    fontSize: 11,
-    color: '#999'
-  },
-  itemRating: {
-    width: 68,
-    fontSize: 8,
-    color: '#f16c00'
-  },
-  itemRatingWeight: {
-    fontSize: 12,
-    fontWeight: '700'
   }
 });
 
-export default Today;
+export default Photos;
