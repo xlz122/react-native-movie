@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-function Cast(props): React.ReactElement {
+function MovieCast(props): React.ReactElement {
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Cast;
+export default MovieCast;
