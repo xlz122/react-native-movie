@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-function Photos(props): React.ReactElement {
+function MoviePhoto(props): React.ReactElement {
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Photos;
+export default MoviePhoto;

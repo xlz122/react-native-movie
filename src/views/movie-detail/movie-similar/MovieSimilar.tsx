@@ -24,7 +24,7 @@ export type Movie = {
   release_date: number;
 };
 
-function SimilarMovie(props: Props): React.ReactElement {
+function MovieSimilar(props: Props): React.ReactElement {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SimilarMovie;
+export default MovieSimilar;
