@@ -100,10 +100,10 @@ function Home(props: Props): React.ReactElement {
         </LinearGradinet>
         <Nav navigation={props.navigation} />
         <Panel
-          navigation={props.navigation}
           title="正在热映"
           subtitle={`${movie?.theater?.total}部`}
-          to="Theater"
+          navigation={props.navigation}
+          to={{ path: 'Theater' }}
         >
           <Category
             navigation={props.navigation}
@@ -111,18 +111,18 @@ function Home(props: Props): React.ReactElement {
           />
         </Panel>
         <Panel
-          navigation={props.navigation}
           title="即将上映"
           subtitle={`${movie?.coming?.total}部`}
-          to="/coming"
+          navigation={props.navigation}
+          to={{ path: 'coming' }}
         >
           <Category navigation={props.navigation} movie={movie?.coming?.data} />
         </Panel>
         <Panel
-          navigation={props.navigation}
           title="那年今日"
           subtitle={`${movie?.today?.total}部`}
-          to="Today"
+          navigation={props.navigation}
+          to={{ path: 'Today' }}
         >
           <Category navigation={props.navigation} movie={movie?.today?.data} />
         </Panel>

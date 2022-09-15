@@ -109,7 +109,6 @@ function MovieInfo(props: Props): React.ReactElement {
       </View>
       <Panel
         title="剧情"
-        to=""
         panelStyle={{ backgroundColor: 'transparent' }}
         headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
         lineStyle={{ display: 'none' }}
