@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity
-} from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { movieTop } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
-import type { PagingParams } from '../../api/home';
+import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
 
 type Props = {
   navigation: Navigation;
@@ -26,17 +18,47 @@ type Movie = {
 };
 
 function HighScore(props: Props): React.ReactElement {
-  const [movie, setMovie] = useState<Movie[]>([]);
-  const [movieParams] = useState<PagingParams>({
+  const [state, setState] = useState({
     page: 1,
-    per_page: 11
+    per_page: 10,
+    // 下拉刷新
+    isRefresh: false,
+    // 加载更多
+    isLoadMore: false,
+    loadMoreText: ''
   });
 
+  const [movie, setMovie] = useState<Movie[]>([]);
+
   const getMovieTop = () => {
-    movieTop({ ...movieParams })
+    movieTop({ page: state.page, per_page: state.per_page })
       .then((res: ResponseType<Movie[]>) => {
         if (res.code === 200) {
-          setMovie(res.data!);
+          // 下拉刷新、初始化
+          if (state.isRefresh || movie.length === 0) {
+            setMovie(res.data!);
+          }
+
+          // 加载更多
+          if (state.isLoadMore) {
+            setMovie(movie.concat(res.data!));
+          }
+
+          if (res.data && res.data?.length < state.per_page) {
+            setState({
+              ...state,
+              isRefresh: false,
+              isLoadMore: false,
+              loadMoreText: '没有更多数据了'
+            });
+          } else {
+            setState({
+              ...state,
+              isRefresh: false,
+              isLoadMore: false,
+              loadMoreText: '加载更多...'
+            });
+          }
         }
       })
       .catch(() => ({}));
@@ -44,7 +66,7 @@ function HighScore(props: Props): React.ReactElement {
 
   useEffect(() => {
     getMovieTop();
-  }, [movieParams]);
+  }, [state.isRefresh, state.isLoadMore]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -78,23 +100,34 @@ function HighScore(props: Props): React.ReactElement {
     </TouchableOpacity>
   );
 
+  const onRefresh = (): void => {
+    setState({ ...state, isRefresh: true, page: 1 });
+  };
+
+  const onEndReached = (): void => {
+    setState({
+      ...state,
+      page: state.page + 1,
+      isLoadMore: true,
+      loadMoreText: '加载中...'
+    });
+  };
+
   return (
-    <SafeAreaView style={styles.page}>
-      <FlatList
-        initialNumToRender={6}
-        showsVerticalScrollIndicator={false}
-        data={movie}
-        renderItem={renderItem}
-      />
-    </SafeAreaView>
+    <ScrollRefresh
+      initialNumToRender={6}
+      showsVerticalScrollIndicator={false}
+      data={movie}
+      renderItem={renderItem}
+      refreshing={state.isRefresh}
+      onRefresh={onRefresh}
+      loadMoreText={state.loadMoreText}
+      onEndReached={onEndReached}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  page: {
-    paddingBottom: 15,
-    backgroundColor: '#fff'
-  },
   item: {
     display: 'flex',
     flexDirection: 'row',
