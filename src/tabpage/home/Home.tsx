@@ -99,7 +99,7 @@ function Home(props: Props): React.ReactElement {
           {/* <Banner banner={banner} onChange={bannerChange} /> */}
         </LinearGradinet>
         <Nav navigation={props.navigation} />
-        {movie?.theater?.total && movie?.theater?.total > 0 && (
+        {movie?.theater?.data && movie?.theater?.data?.length > 0 && (
           <Panel
             title="正在热映"
             subtitle={`${movie?.theater?.total}部`}
@@ -112,7 +112,7 @@ function Home(props: Props): React.ReactElement {
             />
           </Panel>
         )}
-        {movie?.coming?.total && movie?.coming?.total > 0 && (
+        {movie?.coming?.data && movie?.coming?.data?.length > 0 && (
           <Panel
             title="即将上映"
             subtitle={`${movie?.coming?.total}部`}
@@ -125,7 +125,7 @@ function Home(props: Props): React.ReactElement {
             />
           </Panel>
         )}
-        {movie?.today?.total && movie?.today?.total > 0 && (
+        {movie?.today?.data && movie?.today?.data?.length > 0 && (
           <Panel
             title="那年今日"
             subtitle={`${movie?.today?.total}部`}
