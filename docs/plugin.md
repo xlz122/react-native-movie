@@ -1,5 +1,4 @@
 commitlint提交校验
-
 * ts-node
 
 手势
@@ -25,9 +24,7 @@ tab导航
 * react-native-reanimated
 * react-native-reanimated-carousel
 
-更改babel.config.js、yarn.lock文件，如下:
-
-babel.config.js
+配置babel.config.js
 ```
 plugins: ['react-native-reanimated/plugin']
 ```
@@ -47,15 +44,9 @@ plugins: ['react-native-reanimated/plugin']
 如果出现下载极慢的情况，请选择2.9.1版本，并更改yarn.lock文件如下:
 
 * react-native-reanimated(2.9.1)
-* react-native-reanimated-carousel(3.0.3)
 
 yarn.lock
 ```
-react-native-reanimated-carousel@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated-carousel/-/react-native-reanimated-carousel-3.0.3.tgz#b19b3909fa2ed7c35716fd7f1d2f4aff91345db3"
-  integrity sha512-KdidXIBNQb4F/JmXn4tV+2yr/6BhYUQCii0QwBtv64QYiYiBIn+3K8yKJpLTOoy7e3dB3HFKD69VwCCw8ujd2w==
-
 react-native-reanimated@^2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.9.1.tgz#d9a932e312c13c05b4f919e43ebbf76d996e0bc1"

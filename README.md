@@ -1,9 +1,9 @@
 ## 环境要求
 
-需要 NodeJS 14.0.0+ 环境
+需要 NodeJS 16.0.0+ 环境
 
-![](./src/assets/design-sketch/npm-6.14.4.svg)
-![](./src/assets/design-sketch/node-14.0.0.svg)
+![](./src/assets/design-sketch/npm-7.10.0.svg)
+![](./src/assets/design-sketch/node-16.0.0.svg)
 
 需要 Java JDK 11+ 环境
 
@@ -17,10 +17,12 @@
 
 本项目是一个仿写[慕影网H5端](https://github.com/NameLi/muying-h5)项目。
 
+项目使用react-native-web实现web端应用,可查看仓库[web分支](https://github.com/xlz122/react-native-movie/tree/web)。
+
 ## 项目使用技术栈
 
 * React
-* React Native 0.69.5
+* React Native 0.70.0
 * Redux
 * Typescript
 
@@ -51,10 +53,6 @@ yarn start
 ```
 yarn android
 ```
-
-## 查看项目效果
-
-安卓手机教程: [https://blog.csdn.net/weixin_43233914/article/details/119568245](https://blog.csdn.net/weixin_43233914/article/details/119568245)
 
 ## 项目效果图
 
