@@ -34,13 +34,17 @@ function Theater(props: Props): React.ReactElement {
     movieTheater({ page: state.page, per_page: state.per_page })
       .then((res: ResponseType<Movie[]>) => {
         if (res.code === 200) {
+          if (res.data?.length === 0) {
+            return false;
+          }
+
           // 下拉刷新、初始化
           if (state.isRefresh || movie.length === 0) {
             setMovie(res.data!);
           }
 
           // 加载更多
-          if (state.isLoadMore) {
+          if (state.isLoadMore || res.data?.length !== 0) {
             setMovie(movie.concat(res.data!));
           }
 
@@ -66,7 +70,7 @@ function Theater(props: Props): React.ReactElement {
 
   useEffect(() => {
     getMovieTheater();
-  }, [state.isRefresh, state.isLoadMore]);
+  }, [state.page]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
