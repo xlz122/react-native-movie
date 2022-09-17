@@ -17,7 +17,7 @@
 
 本项目是一个仿写[慕影网H5端](https://github.com/NameLi/muying-h5)项目。
 
-项目使用react-native-web提供web端应用,可查看仓库[web分支](https://github.com/xlz122/react-native-movie/tree/web)。
+项目使用react-native-web实现web端应用,可查看仓库[web分支](https://github.com/xlz122/react-native-movie/tree/web)。
 
 ## 项目使用技术栈
 
@@ -53,10 +53,6 @@ yarn start
 ```
 yarn android
 ```
-
-## 查看项目效果
-
-安卓手机教程: [https://blog.csdn.net/weixin_43233914/article/details/119568245](https://blog.csdn.net/weixin_43233914/article/details/119568245)
 
 ## 项目效果图
 
