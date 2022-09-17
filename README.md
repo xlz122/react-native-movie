@@ -17,6 +17,8 @@
 
 本项目是一个仿写[慕影网H5端](https://github.com/NameLi/muying-h5)项目。
 
+项目使用react-native-web提供web端应用,可查看仓库[web分支](https://github.com/xlz122/react-native-movie/tree/web)。
+
 ## 项目使用技术栈
 
 * React
