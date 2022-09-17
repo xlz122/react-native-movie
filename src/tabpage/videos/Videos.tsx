@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { timeStampToDuration } from '../../utils/utils';
+import { getScreenViewHeight } from '../../utils/screen';
 import { videosList } from '../../api/videos';
 import type { ResponseType } from '../../types/index';
 import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
 import styles from './videos.css';
+
+// 获取屏幕内容高度
+const viewHeight = getScreenViewHeight();
 
 type Video = {
   poster: string;
@@ -128,6 +132,7 @@ function Videos(): React.ReactElement {
   return (
     <View style={styles.page}>
       <ScrollRefresh
+        height={viewHeight - 50}
         initialNumToRender={4}
         showsVerticalScrollIndicator={false}
         data={video}

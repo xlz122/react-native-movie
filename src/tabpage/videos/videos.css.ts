@@ -9,7 +9,6 @@ const viewHeight = getScreenViewHeight();
 const styles = StyleSheet.create({
   page: {
     paddingTop: 15,
-    paddingBottom: 15,
     height: viewHeight,
     backgroundColor: '#fff'
   },
