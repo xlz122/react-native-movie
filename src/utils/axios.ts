@@ -97,7 +97,7 @@ class HttpRequest {
 }
 
 const Axios = new HttpRequest({
-  baseURL: 'https://test-h5-api.ixook.com'
+  baseURL: '/api'
 });
 
 export default Axios;
