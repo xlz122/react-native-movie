@@ -22,7 +22,7 @@
 ## 项目使用技术栈
 
 * React
-* React Native 0.70.0
+* React Native 0.70.1
 * Redux
 * Typescript
 
