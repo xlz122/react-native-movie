@@ -104,7 +104,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(appDirectory, 'web/index.html'), // 指定模板路径
-      filename: 'index.html' // 指定文件名
+      filename: 'index.html', // 指定文件名
+      favicon: path.resolve(appDirectory, 'web/favicon.ico')
     }),
     new webpack.DefinePlugin({
       process: { env: {} },
