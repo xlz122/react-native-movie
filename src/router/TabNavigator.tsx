@@ -8,6 +8,7 @@ const tabbar = [
   {
     name: 'Find',
     label: '首页',
+    title: '首页',
     headerShown: false,
     icon: '\ue908',
     selectIcon: '\ue908',
@@ -16,6 +17,7 @@ const tabbar = [
   {
     name: 'Movies',
     label: '分类',
+    title: '分类',
     headerShown: false,
     icon: '\ue636',
     selectIcon: '\ue636',
@@ -24,6 +26,7 @@ const tabbar = [
   {
     name: 'Videos',
     label: '短片',
+    title: '短片',
     headerShown: false,
     icon: '\ue617',
     selectIcon: '\ue617',
@@ -32,6 +35,7 @@ const tabbar = [
   {
     name: 'Mine',
     label: '我的',
+    title: '我的',
     headerShown: false,
     icon: '\ue909',
     selectIcon: '\ue909',
@@ -63,6 +67,7 @@ function TabNavigator(): React.ReactElement {
             name={item.name}
             component={item.component}
             options={{
+              title: item.title,
               headerShown: item.headerShown, // 选项卡的头部标题栏
               tabBarLabel: item.label,
               tabBarIcon: ({ focused }) => {
