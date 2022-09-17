@@ -36,13 +36,17 @@ function Videos(): React.ReactElement {
     videosList({ page: state.page, per_page: state.per_page })
       .then((res: ResponseType<Video[]>) => {
         if (res.code === 200) {
+          if (res.data?.length === 0) {
+            return false;
+          }
+
           // 下拉刷新、初始化
           if (state.isRefresh || video.length === 0) {
             setVideo(res.data!);
           }
 
           // 加载更多
-          if (state.isLoadMore) {
+          if (state.isLoadMore || res.data?.length !== 0) {
             setVideo(video.concat(res.data!));
           }
 
@@ -68,7 +72,7 @@ function Videos(): React.ReactElement {
 
   useEffect(() => {
     getVideosList();
-  }, [state.isRefresh, state.isLoadMore]);
+  }, [state.page]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
