@@ -1,16 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import type { Navigation } from '../../../types/index';
 
-type Props = {
-  navigation: Navigation;
-};
+function Search(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
 
-function Search(props: Props): React.ReactElement {
   return (
     <View style={styles.search}>
       <TouchableOpacity
-        onPress={() => props?.navigation.push('Search')}
+        onPress={() => navigation.push('Search')}
         activeOpacity={1}
         style={styles.input}
       >

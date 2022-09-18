@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import type { Navigation } from '../../../types/index';
 import Panel from '../../../components/panel/Panel';
 import MovieCast from '../movie-cast/MovieCast';
 
 type Props = {
-  navigation?: Navigation;
   data: Partial<MovieInfo>;
 };
 

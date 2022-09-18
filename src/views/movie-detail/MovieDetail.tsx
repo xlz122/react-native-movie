@@ -119,7 +119,7 @@ function MovieDeail(props: Props): React.ReactElement {
     <>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         <LinearGradinet colors={gradientColor}>
-          <MovieInfo navigation={props.navigation} data={detail} />
+          <MovieInfo data={detail} />
         </LinearGradinet>
         {detail?.photos && detail?.photos?.length > 0 && (
           <Panel
@@ -132,10 +132,7 @@ function MovieDeail(props: Props): React.ReactElement {
         )}
         {detail?.like_movies && detail?.like_movies?.length > 0 && (
           <Panel title="相似影视" moreIconStyle={{ display: 'none' }}>
-            <MovieSimilar
-              navigation={props.navigation}
-              movie={detail?.like_movies}
-            />
+            <MovieSimilar movie={detail?.like_movies} />
           </Panel>
         )}
       </ScrollView>

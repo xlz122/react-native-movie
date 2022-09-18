@@ -3,17 +3,13 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
 import { indexData } from '../../api/home';
-import type { ResponseType, Navigation } from '../../types/index';
+import type { ResponseType } from '../../types/index';
 import type { Movie } from './category/Category';
 import Panel from '../../components/panel/Panel';
 import Search from './search/Search';
 import Banner from './banner/Banner';
 import Nav from './nav/Nav';
 import Category from './category/Category';
-
-type Props = {
-  navigation: Navigation;
-};
 
 export type Gathers = {
   swiper?: { bgcolor: string }[];
@@ -31,7 +27,7 @@ export type Gathers = {
   };
 };
 
-function Home(props: Props): React.ReactElement {
+function Home(): React.ReactElement {
   // 轮播图
   const [banner, setBanner] = useState<Gathers['swiper']>([]);
   // 电影分类
@@ -95,20 +91,17 @@ function Home(props: Props): React.ReactElement {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.page}>
         <LinearGradinet colors={gradientColor} style={styles.bgcolor}>
-          <Search navigation={props.navigation} />
+          <Search />
           <Banner banner={banner} onChange={bannerChange} />
         </LinearGradinet>
-        <Nav navigation={props.navigation} />
+        <Nav />
         {movie?.theater?.data && movie?.theater?.data?.length > 0 && (
           <Panel
             title="正在热映"
             subtitle={`${movie?.theater?.total}部`}
             to={{ path: 'Theater' }}
           >
-            <Category
-              navigation={props.navigation}
-              movie={movie?.theater?.data}
-            />
+            <Category movie={movie?.theater?.data} />
           </Panel>
         )}
         {movie?.coming?.data && movie?.coming?.data?.length > 0 && (
@@ -117,10 +110,7 @@ function Home(props: Props): React.ReactElement {
             subtitle={`${movie?.coming?.total}部`}
             to={{ path: 'coming' }}
           >
-            <Category
-              navigation={props.navigation}
-              movie={movie?.coming?.data}
-            />
+            <Category movie={movie?.coming?.data} />
           </Panel>
         )}
         {movie?.today?.data && movie?.today?.data?.length > 0 && (
@@ -129,10 +119,7 @@ function Home(props: Props): React.ReactElement {
             subtitle={`${movie?.today?.total}部`}
             to={{ path: 'Today' }}
           >
-            <Category
-              navigation={props.navigation}
-              movie={movie?.today?.data}
-            />
+            <Category movie={movie?.today?.data} />
           </Panel>
         )}
       </View>
