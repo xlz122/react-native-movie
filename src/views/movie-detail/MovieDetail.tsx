@@ -80,10 +80,9 @@ function MovieDeail(props: Props): React.ReactElement {
   useLayoutEffect(() => {
     // 设置加载时标头
     props.navigation.setOptions({
-      header: ({ navigation, options }) => {
+      header: ({ options }) => {
         return (
           <CustomHeader
-            navigation={navigation}
             options={options}
             headerTitleAlign={true}
             headerStyle={{
@@ -102,10 +101,9 @@ function MovieDeail(props: Props): React.ReactElement {
 
     // 设置标头
     props.navigation.setOptions({
-      header: ({ navigation, options }) => {
+      header: ({ options }) => {
         return (
           <CustomHeader
-            navigation={navigation}
             options={options}
             headerTitleAlign={true}
             headerStyle={{

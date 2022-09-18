@@ -19,8 +19,8 @@ function StackNavigator(): React.ReactElement {
     <Stack.Navigator
       screenOptions={{
         // 自定义标头
-        header: ({ navigation, options }) => {
-          return <CustomHeader navigation={navigation} options={options} />;
+        header: ({ options }) => {
+          return <CustomHeader options={options} />;
         }
       }}
     >
