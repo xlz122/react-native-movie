@@ -27,7 +27,9 @@ function Videos(): React.ReactElement {
     isRefresh: false,
     // 加载更多
     isLoadMore: false,
-    loadMoreText: ''
+    loadMoreText: '',
+    // 数据是否加载完成
+    complete: false
   });
 
   const [video, setVideo] = useState<Video[]>([]);
@@ -36,17 +38,17 @@ function Videos(): React.ReactElement {
     videosList({ page: state.page, per_page: state.per_page })
       .then((res: ResponseType<Video[]>) => {
         if (res.code === 200) {
-          if (res.data?.length === 0) {
+          if (state.complete) {
             return false;
           }
 
           // 下拉刷新、初始化
-          if (state.isRefresh || video.length === 0) {
+          if (state.isRefresh || state.page === 1) {
             setVideo(res.data!);
           }
 
           // 加载更多
-          if (state.isLoadMore || res.data?.length !== 0) {
+          if (state.isLoadMore || state.page !== 1) {
             setVideo(video.concat(res.data!));
           }
 
@@ -55,7 +57,19 @@ function Videos(): React.ReactElement {
               ...state,
               isRefresh: false,
               isLoadMore: false,
+              complete: true,
               loadMoreText: '没有更多数据了'
+            });
+
+            return false;
+          }
+
+          if (state.page === 1) {
+            setState({
+              ...state,
+              isRefresh: false,
+              isLoadMore: false,
+              loadMoreText: ''
             });
           } else {
             setState({
@@ -113,10 +127,20 @@ function Videos(): React.ReactElement {
   );
 
   const onRefresh = (): void => {
-    setState({ ...state, isRefresh: true, page: 1 });
+    setVideo([]);
+    setState({ ...state, isRefresh: true, complete: false, page: 1 });
+
+    // 只有一页直接刷新
+    if (state.page === 1) {
+      getVideosList();
+    }
   };
 
-  const onEndReached = (): void => {
+  const onEndReached = (): boolean | undefined => {
+    if (state.complete) {
+      return false;
+    }
+
     setState({
       ...state,
       page: state.page + 1,
