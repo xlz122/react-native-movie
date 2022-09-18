@@ -60,6 +60,12 @@ const router: Router[] = [
     title: '电影',
     headerShown: true,
     component: require('../views/movie-detail/MovieDetail').default
+  },
+  {
+    name: 'Author',
+    title: '关于作者',
+    headerShown: true,
+    component: require('../views/author/Author').default
   }
 ];
 
