@@ -103,7 +103,6 @@ function Home(props: Props): React.ReactElement {
           <Panel
             title="正在热映"
             subtitle={`${movie?.theater?.total}部`}
-            navigation={props.navigation}
             to={{ path: 'Theater' }}
           >
             <Category
@@ -116,7 +115,6 @@ function Home(props: Props): React.ReactElement {
           <Panel
             title="即将上映"
             subtitle={`${movie?.coming?.total}部`}
-            navigation={props.navigation}
             to={{ path: 'coming' }}
           >
             <Category
@@ -129,7 +127,6 @@ function Home(props: Props): React.ReactElement {
           <Panel
             title="那年今日"
             subtitle={`${movie?.today?.total}部`}
-            navigation={props.navigation}
             to={{ path: 'Today' }}
           >
             <Category

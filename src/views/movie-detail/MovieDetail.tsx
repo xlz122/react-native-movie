@@ -127,7 +127,6 @@ function MovieDeail(props: Props): React.ReactElement {
           <Panel
             title="相册"
             subtitle={`全部${detail?.photos?.length}`}
-            navigation={props.navigation}
             to={{ path: 'Photos', params: { movieId: id } }}
           >
             <MoviePhoto movie={detail?.photos} />
