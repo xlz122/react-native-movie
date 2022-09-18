@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import type { Navigation } from '../../types/index';
 import styles from './mine.css';
 
@@ -48,16 +48,15 @@ function Mine(props: Props): React.ReactElement {
           <Text style={styles.cellItemText}>意见反馈</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
         </View>
-        <View style={styles.cellItem}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => props?.navigation?.push('Author')}
+          style={styles.cellItem}
+        >
           <Text style={styles.cellItemIcon}>{'\ue634'}</Text>
           <Text style={styles.cellItemText}>关于作者</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
-        </View>
-        <View style={styles.cellItem}>
-          <Text style={styles.cellItemIcon}>{'\ue655'}</Text>
-          <Text style={styles.cellItemText}>关于项目</Text>
-          <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
-        </View>
+        </TouchableOpacity>
         <View style={[styles.cellItem, styles.cellLastItem]}>
           <Text style={styles.cellItemIcon}>{'\ue60b'}</Text>
           <Text style={styles.cellItemText}>更新日志</Text>
