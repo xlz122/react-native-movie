@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
 import { getScreenViewHeight } from '../../utils/screen';
@@ -28,6 +28,9 @@ type Detail = {
     url: string;
   }[];
   like_movies: Movie[];
+  review_count: number;
+  collection_count: number;
+  comment_count: number;
 };
 
 function MovieDeail(props: Props): React.ReactElement {
@@ -115,29 +118,59 @@ function MovieDeail(props: Props): React.ReactElement {
   }, [gradientColor]);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-      <LinearGradinet colors={gradientColor}>
-        <MovieInfo navigation={props.navigation} data={detail} />
-      </LinearGradinet>
-      {detail?.photos && detail?.photos?.length > 0 && (
-        <Panel
-          title="相册"
-          subtitle={`全部${detail?.photos?.length}`}
-          navigation={props.navigation}
-          to={{ path: 'Photos', params: { movieId: id } }}
-        >
-          <MoviePhoto movie={detail?.photos} />
-        </Panel>
-      )}
-      {detail?.like_movies && detail?.like_movies?.length > 0 && (
-        <Panel title="相似影视" moreIconStyle={{ display: 'none' }}>
-          <MovieSimilar
+    <>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+        <LinearGradinet colors={gradientColor}>
+          <MovieInfo navigation={props.navigation} data={detail} />
+        </LinearGradinet>
+        {detail?.photos && detail?.photos?.length > 0 && (
+          <Panel
+            title="相册"
+            subtitle={`全部${detail?.photos?.length}`}
             navigation={props.navigation}
-            movie={detail?.like_movies}
-          />
-        </Panel>
-      )}
-    </ScrollView>
+            to={{ path: 'Photos', params: { movieId: id } }}
+          >
+            <MoviePhoto movie={detail?.photos} />
+          </Panel>
+        )}
+        {detail?.like_movies && detail?.like_movies?.length > 0 && (
+          <Panel title="相似影视" moreIconStyle={{ display: 'none' }}>
+            <MovieSimilar
+              navigation={props.navigation}
+              movie={detail?.like_movies}
+            />
+          </Panel>
+        )}
+      </ScrollView>
+      <View style={styles.comment}>
+        <View style={styles.review}>
+          <Text style={styles.reviewIcon}>{'\ue650'}</Text>
+          <Text style={styles.reviewText}>
+            {detail?.review_count && detail?.review_count > 0
+              ? `共有${detail?.review_count}条影评`
+              : '还没有人发布过影评'}
+          </Text>
+        </View>
+        <View style={styles.tool}>
+          <View style={styles.toolItem}>
+            <Text style={styles.toolItemIcon}>{'\ue911'}</Text>
+            <Text style={styles.toolItemText}>
+              {detail?.collection_count && detail?.collection_count > 0
+                ? detail?.collection_count
+                : '收藏'}
+            </Text>
+          </View>
+          <View style={styles.toolItem}>
+            <Text style={styles.toolItemIcon}>{'\ue620'}</Text>
+            <Text style={styles.toolItemText}>
+              {detail?.comment_count && detail?.comment_count > 0
+                ? detail?.comment_count
+                : '评论'}
+            </Text>
+          </View>
+        </View>
+      </View>
+    </>
   );
 }
 
@@ -145,6 +178,57 @@ const styles = StyleSheet.create({
   page: {
     height: viewHeight,
     backgroundColor: '#f5f5f5'
+  },
+  comment: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 46,
+    backgroundColor: '#fff',
+    borderTopWidth: 0.3,
+    borderStyle: 'solid',
+    borderColor: '#eee'
+  },
+  review: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 14,
+    paddingRight: 14,
+    marginLeft: 5
+  },
+  reviewIcon: {
+    marginRight: 6,
+    fontFamily: 'iconfont',
+    fontSize: 16,
+    color: '#7f889b'
+  },
+  reviewText: {
+    fontSize: 12,
+    color: '#7f889b'
+  },
+  tool: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 12
+  },
+  toolItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minWidth: 41
+  },
+  toolItemIcon: {
+    fontFamily: 'iconfont',
+    fontSize: 16,
+    color: '#7f889b'
+  },
+  toolItemText: {
+    fontSize: 10,
+    color: '#7f889b'
   }
 });
 
