@@ -9,8 +9,10 @@ const viewHeight = getScreenViewHeight();
 const styles = StyleSheet.create({
   page: {
     paddingTop: 15,
-    height: viewHeight,
-    backgroundColor: '#fff'
+    // 50为tabBar高度(需统一配置)
+    height: viewHeight - 50,
+    backgroundColor: '#fff',
+    overflow: 'scroll'
   },
   item: {
     marginLeft: 11,
