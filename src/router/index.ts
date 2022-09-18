@@ -65,7 +65,7 @@ const router: Router[] = [
     name: 'Photos',
     title: '相册',
     headerShown: true,
-    component: require('../views/phtots/Photos').default
+    component: require('../views/photos/Photos').default
   },
   {
     name: 'Author',
