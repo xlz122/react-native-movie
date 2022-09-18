@@ -6,7 +6,7 @@ const viewHeight = getScreenViewHeight();
 
 const styles = StyleSheet.create({
   page: {
-    minHeight: viewHeight,
+    minHeight: viewHeight - 50,
     backgroundColor: '#f5f5f5'
   },
   userInfo: {
