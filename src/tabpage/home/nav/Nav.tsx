@@ -1,18 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import type { Navigation } from '../../../types/index';
 
-type Props = {
-  navigation: Navigation;
-};
+function Nav(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
 
-function Nav(props: Props): React.ReactElement {
   return (
     <View style={styles.nav}>
       <View style={styles.list}>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => props?.navigation.push('Theater')}
+          onPress={() => navigation.push('Theater')}
           style={styles.item}
         >
           <Text style={[styles.itemIcon, styles.hotMovie]}>{'\ue617'}</Text>
@@ -20,7 +19,7 @@ function Nav(props: Props): React.ReactElement {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => props?.navigation.push('HighScore')}
+          onPress={() => navigation.push('HighScore')}
           style={styles.item}
         >
           <Text style={[styles.itemIcon, styles.highScore]}>{'\ue67b'}</Text>
@@ -28,7 +27,7 @@ function Nav(props: Props): React.ReactElement {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => props?.navigation.push('Awards')}
+          onPress={() => navigation.push('Awards')}
           style={styles.item}
         >
           <Text style={[styles.itemIcon, styles.awards]}>{'\ue668'}</Text>
@@ -36,7 +35,7 @@ function Nav(props: Props): React.ReactElement {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => props?.navigation.push('Today')}
+          onPress={() => navigation.push('Today')}
           style={styles.item}
         >
           <Text style={[styles.itemIcon, styles.today]}>{'\ue6c4'}</Text>

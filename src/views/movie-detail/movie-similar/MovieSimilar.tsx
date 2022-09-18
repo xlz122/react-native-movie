@@ -8,10 +8,10 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import type { Navigation } from '../../../types/index';
 
 type Props = {
-  navigation: Navigation;
   movie?: Movie[];
 };
 
@@ -25,10 +25,12 @@ export type Movie = {
 };
 
 function MovieSimilar(props: Props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+      onPress={() => navigation.push('MovieDetail', { id: item.id })}
     >
       <View style={styles.item}>
         <Image
