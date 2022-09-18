@@ -93,7 +93,7 @@ function Movies(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    minHeight: viewHeight,
+    minHeight: viewHeight - 50,
     backgroundColor: '#fff'
   },
   list: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     paddingTop: 10,
-    paddingBottom: 15,
+    paddingBottom: 10,
     paddingLeft: 7,
     paddingRight: 7
   },
