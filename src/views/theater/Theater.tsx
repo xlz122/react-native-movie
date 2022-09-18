@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { getScreenViewHeight } from '../../utils/screen';
-import { movieTop } from '../../api/home';
+import { movieTheater } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
 
@@ -21,7 +21,7 @@ type Movie = {
   countries: string;
 };
 
-function HighScore(props: Props): React.ReactElement {
+function Theater(props: Props): React.ReactElement {
   const [state, setState] = useState({
     page: 1,
     per_page: 10,
@@ -29,26 +29,28 @@ function HighScore(props: Props): React.ReactElement {
     isRefresh: false,
     // 加载更多
     isLoadMore: false,
-    loadMoreText: ''
+    loadMoreText: '',
+    // 数据是否加载完成
+    complete: false
   });
 
   const [movie, setMovie] = useState<Movie[]>([]);
 
-  const getMovieTop = () => {
-    movieTop({ page: state.page, per_page: state.per_page })
+  const getMovieTheater = () => {
+    movieTheater({ page: state.page, per_page: state.per_page })
       .then((res: ResponseType<Movie[]>) => {
         if (res.code === 200) {
-          if (res.data?.length === 0) {
+          if (state.complete) {
             return false;
           }
 
           // 下拉刷新、初始化
-          if (state.isRefresh || movie.length === 0) {
+          if (state.isRefresh || state.page === 1) {
             setMovie(res.data!);
           }
 
           // 加载更多
-          if (state.isLoadMore || res.data?.length !== 0) {
+          if (state.isLoadMore || state.page !== 1) {
             setMovie(movie.concat(res.data!));
           }
 
@@ -57,7 +59,19 @@ function HighScore(props: Props): React.ReactElement {
               ...state,
               isRefresh: false,
               isLoadMore: false,
+              complete: true,
               loadMoreText: '没有更多数据了'
+            });
+
+            return false;
+          }
+
+          if (state.page === 1) {
+            setState({
+              ...state,
+              isRefresh: false,
+              isLoadMore: false,
+              loadMoreText: ''
             });
           } else {
             setState({
@@ -73,7 +87,7 @@ function HighScore(props: Props): React.ReactElement {
   };
 
   useEffect(() => {
-    getMovieTop();
+    getMovieTheater();
   }, [state.page]);
 
   const renderItem = ({ item }) => (
@@ -101,18 +115,30 @@ function HighScore(props: Props): React.ReactElement {
             {item.countries}
           </Text>
         </View>
-        <Text style={styles.itemRating}>
-          <Text style={styles.itemRatingWeight}>{item?.rating}</Text>分
-        </Text>
+        {item?.rating > 0 && (
+          <Text style={styles.itemRating}>
+            <Text style={styles.itemRatingWeight}>{item?.rating}</Text> 分
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
 
   const onRefresh = (): void => {
-    setState({ ...state, isRefresh: true, page: 1 });
+    setMovie([]);
+    setState({ ...state, isRefresh: true, complete: false, page: 1 });
+
+    // 只有一页直接刷新
+    if (state.page === 1) {
+      getMovieTheater();
+    }
   };
 
-  const onEndReached = (): void => {
+  const onEndReached = (): boolean | undefined => {
+    if (state.complete) {
+      return false;
+    }
+
     setState({
       ...state,
       page: state.page + 1,
@@ -181,4 +207,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HighScore;
+export default Theater;
