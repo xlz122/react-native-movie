@@ -1,13 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, FlatList } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
 import type { ListRenderItem } from 'react-native';
 
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
-
 type Props = {
-  height?: number;
   initialNumToRender?: number;
   showsVerticalScrollIndicator?: boolean;
   data?: readonly unknown[];
@@ -32,9 +27,7 @@ function ScrollRefresh(props: Props): React.ReactElement {
   };
 
   return (
-    <SafeAreaView
-      style={[styles.list, { height: props?.height || viewHeight }]}
-    >
+    <SafeAreaView style={styles.list}>
       <FlatList
         // 初始渲染个数
         initialNumToRender={props?.initialNumToRender}
@@ -60,7 +53,7 @@ function ScrollRefresh(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   list: {
-    paddingBottom: 15
+    height: '100%'
   },
   loadMore: {
     display: 'flex',

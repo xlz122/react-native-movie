@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { getScreenViewHeight } from '../../utils/screen';
 import { movieTop } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
+
+// 获取屏幕内容高度
+const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -118,20 +122,26 @@ function HighScore(props: Props): React.ReactElement {
   };
 
   return (
-    <ScrollRefresh
-      initialNumToRender={6}
-      showsVerticalScrollIndicator={false}
-      data={movie}
-      renderItem={renderItem}
-      refreshing={state.isRefresh}
-      onRefresh={onRefresh}
-      loadMoreText={state.loadMoreText}
-      onEndReached={onEndReached}
-    />
+    <View style={styles.page}>
+      <ScrollRefresh
+        initialNumToRender={6}
+        showsVerticalScrollIndicator={false}
+        data={movie}
+        renderItem={renderItem}
+        refreshing={state.isRefresh}
+        onRefresh={onRefresh}
+        loadMoreText={state.loadMoreText}
+        onEndReached={onEndReached}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  page: {
+    height: viewHeight - 42,
+    overflow: 'scroll'
+  },
   item: {
     display: 'flex',
     flexDirection: 'row',

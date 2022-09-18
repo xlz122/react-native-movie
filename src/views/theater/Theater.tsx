@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { movieTheater } from '../../api/home';
+import { getScreenViewHeight } from '../../utils/screen';
+import { movieTop } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
+
+// 获取屏幕内容高度
+const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -17,7 +21,7 @@ type Movie = {
   countries: string;
 };
 
-function Theater(props: Props): React.ReactElement {
+function HighScore(props: Props): React.ReactElement {
   const [state, setState] = useState({
     page: 1,
     per_page: 10,
@@ -30,8 +34,8 @@ function Theater(props: Props): React.ReactElement {
 
   const [movie, setMovie] = useState<Movie[]>([]);
 
-  const getMovieTheater = () => {
-    movieTheater({ page: state.page, per_page: state.per_page })
+  const getMovieTop = () => {
+    movieTop({ page: state.page, per_page: state.per_page })
       .then((res: ResponseType<Movie[]>) => {
         if (res.code === 200) {
           if (res.data?.length === 0) {
@@ -69,7 +73,7 @@ function Theater(props: Props): React.ReactElement {
   };
 
   useEffect(() => {
-    getMovieTheater();
+    getMovieTop();
   }, [state.page]);
 
   const renderItem = ({ item }) => (
@@ -97,11 +101,9 @@ function Theater(props: Props): React.ReactElement {
             {item.countries}
           </Text>
         </View>
-        {item?.rating > 0 && (
-          <Text style={styles.itemRating}>
-            <Text style={styles.itemRatingWeight}>{item?.rating}</Text> 分
-          </Text>
-        )}
+        <Text style={styles.itemRating}>
+          <Text style={styles.itemRatingWeight}>{item?.rating}</Text>分
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -120,20 +122,26 @@ function Theater(props: Props): React.ReactElement {
   };
 
   return (
-    <ScrollRefresh
-      initialNumToRender={6}
-      showsVerticalScrollIndicator={false}
-      data={movie}
-      renderItem={renderItem}
-      refreshing={state.isRefresh}
-      onRefresh={onRefresh}
-      loadMoreText={state.loadMoreText}
-      onEndReached={onEndReached}
-    />
+    <View style={styles.page}>
+      <ScrollRefresh
+        initialNumToRender={6}
+        showsVerticalScrollIndicator={false}
+        data={movie}
+        renderItem={renderItem}
+        refreshing={state.isRefresh}
+        onRefresh={onRefresh}
+        loadMoreText={state.loadMoreText}
+        onEndReached={onEndReached}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  page: {
+    height: viewHeight - 42,
+    overflow: 'scroll'
+  },
   item: {
     display: 'flex',
     flexDirection: 'row',
@@ -173,4 +181,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Theater;
+export default HighScore;
