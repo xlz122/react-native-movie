@@ -127,7 +127,7 @@ function Today(props: Props): React.ReactElement {
 const styles = StyleSheet.create({
   page: {
     paddingBottom: 18,
-    height: viewHeight,
+    height: viewHeight - 42,
     backgroundColor: '#fff'
   },
   tab: {

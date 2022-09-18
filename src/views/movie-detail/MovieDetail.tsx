@@ -170,7 +170,7 @@ function MovieDeail(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    height: viewHeight,
+    height: viewHeight - 42,
     backgroundColor: '#f5f5f5'
   },
   comment: {
