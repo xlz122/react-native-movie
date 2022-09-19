@@ -1,23 +1,14 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Linking
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { getScreenViewHeight } from '../../utils/screen';
+import type { Navigation } from '../../types/index';
 
 // 获取屏幕内容高度
 const viewHeight = getScreenViewHeight();
 
 function Author(): React.ReactElement {
-  // 跳转外部链接
-  const handlePress = (url: string) => {
-    Linking.canOpenURL(url).then(() => {
-      return Linking.openURL(url);
-    });
-  };
+  const navigation: Navigation = useNavigation();
 
   return (
     <View style={styles.page}>
@@ -36,7 +27,9 @@ function Author(): React.ReactElement {
         </View>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => handlePress('https://github.com/xlz122')}
+          onPress={() =>
+            navigation?.push('WebView', { to: 'https://github.com/xlz122' })
+          }
           style={styles.cellItem}
         >
           <Text style={styles.itemText}>github主页</Text>
@@ -46,7 +39,9 @@ function Author(): React.ReactElement {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => handlePress('https://www.xlz122.cn')}
+          onPress={() =>
+            navigation?.push('WebView', { to: 'https://www.xlz122.cn' })
+          }
           style={styles.cellItem}
         >
           <Text style={styles.itemText}>个人博客</Text>
@@ -56,7 +51,9 @@ function Author(): React.ReactElement {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => handlePress('https://n.xlz122.cn')}
+          onPress={() =>
+            navigation?.push('WebView', { to: 'https://n.xlz122.cn' })
+          }
           style={[styles.cellItem, styles.cellLastItem]}
         >
           <Text style={styles.itemText}>开源项目 - 网易云</Text>
@@ -71,8 +68,7 @@ function Author(): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    // web端需要减去标题栏高度
-    height: viewHeight - 42,
+    height: viewHeight,
     backgroundColor: '#f5f5f5'
   },
   cell: {
