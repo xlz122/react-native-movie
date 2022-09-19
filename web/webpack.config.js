@@ -7,7 +7,8 @@ const appDirectory = path.resolve(__dirname, '../');
 // 添加需要编译的react-native包
 const compileNodeModules = [
   'react-native-reanimated',
-  'react-native-linear-gradient'
+  'react-native-linear-gradient',
+  'react-native-webview'
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 // This is needed for webpack to compile JavaScript.
