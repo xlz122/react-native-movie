@@ -51,7 +51,7 @@ const imageLoaderConfiguration = {
 };
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: false,
   entry: [
     // load any web API polyfills
     // path.resolve(appDirectory, 'polyfills-web.js'),
@@ -62,7 +62,9 @@ module.exports = {
   // configures where the build ends up
   output: {
     filename: 'bundle.web.js',
-    path: path.resolve(appDirectory, 'build')
+    path: path.resolve(appDirectory, 'build'),
+    // 每次构建都清除上一次打包文件
+    clean: true
   },
 
   // ...the rest of your config
