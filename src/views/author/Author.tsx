@@ -17,13 +17,13 @@ function Author(): React.ReactElement {
           <Text style={styles.itemText}>工作</Text>
           <Text style={styles.itemRightText}>前端开发</Text>
         </View>
-        <View style={[styles.cellItem, styles.cellLastItem]}>
+        <View style={styles.cellItem}>
           <Text style={styles.itemText}>github主页</Text>
           <Text style={[styles.itemRightText, styles.itemHref]}>
             https://github.com/xlz122
           </Text>
         </View>
-        <View style={[styles.cellItem, styles.cellLastItem]}>
+        <View style={styles.cellItem}>
           <Text style={styles.itemText}>个人博客</Text>
           <Text style={[styles.itemRightText, styles.itemHref]}>
             https://www.xlz122.cn
