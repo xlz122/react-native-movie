@@ -126,7 +126,13 @@ function Theater(props: Props): React.ReactElement {
 
   const onRefresh = (): void => {
     setMovie([]);
-    setState({ ...state, isRefresh: true, complete: false, page: 1 });
+    setState({
+      ...state,
+      page: 1,
+      isRefresh: true,
+      complete: false,
+      loadMoreText: ''
+    });
 
     // 只有一页直接刷新
     if (state.page === 1) {
