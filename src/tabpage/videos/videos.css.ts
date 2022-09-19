@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { getScreenWidth, getScreenViewHeight } from '../../utils/screen';
 
 // 获取屏幕宽度
@@ -9,8 +9,9 @@ const viewHeight = getScreenViewHeight();
 const styles = StyleSheet.create({
   page: {
     paddingTop: 15,
-    // 50为tabBar高度(需统一配置)
-    height: viewHeight - 50,
+    paddingBottom: Platform.OS !== 'web' ? 15 : 0,
+    // web端需要减去tabBar高度
+    height: Platform.OS === 'web' ? viewHeight - 50 : viewHeight,
     backgroundColor: '#fff',
     overflow: 'scroll'
   },

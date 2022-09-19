@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Platform
+} from 'react-native';
 import { getScreenViewHeight } from '../../utils/screen';
 import { movieTheater } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
@@ -171,7 +178,9 @@ function Theater(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    height: viewHeight - 42,
+    paddingBottom: Platform.OS !== 'web' ? 10 : 0,
+    // web端需要减去标题高度
+    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
     overflow: 'scroll'
   },
   item: {
