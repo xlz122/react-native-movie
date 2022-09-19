@@ -2425,7 +2425,7 @@ browser-process-hrtime@^1.0.0:
   resolved "https://registry.yarnpkg.com/browser-process-hrtime/-/browser-process-hrtime-1.0.0.tgz#3c9b4b7d782c8121e56f10106d84c0d0ffc94626"
   integrity sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==
 
-browserslist@^4.21.3:
+browserslist@^4.21.3, browserslist@^4.21.4:
   version "4.21.4"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.21.4.tgz#e7496bbc67b9e39dd0f98565feccdcb0d4ff6987"
   integrity sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==
@@ -2527,9 +2527,9 @@ camelcase@^6.0.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001400:
-  version "1.0.30001402"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001402.tgz#aa29e1f47f5055b0d0c07696a67b8b08023d14c8"
-  integrity sha512-Mx4MlhXO5NwuvXGgVb+hg65HZ+bhUYsz8QtDGDo2QmaJS2GBX47Xfi2koL86lc8K+l+htXeTEB/Aeqvezoo6Ew==
+  version "1.0.30001406"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001406.tgz#d0146e7919635479f873b4507517b627f66ab269"
+  integrity sha512-bWTlaXUy/rq0BBtYShc/jArYfBPjEV95euvZ8JVtO43oQExEN/WquoqpufFjNu4kSpi5cy5kMbNvzztWDfv1Jg==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -2845,11 +2845,11 @@ copy-descriptor@^0.1.0:
   integrity sha512-XgZ0pFcakEUlbwQEVNg3+QAis1FyTL3Qel9FYy8pSkQqoG3PNoT0bOCQtOXcOkur21r2Eq2kI+IE+gsmAEVlYw==
 
 core-js-compat@^3.25.1:
-  version "3.25.1"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.25.1.tgz#6f13a90de52f89bbe6267e5620a412c7f7ff7e42"
-  integrity sha512-pOHS7O0i8Qt4zlPW/eIFjwp+NrTPx+wTL0ctgI2fHn31sZOq89rDsmtc/A2vAX7r6shl+bmVI+678He46jgBlw==
+  version "3.25.2"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.25.2.tgz#7875573586809909c69e03ef310810c1969ee138"
+  integrity sha512-TxfyECD4smdn3/CjWxczVtJqVLEEC2up7/82t7vC0AzNogr+4nQ8vyF7abxAuTXWvjTClSbvGhU0RgqA4ToQaQ==
   dependencies:
-    browserslist "^4.21.3"
+    browserslist "^4.21.4"
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -6751,7 +6751,7 @@ react-native-reanimated-carousel@^3.0.5:
   resolved "https://registry.yarnpkg.com/react-native-reanimated-carousel/-/react-native-reanimated-carousel-3.0.5.tgz#3a8b70f51608adb568d41d553715d59142d18620"
   integrity sha512-fZyA0Yun6Ia9psk+Cj56rHLnsoZCVo/64rRqU5KT51G4fxqhs2HPjWiWIMgvPSa5MNpHYFl2hh10JYXwt7QjCQ==
 
-react-native-reanimated@^2.9.1:
+react-native-reanimated@2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.9.1.tgz#d9a932e312c13c05b4f919e43ebbf76d996e0bc1"
   integrity sha512-309SIhDBwY4F1n6e5Mr5D1uPZm2ESIcmZsGXHUu8hpKX4oIOlZj2MilTk+kHhi05LjChoJkcpfkstotCJmPRPg==
