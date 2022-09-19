@@ -109,11 +109,10 @@ module.exports = {
       favicon: path.resolve(appDirectory, 'web/favicon.ico')
     }),
     new webpack.DefinePlugin({
+      // Uncaught ReferenceError: process is not defined
       process: { env: {} },
-      'process.env.NODE_ENV': JSON.stringify(
-        process.env.NODE_ENV || 'development'
-      ),
-      __DEV__: process.env.NODE_ENV !== 'production' || true
+      // Uncaught ReferenceError: __DEV__ is not defined
+      __DEV__: null
     })
   ]
 };
