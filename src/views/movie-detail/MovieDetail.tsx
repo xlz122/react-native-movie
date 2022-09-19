@@ -170,7 +170,7 @@ function MovieDeail(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    height: viewHeight - 42,
+    height: viewHeight - 42 - 44,
     backgroundColor: '#f5f5f5'
   },
   comment: {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: 46,
+    height: 44,
     backgroundColor: '#fff',
     borderTopWidth: 0.3,
     borderStyle: 'solid',
