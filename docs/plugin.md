@@ -1,26 +1,35 @@
+[Readme.md](../README.md) | [平台差异对比](./difference.md) | [阿里字体图标](./iconfont.md) | 项目插件
+
 commitlint提交校验
+
 * ts-node
 
 手势
+
 * react-native-gesture-handler
 
 状态管理
+
 * @reduxjs/toolkit
 * react-redux
 
 本地存储
+
 * @react-native-async-storage/async-storage
 
 路由
+
 * @react-navigation/native
 * @react-navigation/stack
 * react-native-safe-area-context
 * react-native-screens
 
 tab导航
+
 * @react-navigation/bottom-tabs
 
 轮播图
+
 * react-native-reanimated
 * react-native-reanimated-carousel
 
@@ -63,4 +72,9 @@ react-native-reanimated@^2.9.1:
 ```
 
 渐变背景色
+
 * react-native-linear-gradient
+
+打开外部网页
+
+* react-native-webview

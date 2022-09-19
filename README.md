@@ -1,3 +1,5 @@
+Readme | [平台差异对比](./doc/difference.md) | [阿里字体图标](./doc/iconfont.md) | [项目插件](./doc/plugin.md)
+
 ## 环境要求
 
 需要 NodeJS 16.0.0+ 环境
