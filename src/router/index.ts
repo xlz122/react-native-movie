@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import type { FunctionComponent } from 'react';
 import type { ViewStyle } from 'react-native';
 
@@ -72,6 +73,15 @@ const router: Router[] = [
     title: '关于作者',
     headerShown: true,
     component: require('../views/author/Author').default
+  },
+  {
+    name: 'WebView',
+    title: '',
+    headerShown: false,
+    component: Platform.select({
+      native: require('../views/web-view/WebView.native').default,
+      web: ''
+    })
   }
 ];
 
