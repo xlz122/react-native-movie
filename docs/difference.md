@@ -28,3 +28,28 @@ react-native-webview
 
 * app端使用react-native-webview在app内打开web网页
 * web端不支持react-native-webview插件，需要通过特定文件名来区分不同平台，具体示例可以查看src/views/author文件夹
+
+## 高度差异
+
+```
+import { StatusBar, Dimensions } from 'react-native';
+
+// 状态栏高度
+const StatusBarHeight = StatusBar.currentHeight || 0;
+// 屏幕高度
+const deviceHeight = Dimensions.get('window').height;
+
+// 内容高度
+const viewHeight = deviceHeight - StatusBarHeight;
+```
+
+屏幕内容高度(viewHeight)
+
+* app端直接使用viewHeight撑满屏幕
+* web端 - 有标题栏需减去标题栏高度
+* web端 - 有tabBar需减去tabBar高度
+
+FlatList(上拉加载、下拉刷新)
+
+* app端无需给定具体高度，自动撑满屏幕
+* web端需给定具体滚动高度
