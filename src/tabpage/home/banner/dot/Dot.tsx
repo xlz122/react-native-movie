@@ -9,7 +9,7 @@ import type { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   list: unknown[];
-  progressValue: SharedValue<number | SharedValue<number>>;
+  progressValue?: SharedValue<number | SharedValue<number>>;
 };
 
 function Dot(props: Props): React.ReactElement {
