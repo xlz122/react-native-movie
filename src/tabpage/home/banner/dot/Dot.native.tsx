@@ -12,6 +12,7 @@ function Dot(props: Props): React.ReactElement {
         props.list.map((item, index) => {
           return (
             <View
+              key={index}
               style={[
                 styles.dotItem,
                 index === 0 ? styles.dotActiveItem : styles.dotItem
