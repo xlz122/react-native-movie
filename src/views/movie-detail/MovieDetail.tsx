@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
 import { getScreenViewHeight } from '../../utils/screen';
@@ -18,8 +19,9 @@ const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
-  route: RouteProp<{ params: { id: number } }>;
 };
+
+type Route = RouteProp<{ params: { id: number } }>;
 
 type Detail = {
   bgcolor: string;
@@ -34,12 +36,12 @@ type Detail = {
 };
 
 function MovieDeail(props: Props): React.ReactElement {
-  const { id } = props.route.params;
+  const route: Route = useRoute();
 
   const [detail, setDetail] = useState<Partial<Detail>>({});
 
   const getMovieDetail = () => {
-    moviesDetail({ id })
+    moviesDetail({ id: route.params.id })
       .then((res: ResponseType<Partial<Detail>>) => {
         if (res.code === 200) {
           setDetail(res.data!);
@@ -125,7 +127,7 @@ function MovieDeail(props: Props): React.ReactElement {
           <Panel
             title="相册"
             subtitle={`全部${detail?.photos?.length}`}
-            to={{ path: 'Photos', params: { movieId: id } }}
+            to={{ path: 'Photos', params: { movieId: route.params.id } }}
             panelStyle={{ marginTop: 10 }}
           >
             <MoviePhoto movie={detail?.photos} />
