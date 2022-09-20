@@ -53,37 +53,39 @@ function Movies(props: Props): React.ReactElement {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+    <>
       <Nav onChange={navChange} />
-      <View style={styles.list}>
-        {movie.map(item => {
-          return (
-            <TouchableOpacity
-              key={item.id}
-              activeOpacity={1}
-              onPress={() =>
-                props?.navigation.push('MovieDetail', { id: item.id })
-              }
-              style={styles.item}
-            >
-              <Image
-                source={{ uri: item.poster }}
-                resizeMode={'stretch'}
-                style={[styles.itemImage]}
-              />
-              <Text style={styles.itemRating}>{item?.rating}</Text>
-              <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={styles.itemText}
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+        <View style={styles.list}>
+          {movie.map(item => {
+            return (
+              <TouchableOpacity
+                key={item.id}
+                activeOpacity={1}
+                onPress={() =>
+                  props?.navigation.push('MovieDetail', { id: item.id })
+                }
+                style={styles.item}
               >
-                {item.title}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-    </ScrollView>
+                <Image
+                  source={{ uri: item.poster }}
+                  resizeMode={'stretch'}
+                  style={[styles.itemImage]}
+                />
+                <Text style={styles.itemRating}>{item?.rating}</Text>
+                <Text
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                  style={styles.itemText}
+                >
+                  {item.title}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </ScrollView>
+    </>
   );
 }
 
@@ -98,7 +100,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     paddingTop: 10,
-    paddingBottom: 10,
     paddingLeft: 7,
     paddingRight: 7
   },
