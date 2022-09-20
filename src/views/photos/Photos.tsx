@@ -7,22 +7,20 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import { moviePhotos } from '../../api/movies';
 import type { RouteProp } from '@react-navigation/native';
-import type { Navigation, ResponseType } from '../../types/index';
+import type { ResponseType } from '../../types/index';
 import type { MoviePhotosParams } from '../../api/movies';
 
-type Props = {
-  navigation: Navigation;
-  route: RouteProp<{ params: { movieId: number } }>;
-};
+type Route = RouteProp<{ params: { movieId: number } }>;
 
 type Photo = {
   url: string;
 };
 
-function Photos(props: Props): React.ReactElement {
-  const { movieId } = props.route.params;
+function Photos(): React.ReactElement {
+  const route: Route = useRoute();
 
   const [tab] = useState([
     { title: '全部', type: 'all' },
@@ -40,12 +38,12 @@ function Photos(props: Props): React.ReactElement {
   });
 
   useEffect(() => {
-    if (!movieId) {
+    if (!route.params.movieId) {
       return;
     }
 
-    setPhotoParams({ ...photoParams, id: movieId });
-  }, [movieId]);
+    setPhotoParams({ ...photoParams, id: route.params.movieId });
+  }, [route.params.movieId]);
 
   const getMoviePhotos = () => {
     moviePhotos({ ...photoParams })
