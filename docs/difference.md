@@ -3,7 +3,9 @@
 ## 简介
 
 web端使用react-native-web实现
+
 web端代码请查看仓库[web分支](https://github.com/xlz122/react-native-movie/tree/web)
+
 web端配置文件放置在web文件夹下
 
 ## 配置差异
@@ -52,4 +54,4 @@ const viewHeight = deviceHeight - StatusBarHeight;
 FlatList(上拉加载、下拉刷新)
 
 * app端无需给定具体高度，自动撑满屏幕
-* web端需给定具体滚动高度
+* web端需给定具体滚动高度，否则会无限触发上拉加载的回调函数
