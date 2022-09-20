@@ -6,11 +6,16 @@ import {
   StyleSheet,
   SafeAreaView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
+import { getScreenViewHeight } from '../../utils/screen';
 import { movieToday } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import type { PagingParams } from '../../api/home';
+
+// 获取屏幕内容高度
+const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -122,7 +127,9 @@ function Today(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    flex: 1,
+    paddingBottom: Platform.OS !== 'web' ? 10 : 0,
+    // web端需要减去标题高度
+    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
     backgroundColor: '#fff'
   },
   tab: {
