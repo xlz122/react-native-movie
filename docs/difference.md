@@ -54,4 +54,4 @@ const viewHeight = deviceHeight - StatusBarHeight;
 FlatList(上拉加载、下拉刷新)
 
 * app端无需给定具体高度，自动撑满屏幕
-* web端需给定具体滚动高度，否则会无限触发上拉加载的回调函数
+* web端需给定具体滚动高度(可以使用flex)，否则会无限触发上拉加载的回调函数
