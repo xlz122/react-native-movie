@@ -130,7 +130,6 @@ function Home(): React.ReactElement {
 const styles = StyleSheet.create({
   page: {
     paddingTop: 240,
-    paddingBottom: 10,
     backgroundColor: '#f5f5f5'
   },
   bgcolor: {
