@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
 import type { Navigation, TextInputEvent } from '../../types/index';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -44,7 +40,7 @@ function Search(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   container: {
-    height: viewHeight,
+    flex: 1,
     backgroundColor: '#fff'
   },
   search: {

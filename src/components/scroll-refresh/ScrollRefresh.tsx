@@ -53,7 +53,7 @@ function ScrollRefresh(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   list: {
-    height: '100%'
+    flex: 1
   },
   loadMore: {
     display: 'flex',

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
-import { getScreenViewHeight } from '../../utils/screen';
 import { moviesDetail } from '../../api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '../../types/index';
@@ -12,9 +11,6 @@ import MovieInfo from './movie-info/MovieInfo';
 import Panel from '../../components/panel/Panel';
 import MoviePhoto from './movie-photo/MoviePhoto';
 import MovieSimilar from './movie-similar/MovieSimilar';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -126,6 +122,7 @@ function MovieDeail(props: Props): React.ReactElement {
             title="相册"
             subtitle={`全部${detail?.photos?.length}`}
             to={{ path: 'Photos', params: { movieId: id } }}
+            panelStyle={{ marginTop: 10 }}
           >
             <MoviePhoto movie={detail?.photos} />
           </Panel>
@@ -170,7 +167,7 @@ function MovieDeail(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    height: viewHeight - 42 - 44,
+    flex: 1,
     backgroundColor: '#f5f5f5'
   },
   comment: {

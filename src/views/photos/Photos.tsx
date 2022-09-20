@@ -5,17 +5,12 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
-  Platform
+  TouchableOpacity
 } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
 import { moviePhotos } from '../../api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { Navigation, ResponseType } from '../../types/index';
 import type { MoviePhotosParams } from '../../api/movies';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -119,9 +114,7 @@ function Photos(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    paddingBottom: 18,
-    // web端需要减去标题高度
-    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
+    flex: 1,
     backgroundColor: '#fff'
   },
   tab: {

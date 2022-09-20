@@ -5,17 +5,12 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
-  Platform
+  TouchableOpacity
 } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
 import { moviesList } from '../../api/movies';
 import type { Navigation, ResponseType } from '../../types/index';
 import type { MovieParams } from '../../api/movies';
 import Nav from './nav/Nav';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -94,8 +89,7 @@ function Movies(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    // web端需要减去tabBar高度
-    height: Platform.OS === 'web' ? viewHeight - 50 : viewHeight,
+    flex: 1,
     backgroundColor: '#fff'
   },
   list: {

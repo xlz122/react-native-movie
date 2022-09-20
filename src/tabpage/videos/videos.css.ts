@@ -1,17 +1,13 @@
-import { StyleSheet, Platform } from 'react-native';
-import { getScreenWidth, getScreenViewHeight } from '../../utils/screen';
+import { StyleSheet } from 'react-native';
+import { getScreenWidth } from '../../utils/screen';
 
 // 获取屏幕宽度
 const deviceWidth = getScreenWidth();
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 const styles = StyleSheet.create({
   page: {
+    flex: 1,
     paddingTop: 15,
-    paddingBottom: Platform.OS !== 'web' ? 15 : 0,
-    // web端需要减去tabBar高度
-    height: Platform.OS === 'web' ? viewHeight - 50 : viewHeight,
     backgroundColor: '#fff'
   },
   item: {
