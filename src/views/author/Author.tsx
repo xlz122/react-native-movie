@@ -6,10 +6,6 @@ import {
   TouchableOpacity,
   Linking
 } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 function Author(): React.ReactElement {
   // 跳转外部链接
@@ -71,8 +67,7 @@ function Author(): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    // web端需要减去标题栏高度
-    height: viewHeight - 42,
+    flex: 1,
     backgroundColor: '#f5f5f5'
   },
   cell: {

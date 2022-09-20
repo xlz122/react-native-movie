@@ -1,11 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getScreenViewHeight } from '../../utils/screen';
 import type { Navigation } from '../../types/index';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 function Author(): React.ReactElement {
   const navigation: Navigation = useNavigation();
@@ -68,7 +64,7 @@ function Author(): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    height: viewHeight,
+    flex: 1,
     backgroundColor: '#f5f5f5'
   },
   cell: {

@@ -1,13 +1,8 @@
-import { StyleSheet, Platform } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   page: {
-    // web端需要减去tabBar高度
-    height: Platform.OS === 'web' ? viewHeight - 50 : viewHeight,
+    flex: 1,
     backgroundColor: '#f5f5f5'
   },
   userInfo: {

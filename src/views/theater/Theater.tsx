@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Platform
-} from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { movieTheater } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;
@@ -178,9 +167,8 @@ function Theater(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    paddingBottom: Platform.OS !== 'web' ? 10 : 0,
-    // web端需要减去标题高度
-    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight
+    flex: 1,
+    backgroundColor: '#fff'
   },
   item: {
     display: 'flex',
