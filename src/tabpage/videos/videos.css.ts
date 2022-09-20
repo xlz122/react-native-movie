@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.OS !== 'web' ? 15 : 0,
     // web端需要减去tabBar高度
     height: Platform.OS === 'web' ? viewHeight - 50 : viewHeight,
-    backgroundColor: '#fff',
-    overflow: 'scroll'
+    backgroundColor: '#fff'
   },
   item: {
     marginLeft: 11,
