@@ -35,6 +35,8 @@ function SearchDetail(props: Props): React.ReactElement {
   const [state, setState] = useState({
     page: 1,
     per_page: 10,
+    // 切换
+    switch: false,
     // 下拉刷新
     isRefresh: false,
     // 加载更多
@@ -71,6 +73,7 @@ function SearchDetail(props: Props): React.ReactElement {
           if (res.data && res.data?.length < state.per_page) {
             setState({
               ...state,
+              switch: false,
               isRefresh: false,
               isLoadMore: false,
               complete: true,
@@ -83,6 +86,7 @@ function SearchDetail(props: Props): React.ReactElement {
           if (state.page === 1) {
             setState({
               ...state,
+              switch: false,
               isRefresh: false,
               isLoadMore: false,
               loadMoreText: ''
@@ -90,6 +94,7 @@ function SearchDetail(props: Props): React.ReactElement {
           } else {
             setState({
               ...state,
+              switch: false,
               isRefresh: false,
               isLoadMore: false,
               loadMoreText: '加载更多...'
@@ -102,14 +107,24 @@ function SearchDetail(props: Props): React.ReactElement {
 
   useEffect(() => {
     setMovie([]);
-    setState(state => {
-      state.page = 1;
-      state.complete = false;
-      getSearchDetail();
-
-      return state;
+    setState({
+      ...state,
+      page: 1,
+      switch: true,
+      isRefresh: true,
+      isLoadMore: false,
+      complete: false,
+      loadMoreText: ''
     });
   }, [props.search.type]);
+
+  useEffect(() => {
+    if (!state.switch) {
+      return;
+    }
+
+    getSearchDetail();
+  }, [state.switch]);
 
   useEffect(() => {
     getSearchDetail();
