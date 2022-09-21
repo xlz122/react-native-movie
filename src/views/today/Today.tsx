@@ -9,13 +9,10 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
+import { viewHeight } from '../../utils/screen';
 import { movieToday } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import type { PagingParams } from '../../api/home';
-
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
 
 type Props = {
   navigation: Navigation;

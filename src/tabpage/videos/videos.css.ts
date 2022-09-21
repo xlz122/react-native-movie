@@ -1,8 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { getScreenWidth } from '../../utils/screen';
-
-// 获取屏幕宽度
-const deviceWidth = getScreenWidth();
+import { deviceWidth } from '../../utils/screen';
 
 const styles = StyleSheet.create({
   page: {
