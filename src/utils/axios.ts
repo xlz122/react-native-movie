@@ -6,6 +6,7 @@ import {
   AxiosInstance,
   CancelTokenStatic
 } from 'axios';
+import { Platform } from 'react-native';
 
 // 标识请求
 const getRequestIdentify = (config: AxiosRequestConfig, isReuest = false) => {
@@ -97,7 +98,7 @@ class HttpRequest {
 }
 
 const Axios = new HttpRequest({
-  baseURL: 'https://test-h5-api.ixook.com'
+  baseURL: Platform.OS === 'web' ? '/api' : 'https://test-h5-api.ixook.com'
 });
 
 export default Axios;
