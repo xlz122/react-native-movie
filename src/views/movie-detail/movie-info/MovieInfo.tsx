@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import Panel from '../../../components/panel/Panel';
 import MovieCast from '../movie-cast/MovieCast';
+import MovieRoles from '../movie-roles/MovieRoles';
 
 type Props = {
   data: Partial<MovieInfo>;
@@ -26,6 +27,8 @@ type MovieInfo = {
   summary: string;
   cast_count: number;
   cast: unknown[];
+  role_count: number;
+  roles: unknown[];
 };
 
 function MovieInfo(props: Props): React.ReactElement {
@@ -129,6 +132,20 @@ function MovieInfo(props: Props): React.ReactElement {
       >
         <MovieCast movie={data?.cast} />
       </Panel>
+      {data?.roles && data?.roles?.length > 0 && (
+        <Panel
+          title="角色"
+          subtitle={`全部${data?.role_count}`}
+          panelStyle={{ backgroundColor: 'transparent' }}
+          headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
+          lineStyle={{ display: 'none' }}
+          titleTextStyle={{ color: '#fff' }}
+          subTitleStyle={{ color: '#fff' }}
+          moreIconStyle={{ color: '#fff' }}
+        >
+          <MovieRoles movie={data?.roles} />
+        </Panel>
+      )}
     </View>
   );
 }
