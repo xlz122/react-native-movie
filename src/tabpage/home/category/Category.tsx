@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     right: 6,
     paddingLeft: 1.8,
     paddingRight: 1.8,
-    minHeight: 13,
     backgroundColor: 'rgba(255, 165, 0, 0.7)',
     fontSize: 9,
     color: '#fff',
