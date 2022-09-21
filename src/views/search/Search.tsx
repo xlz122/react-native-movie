@@ -28,6 +28,10 @@ function Search(): React.ReactElement {
     setSearch({ ...search, keyword: e.nativeEvent.text });
   };
 
+  const handleClearKeyword = () => {
+    setSearch({ ...search, keyword: '' });
+  };
+
   // 记录历史记录
   const handleInputBlur = async (): Promise<void | boolean> => {
     if (!search.keyword) {
@@ -78,6 +82,11 @@ function Search(): React.ReactElement {
             placeholder="找影视 / 影人 / 角色"
             style={styles.inputText}
           />
+          {Boolean(search?.keyword) && (
+            <TouchableOpacity activeOpacity={1} onPress={handleClearKeyword}>
+              <Text style={styles.inputClearIcon}>{'\ue637'}</Text>
+            </TouchableOpacity>
+          )}
         </View>
         <Text onPress={cancel} style={styles.cancelText}>
           取消
@@ -147,6 +156,12 @@ const styles = StyleSheet.create({
     padding: 0,
     fontSize: 13,
     color: '#666'
+  },
+  inputClearIcon: {
+    marginRight: 12,
+    fontFamily: 'iconfont',
+    fontSize: 16,
+    color: '#c5c5c5'
   },
   cancelText: {
     width: 68,
