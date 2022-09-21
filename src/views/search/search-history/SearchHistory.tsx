@@ -14,9 +14,10 @@ function SearchHistory(props: Props): React.ReactElement {
       const h = await storageGetItem('history');
       setHistory(h as Array<string>);
     })();
-  }, [history]);
+  }, []);
 
   const clearAllHistory = () => {
+    setHistory([]);
     storageClearItem();
   };
 
