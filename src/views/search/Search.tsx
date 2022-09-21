@@ -44,7 +44,9 @@ function Search(): React.ReactElement {
 
     if (history && history instanceof Array) {
       history[history.length] = search.keyword;
-      await storageSetItem('history', history);
+
+      // 搜索记录去重
+      await storageSetItem('history', Array.from(new Set(history)));
     }
   };
 
