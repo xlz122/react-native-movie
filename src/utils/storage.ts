@@ -17,7 +17,7 @@ export async function storageSetItem(
   key: string,
   value: unknown
 ): Promise<boolean | undefined> {
-  if (toRawType(value) === 'Object' && toRawType(value) === 'Array') {
+  if (toRawType(value) === 'Object' || toRawType(value) === 'Array') {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
     return false;
@@ -30,14 +30,20 @@ export async function storageSetItem(
  * @description 获取本地存储
  * @param { String } key - key
  */
-export async function storageGetItem(key: string): Promise<string | null> {
+export async function storageGetItem<T>(
+  key: string
+): Promise<T | string | null> {
   const value = await AsyncStorage.getItem(key);
 
   if (value === null) {
     return null;
   }
 
-  if (toRawType(value) === 'Object' && toRawType(value) === 'Array') {
+  if (
+    JSON.parse(value) ||
+    toRawType(JSON.parse(value)) === 'Object' ||
+    toRawType(JSON.parse(value)) === 'Array'
+  ) {
     return JSON.parse(value);
   }
 
