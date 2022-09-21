@@ -9,14 +9,11 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '../../utils/screen';
 import { movieToday } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import type { PagingParams } from '../../api/home';
-
-type Props = {
-  navigation: Navigation;
-};
 
 type Movie = {
   id: number;
@@ -27,7 +24,9 @@ type Movie = {
   countries: string;
 };
 
-function Today(props: Props): React.ReactElement {
+function Today(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const [movie, setMovie] = useState<Movie[]>([]);
   const [movieParams, setMovieParams] = useState<PagingParams>({
     page: 1,
@@ -56,7 +55,7 @@ function Today(props: Props): React.ReactElement {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+      onPress={() => navigation.push('MovieDetail', { id: item.id })}
     >
       <View style={styles.item}>
         <Image
