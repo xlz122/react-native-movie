@@ -7,14 +7,11 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '../../utils/screen';
 import { movieTop } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
 import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
-
-type Props = {
-  navigation: Navigation;
-};
 
 type Movie = {
   id: number;
@@ -25,7 +22,9 @@ type Movie = {
   countries: string;
 };
 
-function HighScore(props: Props): React.ReactElement {
+function HighScore(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const [state, setState] = useState({
     page: 1,
     per_page: 10,
@@ -97,7 +96,7 @@ function HighScore(props: Props): React.ReactElement {
   const renderItem = ({ item, index }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+      onPress={() => navigation.push('MovieDetail', { id: item.id })}
     >
       <View style={styles.item}>
         <View style={styles.itemCover}>
