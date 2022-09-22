@@ -69,6 +69,12 @@ const router: Router[] = [
     component: require('../views/photos/Photos').default
   },
   {
+    name: 'Project',
+    title: '关于项目',
+    headerShown: true,
+    component: require('../views/project/Project').default
+  },
+  {
     name: 'Author',
     title: '关于作者',
     headerShown: true,
