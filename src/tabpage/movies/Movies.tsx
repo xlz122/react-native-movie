@@ -1,90 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { deviceWidth } from '../../utils/screen';
 import { moviesList } from '../../api/movies';
 import type { Navigation, ResponseType } from '../../types/index';
 import type { MovieParams } from '../../api/movies';
 import Nav from './nav/Nav';
+import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
 
-type Props = {
-  navigation: Navigation;
-};
+function Movies(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
 
-type Movie = {
-  id: number;
-  title: string;
-  poster: string;
-  rating: number;
-};
+  // 刷新列表
+  const [resetRefresh, setResetRefresh] = useState(false);
 
-function Movies(props: Props): React.ReactElement {
-  const [movie, setMovie] = useState<Movie[]>([]);
-  const [movieParams, setMovieParams] = useState<MovieParams>({
-    page: 1,
-    per_page: 21,
+  const [navParams, setNavParams] = useState({
     category: '全部',
     genre: '全部',
     country: '全部',
     year: '全部'
   });
 
-  const getMoviesList = () => {
-    moviesList({ ...movieParams })
-      .then((res: ResponseType<Movie[]>) => {
-        if (res.code === 200) {
-          setMovie(res.data!);
-        }
-      })
-      .catch(() => ({}));
-  };
-
-  useEffect(() => {
-    getMoviesList();
-  }, [movieParams]);
-
   const navChange = (categoryParams: Partial<MovieParams>) => {
-    setMovieParams({ ...movieParams, ...categoryParams });
+    setResetRefresh(true);
+    setNavParams({ ...navParams, ...categoryParams });
   };
+
+  const getMoviesList = ({ page, per_page }): Promise<unknown[]> => {
+    return new Promise((resolve, reject) => {
+      moviesList({
+        page,
+        per_page,
+        category: navParams.category,
+        genre: navParams.genre,
+        country: navParams.country,
+        year: navParams.year
+      })
+        .then((res: ResponseType<unknown[]>) => {
+          if (res.code === 200) {
+            setResetRefresh(false);
+            resolve(res.data!);
+          } else {
+            reject();
+          }
+        })
+        .catch(() => ({}));
+    });
+  };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => navigation.push('MovieDetail', { id: item.id })}
+      style={styles.item}
+    >
+      <Image
+        source={{ uri: item.poster }}
+        resizeMode={'stretch'}
+        style={[styles.itemImage]}
+      />
+      <Text style={styles.itemRating}>{item?.rating}</Text>
+      <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
+        {item.title}
+      </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <>
       <Nav onChange={navChange} />
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-        <View style={styles.list}>
-          {movie.map(item => {
-            return (
-              <TouchableOpacity
-                key={item.id}
-                activeOpacity={1}
-                onPress={() =>
-                  props?.navigation.push('MovieDetail', { id: item.id })
-                }
-                style={styles.item}
-              >
-                <Image
-                  source={{ uri: item.poster }}
-                  resizeMode={'stretch'}
-                  style={[styles.itemImage]}
-                />
-                <Text style={styles.itemRating}>{item?.rating}</Text>
-                <Text
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                  style={styles.itemText}
-                >
-                  {item.title}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </ScrollView>
+      <View style={styles.page}>
+        <ScrollRefresh
+          page={1}
+          pageSize={16}
+          request={getMoviesList}
+          initialNumToRender={6}
+          numColumns={Math.floor(deviceWidth / 105)}
+          columnWrapperStyle={{
+            justifyContent: 'space-between'
+          }}
+          renderItem={renderItem}
+          resetRefresh={resetRefresh}
+        />
+      </View>
     </>
   );
 }
@@ -92,16 +90,10 @@ function Movies(props: Props): React.ReactElement {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: '#fff'
-  },
-  list: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
     paddingTop: 10,
     paddingLeft: 7,
-    paddingRight: 7
+    paddingRight: 7,
+    backgroundColor: '#fff'
   },
   item: {
     position: 'relative',

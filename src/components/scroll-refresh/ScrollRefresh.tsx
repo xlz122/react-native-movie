@@ -19,6 +19,8 @@ type Props = {
 type FlatListProps = {
   initialNumToRender?: number;
   showsVerticalScrollIndicator?: boolean;
+  numColumns?: number;
+  columnWrapperStyle?: ViewStyle;
   renderItem?: ListRenderItem<unknown>;
   ListEmptyComponent?: React.FunctionComponent;
   ListHeaderComponent?: React.FunctionComponent;
@@ -192,6 +194,8 @@ function ScrollRefresh(props: Props): React.ReactElement {
           props?.showsVerticalScrollIndicator || false
         }
         data={refreshState.data}
+        numColumns={props?.numColumns || 1}
+        columnWrapperStyle={props?.columnWrapperStyle}
         renderItem={props?.renderItem}
         // 空布局
         ListEmptyComponent={props?.ListEmptyComponent}
