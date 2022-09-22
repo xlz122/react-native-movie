@@ -134,6 +134,25 @@ const styles = StyleSheet.create({
     color: '#fff',
     borderRadius: 18
   },
+  egg: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  eggIcon: {
+    marginRight: 5,
+    fontFamily: 'iconfont',
+    fontSize: 12,
+    color: '#fff'
+  },
+  eggText: {
+    fontSize: 12,
+    color: '#b0b3bb'
+  },
   summary: {
     color: '#f5f5f5'
   }
