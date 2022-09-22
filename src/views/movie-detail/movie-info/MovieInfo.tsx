@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import Panel from '../../../components/panel/Panel';
 import MovieCast from '../movie-cast/MovieCast';
 import MovieRoles from '../movie-roles/MovieRoles';
+import styles from './movie-info.css';
 
 type Props = {
   data: Partial<MovieInfo>;
@@ -17,6 +18,8 @@ type MovieInfo = {
   genres: string[];
   countries: string[];
   durations: string[];
+  rating: string;
+  awards_nominate_count: number;
   thrid_rating: {
     douban: {
       count: string;
@@ -80,8 +83,21 @@ function MovieInfo(props: Props): React.ReactElement {
         </View>
       </View>
       <View style={styles.rating}>
+        {Boolean(data?.rating) && (
+          <View style={styles.ratingItem}>
+            <View style={styles.ratingCover}>
+              <Text style={styles.ratingText}>慕影评分</Text>
+              <View style={styles.ratingLine} />
+            </View>
+            <Text style={styles.ratingScore}>{data?.rating}</Text>
+            <Text style={styles.ratingText}>
+              {data?.awards_nominate_count}
+              <Text>人评</Text>
+            </Text>
+          </View>
+        )}
         {Boolean(data?.thrid_rating?.douban?.rating) && (
-          <>
+          <View style={styles.ratingItem}>
             <View style={styles.ratingCover}>
               <Text style={styles.ratingText}>豆瓣评分</Text>
               <Text style={styles.ratingIcon}>{'\ue602'}</Text>
@@ -93,9 +109,9 @@ function MovieInfo(props: Props): React.ReactElement {
               {data?.thrid_rating?.douban?.count}
               <Text>人评</Text>
             </Text>
-          </>
+          </View>
         )}
-        {!data?.thrid_rating?.douban?.rating && (
+        {!data?.rating && !data?.thrid_rating?.douban?.rating && (
           <Text style={styles.noRating}>暂无评分</Text>
         )}
       </View>
@@ -149,130 +165,5 @@ function MovieInfo(props: Props): React.ReactElement {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  page: {},
-  movieInfo: {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 12
-  },
-  infoImage: {
-    width: 94,
-    height: 132,
-    borderRadius: 3
-  },
-  infoDesc: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: 15
-  },
-  descTitle: {
-    marginTop: 1,
-    marginBottom: 1,
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: '700'
-  },
-  descBrief: {
-    marginTop: 7
-  },
-  descText: {
-    marginTop: 4,
-    fontSize: 11,
-    color: '#fff'
-  },
-  operate: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginTop: 17
-  },
-  operateItem: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 18,
-    width: 104,
-    height: 26,
-    backgroundColor: 'rgba(0, 0, 0, .25)',
-    borderRadius: 5
-  },
-  operateIcon: {
-    marginRight: 3.5,
-    fontFamily: 'iconfont',
-    fontSize: 12,
-    color: '#fff'
-  },
-  operateText: {
-    fontSize: 11,
-    color: '#fff'
-  },
-  rating: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginTop: 6,
-    marginLeft: 12,
-    marginRight: 12,
-    minHeight: 82,
-    backgroundColor: 'rgba(0, 0, 0, .25)',
-    borderRadius: 6
-  },
-  ratingCover: {
-    position: 'relative'
-  },
-  ratingText: {
-    fontSize: 11,
-    color: '#fff'
-  },
-  ratingIcon: {
-    position: 'absolute',
-    top: -3,
-    right: -14,
-    fontFamily: 'iconfont',
-    fontSize: 12,
-    color: '#fff'
-  },
-  ratingScore: {
-    marginTop: 3,
-    marginBottom: 3,
-    fontWeight: '700',
-    fontSize: 18,
-    color: '#feb300'
-  },
-  noRating: {
-    fontSize: 12,
-    color: '#fff'
-  },
-  tag: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 18,
-    marginLeft: 12,
-    marginRight: 12
-  },
-  tagItem: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 12,
-    paddingRight: 12,
-    marginRight: 8,
-    marginBottom: 9,
-    backgroundColor: 'hsla(0, 0%, 100%, .1)',
-    fontSize: 12,
-    color: '#fff',
-    borderRadius: 18
-  },
-  summary: {
-    color: '#f5f5f5'
-  }
-});
 
 export default MovieInfo;
