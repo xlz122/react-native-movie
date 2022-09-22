@@ -27,6 +27,7 @@ type MovieInfo = {
     };
   };
   tags: string[];
+  egg_hunt: number;
   summary: string;
   cast_count: number;
   cast: unknown[];
@@ -124,6 +125,14 @@ function MovieInfo(props: Props): React.ReactElement {
           );
         })}
       </View>
+      {Boolean(data?.egg_hunt) && (
+        <View style={styles.egg}>
+          <Text style={styles.eggIcon}>{'\ue61e'}</Text>
+          <Text style={styles.eggText}>
+            {`有${data?.egg_hunt}个彩蛋,不要错过哦~ `}
+          </Text>
+        </View>
+      )}
       <Panel
         title="剧情"
         panelStyle={{ backgroundColor: 'transparent' }}
