@@ -32,103 +32,31 @@ type Movie = {
 function SearchDetail(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const [state, setState] = useState({
-    page: 1,
-    per_page: 10,
-    // 切换
-    switch: false,
-    // 下拉刷新
-    isRefresh: false,
-    // 加载更多
-    isLoadMore: false,
-    loadMoreText: '',
-    // 数据是否加载完成
-    complete: false
-  });
-
-  const [movie, setMovie] = useState<Movie[]>([]);
-
-  const getSearchDetail = () => {
-    searchDetail({
-      ...props.search,
-      page: state.page,
-      per_page: state.per_page
-    })
-      .then((res: ResponseType<Movie[]>) => {
-        if (res.code === 200) {
-          if (state.complete) {
-            return false;
-          }
-
-          // 下拉刷新、初始化
-          if (state.isRefresh || state.page === 1) {
-            setMovie(res.data!);
-          }
-
-          // 加载更多
-          if (state.isLoadMore || state.page !== 1) {
-            setMovie(movie.concat(res.data!));
-          }
-
-          if (res.data && res.data?.length < state.per_page) {
-            setState({
-              ...state,
-              switch: false,
-              isRefresh: false,
-              isLoadMore: false,
-              complete: true,
-              loadMoreText: '没有更多数据了'
-            });
-
-            return false;
-          }
-
-          if (state.page === 1) {
-            setState({
-              ...state,
-              switch: false,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: ''
-            });
-          } else {
-            setState({
-              ...state,
-              switch: false,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: '加载更多...'
-            });
-          }
-        }
+  const getSearchDetail = ({ page, per_page }): Promise<unknown[]> => {
+    return new Promise((resolve, reject) => {
+      searchDetail({
+        page,
+        per_page,
+        keyword: props.search.keyword,
+        type: props.search.type
       })
-      .catch(() => ({}));
+        .then((res: ResponseType<unknown[]>) => {
+          if (res.code === 200) {
+            setResetRefresh(false);
+            resolve(res.data!);
+          } else {
+            reject();
+          }
+        })
+        .catch(() => ({}));
+    });
   };
 
+  // 刷新列表
+  const [resetRefresh, setResetRefresh] = useState(false);
   useEffect(() => {
-    setMovie([]);
-    setState({
-      ...state,
-      page: 1,
-      switch: true,
-      isRefresh: true,
-      isLoadMore: false,
-      complete: false,
-      loadMoreText: ''
-    });
-  }, [props.search.type]);
-
-  useEffect(() => {
-    if (!state.switch) {
-      return;
-    }
-
-    getSearchDetail();
-  }, [state.switch]);
-
-  useEffect(() => {
-    getSearchDetail();
-  }, [state.page]);
+    setResetRefresh(true);
+  }, [props.search]);
 
   // 电影项
   const MovieItem = ({ item }) => (
@@ -188,49 +116,33 @@ function SearchDetail(props: Props): React.ReactElement {
   );
 
   // 角色项
-  const RoleItem = () => (
+  const RoleItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
-        <Text>角色项未完成</Text>
+        <Image
+          source={{ uri: item.avatar }}
+          resizeMode={'stretch'}
+          style={[styles.itemImage]}
+        />
+        <View style={styles.itemInfo}>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemTitle}>
+            {item.name}
+          </Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
+            {item.name_en}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
 
-  const onRefresh = (): void => {
-    setMovie([]);
-    setState({
-      ...state,
-      page: 1,
-      isRefresh: true,
-      complete: false,
-      loadMoreText: ''
-    });
-
-    // 只有一页直接刷新
-    if (state.page === 1) {
-      getSearchDetail();
-    }
-  };
-
-  const onEndReached = (): boolean | undefined => {
-    if (state.complete) {
-      return false;
-    }
-
-    setState({
-      ...state,
-      page: state.page + 1,
-      isLoadMore: true,
-      loadMoreText: '加载中...'
-    });
-  };
-
   return (
     <View style={styles.page}>
       <ScrollRefresh
+        page={1}
+        pageSize={10}
+        request={getSearchDetail}
         initialNumToRender={6}
-        showsVerticalScrollIndicator={false}
-        data={movie}
         renderItem={({ item }) => {
           if (props.search.type === 'movie') {
             return <MovieItem item={item} />;
@@ -239,15 +151,12 @@ function SearchDetail(props: Props): React.ReactElement {
             return <ActorItem item={item} />;
           }
           if (props.search.type === 'role') {
-            return <RoleItem />;
+            return <RoleItem item={item} />;
           }
 
           return <View />;
         }}
-        refreshing={state.isRefresh}
-        onRefresh={onRefresh}
-        loadMoreText={state.loadMoreText}
-        onEndReached={onEndReached}
+        resetRefresh={resetRefresh}
       />
     </View>
   );
@@ -255,6 +164,7 @@ function SearchDetail(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
+    paddingBottom: Platform.OS !== 'web' ? 10 : 0,
     width: '100%',
     height: Platform.OS === 'web' ? viewHeight - 85 : viewHeight + 42 - 85,
     backgroundColor: '#fff'

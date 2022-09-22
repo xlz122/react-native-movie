@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -25,73 +25,19 @@ type Movie = {
 function HighScore(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const [state, setState] = useState({
-    page: 1,
-    per_page: 10,
-    // 下拉刷新
-    isRefresh: false,
-    // 加载更多
-    isLoadMore: false,
-    loadMoreText: '',
-    // 数据是否加载完成
-    complete: false
-  });
-
-  const [movie, setMovie] = useState<Movie[]>([]);
-
-  const getMovieTop = () => {
-    movieTop({ page: state.page, per_page: state.per_page })
-      .then((res: ResponseType<Movie[]>) => {
-        if (res.code === 200) {
-          if (state.complete) {
-            return false;
-          }
-
-          // 下拉刷新、初始化
-          if (state.isRefresh || state.page === 1) {
-            setMovie(res.data!);
-          }
-
-          // 加载更多
-          if (state.isLoadMore || state.page !== 1) {
-            setMovie(movie.concat(res.data!));
-          }
-
-          if (res.data && res.data?.length < state.per_page) {
-            setState({
-              ...state,
-              isRefresh: false,
-              isLoadMore: false,
-              complete: true,
-              loadMoreText: '没有更多数据了'
-            });
-
-            return false;
-          }
-
-          if (state.page === 1) {
-            setState({
-              ...state,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: ''
-            });
+  const getMovieTop = ({ page, per_page }): Promise<unknown[]> => {
+    return new Promise((resolve, reject) => {
+      movieTop({ page, per_page })
+        .then((res: ResponseType<unknown[]>) => {
+          if (res.code === 200) {
+            resolve(res.data!);
           } else {
-            setState({
-              ...state,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: '加载更多...'
-            });
+            reject();
           }
-        }
-      })
-      .catch(() => ({}));
+        })
+        .catch(() => ({}));
+    });
   };
-
-  useEffect(() => {
-    getMovieTop();
-  }, [state.page]);
 
   const renderItem = ({ item, index }) => (
     <TouchableOpacity
@@ -140,46 +86,14 @@ function HighScore(): React.ReactElement {
     </TouchableOpacity>
   );
 
-  const onRefresh = (): void => {
-    setMovie([]);
-    setState({
-      ...state,
-      page: 1,
-      isRefresh: true,
-      complete: false,
-      loadMoreText: ''
-    });
-
-    // 只有一页直接刷新
-    if (state.page === 1) {
-      getMovieTop();
-    }
-  };
-
-  const onEndReached = (): boolean | undefined => {
-    if (state.complete) {
-      return false;
-    }
-
-    setState({
-      ...state,
-      page: state.page + 1,
-      isLoadMore: true,
-      loadMoreText: '加载中...'
-    });
-  };
-
   return (
     <View style={styles.page}>
       <ScrollRefresh
+        page={1}
+        pageSize={10}
+        request={getMovieTop}
         initialNumToRender={6}
-        showsVerticalScrollIndicator={false}
-        data={movie}
         renderItem={renderItem}
-        refreshing={state.isRefresh}
-        onRefresh={onRefresh}
-        loadMoreText={state.loadMoreText}
-        onEndReached={onEndReached}
       />
     </View>
   );

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   Image,
   StyleSheet,
   SafeAreaView,
-  FlatList,
   TouchableOpacity,
   Platform
 } from 'react-native';
@@ -13,43 +12,34 @@ import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '../../utils/screen';
 import { movieToday } from '../../api/home';
 import type { Navigation, ResponseType } from '../../types/index';
-import type { PagingParams } from '../../api/home';
-
-type Movie = {
-  id: number;
-  title: string;
-  poster: string;
-  year: string;
-  genres: string;
-  countries: string;
-};
+import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
 
 function Today(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const [movie, setMovie] = useState<Movie[]>([]);
-  const [movieParams, setMovieParams] = useState<PagingParams>({
-    page: 1,
-    per_page: 11,
-    sortby: 'hot'
-  });
+  // 刷新列表
+  const [resetRefresh, setResetRefresh] = useState(false);
 
-  const getMovieToday = () => {
-    movieToday({ ...movieParams })
-      .then((res: ResponseType<Movie[]>) => {
-        if (res.code === 200) {
-          setMovie(res.data!);
-        }
-      })
-      .catch(() => ({}));
-  };
-
-  useEffect(() => {
-    getMovieToday();
-  }, [movieParams]);
+  const [sortby, setSortby] = useState('hot');
 
   const toggleSort = (value: string): void => {
-    setMovieParams({ ...movieParams, sortby: value });
+    setResetRefresh(true);
+    setSortby(value);
+  };
+
+  const getMovieToday = ({ page, per_page }): Promise<unknown[]> => {
+    return new Promise((resolve, reject) => {
+      movieToday({ page, per_page, sortby })
+        .then((res: ResponseType<unknown[]>) => {
+          if (res.code === 200) {
+            setResetRefresh(false);
+            resolve(res.data!);
+          } else {
+            reject();
+          }
+        })
+        .catch(() => ({}));
+    });
   };
 
   const renderItem = ({ item }) => (
@@ -94,7 +84,7 @@ function Today(): React.ReactElement {
           onPress={() => toggleSort('hot')}
           style={[
             styles.tabItem,
-            movieParams.sortby === 'hot' ? styles.tabActiveItem : styles.tabItem
+            sortby === 'hot' ? styles.tabActiveItem : styles.tabItem
           ]}
         >
           热度排序
@@ -103,19 +93,19 @@ function Today(): React.ReactElement {
           onPress={() => toggleSort('date')}
           style={[
             styles.tabItem,
-            movieParams.sortby === 'date'
-              ? styles.tabActiveItem
-              : styles.tabItem
+            sortby === 'date' ? styles.tabActiveItem : styles.tabItem
           ]}
         >
           时间排序
         </Text>
       </View>
-      <FlatList
+      <ScrollRefresh
+        page={1}
+        pageSize={10}
+        request={getMovieToday}
         initialNumToRender={6}
-        showsVerticalScrollIndicator={false}
-        data={movie}
         renderItem={renderItem}
+        resetRefresh={resetRefresh}
       />
     </SafeAreaView>
   );
