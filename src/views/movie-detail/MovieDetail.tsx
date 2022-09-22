@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
-import { viewHeight } from '../../utils/screen';
 import { moviesDetail } from '../../api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '../../types/index';
@@ -13,6 +12,7 @@ import MovieInfo from './movie-info/MovieInfo';
 import Panel from '../../components/panel/Panel';
 import MoviePhoto from './movie-photo/MoviePhoto';
 import MovieSimilar from './movie-similar/MovieSimilar';
+import styles from './movie-detail.css';
 
 type Props = {
   navigation: Navigation;
@@ -167,63 +167,5 @@ function MovieDeail(props: Props): React.ReactElement {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  page: {
-    height: viewHeight - 42 - 44,
-    backgroundColor: '#f5f5f5'
-  },
-  comment: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: 44,
-    backgroundColor: '#fff',
-    borderTopWidth: 0.3,
-    borderStyle: 'solid',
-    borderColor: '#eee'
-  },
-  review: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 14,
-    paddingRight: 14,
-    marginLeft: 5
-  },
-  reviewIcon: {
-    marginRight: 6,
-    fontFamily: 'iconfont',
-    fontSize: 16,
-    color: '#7f889b'
-  },
-  reviewText: {
-    fontSize: 12,
-    color: '#7f889b'
-  },
-  tool: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 12
-  },
-  toolItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minWidth: 41
-  },
-  toolItemIcon: {
-    fontFamily: 'iconfont',
-    fontSize: 16,
-    color: '#7f889b'
-  },
-  toolItemText: {
-    fontSize: 10,
-    color: '#7f889b'
-  }
-});
 
 export default MovieDeail;
