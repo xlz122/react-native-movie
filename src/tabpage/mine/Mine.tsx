@@ -50,6 +50,15 @@ function Mine(props: Props): React.ReactElement {
         </View>
         <TouchableOpacity
           activeOpacity={1}
+          onPress={() => props?.navigation?.push('Project')}
+          style={styles.cellItem}
+        >
+          <Text style={styles.cellItemIcon}>{'\ue655'}</Text>
+          <Text style={styles.cellItemText}>关于项目</Text>
+          <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={1}
           onPress={() => props?.navigation?.push('Author')}
           style={styles.cellItem}
         >
