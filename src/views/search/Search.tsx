@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 10,
     paddingLeft: 10,
-    paddingRight: 10,
     height: 40
   },
   input: {
@@ -164,7 +163,10 @@ const styles = StyleSheet.create({
     color: '#c5c5c5'
   },
   cancelText: {
-    width: 68,
+    paddingRight: 10,
+    width: 78,
+    height: '100%',
+    lineHeight: 30,
     fontSize: 12.5,
     color: '#777',
     textAlign: 'center'
