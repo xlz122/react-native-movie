@@ -16,14 +16,20 @@ export async function storageGetAllKeys(): Promise<readonly string[]> {
 export async function storageSetItem(
   key: string,
   value: unknown
-): Promise<boolean | undefined> {
-  if (toRawType(value) === 'Object' || toRawType(value) === 'Array') {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem(key, jsonValue);
-    return false;
+): Promise<void> {
+  try {
+    if (
+      toRawType(JSON.parse(value as string)) === 'Object' ||
+      toRawType(JSON.parse(value as string)) === 'Array'
+    ) {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(key, jsonValue);
+    } else {
+      await AsyncStorage.setItem(key, String(value));
+    }
+  } catch {
+    await AsyncStorage.setItem(key, String(value));
   }
-
-  await AsyncStorage.setItem(key, String(value));
 }
 
 /**
@@ -32,22 +38,25 @@ export async function storageSetItem(
  */
 export async function storageGetItem<T>(
   key: string
-): Promise<T | string | null> {
+): Promise<string | Awaited<T>> {
   const value = await AsyncStorage.getItem(key);
 
   if (value === null) {
-    return null;
+    return '';
   }
 
-  if (
-    JSON.parse(value) ||
-    toRawType(JSON.parse(value)) === 'Object' ||
-    toRawType(JSON.parse(value)) === 'Array'
-  ) {
-    return JSON.parse(value);
+  try {
+    if (
+      toRawType(JSON.parse(value)) === 'Object' ||
+      toRawType(JSON.parse(value)) === 'Array'
+    ) {
+      return JSON.parse(value);
+    } else {
+      return value;
+    }
+  } catch {
+    return value;
   }
-
-  return value;
 }
 
 /**
