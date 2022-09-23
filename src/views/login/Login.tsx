@@ -1,45 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-import type { Navigation, TextInputEvent } from '../../types/index';
-import styles from './login.css';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import type { Navigation } from '../../types/index';
+import LoginForm from './login-form/LoginForm';
+import RegisterForm from './register-form/RegisterForm';
 
-type Props = {
-  navigation: Navigation;
-};
+function Login(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
 
-function Login(props: Props): React.ReactElement {
-  // 密码显隐
-  const [password, setPassword] = useState({
-    secureTextEntry: true,
-    iconActive: false
+  const close = (): void => {
+    navigation.goBack();
+  };
+
+  const [state, setState] = useState({
+    type: 'login',
+    typeText: '账号注册'
   });
 
-  const togglePassword = () => {
-    setPassword({
-      secureTextEntry: !password.secureTextEntry,
-      iconActive: !password.iconActive
-    });
-  };
+  const typeChange = () => {
+    if (state.type === 'login') {
+      setState({ type: 'register', typeText: '账号登录' });
+      return false;
+    }
 
-  const [formData, setFormData] = useState({
-    account: '',
-    password: ''
-  });
-
-  const handleInputChange = (e: TextInputEvent, name: string) => {
-    setFormData({ ...formData, [name]: e.nativeEvent.text });
-  };
-
-  const submit = () => {
-    Alert.alert(
-      '登录',
-      `账号: ${formData.account}; 密码: ${formData.password}`,
-      [{ text: '取消', style: 'cancel' }, { text: '确认' }]
-    );
-  };
-
-  const close = () => {
-    props?.navigation.goBack();
+    setState({ type: 'login', typeText: '账号注册' });
   };
 
   return (
@@ -49,49 +33,50 @@ function Login(props: Props): React.ReactElement {
           {'\ue612'}
         </Text>
       </View>
-      <Text style={styles.title}>登录</Text>
-      <View style={styles.form}>
-        <View style={styles.formItem}>
-          <TextInput
-            value={formData.account}
-            onChange={e => {
-              handleInputChange(e, 'account');
-            }}
-            placeholder="请输入手机号"
-            style={styles.itemInput}
-          />
-        </View>
-        <View style={styles.formItem}>
-          <TextInput
-            secureTextEntry={password.secureTextEntry}
-            value={formData.password}
-            onChange={e => {
-              handleInputChange(e, 'password');
-            }}
-            autoComplete="off"
-            placeholder="请输入密码"
-            style={styles.itemInput}
-          />
-          <Text
-            onPress={togglePassword}
-            style={[
-              styles.itemIcon,
-              password.iconActive ? styles.activeIcon : styles.itemIcon
-            ]}
-          >
-            {'\ue639'}
-          </Text>
-        </View>
-        <View style={styles.submit}>
-          <Button title="登 录" onPress={submit} />
-        </View>
-      </View>
+      {state.type === 'login' && <LoginForm />}
+      {state.type === 'register' && <RegisterForm />}
       <View style={styles.tool}>
-        <Text style={styles.toolText}>账号注册</Text>
-        <Text style={styles.toolText}>找回密码</Text>
+        <TouchableOpacity activeOpacity={1} onPress={typeChange}>
+          <Text style={styles.toolText}>{state.typeText}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => navigation.push('Forget')}
+        >
+          <Text style={styles.toolText}>找回密码</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  login: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  close: {
+    paddingLeft: 16,
+    paddingTop: 16,
+    height: 52
+  },
+  closeIcon: {
+    fontFamily: 'iconfont',
+    fontSize: 17,
+    color: '#e54847'
+  },
+  tool: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 28,
+    paddingLeft: 45,
+    paddingRight: 45
+  },
+  toolText: {
+    fontSize: 12,
+    color: '#303133'
+  }
+});
 
 export default Login;
