@@ -27,6 +27,12 @@ const router: Router[] = [
     component: require('../views/login/Login').default
   },
   {
+    name: 'Forget',
+    title: '找回密码',
+    headerShown: true,
+    component: require('../views/forget/Forget').default
+  },
+  {
     name: 'Search',
     title: '',
     headerShown: false,
