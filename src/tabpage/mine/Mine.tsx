@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import type { Navigation } from '../../types/index';
 import styles from './mine.css';
 
@@ -7,21 +9,44 @@ type Props = {
   navigation: Navigation;
 };
 
+type UserInfo = {
+  username: string;
+  avatar: string;
+};
+
 function Mine(props: Props): React.ReactElement {
+  const userinfo = useSelector(
+    (state: RootState) => state.routine.userinfo
+  ) as UserInfo;
+
   return (
     <View style={styles.page}>
       <View style={styles.userInfo}>
-        <Image
-          source={require('../../assets/image/default-avatar.jpg')}
-          resizeMode={'stretch'}
-          style={[styles.avatar]}
-        />
-        <Text
-          onPress={() => props?.navigation.push('Login')}
-          style={styles.userText}
-        >
-          立即登录
-        </Text>
+        {Boolean(userinfo?.username) && (
+          <>
+            <Image
+              source={{ uri: userinfo?.avatar }}
+              resizeMode={'stretch'}
+              style={[styles.avatar]}
+            />
+            <Text style={styles.userNameText}>{userinfo?.username}</Text>
+          </>
+        )}
+        {!userinfo?.username && (
+          <>
+            <Image
+              source={require('../../assets/image/default-avatar.jpg')}
+              resizeMode={'stretch'}
+              style={[styles.avatar]}
+            />
+            <Text
+              onPress={() => props?.navigation.push('Login')}
+              style={styles.userText}
+            >
+              立即登录
+            </Text>
+          </>
+        )}
         <Text style={styles.settingIcon}>{'\ue65e'}</Text>
       </View>
       <View style={styles.menu}>

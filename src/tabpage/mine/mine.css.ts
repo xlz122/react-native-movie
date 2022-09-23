@@ -25,6 +25,12 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     color: '#fff'
   },
+  userNameText: {
+    marginLeft: 11,
+    fontWeight: '700',
+    fontSize: 16,
+    color: '#fff'
+  },
   settingIcon: {
     position: 'absolute',
     top: 16,
