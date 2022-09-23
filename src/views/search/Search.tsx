@@ -43,7 +43,7 @@ function Search(): React.ReactElement {
     const searchHistory: string[] = [];
     if (!history) {
       searchHistory.push(search.keyword);
-      await storageSetItem('history', searchHistory);
+      await storageSetItem('history', JSON.stringify(searchHistory));
     }
 
     if (history && history instanceof Array) {

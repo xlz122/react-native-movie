@@ -1,23 +1,35 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { storageGetItem, storageSetItem } from '../utils/storage';
+
+async function faultTolerant<T>(name: string) {
+  return await storageGetItem<T>(name);
+}
 
 export type RoutineState = {
-  msg: string;
+  token: Promise<string> | string;
+  userinfo: unknown;
 };
 
 const initialState: RoutineState = {
-  msg: ''
+  token: faultTolerant<string>('token') || '',
+  userinfo: faultTolerant('userinfo') || {}
 };
 
 const routineSlice = createSlice({
   name: 'routine',
   initialState,
   reducers: {
-    setMsg: (state, action: PayloadAction<string>) => {
-      state.msg = action.payload;
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+      storageSetItem('token', action.payload);
+    },
+    setUserInfo: (state, action: PayloadAction<unknown>) => {
+      state.userinfo = action.payload;
+      storageSetItem('userinfo', JSON.stringify(action.payload));
     }
   }
 });
 
-export const { setMsg } = routineSlice.actions;
+export const { setToken } = routineSlice.actions;
 
 export default routineSlice.reducer;

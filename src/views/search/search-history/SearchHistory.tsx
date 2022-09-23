@@ -11,7 +11,7 @@ function SearchHistory(props: Props): React.ReactElement {
 
   useEffect(() => {
     (async () => {
-      const h = await storageGetItem('history');
+      const h = (await storageGetItem('history')) || [];
       setHistory(h as Array<string>);
     })();
   }, []);
