@@ -93,7 +93,10 @@ function SearchDetail(props: Props): React.ReactElement {
 
   // 演员项
   const ActorItem = ({ item }) => (
-    <TouchableOpacity activeOpacity={1}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => navigation.push('ActorDetail', { id: item.id })}
+    >
       <View style={styles.item}>
         <Image
           source={{ uri: item.avatar }}

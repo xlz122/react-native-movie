@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '../../utils/utils';
@@ -13,10 +14,6 @@ import Panel from '../../components/panel/Panel';
 import MoviePhoto from './movie-photo/MoviePhoto';
 import MovieSimilar from './movie-similar/MovieSimilar';
 import styles from './movie-detail.css';
-
-type Props = {
-  navigation: Navigation;
-};
 
 type Route = RouteProp<{ params: { id: number } }>;
 
@@ -32,7 +29,8 @@ type Detail = {
   comment_count: number;
 };
 
-function MovieDeail(props: Props): React.ReactElement {
+function MovieDeail(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
   const route: Route = useRoute();
 
   const [detail, setDetail] = useState<Partial<Detail>>({});
@@ -78,7 +76,7 @@ function MovieDeail(props: Props): React.ReactElement {
 
   useLayoutEffect(() => {
     // 设置加载时标头
-    props.navigation.setOptions({
+    navigation.setOptions({
       header: ({ options }) => {
         return (
           <CustomHeader
@@ -99,7 +97,7 @@ function MovieDeail(props: Props): React.ReactElement {
     }
 
     // 设置标头
-    props.navigation.setOptions({
+    navigation.setOptions({
       header: ({ options }) => {
         return (
           <CustomHeader
