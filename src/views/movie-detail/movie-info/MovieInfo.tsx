@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Panel from '../../../components/panel/Panel';
-import MovieCast from '../movie-cast/MovieCast';
+import MovieActor from '../movie-actor/MovieActor';
 import MovieRoles from '../movie-roles/MovieRoles';
 import styles from './movie-info.css';
 
@@ -155,7 +155,7 @@ function MovieInfo(props: Props): React.ReactElement {
         subTitleStyle={{ color: '#fff' }}
         moreIconStyle={{ color: '#fff' }}
       >
-        <MovieCast movie={data?.cast} />
+        <MovieActor movie={data?.cast} />
       </Panel>
       {data?.roles && data?.roles?.length > 0 && (
         <Panel
