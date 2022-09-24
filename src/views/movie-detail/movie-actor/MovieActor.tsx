@@ -8,10 +8,17 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import type { Navigation } from '../../../types/index';
 
 function MovieActor(props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const renderItem = ({ item }) => (
-    <TouchableOpacity activeOpacity={1}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => navigation.push('ActorDetail', { id: item.id })}
+    >
       <View style={styles.item}>
         <Image
           source={{ uri: item.avatar }}
