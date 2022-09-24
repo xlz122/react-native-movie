@@ -31,10 +31,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff'
   },
-  settingIcon: {
+  setting: {
     position: 'absolute',
-    top: 16,
-    right: 25,
+    top: 6,
+    right: 14,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40
+  },
+  settingIcon: {
     fontFamily: 'iconfont',
     fontSize: 18,
     color: '#fff'

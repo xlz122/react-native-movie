@@ -47,7 +47,13 @@ function Mine(props: Props): React.ReactElement {
             </Text>
           </>
         )}
-        <Text style={styles.settingIcon}>{'\ue65e'}</Text>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => props?.navigation.push('Setting')}
+          style={styles.setting}
+        >
+          <Text style={styles.settingIcon}>{'\ue65e'}</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.menu}>
         <View style={styles.menuItem}>

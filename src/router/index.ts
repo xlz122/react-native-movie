@@ -33,6 +33,12 @@ const router: Router[] = [
     component: require('../views/forget/Forget').default
   },
   {
+    name: 'Setting',
+    title: '设置',
+    headerShown: true,
+    component: require('../views/setting/Setting').default
+  },
+  {
     name: 'Search',
     title: '',
     headerShown: false,
