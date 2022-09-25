@@ -81,14 +81,7 @@ function ScrollRefresh(props: Props): React.ReactElement {
   // 重置刷新
   useEffect(() => {
     if (props?.resetRefresh) {
-      setRefreshState({
-        ...refreshState,
-        page: 1,
-        data: [],
-        isRefresh: true,
-        complete: false,
-        loadText: ''
-      });
+      onRefresh();
     }
   }, [props?.resetRefresh]);
 
@@ -120,7 +113,7 @@ function ScrollRefresh(props: Props): React.ReactElement {
         ...refreshState,
         isRefresh: false,
         isLoadMore: false,
-        loadText: '接口加载失败,请重试...'
+        loadText: '接口请求失败,请重试...'
       });
       return false;
     }
