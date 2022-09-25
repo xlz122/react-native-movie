@@ -7,7 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { storageGetItem, storageSetItem } from '../../utils/storage';
+import storage from '../../utils/storage';
 import type { Navigation, TextInputEvent } from '../../types/index';
 import SearchMovie from './search-detail/SearchDetail';
 import SearchHistory from './search-history/SearchHistory';
@@ -38,19 +38,19 @@ function Search(): React.ReactElement {
       return false;
     }
 
-    const history = await storageGetItem('history');
+    const history = await storage.getObjectItem('history');
 
     const searchHistory: string[] = [];
     if (!history) {
       searchHistory.push(search.keyword);
-      await storageSetItem('history', JSON.stringify(searchHistory));
+      await storage.setObjectItem('history', searchHistory);
     }
 
     if (history && history instanceof Array) {
       history[history.length] = search.keyword;
 
       // 搜索记录去重
-      await storageSetItem('history', Array.from(new Set(history)));
+      await storage.setObjectItem('history', Array.from(new Set(history)));
     }
   };
 
