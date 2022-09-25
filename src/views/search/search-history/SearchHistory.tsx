@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { storageGetItem, storageClearItem } from '../../../utils/storage';
+import storage from '../../../utils/storage';
 
 type Props = {
   historySearch: (value: string) => void;
@@ -11,14 +11,16 @@ function SearchHistory(props: Props): React.ReactElement {
 
   useEffect(() => {
     (async () => {
-      const h = (await storageGetItem('history')) || [];
-      setHistory(h as Array<string>);
+      const h = (await storage.getObjectItem('history')) || [];
+      if (h instanceof Array) {
+        setHistory(h);
+      }
     })();
   }, []);
 
   const clearAllHistory = () => {
     setHistory([]);
-    storageClearItem();
+    storage.clear();
   };
 
   return (
