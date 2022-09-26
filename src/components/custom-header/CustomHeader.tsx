@@ -10,6 +10,7 @@ type Props = {
   children?: React.ReactNode;
   headerTitleAlign?: boolean;
   headerStyle?: ViewStyle;
+  arrowStyle?: ViewStyle;
 };
 
 function CustomHeader(props: Props): React.ReactElement {
@@ -20,7 +21,7 @@ function CustomHeader(props: Props): React.ReactElement {
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => navigation.goBack()}
-        style={styles.arrow}
+        style={[styles.arrow, props?.arrowStyle]}
       >
         <Text style={styles.arrowIcon}>{'\ue656'}</Text>
       </TouchableOpacity>
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e54847'
   },
   arrow: {
+    position: 'absolute',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
