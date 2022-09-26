@@ -15,6 +15,7 @@ type MovieInfo = {
     small: string;
   };
   year: string;
+  release_status: number;
   genres: string[];
   countries: string[];
   durations: string[];
@@ -76,10 +77,12 @@ function MovieInfo(props: Props): React.ReactElement {
               <Text style={styles.operateIcon}>{'\ue60a'}</Text>
               <Text style={styles.operateText}>想看</Text>
             </View>
-            <View style={styles.operateItem}>
-              <Text style={styles.operateIcon}>{'\ue911'}</Text>
-              <Text style={styles.operateText}>看过</Text>
-            </View>
+            {data?.release_status !== 1 && (
+              <View style={styles.operateItem}>
+                <Text style={styles.operateIcon}>{'\ue911'}</Text>
+                <Text style={styles.operateText}>看过</Text>
+              </View>
+            )}
           </View>
         </View>
       </View>
@@ -141,7 +144,7 @@ function MovieInfo(props: Props): React.ReactElement {
         titleTextStyle={{ color: '#fff' }}
         moreIconStyle={{ color: '#fff' }}
       >
-        <Text numberOfLines={3} ellipsizeMode="tail" style={styles.summary}>
+        <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
           {data?.summary}
         </Text>
       </Panel>

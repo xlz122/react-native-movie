@@ -94,7 +94,9 @@ const styles = StyleSheet.create({
   itemTag: {
     position: 'absolute',
     top: 6,
-    right: 6,
+    right: 5,
+    paddingTop: 0.3,
+    paddingBottom: 0.3,
     paddingLeft: 1.8,
     paddingRight: 1.8,
     backgroundColor: 'rgba(255, 165, 0, 0.7)',
