@@ -76,7 +76,7 @@ const router: Router[] = [
   },
   {
     name: 'ActorDetail',
-    title: '演员',
+    title: '',
     headerShown: true,
     component: require('../views/actor-detail/ActorDetail').default
   },

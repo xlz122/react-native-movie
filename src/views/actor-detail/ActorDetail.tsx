@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { actorsDetail } from '../../api/actor-detail';
 import type { RouteProp } from '@react-navigation/native';
-import type { ResponseType } from '../../types/index';
+import type { ResponseType, Navigation } from '../../types/index';
 import type { Movie } from './actor-wroks/ActorWorks';
+import CustomHeader from '../../components/custom-header/CustomHeader';
 import Panel from '../../components/panel/Panel';
 import ActorInfo from './actor-info/ActorInfo';
 import ActorPhoto from './actor-photo/ActorPhoto';
@@ -23,6 +25,7 @@ type Detail = {
 };
 
 function ActorDetail(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
   const route: Route = useRoute();
 
   const [detail, setDetail] = useState<Partial<Detail>>({});
@@ -41,12 +44,30 @@ function ActorDetail(): React.ReactElement {
     getActorDetail();
   }, []);
 
+  useLayoutEffect(() => {
+    // 设置标头
+    navigation.setOptions({
+      header: ({ options }) => {
+        return (
+          <CustomHeader
+            options={options}
+            headerTitleAlign={true}
+            headerStyle={{ height: 0 }}
+            arrowStyle={{ top: 2 }}
+          />
+        );
+      }
+    });
+  }, []);
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
       <ActorInfo data={detail} />
       <View style={styles.count}>
         <View style={styles.countItem}>
-          <Text style={styles.countItemValue}>{detail?.collection_count}</Text>
+          <Text style={styles.countItemValue}>
+            {detail?.collection_count}人
+          </Text>
           <Text style={styles.countItemLabel}>已关注数</Text>
         </View>
         <View style={styles.countItem}>
@@ -61,10 +82,10 @@ function ActorDetail(): React.ReactElement {
       <Panel
         title="个人简介"
         subtitle={'更多信息'}
-        panelStyle={{ paddingBottom: 10, marginTop: 10 }}
+        panelStyle={{ paddingBottom: 10 }}
       >
         {Boolean(detail?.summary) && (
-          <Text numberOfLines={3} ellipsizeMode="tail" style={styles.summary}>
+          <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
             {detail?.summary}
           </Text>
         )}
@@ -109,7 +130,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     margin: 10,
-    height: 77,
+    height: 72,
     backgroundColor: '#fff',
     borderRadius: 4
   },
@@ -129,7 +150,7 @@ const styles = StyleSheet.create({
     color: '#303133'
   },
   countItemLabel: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#888'
   },
   countLastItem: {
@@ -144,8 +165,9 @@ const styles = StyleSheet.create({
     color: '#303133'
   },
   summaryText: {
-    height: 82,
-    lineHeight: 82,
+    height: 75,
+    lineHeight: 75,
+    fontSize: 12,
     color: '#999'
   }
 });

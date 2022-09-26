@@ -53,12 +53,12 @@ function ActorInfo(props: Props): React.ReactElement {
 const styles = StyleSheet.create({
   page: {
     position: 'relative',
-    height: 242,
+    height: 222,
     backgroundColor: 'rgba(229,72,71,.85)',
     overflow: 'hidden'
   },
   infoImage: {
-    height: 408
+    height: 398
   },
   info: {
     position: 'absolute',
@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%'
   },
   infoBrief: {
     display: 'flex',
@@ -81,19 +82,19 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   briefEnName: {
-    marginTop: 5,
-    fontSize: 14,
+    marginTop: 1,
+    fontSize: 12,
     color: '#ccc'
   },
   briefExtra: {
-    marginTop: 5,
-    fontSize: 12,
+    marginTop: 6,
+    fontSize: 10.5,
     color: '#ddd'
   },
   infoFocus: {
     paddingLeft: 20,
     paddingRight: 20,
-    marginRight: 10,
+    marginRight: 12,
     height: 28,
     lineHeight: 28,
     backgroundColor: 'hsla(0, 0%, 100%, .25)',
