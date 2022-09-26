@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store/index';
 import type { Navigation } from '@/types/index';
 import styles from './mine.css';
 
@@ -14,13 +15,9 @@ type UserInfo = {
 };
 
 function Mine(props: Props): React.ReactElement {
-  const [userinfo, setUserInfo] = useState<UserInfo>({});
-
-  useEffect(() => {
-    AsyncStorage.getItem('userinfo').then(itemValue => {
-      setUserInfo(JSON.parse(itemValue));
-    });
-  }, []);
+  const userinfo = useSelector(
+    (state: RootState) => state.routine.userinfo
+  ) as UserInfo;
 
   return (
     <View style={styles.page}>
