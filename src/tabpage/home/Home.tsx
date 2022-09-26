@@ -108,7 +108,7 @@ function Home(): React.ReactElement {
           <Panel
             title="即将上映"
             subtitle={`${movie?.coming?.total}部`}
-            to={{ path: 'coming' }}
+            to={{ path: 'Coming' }}
           >
             <Category movie={movie?.coming?.data} />
           </Panel>
