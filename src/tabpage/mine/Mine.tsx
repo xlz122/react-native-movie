@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { useStore } from 'react-redux';
-import type { RootState } from '@/store/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Navigation } from '@/types/index';
 import styles from './mine.css';
 
@@ -15,15 +14,12 @@ type UserInfo = {
 };
 
 function Mine(props: Props): React.ReactElement {
-  const store = useStore<RootState>().getState();
-
   const [userinfo, setUserInfo] = useState<UserInfo>({});
 
   useEffect(() => {
-    (async () => {
-      const result = (await store.routine.userinfo) || {};
-      setUserInfo(JSON.parse(result as string));
-    })();
+    AsyncStorage.getItem('userinfo').then(itemValue => {
+      setUserInfo(JSON.parse(itemValue));
+    });
   }, []);
 
   return (

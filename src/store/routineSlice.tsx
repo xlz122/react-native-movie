@@ -24,18 +24,18 @@ const routineSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
       storage.setStringItem('token', action.payload);
-      storage.setObjectItem('isLogin', JSON.stringify(true));
+      storage.setObjectItem('isLogin', true);
     },
     setUserInfo: (state, action: PayloadAction<unknown>) => {
       state.userinfo = action.payload;
-      storage.setObjectItem('userinfo', JSON.stringify(action.payload));
+      storage.setObjectItem('userinfo', action.payload);
     },
     setLogout: state => {
       state.token = '';
       storage.setStringItem('token', '');
-      storage.setObjectItem('isLogin', JSON.stringify(false));
+      storage.setObjectItem('isLogin', false);
       state.userinfo = {};
-      storage.setObjectItem('userinfo', JSON.stringify({}));
+      storage.setObjectItem('userinfo', {});
     }
   }
 });
