@@ -9,21 +9,18 @@ export type RoutineState = {
 };
 
 const initialState: RoutineState = {
-  isLogin:
-    storeStorage.getStringItem({
-      key: 'token',
-      reducers: 'setToken'
-    }) || false,
-  token:
-    storeStorage.getStringItem({
-      key: 'token',
-      reducers: 'setToken'
-    }) || '',
-  userinfo:
-    storeStorage.getObjectItem({
-      key: 'userinfo',
-      reducers: 'setUserInfo'
-    }) || {}
+  isLogin: storeStorage.getStringItem({
+    key: 'token',
+    reducers: 'setToken'
+  }),
+  token: storeStorage.getStringItem({
+    key: 'token',
+    reducers: 'setToken'
+  }),
+  userinfo: storeStorage.getObjectItem({
+    key: 'userinfo',
+    reducers: 'setUserInfo'
+  })
 };
 
 const routineSlice = createSlice({
