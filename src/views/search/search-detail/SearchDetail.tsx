@@ -8,10 +8,10 @@ import {
   Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { viewHeight } from '../../../utils/screen';
-import { searchDetail } from '../../../api/search';
-import type { Navigation, ResponseType } from '../../../types/index';
-import ScrollRefresh from '../../../components/scroll-refresh/ScrollRefresh';
+import { viewHeight } from '@/utils/screen';
+import { searchDetail } from '@/api/search';
+import type { Navigation, ResponseType } from '@/types/index';
+import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
 type Props = {
   search: {

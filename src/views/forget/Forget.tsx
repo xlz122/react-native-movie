@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import type { TextInputEvent } from '../../types/index';
+import type { TextInputEvent } from '@/types/index';
 
 function Forget(): React.ReactElement {
   const [formData, setFormData] = useState({

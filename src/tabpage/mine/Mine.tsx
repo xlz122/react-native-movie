@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useStore } from 'react-redux';
-import type { RootState } from '../../store';
-import type { Navigation } from '../../types/index';
+import type { RootState } from '@/store/index';
+import type { Navigation } from '@/types/index';
 import styles from './mine.css';
 
 type Props = {

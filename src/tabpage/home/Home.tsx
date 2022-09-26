@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
-import { colorToRgba } from '../../utils/utils';
-import { indexData } from '../../api/home';
-import type { ResponseType } from '../../types/index';
+import { colorToRgba } from '@/utils/utils';
+import { indexData } from '@/api/home';
+import type { ResponseType } from '@/types/index';
 import type { Movie } from './category/Category';
-import Panel from '../../components/panel/Panel';
+import Panel from '@/components/panel/Panel';
 import Search from './search/Search';
 import Banner from './banner/Banner';
 import Nav from './nav/Nav';

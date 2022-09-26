@@ -7,7 +7,7 @@ import {
   CancelTokenStatic
 } from 'axios';
 import { Platform } from 'react-native';
-import store from '../store';
+import store from '@/store/index';
 
 // 标识请求
 const getRequestIdentify = (config: AxiosRequestConfig, isReuest = false) => {

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { viewHeight } from '../../utils/screen';
+import { viewHeight } from '@/utils/screen';
 
 const styles = StyleSheet.create({
   page: {

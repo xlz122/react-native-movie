@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import axios from '@/utils/axios';
 
 /**
  * @description 获取图片详情

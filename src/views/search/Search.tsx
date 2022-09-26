@@ -7,8 +7,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import storage from '../../utils/storage';
-import type { Navigation, TextInputEvent } from '../../types/index';
+import storage from '@/utils/storage';
+import type { Navigation, TextInputEvent } from '@/types/index';
 import SearchMovie from './search-detail/SearchDetail';
 import SearchHistory from './search-history/SearchHistory';
 

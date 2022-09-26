@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { deviceWidth } from '../../utils/screen';
-import { moviesList } from '../../api/movies';
-import type { Navigation, ResponseType } from '../../types/index';
-import type { MovieParams } from '../../api/movies';
+import { deviceWidth } from '@/utils/screen';
+import { moviesList } from '@/api/movies';
+import type { Navigation, ResponseType } from '@/types/index';
+import type { MovieParams } from '@/api/movies';
 import Nav from './nav/Nav';
-import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
+import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
 function Movies(): React.ReactElement {
   const navigation: Navigation = useNavigation();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { movieAwards } from '../../api/home';
-import type { ResponseType } from '../../types/index';
+import { movieAwards } from '@/api/home';
+import type { ResponseType } from '@/types/index';
 
 type AwardsType = {
   id: number;

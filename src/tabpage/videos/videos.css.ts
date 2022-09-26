@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { deviceWidth } from '../../utils/screen';
+import { deviceWidth } from '@/utils/screen';
 
 const styles = StyleSheet.create({
   page: {

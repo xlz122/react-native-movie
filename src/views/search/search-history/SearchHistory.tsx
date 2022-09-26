@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import storage from '../../../utils/storage';
+import storage from '@/utils/storage';
 
 type Props = {
   historySearch: (value: string) => void;
