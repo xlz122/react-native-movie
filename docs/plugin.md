@@ -57,3 +57,29 @@ plugins: ['react-native-reanimated/plugin']
 打开外部网页
 
 * react-native-webview
+
+路径别名
+
+* babel-plugin-module-resolver
+
+配置babel.config.js
+```
+[
+  'module-resolver',
+  {
+    root: ['./src'],
+    extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+    alias: {
+      '@': ['./src']
+    }
+  }
+]
+```
+
+配置tsconfig.json(直接拿的create-react-app的官方配置)
+```
+"baseUrl": ".",
+"paths": {
+  "@/*": ["src/*"]
+}
+```
