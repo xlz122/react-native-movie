@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import type { Navigation } from '../../types/index';
+import type { Navigation } from '@/types/index';
 import LoginForm from './login-form/LoginForm';
 import RegisterForm from './register-form/RegisterForm';
 

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { ViewStyle } from 'react-native';
 import type { StackNavigationOptions } from '@react-navigation/stack';
-import type { Navigation } from '../../types/index';
+import type { Navigation } from '@/types/index';
 
 type Props = {
   options?: StackNavigationOptions;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
-import { phoneCode, register } from '../../../api/user';
-import type { TextInputEvent, ResponseType } from '../../../types/index';
-import type { LoginParams } from '../../../api/user';
+import { phoneCode, register } from '@/api/user';
+import type { TextInputEvent, ResponseType } from '@/types/index';
+import type { LoginParams } from '@/api/user';
 
 function RegisterForm(): React.ReactElement {
   const [formData, setFormData] = useState<LoginParams>({

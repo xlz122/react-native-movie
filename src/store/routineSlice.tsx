@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import storage from '../utils/storage';
+import storage from '@/utils/storage';
 
 async function faultTolerant<T>(name: string) {
   return await storage.getObjectItem<T>(name);

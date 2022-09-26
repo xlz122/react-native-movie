@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import axios from '@/utils/axios';
 
 /**
  * @description 首页内容聚合接口,包含 swiper, coming, theater, today, article

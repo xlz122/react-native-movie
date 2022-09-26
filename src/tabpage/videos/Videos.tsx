@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { timeStampToDuration } from '../../utils/utils';
-import { videosList } from '../../api/videos';
-import type { ResponseType } from '../../types/index';
-import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
+import { timeStampToDuration } from '@/utils/utils';
+import { videosList } from '@/api/videos';
+import type { ResponseType } from '@/types/index';
+import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 import styles from './videos.css';
 
 function Videos(): React.ReactElement {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import Panel from '../../../components/panel/Panel';
+import Panel from '@/components/panel/Panel';
 import MovieActor from '../movie-actor/MovieActor';
 import MovieRoles from '../movie-roles/MovieRoles';
 import styles from './movie-info.css';

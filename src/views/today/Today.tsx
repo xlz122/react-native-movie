@@ -9,10 +9,10 @@ import {
   Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { viewHeight } from '../../utils/screen';
-import { movieToday } from '../../api/home';
-import type { Navigation, ResponseType } from '../../types/index';
-import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
+import { viewHeight } from '@/utils/screen';
+import { movieToday } from '@/api/home';
+import type { Navigation, ResponseType } from '@/types/index';
+import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
 function Today(): React.ReactElement {
   const navigation: Navigation = useNavigation();

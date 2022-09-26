@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import axios from '@/utils/axios';
 
 /**
  * @description 影视分类菜单

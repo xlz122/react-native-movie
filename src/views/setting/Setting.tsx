@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useStore } from 'react-redux';
-import type { Navigation } from '../../types/index';
+import type { Navigation } from '@/types/index';
 
 function Setting(): React.ReactElement {
   const navigation: Navigation = useNavigation();

@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import axios from '@/utils/axios';
 
 export type LoginParams = {
   account: string;
@@ -40,7 +40,7 @@ export const register = ({ account, password, code }: LoginParams) => {
 /**
  * @description 发送短信验证码
  */
-export const phoneCode = ({ phone }) => {
+export const phoneCode = ({ phone }: { phone: string }) => {
   const data = { phone };
 
   return axios.request({
