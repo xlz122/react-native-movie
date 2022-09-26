@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#e54847'
   },
   arrow: {
-    position: 'absolute',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',

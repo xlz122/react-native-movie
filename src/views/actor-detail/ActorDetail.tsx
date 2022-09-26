@@ -53,7 +53,7 @@ function ActorDetail(): React.ReactElement {
             options={options}
             headerTitleAlign={true}
             headerStyle={{ height: 0 }}
-            arrowStyle={{ top: 2 }}
+            arrowStyle={{ position: 'absolute', top: 2 }}
           />
         );
       }
