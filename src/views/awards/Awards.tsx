@@ -12,7 +12,7 @@ type AwardsType = {
 function Awards(): React.ReactElement {
   const [awards, setAwards] = useState<AwardsType[]>([]);
 
-  const getMovieToday = () => {
+  const getMovieAwards = () => {
     movieAwards()
       .then((res: ResponseType<AwardsType[]>) => {
         if (res.code === 200) {
@@ -23,7 +23,7 @@ function Awards(): React.ReactElement {
   };
 
   useEffect(() => {
-    getMovieToday();
+    getMovieAwards();
   }, []);
 
   return (
