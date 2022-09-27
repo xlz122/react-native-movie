@@ -1,9 +1,5 @@
 [Readme.md](../README.md) | [平台差异对比](./difference.md) | [阿里字体图标](./iconfont.md) | 项目插件
 
-commitlint提交校验
-
-* ts-node
-
 手势
 
 * react-native-gesture-handler
