@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#e54847'
   },
   avatar: {
-    width: 73,
-    height: 73,
+    width: 66,
+    height: 66,
     borderRadius: 100
   },
   userText: {
@@ -46,42 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#fff'
   },
-  menu: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: -45,
-    marginRight: 17,
-    marginLeft: 17,
-    height: 90,
-    backgroundColor: '#fff',
-    borderRadius: 6
-  },
-  menuItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1
-  },
-  menuItemCount: {
-    width: 9,
-    height: 36,
-    lineHeight: 36,
-    fontSize: 18,
-    color: '#e54847',
-    borderRadius: 100
-  },
-  menuItemName: {
-    marginTop: 9,
-    fontSize: 11,
-    fontFamily: 'inherit',
-    fontWeight: 'bold',
-    color: '#666'
-  },
   cell: {
-    margin: 18,
+    margin: 14,
+    marginBottom: 0,
     backgroundColor: '#fff',
     borderRadius: 6
   },
