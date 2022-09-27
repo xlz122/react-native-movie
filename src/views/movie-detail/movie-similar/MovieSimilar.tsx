@@ -8,10 +8,10 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import type { Navigation } from '../../../types/index';
+import { useNavigation } from '@react-navigation/native';
+import type { Navigation } from '@/types/index';
 
 type Props = {
-  navigation: Navigation;
   movie?: Movie[];
 };
 
@@ -25,10 +25,12 @@ export type Movie = {
 };
 
 function MovieSimilar(props: Props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+      onPress={() => navigation.push('MovieDetail', { id: item.id })}
     >
       <View style={styles.item}>
         <Image
@@ -45,10 +47,6 @@ function MovieSimilar(props: Props): React.ReactElement {
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
           {item.title}
         </Text>
-        {/* 上映时间 */}
-        {item?.release_date && (
-          <Text style={styles.itemDate}>{item?.release_date}</Text>
-        )}
       </View>
     </TouchableOpacity>
   );
@@ -72,7 +70,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingLeft: 11,
+    paddingLeft: 10,
+    paddingBottom: 10,
     backgroundColor: '#fff',
     borderRadius: 4
   },
@@ -91,9 +90,11 @@ const styles = StyleSheet.create({
   itemTag: {
     position: 'absolute',
     top: 6,
-    right: 6,
-    width: 22,
-    height: 13,
+    right: 5,
+    paddingTop: 0.3,
+    paddingBottom: 0.3,
+    paddingLeft: 1.8,
+    paddingRight: 1.8,
     backgroundColor: 'rgba(255, 165, 0, 0.7)',
     fontSize: 9,
     color: '#fff',
@@ -112,11 +113,6 @@ const styles = StyleSheet.create({
     width: 94,
     color: '#333',
     fontSize: 12
-  },
-  itemDate: {
-    marginTop: 2,
-    fontSize: 10.5,
-    color: '#888'
   }
 });
 

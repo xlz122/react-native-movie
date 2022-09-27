@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import type { ViewStyle, TextStyle } from 'react-native';
-import type { Navigation } from '../../types/index';
+import type { Navigation } from '@/types/index';
 
 type Props = {
-  navigation?: Navigation;
   title?: string;
   subtitle?: string;
   to?: {
@@ -21,6 +21,8 @@ type Props = {
 };
 
 function Panel(props: Props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   return (
     <View style={[styles.panel, props?.panelStyle]}>
       <View style={[styles.header, props?.headerStyle]}>
@@ -33,7 +35,8 @@ function Panel(props: Props): React.ReactElement {
         <TouchableOpacity
           activeOpacity={1}
           onPress={() =>
-            props?.navigation?.push(props?.to?.path || '', props?.to?.params)
+            props?.to?.path &&
+            navigation.push(props?.to?.path, props?.to?.params)
           }
           style={styles.more}
         >
@@ -55,7 +58,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    paddingBottom: 10,
     margin: 10,
     marginTop: 0,
     backgroundColor: '#fff',

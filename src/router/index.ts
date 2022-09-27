@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import type { FunctionComponent } from 'react';
 import type { ViewStyle } from 'react-native';
 
@@ -26,6 +27,18 @@ const router: Router[] = [
     component: require('../views/login/Login').default
   },
   {
+    name: 'Forget',
+    title: '找回密码',
+    headerShown: true,
+    component: require('../views/forget/Forget').default
+  },
+  {
+    name: 'Setting',
+    title: '设置',
+    headerShown: true,
+    component: require('../views/setting/Setting').default
+  },
+  {
     name: 'Search',
     title: '',
     headerShown: false,
@@ -36,6 +49,12 @@ const router: Router[] = [
     title: '正在热映',
     headerShown: true,
     component: require('../views/theater/Theater').default
+  },
+  {
+    name: 'Coming',
+    title: '即将上映',
+    headerShown: true,
+    component: require('../views/coming/Coming').default
   },
   {
     name: 'HighScore',
@@ -60,6 +79,45 @@ const router: Router[] = [
     title: '电影',
     headerShown: true,
     component: require('../views/movie-detail/MovieDetail').default
+  },
+  {
+    name: 'Photos',
+    title: '相册',
+    headerShown: true,
+    component: require('../views/photos/Photos').default
+  },
+  {
+    name: 'ActorDetail',
+    title: '',
+    headerShown: true,
+    component: require('../views/actor-detail/ActorDetail').default
+  },
+  {
+    name: 'ActorList',
+    title: '演员表',
+    headerShown: true,
+    component: require('../views/actor-list/ActorList').default
+  },
+  {
+    name: 'Project',
+    title: '关于项目',
+    headerShown: true,
+    component: require('../views/project/Project').default
+  },
+  {
+    name: 'Author',
+    title: '关于作者',
+    headerShown: true,
+    component: require('../views/author/Author').default
+  },
+  {
+    name: 'WebView',
+    title: '',
+    headerShown: false,
+    component: Platform.select({
+      native: require('../views/web-view/WebView.native').default,
+      web: ''
+    })
   }
 ];
 

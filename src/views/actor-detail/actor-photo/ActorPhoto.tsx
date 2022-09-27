@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   SafeAreaView,
@@ -9,22 +8,15 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-function MovieCast(props): React.ReactElement {
+function ActorPhoto(props): React.ReactElement {
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
         <Image
-          source={{ uri: item.avatar }}
+          source={{ uri: item.url }}
           resizeMode={'stretch'}
           style={[styles.itemImage]}
         />
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-          {item.name}
-        </Text>
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.labelText}>
-          {item?.profession === '导演' ? item?.profession : ''}
-          {item?.act ? `饰: ${item?.act}` : ''}
-        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -33,11 +25,10 @@ function MovieCast(props): React.ReactElement {
     <SafeAreaView style={styles.list}>
       <FlatList
         horizontal
-        initialNumToRender={4}
+        initialNumToRender={6}
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
-        keyExtractor={item => item.union_id}
       />
     </SafeAreaView>
   );
@@ -49,29 +40,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingLeft: 10,
+    paddingBottom: 10,
+    backgroundColor: '#fff',
     borderRadius: 4
   },
   item: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    paddingBottom: 7,
-    marginRight: 8,
-    width: 94
+    marginRight: 8
   },
   itemImage: {
-    height: 130,
+    width: 62,
+    height: 85,
     borderRadius: 3
-  },
-  itemText: {
-    marginTop: 5,
-    color: '#fff',
-    fontSize: 12
-  },
-  labelText: {
-    color: 'hsla(0,0%,96.1%,.75)',
-    fontSize: 10
   }
 });
 
-export default MovieCast;
+export default ActorPhoto;

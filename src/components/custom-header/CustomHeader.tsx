@@ -1,24 +1,27 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import type { ViewStyle } from 'react-native';
 import type { StackNavigationOptions } from '@react-navigation/stack';
-import type { Navigation } from '../../types/index';
+import type { Navigation } from '@/types/index';
 
 type Props = {
-  navigation: Navigation;
   options?: StackNavigationOptions;
   children?: React.ReactNode;
   headerTitleAlign?: boolean;
   headerStyle?: ViewStyle;
+  arrowStyle?: ViewStyle;
 };
 
 function CustomHeader(props: Props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   return (
     <View style={[styles.header, props?.headerStyle]}>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => props?.navigation.goBack()}
-        style={styles.arrow}
+        onPress={() => navigation.goBack()}
+        style={[styles.arrow, props?.arrowStyle]}
       >
         <Text style={styles.arrowIcon}>{'\ue656'}</Text>
       </TouchableOpacity>

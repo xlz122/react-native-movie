@@ -6,6 +6,8 @@ import {
   AxiosInstance,
   CancelTokenStatic
 } from 'axios';
+import { Platform } from 'react-native';
+import store from '@/store/index';
 
 // 标识请求
 const getRequestIdentify = (config: AxiosRequestConfig, isReuest = false) => {
@@ -67,7 +69,7 @@ class HttpRequest {
   interceptors(instance: AxiosInstance) {
     // 请求拦截
     instance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      async (config: AxiosRequestConfig) => {
         // 拦截重复请求(即当前正在进行的相同请求)
         const requestData: string = getRequestIdentify(config, true); // 标识请求
         // 取消重复请求
@@ -77,6 +79,12 @@ class HttpRequest {
           pending[requestData] = cancel;
         });
 
+        const token = (await store.getState().routine.token) || '';
+        if (token) {
+          config.headers = Object.assign(config.headers!, {
+            Authorization: `Bearer ${token}`
+          });
+        }
         return Promise.resolve(config);
       },
       (error: AxiosError) => {
@@ -97,7 +105,7 @@ class HttpRequest {
 }
 
 const Axios = new HttpRequest({
-  baseURL: 'https://test-h5-api.ixook.com'
+  baseURL: Platform.OS === 'web' ? '/api' : 'https://test-h5-api.ixook.com'
 });
 
 export default Axios;

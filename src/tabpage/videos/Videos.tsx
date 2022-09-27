@@ -1,82 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { timeStampToDuration } from '../../utils/utils';
-import { getScreenViewHeight } from '../../utils/screen';
-import { videosList } from '../../api/videos';
-import type { ResponseType } from '../../types/index';
-import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
+import { timeStampToDuration } from '@/utils/utils';
+import { videosList } from '@/api/videos';
+import type { ResponseType } from '@/types/index';
+import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 import styles from './videos.css';
 
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
-
-type Video = {
-  poster: string;
-  title: string;
-  play_count: number;
-  duration: number;
-  like_count: number;
-  comment_count: number;
-  author: {
-    avatar: string;
-    username: string;
-  };
-};
-
 function Videos(): React.ReactElement {
-  const [state, setState] = useState({
-    page: 1,
-    per_page: 5,
-    // 下拉刷新
-    isRefresh: false,
-    // 加载更多
-    isLoadMore: false,
-    loadMoreText: ''
-  });
-
-  const [video, setVideo] = useState<Video[]>([]);
-
-  const getVideosList = () => {
-    videosList({ page: state.page, per_page: state.per_page })
-      .then((res: ResponseType<Video[]>) => {
-        if (res.code === 200) {
-          if (res.data?.length === 0) {
-            return false;
-          }
-
-          // 下拉刷新、初始化
-          if (state.isRefresh || video.length === 0) {
-            setVideo(res.data!);
-          }
-
-          // 加载更多
-          if (state.isLoadMore || res.data?.length !== 0) {
-            setVideo(video.concat(res.data!));
-          }
-
-          if (res.data && res.data?.length < state.per_page) {
-            setState({
-              ...state,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: '没有更多数据了'
-            });
+  const getVideosList = ({ page, per_page }): Promise<unknown[]> => {
+    return new Promise((resolve, reject) => {
+      videosList({ page, per_page })
+        .then((res: ResponseType<unknown[]>) => {
+          if (res.code === 200) {
+            resolve(res.data!);
           } else {
-            setState({
-              ...state,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: '加载更多...'
-            });
+            reject();
           }
-        }
-      })
-      .catch(() => ({}));
+        })
+        .catch(() => ({}));
+    });
   };
-
-  useEffect(() => {
-    getVideosList();
-  }, [state.page]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity activeOpacity={1}>
@@ -116,31 +59,14 @@ function Videos(): React.ReactElement {
     </TouchableOpacity>
   );
 
-  const onRefresh = (): void => {
-    setState({ ...state, isRefresh: true, page: 1 });
-  };
-
-  const onEndReached = (): void => {
-    setState({
-      ...state,
-      page: state.page + 1,
-      isLoadMore: true,
-      loadMoreText: '加载中...'
-    });
-  };
-
   return (
     <View style={styles.page}>
       <ScrollRefresh
-        height={viewHeight - 50}
-        initialNumToRender={4}
-        showsVerticalScrollIndicator={false}
-        data={video}
+        page={1}
+        pageSize={5}
+        request={getVideosList}
+        initialNumToRender={6}
         renderItem={renderItem}
-        refreshing={state.isRefresh}
-        onRefresh={onRefresh}
-        loadMoreText={state.loadMoreText}
-        onEndReached={onEndReached}
       />
     </View>
   );

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { movieAwards } from '../../api/home';
-import type { ResponseType } from '../../types/index';
+import { View, Text, StyleSheet, ScrollView, Platform } from 'react-native';
+import { viewHeight } from '@/utils/screen';
+import { movieAwards } from '@/api/home';
+import type { ResponseType } from '@/types/index';
 
 type AwardsType = {
   id: number;
@@ -11,7 +12,7 @@ type AwardsType = {
 function Awards(): React.ReactElement {
   const [awards, setAwards] = useState<AwardsType[]>([]);
 
-  const getMovieToday = () => {
+  const getMovieAwards = () => {
     movieAwards()
       .then((res: ResponseType<AwardsType[]>) => {
         if (res.code === 200) {
@@ -22,12 +23,12 @@ function Awards(): React.ReactElement {
   };
 
   useEffect(() => {
-    getMovieToday();
+    getMovieAwards();
   }, []);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.page}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+      <View style={styles.list}>
         {awards.map((item, index) => {
           return (
             <View
@@ -48,12 +49,16 @@ function Awards(): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
+    // web端需要减去标题高度
+    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
+    backgroundColor: '#fff'
+  },
+  list: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
-    alignItems: 'center',
-    backgroundColor: '#fff'
+    alignItems: 'center'
   },
   item: {
     display: 'flex',

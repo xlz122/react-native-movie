@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { movieTop } from '../../api/home';
-import type { Navigation, ResponseType } from '../../types/index';
-import ScrollRefresh from '../../components/scroll-refresh/ScrollRefresh';
-
-type Props = {
-  navigation: Navigation;
-};
+import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Platform
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { viewHeight } from '@/utils/screen';
+import { movieTop } from '@/api/home';
+import type { Navigation, ResponseType } from '@/types/index';
+import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
 type Movie = {
   id: number;
@@ -17,72 +22,49 @@ type Movie = {
   countries: string;
 };
 
-function HighScore(props: Props): React.ReactElement {
-  const [state, setState] = useState({
-    page: 1,
-    per_page: 10,
-    // 下拉刷新
-    isRefresh: false,
-    // 加载更多
-    isLoadMore: false,
-    loadMoreText: ''
-  });
+function HighScore(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
 
-  const [movie, setMovie] = useState<Movie[]>([]);
-
-  const getMovieTop = () => {
-    movieTop({ page: state.page, per_page: state.per_page })
-      .then((res: ResponseType<Movie[]>) => {
-        if (res.code === 200) {
-          if (res.data?.length === 0) {
-            return false;
-          }
-
-          // 下拉刷新、初始化
-          if (state.isRefresh || movie.length === 0) {
-            setMovie(res.data!);
-          }
-
-          // 加载更多
-          if (state.isLoadMore || res.data?.length !== 0) {
-            setMovie(movie.concat(res.data!));
-          }
-
-          if (res.data && res.data?.length < state.per_page) {
-            setState({
-              ...state,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: '没有更多数据了'
-            });
+  const getMovieTop = ({ page, per_page }): Promise<unknown[]> => {
+    return new Promise((resolve, reject) => {
+      movieTop({ page, per_page })
+        .then((res: ResponseType<unknown[]>) => {
+          if (res.code === 200) {
+            resolve(res.data!);
           } else {
-            setState({
-              ...state,
-              isRefresh: false,
-              isLoadMore: false,
-              loadMoreText: '加载更多...'
-            });
+            reject();
           }
-        }
-      })
-      .catch(() => ({}));
+        })
+        .catch(() => ({}));
+    });
   };
 
-  useEffect(() => {
-    getMovieTop();
-  }, [state.page]);
-
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, index }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+      onPress={() => navigation.push('MovieDetail', { id: item.id })}
     >
       <View style={styles.item}>
-        <Image
-          source={{ uri: item.poster }}
-          resizeMode={'stretch'}
-          style={[styles.itemImage]}
-        />
+        <View style={styles.itemCover}>
+          <Image
+            source={{ uri: item.poster }}
+            resizeMode={'stretch'}
+            style={[styles.itemImage]}
+          />
+          {index === 0 && (
+            <View style={[styles.itemCoverBg, styles.coverBgColor1]} />
+          )}
+          {index === 1 && (
+            <View style={[styles.itemCoverBg, styles.coverBgColor2]} />
+          )}
+          {index === 2 && (
+            <View style={[styles.itemCoverBg, styles.coverBgColor3]} />
+          )}
+          {index > 2 && (
+            <View style={[styles.itemCoverBg, styles.coverBgColor4]} />
+          )}
+          <Text style={styles.itemCoverText}>{index + 1}</Text>
+        </View>
         <View style={styles.itemInfo}>
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemTitle}>
             {item.title}
@@ -104,34 +86,26 @@ function HighScore(props: Props): React.ReactElement {
     </TouchableOpacity>
   );
 
-  const onRefresh = (): void => {
-    setState({ ...state, isRefresh: true, page: 1 });
-  };
-
-  const onEndReached = (): void => {
-    setState({
-      ...state,
-      page: state.page + 1,
-      isLoadMore: true,
-      loadMoreText: '加载中...'
-    });
-  };
-
   return (
-    <ScrollRefresh
-      initialNumToRender={6}
-      showsVerticalScrollIndicator={false}
-      data={movie}
-      renderItem={renderItem}
-      refreshing={state.isRefresh}
-      onRefresh={onRefresh}
-      loadMoreText={state.loadMoreText}
-      onEndReached={onEndReached}
-    />
+    <View style={styles.page}>
+      <ScrollRefresh
+        page={1}
+        pageSize={10}
+        request={getMovieTop}
+        initialNumToRender={6}
+        renderItem={renderItem}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  page: {
+    paddingBottom: Platform.OS !== 'web' ? 10 : 0,
+    // web端需要减去标题高度
+    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
+    backgroundColor: '#fff'
+  },
   item: {
     display: 'flex',
     flexDirection: 'row',
@@ -139,10 +113,44 @@ const styles = StyleSheet.create({
     marginRight: -20,
     marginLeft: 16
   },
-  itemImage: {
+  itemCover: {
+    position: 'relative',
     width: 93,
     height: 124,
-    borderRadius: 3
+    borderRadius: 3,
+    overflow: 'hidden'
+  },
+  itemImage: {
+    width: 93,
+    height: 124
+  },
+  itemCoverBg: {
+    position: 'absolute',
+    top: -18,
+    left: -14,
+    width: 30,
+    height: 48,
+    transform: [{ rotate: '-135deg' }]
+  },
+  coverBgColor1: {
+    backgroundColor: 'red'
+  },
+  coverBgColor2: {
+    backgroundColor: '#ff4500'
+  },
+  coverBgColor3: {
+    backgroundColor: '#f4a460'
+  },
+  coverBgColor4: {
+    backgroundColor: '#adadad'
+  },
+  itemCoverText: {
+    position: 'absolute',
+    top: 1.6,
+    left: 5,
+    zIndex: 1,
+    fontSize: 10,
+    color: '#fff'
   },
   itemInfo: {
     flex: 1,
