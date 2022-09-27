@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, .25)',
     borderRadius: 5
   },
+  operateActiveItem: {
+    opacity: 0.5
+  },
   operateIcon: {
     marginRight: 3.5,
     fontFamily: 'iconfont',

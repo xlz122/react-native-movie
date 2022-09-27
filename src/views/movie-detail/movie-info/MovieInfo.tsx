@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { movieWish } from '@/api/movie-detail';
+import type { RootState } from '@/store/index';
+import type { ResponseType, Navigation } from '@/types/index';
 import Panel from '@/components/panel/Panel';
 import MovieActor from '../movie-actor/MovieActor';
 import MovieRoles from '../movie-roles/MovieRoles';
@@ -7,6 +12,7 @@ import styles from './movie-info.css';
 
 type Props = {
   data: Partial<MovieInfo>;
+  refreshDetail: () => void;
 };
 
 type MovieInfo = {
@@ -20,6 +26,7 @@ type MovieInfo = {
   genres: string[];
   countries: string[];
   durations: string[];
+  is_wish: boolean;
   rating: string;
   awards_nominate_count: number;
   thrid_rating: {
@@ -38,7 +45,27 @@ type MovieInfo = {
 };
 
 function MovieInfo(props: Props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+  const isLogin = useSelector((state: RootState) => state.routine.isLogin);
+
   const { data } = props;
+
+  // 想看/取消想看
+  const movieWishChange = (): boolean | undefined => {
+    if (!isLogin) {
+      navigation.push('Login');
+      return false;
+    }
+
+    movieWish({ id: data.id })
+      .then((res: ResponseType<unknown>) => {
+        if (res.code === 200) {
+          props.refreshDetail();
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+        }
+      })
+      .catch(() => ({}));
+  };
 
   return (
     <View style={styles.page}>
@@ -74,10 +101,19 @@ function MovieInfo(props: Props): React.ReactElement {
             </Text>
           </View>
           <View style={styles.operate}>
-            <View style={styles.operateItem}>
-              <Text style={styles.operateIcon}>{'\ue60a'}</Text>
-              <Text style={styles.operateText}>想看</Text>
-            </View>
+            <TouchableOpacity activeOpacity={1} onPress={movieWishChange}>
+              <View
+                style={[
+                  styles.operateItem,
+                  data?.is_wish ? styles.operateActiveItem : styles.operateItem
+                ]}
+              >
+                <Text style={styles.operateIcon}>{'\ue60a'}</Text>
+                <Text style={styles.operateText}>
+                  {data?.is_wish ? '已想看' : '想看'}
+                </Text>
+              </View>
+            </TouchableOpacity>
             {data?.release_status !== 1 && (
               <View style={styles.operateItem}>
                 <Text style={styles.operateIcon}>{'\ue911'}</Text>

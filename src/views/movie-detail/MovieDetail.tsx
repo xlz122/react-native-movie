@@ -45,6 +45,11 @@ function MovieDeail(): React.ReactElement {
       .catch(() => ({}));
   };
 
+  // 刷新详情
+  const refreshDetail = () => {
+    getMovieDetail();
+  };
+
   useEffect(() => {
     getMovieDetail();
   }, []);
@@ -116,7 +121,7 @@ function MovieDeail(): React.ReactElement {
     <>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         <LinearGradinet colors={gradientColor}>
-          <MovieInfo data={detail} />
+          <MovieInfo data={detail} refreshDetail={refreshDetail} />
         </LinearGradinet>
         {detail?.photos && detail?.photos?.length > 0 && (
           <Panel
