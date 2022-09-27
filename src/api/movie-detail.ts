@@ -22,6 +22,17 @@ export type MoviePhotosParams = {
 };
 
 /**
+ * @description 新增或删除我的想看
+ * @param { Number } id - 影视id
+ */
+export const movieWish = ({ id }: { id: number }) => {
+  return axios.request({
+    url: `/user/movies/${id}/wish`,
+    method: 'post'
+  });
+};
+
+/**
  * @description 获取影视演员列表
  * @param { Number } id - 影视id
  */
