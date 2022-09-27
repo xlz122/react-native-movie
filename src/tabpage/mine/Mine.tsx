@@ -75,8 +75,8 @@ function Mine(props: Props): React.ReactElement {
       </View>
       <View style={styles.cell}>
         <View style={styles.cellItem}>
-          <Text style={styles.cellItemIcon}>{'\ue601'}</Text>
-          <Text style={styles.cellItemText}>意见反馈</Text>
+          <Text style={styles.cellItemIcon}>{'\ue701'}</Text>
+          <Text style={styles.cellItemText}>兴趣爱好</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
         </View>
         <TouchableOpacity
@@ -91,17 +91,12 @@ function Mine(props: Props): React.ReactElement {
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => props?.navigation?.push('Author')}
-          style={styles.cellItem}
+          style={[styles.cellItem, styles.cellLastItem]}
         >
           <Text style={styles.cellItemIcon}>{'\ue634'}</Text>
           <Text style={styles.cellItemText}>关于作者</Text>
           <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
         </TouchableOpacity>
-        <View style={[styles.cellItem, styles.cellLastItem]}>
-          <Text style={styles.cellItemIcon}>{'\ue60b'}</Text>
-          <Text style={styles.cellItemText}>更新日志</Text>
-          <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
-        </View>
       </View>
     </View>
   );
