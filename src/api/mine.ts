@@ -27,3 +27,16 @@ export const userActors = ({ page, per_page }: CollectionParams) => {
     params
   });
 };
+
+/**
+ * @description 获取用户关注的角色
+ */
+export const userRoles = ({ page, per_page }: CollectionParams) => {
+  const params = { page, per_page };
+
+  return axios.request({
+    url: '/user/collections/roles',
+    method: 'get',
+    params
+  });
+};
