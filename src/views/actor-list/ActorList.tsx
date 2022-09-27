@@ -45,7 +45,6 @@ function ActorList(): React.ReactElement {
 
   const RenderItem = ({ item, index, length }) => (
     <TouchableOpacity
-      key={index}
       activeOpacity={1}
       onPress={() => navigation.push('ActorDetail', { id: item.id })}
     >
@@ -91,11 +90,12 @@ function ActorList(): React.ReactElement {
                 </Text>
               </View>
               <View style={styles.itemList}>
-                {item?.children?.map((i, ind) => {
+                {item?.children?.map((citem, cindex) => {
                   return (
                     <RenderItem
-                      item={i}
-                      index={ind}
+                      key={cindex}
+                      item={citem}
+                      index={cindex}
                       length={item?.children?.length}
                     />
                   );
