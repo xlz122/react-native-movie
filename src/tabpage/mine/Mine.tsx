@@ -18,6 +18,7 @@ function Mine(props: Props): React.ReactElement {
   const userinfo = useSelector(
     (state: RootState) => state.routine.userinfo
   ) as UserInfo;
+  const isLogin = useSelector((state: RootState) => state.routine.isLogin);
 
   return (
     <View style={styles.page}>
@@ -47,13 +48,15 @@ function Mine(props: Props): React.ReactElement {
             </Text>
           </>
         )}
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => props?.navigation.push('Setting')}
-          style={styles.setting}
-        >
-          <Text style={styles.settingIcon}>{'\ue65e'}</Text>
-        </TouchableOpacity>
+        {isLogin && (
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => props?.navigation.push('Setting')}
+            style={styles.setting}
+          >
+            <Text style={styles.settingIcon}>{'\ue65e'}</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.menu}>
         <View style={styles.menuItem}>

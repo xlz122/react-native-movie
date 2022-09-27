@@ -59,6 +59,10 @@ function LoginForm(): React.ReactElement {
       .then(async (res: ResponseType<{ token: string }>) => {
         if (res.code === 200) {
           store.dispatch({
+            type: 'routine/setLogin',
+            payload: true
+          });
+          store.dispatch({
             type: 'routine/setToken',
             payload: res?.data?.token
           });

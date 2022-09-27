@@ -9,9 +9,9 @@ export type RoutineState = {
 };
 
 const initialState: RoutineState = {
-  isLogin: storeStorage.getStringItem({
-    key: 'token',
-    reducers: 'setToken'
+  isLogin: storeStorage.getObjectItem({
+    key: 'isLogin',
+    reducers: 'setLogin'
   }),
   token: storeStorage.getStringItem({
     key: 'token',
@@ -27,11 +27,13 @@ const routineSlice = createSlice({
   name: 'routine',
   initialState,
   reducers: {
+    setLogin: (state, action: PayloadAction<boolean>) => {
+      state.isLogin = action.payload;
+      storage.setObjectItem('isLogin', action.payload);
+    },
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
-      state.isLogin = true;
       storage.setStringItem('token', action.payload);
-      storage.setObjectItem('isLogin', true);
     },
     setUserInfo: (state, action: PayloadAction<unknown>) => {
       state.userinfo = action.payload;
@@ -40,6 +42,7 @@ const routineSlice = createSlice({
     setLogout: state => {
       state.token = '';
       storage.setStringItem('token', '');
+      state.isLogin = false;
       storage.setObjectItem('isLogin', false);
       state.userinfo = {};
       storage.setObjectItem('userinfo', {});
