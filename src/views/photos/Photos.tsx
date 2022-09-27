@@ -8,10 +8,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { moviePhotos } from '@/api/movies';
+import { moviePhotos } from '@/api/movie-detail';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType } from '@/types/index';
-import type { MoviePhotosParams } from '@/api/movies';
+import type { MoviePhotosParams } from '@/api/movie-detail';
 
 type Route = RouteProp<{ params: { movieId: number } }>;
 
