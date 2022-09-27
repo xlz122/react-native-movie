@@ -79,11 +79,7 @@ function ActorDetail(): React.ReactElement {
           <Text style={styles.countItemLabel}>饰演角色</Text>
         </View>
       </View>
-      <Panel
-        title="个人简介"
-        subtitle={'更多信息'}
-        panelStyle={{ paddingBottom: 10 }}
-      >
+      <Panel title="个人简介" subtitle={'更多信息'}>
         {Boolean(detail?.summary) && (
           <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
             {detail?.summary}
@@ -96,11 +92,7 @@ function ActorDetail(): React.ReactElement {
         )}
       </Panel>
       {detail?.photos && detail?.photos?.length > 0 && (
-        <Panel
-          title="相册"
-          subtitle={`全部${detail?.photos?.length}张`}
-          panelStyle={{ paddingBottom: 10 }}
-        >
+        <Panel title="相册" subtitle={`全部${detail?.photos?.length}张`}>
           <ActorPhoto movie={detail?.photos} />
         </Panel>
       )}
@@ -160,8 +152,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 11,
-    paddingRight: 11,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
     color: '#303133'
   },
   summaryText: {
