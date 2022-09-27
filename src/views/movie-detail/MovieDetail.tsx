@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '@/utils/utils';
-import { moviesDetail } from '@/api/movies';
+import { moviesDetail } from '@/api/movie-detail';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
 import type { Movie } from './movie-similar/MovieSimilar';
