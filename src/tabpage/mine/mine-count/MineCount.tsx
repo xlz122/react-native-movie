@@ -42,11 +42,21 @@ function MineCount(): React.ReactElement {
     getUserCount();
   }, [isLogin]);
 
+  // 跳转关注详情
+  const jumpFlollowDetail = (path: string): boolean | undefined => {
+    if (!isLogin) {
+      navigation.push('Login');
+      return false;
+    }
+
+    navigation.push(path);
+  };
+
   return (
     <View style={styles.count}>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => navigation.push('Actor')}
+        onPress={() => jumpFlollowDetail('Actor')}
         style={styles.countItem}
       >
         <Text style={styles.countItemCount}>
@@ -56,7 +66,7 @@ function MineCount(): React.ReactElement {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => navigation.push('Role')}
+        onPress={() => jumpFlollowDetail('Role')}
         style={styles.countItem}
       >
         <Text style={styles.countItemCount}>
