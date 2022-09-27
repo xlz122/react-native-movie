@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/index';
 import type { Navigation } from '@/types/index';
+import MineCount from './mine-count/MineCount';
 import styles from './mine.css';
 
 type Props = {
@@ -58,24 +59,22 @@ function Mine(props: Props): React.ReactElement {
           </TouchableOpacity>
         )}
       </View>
-      <View style={styles.menu}>
-        <View style={styles.menuItem}>
-          <Text style={styles.menuItemCount}>-</Text>
-          <Text style={styles.menuItemName}>关注影人</Text>
+      {/* 收藏统计 */}
+      <MineCount />
+      {isLogin && (
+        <View style={styles.cell}>
+          <View style={styles.cellItem}>
+            <Text style={styles.cellItemIcon}>{'\ue6c8'}</Text>
+            <Text style={styles.cellItemText}>我的资料</Text>
+            <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
+          </View>
+          <View style={[styles.cellItem, styles.cellLastItem]}>
+            <Text style={styles.cellItemIcon}>{'\ue611'}</Text>
+            <Text style={styles.cellItemText}>影片收藏夹</Text>
+            <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
+          </View>
         </View>
-        <View style={styles.menuItem}>
-          <Text style={styles.menuItemCount}>-</Text>
-          <Text style={styles.menuItemName}>关注角色</Text>
-        </View>
-        <View style={styles.menuItem}>
-          <Text style={styles.menuItemCount}>-</Text>
-          <Text style={styles.menuItemName}>收藏影评</Text>
-        </View>
-        <View style={styles.menuItem}>
-          <Text style={styles.menuItemCount}>-</Text>
-          <Text style={styles.menuItemName}>收藏视频</Text>
-        </View>
-      </View>
+      )}
       <View style={styles.cell}>
         <View style={styles.cellItem}>
           <Text style={styles.cellItemIcon}>{'\ue701'}</Text>
