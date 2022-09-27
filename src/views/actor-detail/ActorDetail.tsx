@@ -40,6 +40,11 @@ function ActorDetail(): React.ReactElement {
       .catch(() => ({}));
   };
 
+  // 刷新详情
+  const refreshDetail = () => {
+    getActorDetail();
+  };
+
   useEffect(() => {
     getActorDetail();
   }, []);
@@ -62,7 +67,7 @@ function ActorDetail(): React.ReactElement {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-      <ActorInfo data={detail} />
+      <ActorInfo data={detail} refreshDetail={refreshDetail} />
       <View style={styles.count}>
         <View style={styles.countItem}>
           <Text style={styles.countItemValue}>
