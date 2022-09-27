@@ -9,10 +9,6 @@ function Project(): React.ReactElement {
           <Text style={styles.itemText}>react native</Text>
           <Text style={styles.itemRightText}>0.70.1</Text>
         </View>
-        <View style={styles.cellItem}>
-          <Text style={styles.itemText}>开发进度</Text>
-          <Text style={styles.itemRightText}>开发中</Text>
-        </View>
         <View style={[styles.cellItem, styles.cellLastItem]}>
           <Text style={styles.itemText}>维护时间</Text>
           <Text style={styles.itemRightText}>长期维护</Text>
