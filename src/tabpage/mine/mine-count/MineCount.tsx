@@ -54,12 +54,16 @@ function MineCount(): React.ReactElement {
         </Text>
         <Text style={styles.countItemName}>关注影人</Text>
       </TouchableOpacity>
-      <View style={styles.countItem}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => navigation.push('Role')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.role_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>关注角色</Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.countItem}>
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.review_count}` : '-'}
