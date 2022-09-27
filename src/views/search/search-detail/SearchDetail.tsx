@@ -20,15 +20,6 @@ type Props = {
   };
 };
 
-type Movie = {
-  id: number;
-  title: string;
-  poster: string;
-  year: string;
-  genres: string;
-  countries: string;
-};
-
 function SearchDetail(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
@@ -91,7 +82,7 @@ function SearchDetail(props: Props): React.ReactElement {
     </TouchableOpacity>
   );
 
-  // 演员项
+  // 影人项
   const ActorItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
