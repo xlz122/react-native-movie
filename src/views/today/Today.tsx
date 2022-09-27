@@ -1,64 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   Image,
   StyleSheet,
   SafeAreaView,
-  FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
-import { getScreenViewHeight } from '../../utils/screen';
-import { movieToday } from '../../api/home';
-import type { Navigation, ResponseType } from '../../types/index';
-import type { PagingParams } from '../../api/home';
+import { useNavigation } from '@react-navigation/native';
+import { viewHeight } from '@/utils/screen';
+import { movieToday } from '@/api/home';
+import type { Navigation, ResponseType } from '@/types/index';
+import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
-// 获取屏幕内容高度
-const viewHeight = getScreenViewHeight();
+function Today(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
 
-type Props = {
-  navigation: Navigation;
-};
+  // 刷新列表
+  const [resetRefresh, setResetRefresh] = useState(false);
 
-type Movie = {
-  id: number;
-  title: string;
-  poster: string;
-  year: string;
-  genres: string;
-  countries: string;
-};
-
-function Today(props: Props): React.ReactElement {
-  const [movie, setMovie] = useState<Movie[]>([]);
-  const [movieParams, setMovieParams] = useState<PagingParams>({
-    page: 1,
-    per_page: 11,
-    sortby: 'hot'
-  });
-
-  const getMovieToday = () => {
-    movieToday({ ...movieParams })
-      .then((res: ResponseType<Movie[]>) => {
-        if (res.code === 200) {
-          setMovie(res.data!);
-        }
-      })
-      .catch(() => ({}));
-  };
-
-  useEffect(() => {
-    getMovieToday();
-  }, [movieParams]);
+  const [sortby, setSortby] = useState('hot');
 
   const toggleSort = (value: string): void => {
-    setMovieParams({ ...movieParams, sortby: value });
+    setResetRefresh(true);
+    setSortby(value);
+  };
+
+  const getMovieToday = ({ page, per_page }): Promise<unknown[]> => {
+    return new Promise((resolve, reject) => {
+      movieToday({ page, per_page, sortby })
+        .then((res: ResponseType<unknown[]>) => {
+          if (res.code === 200) {
+            setResetRefresh(false);
+            resolve(res.data!);
+          } else {
+            reject();
+          }
+        })
+        .catch(() => ({}));
+    });
   };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => props?.navigation.push('MovieDetail', { id: item.id })}
+      onPress={() => navigation.push('MovieDetail', { id: item.id })}
     >
       <View style={styles.item}>
         <Image
@@ -97,7 +84,7 @@ function Today(props: Props): React.ReactElement {
           onPress={() => toggleSort('hot')}
           style={[
             styles.tabItem,
-            movieParams.sortby === 'hot' ? styles.tabActiveItem : styles.tabItem
+            sortby === 'hot' ? styles.tabActiveItem : styles.tabItem
           ]}
         >
           热度排序
@@ -106,19 +93,19 @@ function Today(props: Props): React.ReactElement {
           onPress={() => toggleSort('date')}
           style={[
             styles.tabItem,
-            movieParams.sortby === 'date'
-              ? styles.tabActiveItem
-              : styles.tabItem
+            sortby === 'date' ? styles.tabActiveItem : styles.tabItem
           ]}
         >
           时间排序
         </Text>
       </View>
-      <FlatList
+      <ScrollRefresh
+        page={1}
+        pageSize={10}
+        request={getMovieToday}
         initialNumToRender={6}
-        showsVerticalScrollIndicator={false}
-        data={movie}
         renderItem={renderItem}
+        resetRefresh={resetRefresh}
       />
     </SafeAreaView>
   );
@@ -126,8 +113,9 @@ function Today(props: Props): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    paddingBottom: 18,
-    height: viewHeight,
+    paddingBottom: Platform.OS !== 'web' ? 10 : 0,
+    // web端需要减去标题高度
+    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
     backgroundColor: '#fff'
   },
   tab: {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import type { Route } from '../types/index';
-import CustomHeader from '../components/custom-header/CustomHeader';
+import type { Route } from '@/types/index';
+import CustomHeader from '@/components/custom-header/CustomHeader';
 import router from './index';
 
 const Stack = createStackNavigator();
@@ -19,8 +19,8 @@ function StackNavigator(): React.ReactElement {
     <Stack.Navigator
       screenOptions={{
         // 自定义标头
-        header: ({ navigation, options }) => {
-          return <CustomHeader navigation={navigation} options={options} />;
+        header: ({ options }) => {
+          return <CustomHeader options={options} />;
         }
       }}
     >

@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import axios from '@/utils/axios';
 
 /**
  * @description 首页内容聚合接口,包含 swiper, coming, theater, today, article
@@ -26,6 +26,21 @@ export const movieTheater = ({ page, per_page }: PagingParams) => {
 
   return axios.request({
     url: '/movie/theater',
+    method: 'get',
+    params
+  });
+};
+
+/**
+ * @description 即将上映影片
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ */
+export const movieComing = ({ page, per_page }: PagingParams) => {
+  const params = { page, per_page };
+
+  return axios.request({
+    url: 'movie/coming',
     method: 'get',
     params
   });

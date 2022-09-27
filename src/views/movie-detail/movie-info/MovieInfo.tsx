@@ -1,23 +1,34 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import type { Navigation } from '../../../types/index';
-import Panel from '../../../components/panel/Panel';
-import MovieCast from '../movie-cast/MovieCast';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { movieWish } from '@/api/movie-detail';
+import type { RootState } from '@/store/index';
+import type { ResponseType, Navigation } from '@/types/index';
+import Panel from '@/components/panel/Panel';
+import MovieActor from '../movie-actor/MovieActor';
+import MovieRoles from '../movie-roles/MovieRoles';
+import styles from './movie-info.css';
 
 type Props = {
-  navigation?: Navigation;
   data: Partial<MovieInfo>;
+  refreshDetail: () => void;
 };
 
 type MovieInfo = {
+  id: number;
   title: string;
   poster: {
     small: string;
   };
   year: string;
+  release_status: number;
   genres: string[];
   countries: string[];
   durations: string[];
+  is_wish: boolean;
+  rating: string;
+  awards_nominate_count: number;
   thrid_rating: {
     douban: {
       count: string;
@@ -25,13 +36,36 @@ type MovieInfo = {
     };
   };
   tags: string[];
+  egg_hunt: number;
   summary: string;
   cast_count: number;
   cast: unknown[];
+  role_count: number;
+  roles: unknown[];
 };
 
 function MovieInfo(props: Props): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+  const isLogin = useSelector((state: RootState) => state.routine.isLogin);
+
   const { data } = props;
+
+  // 想看/取消想看
+  const movieWishChange = (): boolean | undefined => {
+    if (!isLogin) {
+      navigation.push('Login');
+      return false;
+    }
+
+    movieWish({ id: data.id })
+      .then((res: ResponseType<unknown>) => {
+        if (res.code === 200) {
+          props.refreshDetail();
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+        }
+      })
+      .catch(() => ({}));
+  };
 
   return (
     <View style={styles.page}>
@@ -67,20 +101,44 @@ function MovieInfo(props: Props): React.ReactElement {
             </Text>
           </View>
           <View style={styles.operate}>
-            <View style={styles.operateItem}>
-              <Text style={styles.operateIcon}>{'\ue60a'}</Text>
-              <Text style={styles.operateText}>想看</Text>
-            </View>
-            <View style={styles.operateItem}>
-              <Text style={styles.operateIcon}>{'\ue911'}</Text>
-              <Text style={styles.operateText}>看过</Text>
-            </View>
+            <TouchableOpacity activeOpacity={1} onPress={movieWishChange}>
+              <View
+                style={[
+                  styles.operateItem,
+                  data?.is_wish ? styles.operateActiveItem : styles.operateItem
+                ]}
+              >
+                <Text style={styles.operateIcon}>{'\ue60a'}</Text>
+                <Text style={styles.operateText}>
+                  {data?.is_wish ? '已想看' : '想看'}
+                </Text>
+              </View>
+            </TouchableOpacity>
+            {data?.release_status !== 1 && (
+              <View style={styles.operateItem}>
+                <Text style={styles.operateIcon}>{'\ue911'}</Text>
+                <Text style={styles.operateText}>看过</Text>
+              </View>
+            )}
           </View>
         </View>
       </View>
       <View style={styles.rating}>
+        {Boolean(data?.rating) && (
+          <View style={styles.ratingItem}>
+            <View style={styles.ratingCover}>
+              <Text style={styles.ratingText}>慕影评分</Text>
+              <View style={styles.ratingLine} />
+            </View>
+            <Text style={styles.ratingScore}>{data?.rating}</Text>
+            <Text style={styles.ratingText}>
+              {data?.awards_nominate_count}
+              <Text>人评</Text>
+            </Text>
+          </View>
+        )}
         {Boolean(data?.thrid_rating?.douban?.rating) && (
-          <>
+          <View style={styles.ratingItem}>
             <View style={styles.ratingCover}>
               <Text style={styles.ratingText}>豆瓣评分</Text>
               <Text style={styles.ratingIcon}>{'\ue602'}</Text>
@@ -92,9 +150,9 @@ function MovieInfo(props: Props): React.ReactElement {
               {data?.thrid_rating?.douban?.count}
               <Text>人评</Text>
             </Text>
-          </>
+          </View>
         )}
-        {!data?.thrid_rating?.douban?.rating && (
+        {!data?.rating && !data?.thrid_rating?.douban?.rating && (
           <Text style={styles.noRating}>暂无评分</Text>
         )}
       </View>
@@ -107,6 +165,14 @@ function MovieInfo(props: Props): React.ReactElement {
           );
         })}
       </View>
+      {Boolean(data?.egg_hunt) && (
+        <View style={styles.egg}>
+          <Text style={styles.eggIcon}>{'\ue61e'}</Text>
+          <Text style={styles.eggText}>
+            {`有${data?.egg_hunt}个彩蛋,不要错过哦~ `}
+          </Text>
+        </View>
+      )}
       <Panel
         title="剧情"
         panelStyle={{ backgroundColor: 'transparent' }}
@@ -115,13 +181,14 @@ function MovieInfo(props: Props): React.ReactElement {
         titleTextStyle={{ color: '#fff' }}
         moreIconStyle={{ color: '#fff' }}
       >
-        <Text numberOfLines={3} ellipsizeMode="tail" style={styles.summary}>
+        <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
           {data?.summary}
         </Text>
       </Panel>
       <Panel
         title="演员"
         subtitle={`全部${data?.cast_count}`}
+        to={{ path: 'ActorList', params: { movieId: data.id } }}
         panelStyle={{ backgroundColor: 'transparent' }}
         headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
         lineStyle={{ display: 'none' }}
@@ -129,135 +196,24 @@ function MovieInfo(props: Props): React.ReactElement {
         subTitleStyle={{ color: '#fff' }}
         moreIconStyle={{ color: '#fff' }}
       >
-        <MovieCast movie={data?.cast} />
+        <MovieActor movie={data?.cast} />
       </Panel>
+      {data?.roles && data?.roles?.length > 0 && (
+        <Panel
+          title="角色"
+          subtitle={`全部${data?.role_count}`}
+          panelStyle={{ backgroundColor: 'transparent' }}
+          headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
+          lineStyle={{ display: 'none' }}
+          titleTextStyle={{ color: '#fff' }}
+          subTitleStyle={{ color: '#fff' }}
+          moreIconStyle={{ color: '#fff' }}
+        >
+          <MovieRoles movie={data?.roles} />
+        </Panel>
+      )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  page: {},
-  movieInfo: {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 12
-  },
-  infoImage: {
-    width: 94,
-    height: 132,
-    borderRadius: 3
-  },
-  infoDesc: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: 15
-  },
-  descTitle: {
-    marginTop: 1,
-    marginBottom: 1,
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: '700'
-  },
-  descBrief: {
-    marginTop: 7
-  },
-  descText: {
-    marginTop: 4,
-    fontSize: 11,
-    color: '#fff'
-  },
-  operate: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginTop: 17
-  },
-  operateItem: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 18,
-    width: 104,
-    height: 26,
-    backgroundColor: 'rgba(0, 0, 0, .25)',
-    borderRadius: 5
-  },
-  operateIcon: {
-    marginRight: 3.5,
-    fontFamily: 'iconfont',
-    fontSize: 12,
-    color: '#fff'
-  },
-  operateText: {
-    fontSize: 11,
-    color: '#fff'
-  },
-  rating: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginTop: 6,
-    marginLeft: 12,
-    marginRight: 12,
-    minHeight: 82,
-    backgroundColor: 'rgba(0, 0, 0, .25)',
-    borderRadius: 6
-  },
-  ratingCover: {
-    position: 'relative'
-  },
-  ratingText: {
-    fontSize: 11,
-    color: '#fff'
-  },
-  ratingIcon: {
-    position: 'absolute',
-    top: -3,
-    right: -14,
-    fontFamily: 'iconfont',
-    fontSize: 12,
-    color: '#fff'
-  },
-  ratingScore: {
-    marginTop: 3,
-    marginBottom: 3,
-    fontWeight: '700',
-    fontSize: 18,
-    color: '#feb300'
-  },
-  noRating: {
-    fontSize: 12,
-    color: '#fff'
-  },
-  tag: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 18,
-    marginLeft: 12,
-    marginRight: 12
-  },
-  tagItem: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 12,
-    paddingRight: 12,
-    marginRight: 8,
-    marginBottom: 9,
-    backgroundColor: 'hsla(0, 0%, 100%, .1)',
-    fontSize: 12,
-    color: '#fff',
-    borderRadius: 18
-  },
-  summary: {
-    color: '#f5f5f5'
-  }
-});
 
 export default MovieInfo;

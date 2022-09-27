@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { movieCategories } from '../../../api/movies';
-import type { ResponseType } from '../../../types/index';
-import type { MovieParams } from '../../../api/movies';
+import { movieCategories } from '@/api/movies';
+import type { ResponseType } from '@/types/index';
+import type { MovieParams } from '@/api/movies';
 import NavGroup from '../nav-group/NavGroup';
 
 type Category = {
