@@ -56,6 +56,10 @@ function Photos(): React.ReactElement {
   };
 
   useEffect(() => {
+    if (!route.params.movieId || photoParams.id === 0) {
+      return;
+    }
+
     getMoviePhotos();
   }, [photoParams]);
 
