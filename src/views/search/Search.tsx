@@ -9,7 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import storage from '@/utils/storage';
 import type { Navigation, TextInputEvent } from '@/types/index';
-import SearchMovie from './search-detail/SearchDetail';
+import SearchDetail from './search-detail/SearchDetail';
 import SearchHistory from './search-history/SearchHistory';
 
 function Search(): React.ReactElement {
@@ -113,7 +113,7 @@ function Search(): React.ReactElement {
               );
             })}
           </View>
-          <SearchMovie search={search} />
+          <SearchDetail search={search} />
         </>
       )}
       {!search.keyword && <SearchHistory historySearch={historySearch} />}
