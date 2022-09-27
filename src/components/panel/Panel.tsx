@@ -35,7 +35,8 @@ function Panel(props: Props): React.ReactElement {
         <TouchableOpacity
           activeOpacity={1}
           onPress={() =>
-            navigation.push(props?.to?.path || '', props?.to?.params)
+            props?.to?.path &&
+            navigation.push(props?.to?.path, props?.to?.params)
           }
           style={styles.more}
         >
