@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     paddingTop: 18,
-    marginRight: -20,
-    marginLeft: 16
+    marginLeft: 16,
+    marginRight: -20
   },
   itemImage: {
     width: 93,

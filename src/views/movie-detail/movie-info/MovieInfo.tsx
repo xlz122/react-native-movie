@@ -10,6 +10,7 @@ type Props = {
 };
 
 type MovieInfo = {
+  id: number;
   title: string;
   poster: {
     small: string;
@@ -151,6 +152,7 @@ function MovieInfo(props: Props): React.ReactElement {
       <Panel
         title="演员"
         subtitle={`全部${data?.cast_count}`}
+        to={{ path: 'ActorList', params: { movieId: data.id } }}
         panelStyle={{ backgroundColor: 'transparent' }}
         headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
         lineStyle={{ display: 'none' }}
