@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingLeft: 11,
+    paddingLeft: 10,
+    paddingBottom: 10,
     backgroundColor: '#fff',
     borderRadius: 4
   },
