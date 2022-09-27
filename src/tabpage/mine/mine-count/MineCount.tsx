@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { userCount } from '@/api/mine';
 import type { RootState } from '@/store/index';
-import type { ResponseType } from '@/types/index';
+import type { ResponseType, Navigation } from '@/types/index';
 
 type Count = {
   actor_count: number;
@@ -13,6 +14,7 @@ type Count = {
 };
 
 function MineCount(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
   const isLogin = useSelector((state: RootState) => state.routine.isLogin);
 
   const [count, setCount] = useState<Count>({
@@ -26,7 +28,6 @@ function MineCount(): React.ReactElement {
     userCount()
       .then((res: ResponseType<Count>) => {
         if (res.code === 200) {
-          console.log(res);
           setCount(res.data);
         }
       })
@@ -43,12 +44,16 @@ function MineCount(): React.ReactElement {
 
   return (
     <View style={styles.count}>
-      <View style={styles.countItem}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => navigation.push('Actor')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.actor_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>关注影人</Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.countItem}>
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.role_count}` : '-'}

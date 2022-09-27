@@ -9,3 +9,21 @@ export const userCount = () => {
     method: 'get'
   });
 };
+
+export type CollectionParams = {
+  page: number;
+  per_page: number;
+};
+
+/**
+ * @description 获取用户关注的影人
+ */
+export const userActors = ({ page, per_page }: CollectionParams) => {
+  const params = { page, per_page };
+
+  return axios.request({
+    url: '/user/collections/actors',
+    method: 'get',
+    params
+  });
+};
