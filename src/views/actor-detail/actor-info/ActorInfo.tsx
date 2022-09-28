@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     marginRight: 12,
     height: 28,
-    lineHeight: 28,
+    lineHeight: 26,
     backgroundColor: 'hsla(0, 0%, 100%, .25)',
     fontSize: 12,
     color: '#fff',
