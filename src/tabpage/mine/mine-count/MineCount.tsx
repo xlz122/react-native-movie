@@ -97,8 +97,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: -38,
-    marginRight: 17,
-    marginLeft: 17,
+    marginHorizontal: 17,
     height: 76,
     backgroundColor: '#fff',
     borderRadius: 6

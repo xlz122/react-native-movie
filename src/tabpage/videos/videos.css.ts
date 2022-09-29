@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   item: {
-    marginLeft: 11,
-    marginRight: 11
+    marginHorizontal: 11
   },
   itemCover: {
     position: 'relative'
@@ -63,8 +62,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: 11,
-    paddingRight: 11,
+    paddingHorizontal: 11,
     height: 49
   },
   author: {

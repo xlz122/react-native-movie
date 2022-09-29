@@ -141,8 +141,7 @@ const styles = StyleSheet.create({
     color: '#ddd'
   },
   infoFocus: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingHorizontal: 20,
     marginRight: 12,
     height: 28,
     lineHeight: 26,

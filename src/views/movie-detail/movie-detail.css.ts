@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 14,
-    paddingRight: 14,
+    paddingHorizontal: 14,
     marginLeft: 5
   },
   reviewIcon: {

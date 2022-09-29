@@ -68,11 +68,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingVertical: 16,
     marginTop: 6,
-    marginLeft: 12,
-    marginRight: 12,
+    marginHorizontal: 12,
     minHeight: 82,
     backgroundColor: 'rgba(0, 0, 0, .25)',
     borderRadius: 6
@@ -107,8 +105,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   ratingScore: {
-    marginTop: 3,
-    marginBottom: 3,
+    marginVertical: 3,
     fontWeight: '700',
     fontSize: 18,
     color: '#feb300'
@@ -122,14 +119,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 18,
-    marginLeft: 12,
-    marginRight: 12
+    marginHorizontal: 12
   },
   tagItem: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 12,
-    paddingRight: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
     marginRight: 8,
     marginBottom: 9,
     backgroundColor: 'hsla(0, 0%, 100%, .1)',
@@ -143,8 +137,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10
+    marginHorizontal: 10
   },
   eggIcon: {
     marginRight: 5,

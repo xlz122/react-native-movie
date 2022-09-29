@@ -145,8 +145,7 @@ const styles = StyleSheet.create({
     borderRadius: 70
   },
   inputIcon: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
     fontFamily: 'iconfont',
     fontSize: 14
   },

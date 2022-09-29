@@ -69,9 +69,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 28,
-    paddingLeft: 45,
-    paddingRight: 45
+    paddingHorizontal: 45,
+    marginTop: 28
   },
   toolText: {
     fontSize: 12,

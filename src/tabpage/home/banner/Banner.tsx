@@ -62,8 +62,7 @@ const styles = StyleSheet.create({
     height: 190
   },
   coverContainer: {
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingHorizontal: 10
   },
   cover: {
     position: 'relative',
