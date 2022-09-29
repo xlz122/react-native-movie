@@ -77,10 +77,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 13,
-    paddingBottom: 13,
-    marginRight: 17,
-    marginLeft: 17,
+    paddingVertical: 13,
+    marginHorizontal: 17,
     borderBottomWidth: 0.4,
     borderStyle: 'solid',
     borderColor: '#eee'

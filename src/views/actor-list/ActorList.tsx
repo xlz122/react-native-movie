@@ -133,8 +133,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
     width: '100%',
     height: 45
   },
@@ -163,10 +162,8 @@ const styles = StyleSheet.create({
   listItem: {
     display: 'flex',
     flexDirection: 'row',
-    paddingTop: 8,
-    paddingBottom: 8,
-    marginLeft: 15,
-    marginRight: 15,
+    paddingVertical: 8,
+    marginHorizontal: 15,
     borderBottomWidth: 0.38,
     borderStyle: 'solid',
     borderColor: '#dedede'

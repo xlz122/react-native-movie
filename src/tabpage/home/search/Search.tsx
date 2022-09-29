@@ -23,10 +23,8 @@ function Search(): React.ReactElement {
 const styles = StyleSheet.create({
   search: {
     display: 'flex',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 11,
-    marginBottom: 11,
+    paddingHorizontal: 10,
+    marginVertical: 11,
     height: 28
   },
   input: {
@@ -39,8 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: 48
   },
   inputIcon: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
     fontFamily: 'iconfont',
     fontSize: 14
   },

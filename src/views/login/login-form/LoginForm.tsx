@@ -132,8 +132,7 @@ function LoginForm(): React.ReactElement {
 
 const styles = StyleSheet.create({
   title: {
-    paddingLeft: 45,
-    paddingRight: 45,
+    paddingHorizontal: 45,
     marginTop: 45,
     fontWeight: '700',
     fontSize: 22,
@@ -141,8 +140,7 @@ const styles = StyleSheet.create({
   },
   form: {
     paddingTop: 34,
-    paddingLeft: 45,
-    paddingRight: 45
+    paddingHorizontal: 45
   },
   formItem: {
     position: 'relative',

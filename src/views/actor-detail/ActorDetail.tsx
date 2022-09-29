@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
     paddingBottom: 10,
     color: '#303133'
   },
