@@ -34,12 +34,12 @@ function RoleActor(props: Props): React.ReactElement {
     >
       <View style={styles.item}>
         <Image
-          source={{ uri: item.avatar }}
+          source={{ uri: item?.avatar }}
           resizeMode={'stretch'}
           style={[styles.itemImage]}
         />
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-          {item.name}
+          {item?.name}
         </Text>
       </View>
     </TouchableOpacity>
