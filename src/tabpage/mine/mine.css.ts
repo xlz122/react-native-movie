@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
   },
   userText: {
     marginLeft: 11,
+    width: 62,
+    height: 42,
+    lineHeight: 42,
     color: '#fff'
   },
   userNameText: {
