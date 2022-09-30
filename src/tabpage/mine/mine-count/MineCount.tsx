@@ -49,6 +49,10 @@ function MineCount(): React.ReactElement {
       return false;
     }
 
+    if (!path) {
+      return false;
+    }
+
     navigation.push(path);
   };
 
@@ -74,18 +78,26 @@ function MineCount(): React.ReactElement {
         </Text>
         <Text style={styles.countItemName}>关注角色</Text>
       </TouchableOpacity>
-      <View style={styles.countItem}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => jumpFlollowDetail('')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.review_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>收藏影评</Text>
-      </View>
-      <View style={styles.countItem}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => jumpFlollowDetail('')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.video_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>收藏视频</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
