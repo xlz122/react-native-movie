@@ -34,7 +34,7 @@ function RoleInfo(props: Props): React.ReactElement {
 
   return (
     <View style={styles.page}>
-      {!data?.avatar?.includes('default') && (
+      {data?.avatar && !data?.avatar?.includes('default') && (
         <Image
           source={{ uri: data?.avatar }}
           resizeMode={'cover'}
