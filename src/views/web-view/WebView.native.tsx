@@ -11,7 +11,7 @@ type Route = RouteProp<{ params: { to: string } }>;
 function MyWebView(): React.ReactElement {
   const route: Route = useRoute();
 
-  const RrenderLoading = () => {
+  const RenderLoading = () => {
     return <Text style={styles.loading}>loading...</Text>;
   };
 
@@ -21,7 +21,7 @@ function MyWebView(): React.ReactElement {
         style={styles.web}
         source={{ uri: route.params.to }}
         startInLoadingState={true}
-        renderLoading={() => <RrenderLoading />}
+        renderLoading={() => <RenderLoading />}
       />
     </View>
   );
