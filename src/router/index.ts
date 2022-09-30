@@ -99,6 +99,12 @@ const router: Router[] = [
     component: require('../views/role/Role').default
   },
   {
+    name: 'RoleDetail',
+    title: '',
+    headerShown: true,
+    component: require('../views/role-detail/RoleDetail').default
+  },
+  {
     name: 'ActorList',
     title: '演员表',
     headerShown: true,
