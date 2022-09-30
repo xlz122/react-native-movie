@@ -91,8 +91,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     paddingTop: 10,
-    paddingLeft: 7,
-    paddingRight: 7,
+    paddingHorizontal: 7,
     backgroundColor: '#fff'
   },
   item: {
@@ -100,8 +99,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     paddingBottom: 10,
-    marginLeft: 5,
-    marginRight: 5,
+    marginHorizontal: 5,
     width: 105,
     textAlign: 'center'
   },

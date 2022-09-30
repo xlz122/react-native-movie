@@ -28,11 +28,9 @@ function Login(): React.ReactElement {
 
   return (
     <View style={styles.login}>
-      <View style={styles.close}>
-        <Text onPress={close} style={styles.closeIcon}>
-          {'\ue612'}
-        </Text>
-      </View>
+      <TouchableOpacity activeOpacity={1} onPress={close} style={styles.close}>
+        <Text style={styles.closeIcon}>{'\ue612'}</Text>
+      </TouchableOpacity>
       {state.type === 'login' && <LoginForm />}
       {state.type === 'register' && <RegisterForm />}
       <View style={styles.tool}>
@@ -58,6 +56,7 @@ const styles = StyleSheet.create({
   close: {
     paddingLeft: 16,
     paddingTop: 16,
+    width: 52,
     height: 52
   },
   closeIcon: {
@@ -69,9 +68,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 28,
-    paddingLeft: 45,
-    paddingRight: 45
+    paddingHorizontal: 45,
+    marginTop: 28
   },
   toolText: {
     fontSize: 12,

@@ -11,8 +11,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingLeft: 17,
-    paddingRight: 17,
+    paddingHorizontal: 17,
     height: 209,
     backgroundColor: '#e54847'
   },
@@ -23,6 +22,9 @@ const styles = StyleSheet.create({
   },
   userText: {
     marginLeft: 11,
+    width: 62,
+    height: 42,
+    lineHeight: 42,
     color: '#fff'
   },
   userNameText: {
@@ -57,10 +59,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 13,
-    paddingBottom: 13,
-    marginRight: 17,
-    marginLeft: 17,
+    paddingVertical: 13,
+    marginHorizontal: 17,
     borderBottomWidth: 0.4,
     borderStyle: 'solid',
     borderColor: '#eee'

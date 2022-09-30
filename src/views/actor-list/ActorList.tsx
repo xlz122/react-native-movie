@@ -45,7 +45,6 @@ function ActorList(): React.ReactElement {
 
   const RenderItem = ({ item, index, length }) => (
     <TouchableOpacity
-      key={index}
       activeOpacity={1}
       onPress={() => navigation.push('ActorDetail', { id: item.id })}
     >
@@ -91,11 +90,12 @@ function ActorList(): React.ReactElement {
                 </Text>
               </View>
               <View style={styles.itemList}>
-                {item?.children?.map((i, ind) => {
+                {item?.children?.map((citem, cindex) => {
                   return (
                     <RenderItem
-                      item={i}
-                      index={ind}
+                      key={cindex}
+                      item={citem}
+                      index={cindex}
                       length={item?.children?.length}
                     />
                   );
@@ -133,8 +133,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
     width: '100%',
     height: 45
   },
@@ -163,10 +162,8 @@ const styles = StyleSheet.create({
   listItem: {
     display: 'flex',
     flexDirection: 'row',
-    paddingTop: 8,
-    paddingBottom: 8,
-    marginLeft: 15,
-    marginRight: 15,
+    paddingVertical: 8,
+    marginHorizontal: 15,
     borderBottomWidth: 0.38,
     borderStyle: 'solid',
     borderColor: '#dedede'

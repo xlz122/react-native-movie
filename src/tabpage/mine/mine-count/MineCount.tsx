@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { userCount } from '@/api/mine';
 import type { RootState } from '@/store/index';
-import type { ResponseType } from '@/types/index';
+import type { ResponseType, Navigation } from '@/types/index';
 
 type Count = {
   actor_count: number;
@@ -13,6 +14,7 @@ type Count = {
 };
 
 function MineCount(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
   const isLogin = useSelector((state: RootState) => state.routine.isLogin);
 
   const [count, setCount] = useState<Count>({
@@ -26,7 +28,6 @@ function MineCount(): React.ReactElement {
     userCount()
       .then((res: ResponseType<Count>) => {
         if (res.code === 200) {
-          console.log(res);
           setCount(res.data);
         }
       })
@@ -41,32 +42,62 @@ function MineCount(): React.ReactElement {
     getUserCount();
   }, [isLogin]);
 
+  // 跳转关注详情
+  const jumpFlollowDetail = (path: string): boolean | undefined => {
+    if (!isLogin) {
+      navigation.push('Login');
+      return false;
+    }
+
+    if (!path) {
+      return false;
+    }
+
+    navigation.push(path);
+  };
+
   return (
     <View style={styles.count}>
-      <View style={styles.countItem}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => jumpFlollowDetail('Actor')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.actor_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>关注影人</Text>
-      </View>
-      <View style={styles.countItem}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => jumpFlollowDetail('Role')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.role_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>关注角色</Text>
-      </View>
-      <View style={styles.countItem}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => jumpFlollowDetail('')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.review_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>收藏影评</Text>
-      </View>
-      <View style={styles.countItem}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => jumpFlollowDetail('')}
+        style={styles.countItem}
+      >
         <Text style={styles.countItemCount}>
           {isLogin ? `${count.video_count}` : '-'}
         </Text>
         <Text style={styles.countItemName}>收藏视频</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -78,8 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: -38,
-    marginRight: 17,
-    marginLeft: 17,
+    marginHorizontal: 17,
     height: 76,
     backgroundColor: '#fff',
     borderRadius: 6

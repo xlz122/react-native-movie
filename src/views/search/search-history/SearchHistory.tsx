@@ -57,8 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   record: {
-    paddingLeft: 15,
-    paddingRight: 15
+    paddingHorizontal: 15
   },
   recordTitle: {
     display: 'flex',
@@ -80,10 +79,8 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   item: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingLeft: 7,
-    paddingRight: 7,
+    paddingVertical: 2,
+    paddingHorizontal: 7,
     marginRight: 8,
     marginBottom: 8,
     backgroundColor: '#f4f4f4',

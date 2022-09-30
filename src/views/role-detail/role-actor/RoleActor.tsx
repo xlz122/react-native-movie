@@ -24,28 +24,22 @@ export type Movie = {
   release_date: number;
 };
 
-function MovieSimilar(props: Props): React.ReactElement {
+function RoleActor(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => navigation.push('MovieDetail', { id: item.id })}
+      onPress={() => navigation.push('ActorDetail', { id: item.id })}
     >
       <View style={styles.item}>
         <Image
-          source={{ uri: item.poster }}
+          source={{ uri: item?.avatar }}
           resizeMode={'stretch'}
           style={[styles.itemImage]}
         />
-        {item?.category && item?.category !== '电影' && (
-          <Text style={styles.itemTag}>{item?.category}</Text>
-        )}
-        {item?.rating?.length && (
-          <Text style={styles.itemRating}>{item?.rating}分</Text>
-        )}
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-          {item.title}
+          {item?.name}
         </Text>
       </View>
     </TouchableOpacity>
@@ -87,25 +81,6 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 3
   },
-  itemTag: {
-    position: 'absolute',
-    top: 6,
-    right: 5,
-    paddingVertical: 0.3,
-    paddingHorizontal: 1.8,
-    backgroundColor: 'rgba(255, 165, 0, 0.7)',
-    fontSize: 9,
-    color: '#fff',
-    textAlign: 'center',
-    borderRadius: 2
-  },
-  itemRating: {
-    position: 'absolute',
-    right: 4,
-    bottom: 34,
-    fontSize: 10.5,
-    color: 'orange'
-  },
   itemText: {
     marginTop: 5,
     width: 94,
@@ -114,4 +89,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MovieSimilar;
+export default RoleActor;

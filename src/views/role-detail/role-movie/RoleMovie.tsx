@@ -24,7 +24,7 @@ export type Movie = {
   release_date: number;
 };
 
-function MovieSimilar(props: Props): React.ReactElement {
+function RoleMovie(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
   const renderItem = ({ item }) => (
@@ -114,4 +114,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MovieSimilar;
+export default RoleMovie;

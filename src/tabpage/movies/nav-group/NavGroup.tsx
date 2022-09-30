@@ -50,10 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   item: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 3,
-    marginBottom: 3,
+    paddingHorizontal: 10,
+    marginVertical: 3,
     marginRight: 5,
     height: 20,
     lineHeight: 18,

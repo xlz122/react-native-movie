@@ -41,9 +41,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    paddingHorizontal: 15,
     marginTop: 15,
-    paddingLeft: 15,
-    paddingRight: 15,
     height: 51,
     backgroundColor: '#fff'
   },
@@ -57,9 +56,8 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   progressBtn: {
-    marginTop: 25,
-    paddingLeft: 15,
-    paddingRight: 15
+    paddingHorizontal: 15,
+    marginTop: 25
   }
 });
 

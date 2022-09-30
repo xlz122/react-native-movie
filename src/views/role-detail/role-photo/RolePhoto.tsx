@@ -1,33 +1,22 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   SafeAreaView,
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import type { Navigation } from '@/types/index';
 
-function MovieRoles(props): React.ReactElement {
-  const navigation: Navigation = useNavigation();
-
+function RolePhoto(props): React.ReactElement {
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      activeOpacity={1}
-      onPress={() => navigation.push('RoleDetail', { id: item.id })}
-    >
+    <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
         <Image
-          source={{ uri: item.avatar }}
+          source={{ uri: item.url }}
           resizeMode={'stretch'}
           style={[styles.itemImage]}
         />
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-          {item.name}
-        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -36,11 +25,10 @@ function MovieRoles(props): React.ReactElement {
     <SafeAreaView style={styles.list}>
       <FlatList
         horizontal
-        initialNumToRender={4}
+        initialNumToRender={6}
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
-        keyExtractor={item => item.union_id}
       />
     </SafeAreaView>
   );
@@ -52,25 +40,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingLeft: 10,
+    paddingBottom: 10,
+    backgroundColor: '#fff',
     borderRadius: 4
   },
   item: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    paddingBottom: 7,
-    marginRight: 8,
-    width: 94
+    marginRight: 8
   },
   itemImage: {
-    height: 130,
+    width: 62,
+    height: 85,
     borderRadius: 3
-  },
-  itemText: {
-    marginTop: 5,
-    color: '#fff',
-    fontSize: 12
   }
 });
 
-export default MovieRoles;
+export default RolePhoto;
