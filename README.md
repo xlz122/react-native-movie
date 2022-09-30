@@ -38,6 +38,10 @@ Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/ic
 
 如果想加入本项目开发，需将项目fork到自己的仓库下，功能开发完成后，提PR即可。
 
+项目使用react-native-web实现web端应用,可查看[web分支](https://github.com/xlz122/react-native-movie/tree/web)。
+
+0.69.5分支轮播图在app端可用，其余分支不可用(插件不支持，用图片代替)。
+
 ## 运行
 
 启动项目
