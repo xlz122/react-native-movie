@@ -13,3 +13,25 @@ export const actorsDetail = ({ id }: { id: number }) => {
     params
   });
 };
+
+/**
+ * @description 关注影人
+ * @param { Number } id - 影人id
+ */
+export const followActors = ({ id }: { id: number }) => {
+  return axios.request({
+    url: `/user/actors/${id}/collections`,
+    method: 'post'
+  });
+};
+
+/**
+ * @description 取消关注影人
+ * @param { Number } id - 影人id
+ */
+export const unFollowActors = ({ id }: { id: number }) => {
+  return axios.request({
+    url: `/user/actors/${id}/collections`,
+    method: 'delete'
+  });
+};

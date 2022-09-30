@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
   dotItem: {
     width: 15,
     height: 3,
-    marginLeft: 2,
-    marginRight: 2,
+    marginHorizontal: 2,
     backgroundColor: '#fff',
     borderRadius: 10
   },

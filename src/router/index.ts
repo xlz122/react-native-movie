@@ -87,16 +87,34 @@ const router: Router[] = [
     component: require('../views/photos/Photos').default
   },
   {
-    name: 'ActorDetail',
+    name: 'Actor',
+    title: '关注影人',
+    headerShown: true,
+    component: require('../views/actor/Actor').default
+  },
+  {
+    name: 'Role',
+    title: '关注角色',
+    headerShown: true,
+    component: require('../views/role/Role').default
+  },
+  {
+    name: 'RoleDetail',
     title: '',
     headerShown: true,
-    component: require('../views/actor-detail/ActorDetail').default
+    component: require('../views/role-detail/RoleDetail').default
   },
   {
     name: 'ActorList',
     title: '演员表',
     headerShown: true,
     component: require('../views/actor-list/ActorList').default
+  },
+  {
+    name: 'ActorDetail',
+    title: '',
+    headerShown: true,
+    component: require('../views/actor-detail/ActorDetail').default
   },
   {
     name: 'Project',

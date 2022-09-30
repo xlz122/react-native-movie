@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { followActors, unFollowActors } from '@/api/actor';
 import type { RootState } from '@/store/index';
-import type { ResponseType, Navigation } from '@/types/index';
+import type { Navigation } from '@/types/index';
 
 type Props = {
   data: Partial<Info>;
@@ -16,83 +15,45 @@ type Info = {
   avatar?: string;
   name?: string;
   name_en?: string;
-  gender?: string;
-  birthday?: string;
-  country?: string;
   is_collection?: number;
 };
 
-function ActorInfo(props: Props): React.ReactElement {
+function RoleInfo(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
   const isLogin = useSelector((state: RootState) => state.routine.isLogin);
 
   const { data } = props;
 
-  // 关注/取消关注影人
-  const collectionChange = (is_collection: number): boolean | undefined => {
+  // 收藏/取消收藏角色
+  const collectionChange = (): boolean | undefined => {
     if (!isLogin) {
       navigation.push('Login');
       return false;
-    }
-
-    if (is_collection === 0) {
-      followActors({ id: data.id })
-        .then((res: ResponseType<unknown>) => {
-          if (res.code === 200) {
-            props.refreshDetail();
-            Alert.alert('提示', res?.message, [{ text: '确认' }]);
-          }
-        })
-        .catch(() => ({}));
-    }
-
-    if (is_collection === 1) {
-      unFollowActors({ id: data.id })
-        .then((res: ResponseType<unknown>) => {
-          if (res.code === 200) {
-            props.refreshDetail();
-            Alert.alert('提示', res?.message, [{ text: '确认' }]);
-          }
-        })
-        .catch(() => ({}));
     }
   };
 
   return (
     <View style={styles.page}>
-      <Image
-        source={{ uri: data?.avatar }}
-        resizeMode={'cover'}
-        style={[styles.infoImage]}
-      />
+      {data?.avatar && !data?.avatar?.includes('default') && (
+        <Image
+          source={{ uri: data?.avatar }}
+          resizeMode={'cover'}
+          style={[styles.infoImage]}
+        />
+      )}
       <View style={styles.info}>
         <View style={styles.infoBrief}>
           <Text style={styles.briefName}>{data?.name}</Text>
           <Text style={styles.briefEnName}>{data?.name_en}</Text>
-          <Text style={styles.briefExtra}>
-            {data?.gender}
-            {Boolean(data?.birthday) && (
-              <>
-                <Text> · </Text>
-                {data?.birthday}
-              </>
-            )}
-            {Boolean(data?.country) && (
-              <>
-                <Text> · </Text>
-                {data?.country}
-              </>
-            )}
-          </Text>
         </View>
         <Text
-          onPress={() => collectionChange(data.is_collection)}
+          onPress={collectionChange}
           style={[
             styles.infoFocus,
             data?.is_collection === 1 ? styles.activeFoucus : styles.infoFocus
           ]}
         >
-          {`${data?.is_collection === 1 ? '已关注' : '关注'}`}
+          {`${data?.is_collection === 1 ? '已收藏' : '收藏'}`}
         </Text>
       </View>
     </View>
@@ -135,11 +96,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#ccc'
   },
-  briefExtra: {
-    marginTop: 6,
-    fontSize: 10.5,
-    color: '#ddd'
-  },
   infoFocus: {
     paddingHorizontal: 20,
     marginRight: 12,
@@ -155,4 +111,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ActorInfo;
+export default RoleInfo;
