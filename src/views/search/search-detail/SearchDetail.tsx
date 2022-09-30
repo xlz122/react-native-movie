@@ -111,7 +111,10 @@ function SearchDetail(props: Props): React.ReactElement {
 
   // 角色项
   const RoleItem = ({ item }) => (
-    <TouchableOpacity activeOpacity={1}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => navigation.push('RoleDetail', { id: item.id })}
+    >
       <View style={styles.item}>
         <Image
           source={{ uri: item.avatar }}

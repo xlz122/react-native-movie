@@ -11,13 +11,26 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import type { Navigation } from '@/types/index';
 
-function MovieRoles(props): React.ReactElement {
+type Props = {
+  movie?: Movie[];
+};
+
+export type Movie = {
+  id: number;
+  title: string;
+  poster: string;
+  category: string;
+  rating: number;
+  release_date: number;
+};
+
+function RoleActor(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => navigation.push('RoleDetail', { id: item.id })}
+      onPress={() => navigation.push('ActorDetail', { id: item.id })}
     >
       <View style={styles.item}>
         <Image
@@ -40,7 +53,6 @@ function MovieRoles(props): React.ReactElement {
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
-        keyExtractor={item => item.union_id}
       />
     </SafeAreaView>
   );
@@ -52,6 +64,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingLeft: 10,
+    paddingBottom: 10,
+    backgroundColor: '#fff',
     borderRadius: 4
   },
   item: {
@@ -59,18 +74,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     paddingBottom: 7,
-    marginRight: 8,
-    width: 94
+    marginRight: 8
   },
   itemImage: {
+    width: 94,
     height: 130,
     borderRadius: 3
   },
   itemText: {
     marginTop: 5,
-    color: '#fff',
+    width: 94,
+    color: '#333',
     fontSize: 12
   }
 });
 
-export default MovieRoles;
+export default RoleActor;
