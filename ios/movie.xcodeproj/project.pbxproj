@@ -14,7 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-movie-movieTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-movie-movieTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		0DC0C33C3DC7414BB6DC52BB /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89607F4777BB49ABA363ADBB /* iconfont.ttf */; };
+		6DD0169EC16645F580AC4835 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE6367147F1A4FFD8FD039EA /* iconfont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = movie/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-movie-movieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movie-movieTests.release.xcconfig"; path = "Target Support Files/Pods-movie-movieTests/Pods-movie-movieTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		89607F4777BB49ABA363ADBB /* iconfont.ttf */ = {isa = PBXFileReference; name = "iconfont.ttf"; path = "../src/assets/fonts/iconfont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EE6367147F1A4FFD8FD039EA /* iconfont.ttf */ = {isa = PBXFileReference; name = "iconfont.ttf"; path = "../src/assets/fonts/iconfont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +124,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
-				812C82DE8C1E4A808E5E4C28 /* Resources */,
+				252284F15A4747F08CD0EF1B /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -151,10 +151,10 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		812C82DE8C1E4A808E5E4C28 /* Resources */ = {
+		252284F15A4747F08CD0EF1B /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				89607F4777BB49ABA363ADBB /* iconfont.ttf */,
+				EE6367147F1A4FFD8FD039EA /* iconfont.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -256,7 +256,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				0DC0C33C3DC7414BB6DC52BB /* iconfont.ttf in Resources */,
+				6DD0169EC16645F580AC4835 /* iconfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
