@@ -4,14 +4,12 @@
 
 * react-native-gesture-handler
 
-状态管理
+持久化状态管理(redux + 本地存储 + redux-persist)
 
 * @reduxjs/toolkit
 * react-redux
-
-本地存储
-
 * @react-native-async-storage/async-storage
+* redux-persist
 
 路由
 
@@ -34,7 +32,7 @@ tab导航
 plugins: ['react-native-reanimated/plugin']
 ```
 
-轮播图2.10.0版本及以上，启动项目时会进行下载boost_1_76_0.tar.gz(下载极慢，所以项目写死版本号为2.9.1)，2.10.0版本如下：
+轮播图2.10.0版本及以上，启动项目时会进行下载boost_1_76_0.tar.gz(下载极慢，所以项目写死版本号为2.9.1)，2.10.0版本示例如下：
 
 ```
 > Task :react-native-reanimated:downloadGlog FAILED
@@ -48,7 +46,8 @@ plugins: ['react-native-reanimated/plugin']
 
 渐变背景色
 
-* react-native-linear-gradient
+* react-native-linear-gradient(app端)
+* react-native-web-linear-gradient(web端)
 
 打开外部网页
 
