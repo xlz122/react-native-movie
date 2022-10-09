@@ -1,6 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// gzip压缩
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+// 需要进行压缩的文件
+const productionGzipExtensions = ['js', 'css', 'json'];
 
 const appDirectory = path.resolve(__dirname, '../');
 
@@ -105,16 +109,25 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(appDirectory, 'web/index.html'), // 指定模板路径
-      filename: 'index.html', // 指定文件名
-      favicon: path.resolve(appDirectory, 'web/favicon.ico')
-    }),
     new webpack.DefinePlugin({
       // Uncaught ReferenceError: process is not defined
       process: { env: {} },
       // Uncaught ReferenceError: __DEV__ is not defined
       __DEV__: null
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(appDirectory, 'web/index.html'), // 指定模板路径
+      filename: 'index.html', // 指定文件名
+      favicon: path.resolve(appDirectory, 'web/favicon.ico')
+    }),
+    new CompressionWebpackPlugin({
+      filename: '[path][base].gz',
+      algorithm: 'gzip',
+      test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+      // 对超过10k的数据进行压缩
+      threshold: 10240,
+      // 压缩比例(0 ~ 1)
+      minRatio: 0.6
     })
   ]
 };
