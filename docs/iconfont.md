@@ -1,11 +1,8 @@
-## iconfont 阿里字体图标配置
-
 ## 1.将iconfont图标文件放置在src/assets/fonts
 
 项目所需的字体图标文件仅iconfont.ttf这一个文件即可
 
 其余文件只是用于打开demo_index.html，打包时可将其余文件删除
-
 
 ## 2.链接
 
