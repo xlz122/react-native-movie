@@ -7,12 +7,15 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { userRoles } from '@/api/mine';
-import type { ResponseType } from '@/types/index';
+import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
 function Role(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const getUserRoles = ({ page, per_page }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       userRoles({ page, per_page })
@@ -28,7 +31,10 @@ function Role(): React.ReactElement {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity activeOpacity={1}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => navigation.push('RoleDetail', { id: item.id })}
+    >
       <View style={styles.item}>
         <Image
           source={{ uri: item.avatar }}
