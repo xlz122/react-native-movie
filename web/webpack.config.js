@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // gzip压缩
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
@@ -64,11 +65,48 @@ module.exports = {
   ],
 
   // configures where the build ends up
+  // output: {
+  //   filename: 'bundle.web.js',
+  //   path: path.resolve(appDirectory, 'build'),
+  //   // 每次构建都清除上一次打包文件
+  //   clean: true
+  // },
+
   output: {
-    filename: 'bundle.web.js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     path: path.resolve(appDirectory, 'build'),
     // 每次构建都清除上一次打包文件
     clean: true
+  },
+
+  optimization: {
+    runtimeChunk: 'single', // 会将Webpack在浏览器端运行时需要的代码单独抽离到一个文件
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          // 产生一个Chunk
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5, // The default limit is too small to showcase the effect
+          minSize: 0 // This is example is too small to create commons chunks
+        },
+        vendor: {
+          // 产生一个Chunk
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10,
+          enforce: true
+        }
+      }
+    },
+    // 忽略打包LICENSE文件
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false
+      })
+    ]
   },
 
   // ...the rest of your config
