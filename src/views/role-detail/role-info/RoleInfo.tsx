@@ -98,9 +98,8 @@ const styles = StyleSheet.create({
   },
   infoFocus: {
     paddingHorizontal: 20,
+    paddingVertical: 6.5,
     marginRight: 12,
-    height: 28,
-    lineHeight: 26,
     backgroundColor: 'hsla(0, 0%, 100%, .25)',
     fontSize: 12,
     color: '#fff',
