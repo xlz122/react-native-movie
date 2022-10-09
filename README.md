@@ -1,3 +1,5 @@
+Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/iconfont.md) | [项目插件](docs/plugin.md)
+
 ## 环境要求
 
 需要 NodeJS 16.0.0+ 环境
@@ -15,9 +17,9 @@
 
 ## 简介
 
-本项目是一个仿写[慕影网H5端](https://github.com/NameLi/muying-h5)项目。
+本项目是一个仿写[慕影网H5端](https://github.com/NameLi/muying-h5)项目
 
-项目使用react-native-web实现web端应用,可查看仓库[web分支](https://github.com/xlz122/react-native-movie/tree/web)。
+项目使用react-native-web实现web端应用,可查看[web分支](https://github.com/xlz122/react-native-movie/tree/web)
 
 ## 项目使用技术栈
 
@@ -36,7 +38,7 @@
 
 ## 加入项目
 
-如果想加入本项目开发，需将项目fork到自己的仓库下，功能开发完成后，提PR即可。
+如果想加入本项目开发，需将项目fork到自己的仓库下，功能开发完成后，提PR即可
 
 ## 运行
 
