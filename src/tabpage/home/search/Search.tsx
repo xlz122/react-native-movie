@@ -1,17 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { ViewStyle } from 'react-native';
 import type { Navigation } from '@/types/index';
 
-function Search(): React.ReactElement {
+type Props = {
+  searchStyle?: ViewStyle;
+  inputStyle?: ViewStyle;
+};
+
+function Search(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
   return (
-    <View style={styles.search}>
+    <View style={[styles.search, props?.searchStyle]}>
       <TouchableOpacity
         onPress={() => navigation.push('Search')}
         activeOpacity={1}
-        style={styles.input}
+        style={[styles.input, props?.inputStyle]}
       >
         <Text style={styles.inputIcon}>{'\ue613'}</Text>
         <Text style={styles.inputText}>请输入你要搜索的内容</Text>
@@ -24,8 +30,8 @@ const styles = StyleSheet.create({
   search: {
     display: 'flex',
     paddingHorizontal: 10,
-    marginVertical: 11,
-    height: 28
+    paddingVertical: 11,
+    height: 48
   },
   input: {
     flex: 1,
