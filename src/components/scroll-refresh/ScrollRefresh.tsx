@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, FlatList } from 'react-native';
-import type { ListRenderItem, ViewStyle } from 'react-native';
+import type { ViewStyle, ListRenderItemInfo } from 'react-native';
 
 type Props = {
   page?: number;
@@ -21,7 +21,7 @@ type FlatListProps = {
   showsVerticalScrollIndicator?: boolean;
   numColumns?: number;
   columnWrapperStyle?: ViewStyle;
-  renderItem?: ListRenderItem<unknown>;
+  renderItem?: React.FunctionComponent<ListRenderItemInfo<any>>;
   ListEmptyComponent?: React.FunctionComponent;
   ListHeaderComponent?: React.FunctionComponent;
   ListFooterComponent?: React.FunctionComponent;

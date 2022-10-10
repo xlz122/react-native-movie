@@ -7,7 +7,8 @@ import { colorToRgba } from '@/utils/utils';
 import { moviesDetail } from '@/api/movie-detail';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
-import type { Movie } from './movie-similar/MovieSimilar';
+import type { MovieInfoType } from './movie-info/MovieInfo';
+import type { ItemType } from './movie-similar/MovieSimilar';
 import CustomHeader from '@/components/custom-header/CustomHeader';
 import MovieInfo from './movie-info/MovieInfo';
 import Panel from '@/components/panel/Panel';
@@ -23,7 +24,7 @@ type Detail = {
   photos: {
     url: string;
   }[];
-  like_movies: Movie[];
+  like_movies: ItemType[];
   review_count: number;
   collection_count: number;
   comment_count: number;
@@ -121,7 +122,10 @@ function MovieDeail(): React.ReactElement {
     <>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         <LinearGradinet colors={gradientColor}>
-          <MovieInfo data={detail} refreshDetail={refreshDetail} />
+          <MovieInfo
+            data={detail as MovieInfoType}
+            refreshDetail={refreshDetail}
+          />
         </LinearGradinet>
         {detail?.photos && detail?.photos?.length > 0 && (
           <Panel
@@ -130,7 +134,7 @@ function MovieDeail(): React.ReactElement {
             to={{ path: 'Photos', params: { movieId: route.params.id } }}
             panelStyle={{ marginTop: 10 }}
           >
-            <MoviePhoto movie={detail?.photos} />
+            <MoviePhoto photo={detail?.photos} />
           </Panel>
         )}
         {detail?.like_movies && detail?.like_movies?.length > 0 && (

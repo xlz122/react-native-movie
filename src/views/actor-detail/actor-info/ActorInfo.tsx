@@ -12,14 +12,14 @@ type Props = {
 };
 
 type Info = {
-  id?: number;
+  id: number;
   avatar?: string;
   name?: string;
   name_en?: string;
   gender?: string;
   birthday?: string;
   country?: string;
-  is_collection?: number;
+  is_collection: number;
 };
 
 function ActorInfo(props: Props): React.ReactElement {
@@ -36,7 +36,7 @@ function ActorInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 0) {
-      followActors({ id: data.id })
+      followActors({ id: data.id! })
         .then((res: ResponseType<unknown>) => {
           if (res.code === 200) {
             props.refreshDetail();
@@ -47,7 +47,7 @@ function ActorInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 1) {
-      unFollowActors({ id: data.id })
+      unFollowActors({ id: data.id! })
         .then((res: ResponseType<unknown>) => {
           if (res.code === 200) {
             props.refreshDetail();
@@ -86,7 +86,7 @@ function ActorInfo(props: Props): React.ReactElement {
           </Text>
         </View>
         <Text
-          onPress={() => collectionChange(data.is_collection)}
+          onPress={() => collectionChange(data.is_collection!)}
           style={[
             styles.infoFocus,
             data?.is_collection === 1 ? styles.activeFoucus : styles.infoFocus

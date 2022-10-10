@@ -2,12 +2,33 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { timeStampToDuration } from '@/utils/utils';
 import { videosList } from '@/api/videos';
+import type { ListRenderItemInfo } from 'react-native';
 import type { ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 import styles from './videos.css';
 
+type ItemType = {
+  id: number;
+  poster: string;
+  title: string;
+  play_count: number;
+  duration: number;
+  author: {
+    avatar: string;
+    username: string;
+  };
+  like_count: number;
+  comment_count: number;
+};
+
 function Videos(): React.ReactElement {
-  const getVideosList = ({ page, per_page }): Promise<unknown[]> => {
+  const getVideosList = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       videosList({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
@@ -21,7 +42,7 @@ function Videos(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
         <View style={styles.itemCover}>

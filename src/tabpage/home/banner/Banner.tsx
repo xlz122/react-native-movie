@@ -8,17 +8,25 @@ import {
 } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
-import type { SharedValue } from 'react-native-reanimated';
 import Dot from './dot/Dot';
 
 // 获取屏幕宽度
 const pageWidth = Dimensions.get('window').width;
 
-function Banner(props): React.ReactElement {
-  // 轮播滚动值
-  const progressValue = useSharedValue<SharedValue<number> | number>(0);
+type Props = {
+  banner: BannerItem[];
+  onChange: (index: number) => void;
+};
 
-  const RenderItem = ({ item }) => {
+type BannerItem = {
+  banner: string;
+};
+
+function Banner(props: Props): React.ReactElement {
+  // 轮播滚动值
+  const progressValue = useSharedValue<number>(0);
+
+  const RenderItem = ({ item }: { item: BannerItem }) => {
     return (
       <TouchableOpacity activeOpacity={1}>
         <View style={styles.coverContainer}>

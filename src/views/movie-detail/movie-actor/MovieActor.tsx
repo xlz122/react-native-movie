@@ -9,12 +9,26 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation } from '@/types/index';
 
-function MovieActor(props): React.ReactElement {
+type Props = {
+  movie: ActorItemType[];
+};
+
+export type ActorItemType = {
+  union_id: number;
+  id: number;
+  avatar: string;
+  name: string;
+  profession: string;
+  act: string;
+};
+
+function MovieActor(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ActorItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('ActorDetail', { id: item.id })}
@@ -44,7 +58,7 @@ function MovieActor(props): React.ReactElement {
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
-        keyExtractor={item => item.union_id}
+        keyExtractor={item => String(item.union_id)}
       />
     </SafeAreaView>
   );

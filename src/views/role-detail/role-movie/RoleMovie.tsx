@@ -9,25 +9,26 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation } from '@/types/index';
 
 type Props = {
-  movie?: Movie[];
+  movie?: MovieItemType[];
 };
 
-export type Movie = {
+export type MovieItemType = {
   id: number;
   title: string;
   poster: string;
   category: string;
-  rating: number;
+  rating: string;
   release_date: number;
 };
 
 function RoleMovie(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<MovieItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('MovieDetail', { id: item.id })}
@@ -41,7 +42,7 @@ function RoleMovie(props: Props): React.ReactElement {
         {item?.category && item?.category !== '电影' && (
           <Text style={styles.itemTag}>{item?.category}</Text>
         )}
-        {item?.rating?.length && (
+        {Number(item?.rating) > 0 && (
           <Text style={styles.itemRating}>{item?.rating}分</Text>
         )}
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
