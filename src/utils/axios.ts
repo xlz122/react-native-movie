@@ -98,6 +98,14 @@ class HttpRequest {
         return Promise.resolve(data);
       },
       (error: AxiosError) => {
+        // 无权限
+        if (error.response?.status === 401) {
+          store.dispatch({
+            type: 'routine/setLogout',
+            payload: ''
+          });
+        }
+
         return Promise.reject(error);
       }
     );
