@@ -5,7 +5,9 @@ import { useRoute } from '@react-navigation/native';
 import { roleDetail } from '@/api/role';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
-import type { Movie } from './role-movie/RoleMovie';
+import type { PhotoItemType } from './role-photo/RolePhoto';
+import type { MovieItemType } from './role-movie/RoleMovie';
+import type { ActorItemType } from './role-actor/RoleActor';
 import CustomHeader from '@/components/custom-header/CustomHeader';
 import Panel from '@/components/panel/Panel';
 import RoleInfo from './role-info/RoleInfo';
@@ -21,9 +23,9 @@ type Detail = {
   movie_count: number;
   actor_count: number;
   brief: string;
-  photos: unknown[];
-  movies: Movie[];
-  actors: Movie[];
+  photos: PhotoItemType[];
+  movies: MovieItemType[];
+  actors: ActorItemType[];
 };
 
 function ActorDetail(): React.ReactElement {
@@ -100,7 +102,7 @@ function ActorDetail(): React.ReactElement {
       </Panel>
       {detail?.photos && detail?.photos?.length > 0 && (
         <Panel title="相册" subtitle={`全部${detail?.photos?.length}张`}>
-          <RolePhoto movie={detail?.photos} />
+          <RolePhoto photo={detail?.photos} />
         </Panel>
       )}
       {detail?.movies && detail?.movies?.length > 0 && (

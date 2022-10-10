@@ -5,23 +5,25 @@ import { useSelector } from 'react-redux';
 import { movieWish } from '@/api/movie-detail';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
+import type { ActorItemType } from '../movie-actor/MovieActor';
+import type { RoleItemType } from '../movie-roles/MovieRoles';
 import Panel from '@/components/panel/Panel';
 import MovieActor from '../movie-actor/MovieActor';
 import MovieRoles from '../movie-roles/MovieRoles';
 import styles from './movie-info.css';
 
 type Props = {
-  data: Partial<MovieInfo>;
+  data: MovieInfoType;
   refreshDetail: () => void;
 };
 
-type MovieInfo = {
+export type MovieInfoType = {
   id: number;
-  title: string;
+  title?: string;
   poster: {
     small: string;
   };
-  year: string;
+  year: number;
   release_status: number;
   genres: string[];
   countries: string[];
@@ -39,9 +41,9 @@ type MovieInfo = {
   egg_hunt: number;
   summary: string;
   cast_count: number;
-  cast: unknown[];
+  cast: ActorItemType[];
   role_count: number;
-  roles: unknown[];
+  roles: RoleItemType[];
 };
 
 function MovieInfo(props: Props): React.ReactElement {

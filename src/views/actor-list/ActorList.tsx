@@ -23,6 +23,19 @@ type ActorType = {
   children: unknown[];
 };
 
+type ItemType = {
+  item: {
+    id: number;
+    avatar: string;
+    name: string;
+    name_en: string;
+    gender: string;
+    country: string;
+  };
+  index: number;
+  length: number;
+};
+
 function ActorList(): React.ReactElement {
   const navigation: Navigation = useNavigation();
   const route: Route = useRoute();
@@ -43,7 +56,7 @@ function ActorList(): React.ReactElement {
     getMovieActor();
   }, []);
 
-  const RenderItem = ({ item, index, length }) => (
+  const RenderItem = ({ item, index, length }: ItemType) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('ActorDetail', { id: item.id })}
@@ -94,7 +107,7 @@ function ActorList(): React.ReactElement {
                   return (
                     <RenderItem
                       key={cindex}
-                      item={citem}
+                      item={citem as ItemType['item']}
                       index={cindex}
                       length={item?.children?.length}
                     />

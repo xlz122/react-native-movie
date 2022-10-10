@@ -2,7 +2,16 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import Dot from './dot/Dot';
 
-function Banner(props): React.ReactElement {
+type Props = {
+  banner: BannerItem[];
+  onChange?: (index: number) => void;
+};
+
+type BannerItem = {
+  banner: string;
+};
+
+function Banner(props: Props): React.ReactElement {
   return (
     <View style={styles.banner}>
       <View style={styles.coverContainer}>

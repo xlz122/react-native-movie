@@ -10,22 +10,30 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { movieTop } from '@/api/home';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
-type Movie = {
+type ItemType = {
   id: number;
   title: string;
   poster: string;
-  year: string;
+  year: number;
   genres: string;
   countries: string;
+  rating: string;
 };
 
 function HighScore(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getMovieTop = ({ page, per_page }): Promise<unknown[]> => {
+  const getMovieTop = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       movieTop({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
@@ -39,7 +47,7 @@ function HighScore(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item, index }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('MovieDetail', { id: item.id })}

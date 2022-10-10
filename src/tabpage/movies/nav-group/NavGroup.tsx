@@ -7,8 +7,18 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-function NavGroup(props): React.ReactElement {
-  const renderItem = ({ item }) => (
+type Props = {
+  category: GroupItem[];
+  active: string;
+  onChange: (name: string) => void;
+};
+
+type GroupItem = {
+  name: string;
+};
+
+function NavGroup(props: Props): React.ReactElement {
+  const renderItem = ({ item }: { item: GroupItem }) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => {

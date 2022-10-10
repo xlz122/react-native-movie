@@ -10,13 +10,30 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { movieTheater } from '@/api/home';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
+
+type ItemType = {
+  id: number;
+  poster: string;
+  title: string;
+  year: number;
+  genres: string;
+  countries: string;
+  rating: string;
+};
 
 function Theater(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getMovieTheater = ({ page, per_page }): Promise<unknown[]> => {
+  const getMovieTheater = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       movieTheater({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
@@ -30,7 +47,7 @@ function Theater(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('MovieDetail', { id: item.id })}
@@ -55,7 +72,7 @@ function Theater(): React.ReactElement {
             {item.countries}
           </Text>
         </View>
-        {item?.rating > 0 && (
+        {Number(item?.rating) > 0 && (
           <Text style={styles.itemRating}>
             <Text style={styles.itemRatingWeight}>{item?.rating}</Text> 分
           </Text>
