@@ -10,13 +10,27 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { userRoles } from '@/api/mine';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
+
+type ItemType = {
+  id: number;
+  avatar: string;
+  name: string;
+  name_en: string;
+};
 
 function Role(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getUserRoles = ({ page, per_page }): Promise<unknown[]> => {
+  const getUserRoles = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       userRoles({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
@@ -30,7 +44,7 @@ function Role(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('RoleDetail', { id: item.id })}

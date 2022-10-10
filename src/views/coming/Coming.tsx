@@ -10,13 +10,29 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { movieComing } from '@/api/home';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
+
+type ItemType = {
+  id: number;
+  poster: string;
+  title: string;
+  wish_count: number;
+  genres: string;
+  countries: string;
+};
 
 function Coming(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getMovieComing = ({ page, per_page }): Promise<unknown[]> => {
+  const getMovieComing = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       movieComing({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
@@ -30,7 +46,7 @@ function Coming(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('MovieDetail', { id: item.id })}

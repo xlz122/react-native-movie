@@ -28,7 +28,7 @@ function MineCount(): React.ReactElement {
     userCount()
       .then((res: ResponseType<Count>) => {
         if (res.code === 200) {
-          setCount(res.data);
+          setCount(res.data as Count);
         }
       })
       .catch(() => ({}));

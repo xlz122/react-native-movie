@@ -5,7 +5,7 @@ import { useRoute } from '@react-navigation/native';
 import { actorsDetail } from '@/api/actor';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
-import type { Movie } from './actor-wroks/ActorWorks';
+import type { ItemType } from './actor-wroks/ActorWorks';
 import CustomHeader from '@/components/custom-header/CustomHeader';
 import Panel from '@/components/panel/Panel';
 import ActorInfo from './actor-info/ActorInfo';
@@ -15,13 +15,17 @@ import ActorWorks from './actor-wroks/ActorWorks';
 type Route = RouteProp<{ params: { id: number } }>;
 
 type Detail = {
+  id: number;
   avatar?: string;
   collection_count: number;
   works_count: number;
   role_count: number;
   summary: string[];
-  photos: unknown[];
-  works: Movie[];
+  photos: {
+    url: string;
+  }[];
+  works: ItemType[];
+  is_collection: number;
 };
 
 function ActorDetail(): React.ReactElement {
@@ -98,7 +102,7 @@ function ActorDetail(): React.ReactElement {
       </Panel>
       {detail?.photos && detail?.photos?.length > 0 && (
         <Panel title="相册" subtitle={`全部${detail?.photos?.length}张`}>
-          <ActorPhoto movie={detail?.photos} />
+          <ActorPhoto photo={detail?.photos} />
         </Panel>
       )}
       {detail?.works && detail?.works?.length > 0 && (

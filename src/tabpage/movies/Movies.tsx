@@ -3,10 +3,18 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { deviceWidth } from '@/utils/screen';
 import { moviesList } from '@/api/movies';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
 import type { MovieParams } from '@/api/movies';
 import Nav from './nav/Nav';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
+
+type ItemType = {
+  id: number;
+  poster: string;
+  rating?: number;
+  title: string;
+};
 
 function Movies(): React.ReactElement {
   const navigation: Navigation = useNavigation();
@@ -26,7 +34,13 @@ function Movies(): React.ReactElement {
     setNavParams({ ...navParams, ...categoryParams });
   };
 
-  const getMoviesList = ({ page, per_page }): Promise<unknown[]> => {
+  const getMoviesList = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       moviesList({
         page,
@@ -48,7 +62,7 @@ function Movies(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('MovieDetail', { id: item.id })}

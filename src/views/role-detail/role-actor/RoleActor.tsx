@@ -9,25 +9,23 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation } from '@/types/index';
 
 type Props = {
-  movie?: Movie[];
+  movie?: ActorItemType[];
 };
 
-export type Movie = {
+export type ActorItemType = {
   id: number;
-  title: string;
-  poster: string;
-  category: string;
-  rating: number;
-  release_date: number;
+  avatar: string;
+  name: string;
 };
 
 function RoleActor(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ActorItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('ActorDetail', { id: item.id })}

@@ -11,8 +11,19 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { movieToday } from '@/api/home';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
+
+type ItemType = {
+  id: number;
+  poster: string;
+  title: string;
+  year: number;
+  genres: string;
+  countries: string;
+  rating: string;
+};
 
 function Today(): React.ReactElement {
   const navigation: Navigation = useNavigation();
@@ -27,7 +38,13 @@ function Today(): React.ReactElement {
     setSortby(value);
   };
 
-  const getMovieToday = ({ page, per_page }): Promise<unknown[]> => {
+  const getMovieToday = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       movieToday({ page, per_page, sortby })
         .then((res: ResponseType<unknown[]>) => {
@@ -42,7 +59,7 @@ function Today(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('MovieDetail', { id: item.id })}
@@ -67,7 +84,7 @@ function Today(): React.ReactElement {
             {item.countries}
           </Text>
         </View>
-        {item?.rating.length && (
+        {Number(item?.rating) > 0 && (
           <Text style={styles.itemRating}>
             <Text style={styles.itemRatingWeight}>{item?.rating}</Text>
             <Text> 分</Text>

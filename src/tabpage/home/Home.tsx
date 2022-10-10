@@ -4,7 +4,7 @@ import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '@/utils/utils';
 import { indexData } from '@/api/home';
 import type { ResponseType } from '@/types/index';
-import type { Movie } from './category/Category';
+import type { MovieItemType } from './category/Category';
 import Panel from '@/components/panel/Panel';
 import Search from './search/Search';
 import Banner from './banner/Banner';
@@ -12,17 +12,20 @@ import Nav from './nav/Nav';
 import Category from './category/Category';
 
 export type Gathers = {
-  swiper?: { bgcolor: string }[];
+  swiper: {
+    bgcolor: string;
+    banner: string;
+  }[];
   theater: {
-    data?: Movie[];
+    data?: MovieItemType[];
     total?: number;
   };
   coming: {
-    data?: Movie[];
+    data?: MovieItemType[];
     total?: number;
   };
   today: {
-    data?: Movie[];
+    data?: MovieItemType[];
     total?: number;
   };
 };
@@ -41,7 +44,7 @@ function Home(): React.ReactElement {
     indexData()
       .then((res: ResponseType<Gathers>) => {
         if (res.code === 200) {
-          setBanner(res?.data?.swiper);
+          setBanner(res?.data?.swiper || []);
           setMovie({
             theater: res?.data?.theater,
             coming: res?.data?.coming,
