@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { movieCategories } from '@/api/movies';
 import type { ResponseType } from '@/types/index';
-import type { MovieParams } from '@/api/movies';
 import NavGroup from '../nav-group/NavGroup';
+
+type Props = {
+  onChange: (categoryParams: CategoryParams) => void;
+};
 
 type Category = {
   categories: {
@@ -13,11 +16,18 @@ type Category = {
     }[];
   }[];
   genres: { name: string }[];
-  countries: unknown[];
-  years: unknown[];
+  countries: { name: string }[];
+  years: { name: string }[];
 };
 
-function Nav(props): React.ReactElement {
+type CategoryParams = {
+  category: string;
+  genre: string;
+  country: string;
+  year: string;
+};
+
+function Nav(props: Props): React.ReactElement {
   const [category, setCategory] = useState<Category>({
     categories: [],
     genres: [],
@@ -58,7 +68,7 @@ function Nav(props): React.ReactElement {
     setCategory({ ...category, genres });
   }, [category?.categories]);
 
-  const [categoryParams, setCategoryParams] = useState<Partial<MovieParams>>({
+  const [categoryParams, setCategoryParams] = useState<CategoryParams>({
     category: '全部',
     genre: '全部',
     country: '全部',

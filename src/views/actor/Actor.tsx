@@ -10,13 +10,29 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { userActors } from '@/api/mine';
+import type { ListRenderItemInfo } from 'react-native';
 import type { ResponseType, Navigation } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
+
+type ItemType = {
+  id: number;
+  avatar: string;
+  name: string;
+  name_en: string;
+  gender: string;
+  country: string;
+};
 
 function Actor(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getUserActors = ({ page, per_page }): Promise<unknown[]> => {
+  const getUserActors = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       userActors({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
@@ -30,7 +46,7 @@ function Actor(): React.ReactElement {
     });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('ActorDetail', { id: item.id })}

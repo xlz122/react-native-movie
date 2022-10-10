@@ -9,12 +9,24 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation } from '@/types/index';
 
-function MovieRoles(props): React.ReactElement {
+type Props = {
+  movie: RoleItemType[];
+};
+
+export type RoleItemType = {
+  union_id: number;
+  id: number;
+  avatar: string;
+  name: string;
+};
+
+function MovieRoles(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: ListRenderItemInfo<RoleItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('RoleDetail', { id: item.id })}
@@ -40,7 +52,7 @@ function MovieRoles(props): React.ReactElement {
         showsHorizontalScrollIndicator={false}
         data={props.movie}
         renderItem={renderItem}
-        keyExtractor={item => item.union_id}
+        keyExtractor={item => String(item.union_id)}
       />
     </SafeAreaView>
   );

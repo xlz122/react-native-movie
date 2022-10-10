@@ -7,9 +7,18 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
+import type { ListRenderItemInfo } from 'react-native';
 
-function RolePhoto(props): React.ReactElement {
-  const renderItem = ({ item }) => (
+type Props = {
+  photo: PhotoItemType[];
+};
+
+export type PhotoItemType = {
+  url: string;
+};
+
+function RolePhoto(props: Props): React.ReactElement {
+  const renderItem = ({ item }: ListRenderItemInfo<PhotoItemType>) => (
     <TouchableOpacity activeOpacity={1}>
       <View style={styles.item}>
         <Image
@@ -27,7 +36,7 @@ function RolePhoto(props): React.ReactElement {
         horizontal
         initialNumToRender={6}
         showsHorizontalScrollIndicator={false}
-        data={props.movie}
+        data={props.photo}
         renderItem={renderItem}
       />
     </SafeAreaView>

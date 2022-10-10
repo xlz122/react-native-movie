@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { searchDetail } from '@/api/search';
+import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
@@ -20,10 +21,39 @@ type Props = {
   };
 };
 
+type MovieItemType = {
+  id: number;
+  poster: string;
+  title: string;
+  year: number;
+  genres: string;
+  countries: string;
+  rating: string;
+};
+type ActorItemType = {
+  id: number;
+  avatar: string;
+  name: string;
+  name_en: string;
+  gender: string;
+};
+type RoleItemType = {
+  id: number;
+  avatar: string;
+  name: string;
+  name_en: string;
+};
+
 function SearchDetail(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getSearchDetail = ({ page, per_page }): Promise<unknown[]> => {
+  const getSearchDetail = ({
+    page,
+    per_page
+  }: {
+    page: number;
+    per_page: number;
+  }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
       searchDetail({
         page,
@@ -50,7 +80,7 @@ function SearchDetail(props: Props): React.ReactElement {
   }, [props.search]);
 
   // 电影项
-  const MovieItem = ({ item }) => (
+  const MovieItem = ({ item }: { item: MovieItemType }) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('MovieDetail', { id: item.id })}
@@ -83,7 +113,7 @@ function SearchDetail(props: Props): React.ReactElement {
   );
 
   // 影人项
-  const ActorItem = ({ item }) => (
+  const ActorItem = ({ item }: { item: ActorItemType }) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('ActorDetail', { id: item.id })}
@@ -110,7 +140,7 @@ function SearchDetail(props: Props): React.ReactElement {
   );
 
   // 角色项
-  const RoleItem = ({ item }) => (
+  const RoleItem = ({ item }: { item: RoleItemType }) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.push('RoleDetail', { id: item.id })}
@@ -140,15 +170,15 @@ function SearchDetail(props: Props): React.ReactElement {
         pageSize={10}
         request={getSearchDetail}
         initialNumToRender={6}
-        renderItem={({ item }) => {
+        renderItem={({ item }: ListRenderItemInfo<unknown>) => {
           if (props.search.type === 'movie') {
-            return <MovieItem item={item} />;
+            return <MovieItem item={item as MovieItemType} />;
           }
           if (props.search.type === 'actor') {
-            return <ActorItem item={item} />;
+            return <ActorItem item={item as ActorItemType} />;
           }
           if (props.search.type === 'role') {
-            return <RoleItem item={item} />;
+            return <RoleItem item={item as RoleItemType} />;
           }
 
           return <View />;

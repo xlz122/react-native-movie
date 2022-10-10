@@ -9,11 +9,17 @@ import type { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   list: unknown[];
-  progressValue?: SharedValue<number | SharedValue<number>>;
+  progressValue?: SharedValue<number>;
+};
+
+type PaginationItemType = {
+  animValue: SharedValue<number>;
+  index: number;
+  length: number;
 };
 
 function Dot(props: Props): React.ReactElement {
-  const PaginationItem = ({ animValue, index, length }) => {
+  const PaginationItem = ({ animValue, index, length }: PaginationItemType) => {
     const width = 15;
 
     const animStyle = useAnimatedStyle(() => {
@@ -66,7 +72,7 @@ function Dot(props: Props): React.ReactElement {
           return (
             <PaginationItem
               key={index}
-              animValue={props.progressValue}
+              animValue={props.progressValue!}
               index={index}
               length={props.list.length}
             />
