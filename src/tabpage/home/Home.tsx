@@ -5,6 +5,7 @@ import { colorToRgba } from '@/utils/utils';
 import { indexData } from '@/api/home';
 import type { ResponseType } from '@/types/index';
 import type { MovieItemType } from './category/Category';
+import Skeleton from '@/components/skeleton/Home';
 import Panel from '@/components/panel/Panel';
 import Search from './search/Search';
 import Banner from './banner/Banner';
@@ -31,6 +32,7 @@ export type Gathers = {
 };
 
 function Home(): React.ReactElement {
+  const [loading, setLoading] = useState(true);
   // 轮播图
   const [banner, setBanner] = useState<Gathers['swiper']>([]);
   // 电影分类
@@ -44,6 +46,7 @@ function Home(): React.ReactElement {
     indexData()
       .then((res: ResponseType<Gathers>) => {
         if (res.code === 200) {
+          setLoading(false);
           setBanner(res?.data?.swiper || []);
           setMovie({
             theater: res?.data?.theater,
@@ -91,39 +94,44 @@ function Home(): React.ReactElement {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-      <LinearGradinet colors={gradientColor} style={styles.bgcolor} />
-      <Search />
-      <Banner banner={banner} onChange={bannerChange} />
-      <Nav />
-      {movie?.theater?.data && movie?.theater?.data?.length > 0 && (
-        <Panel
-          title="正在热映"
-          subtitle={`${movie?.theater?.total}部`}
-          to={{ path: 'Theater' }}
-        >
-          <Category movie={movie?.theater?.data} />
-        </Panel>
+    <>
+      {loading && <Skeleton />}
+      {!loading && (
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+          <LinearGradinet colors={gradientColor} style={styles.bgcolor} />
+          <Search />
+          <Banner banner={banner} onChange={bannerChange} />
+          <Nav />
+          {movie?.theater?.data && movie?.theater?.data?.length > 0 && (
+            <Panel
+              title="正在热映"
+              subtitle={`${movie?.theater?.total}部`}
+              to={{ path: 'Theater' }}
+            >
+              <Category movie={movie?.theater?.data} />
+            </Panel>
+          )}
+          {movie?.coming?.data && movie?.coming?.data?.length > 0 && (
+            <Panel
+              title="即将上映"
+              subtitle={`${movie?.coming?.total}部`}
+              to={{ path: 'Coming' }}
+            >
+              <Category movie={movie?.coming?.data} />
+            </Panel>
+          )}
+          {movie?.today?.data && movie?.today?.data?.length > 0 && (
+            <Panel
+              title="那年今日"
+              subtitle={`${movie?.today?.total}部`}
+              to={{ path: 'Today' }}
+            >
+              <Category movie={movie?.today?.data} />
+            </Panel>
+          )}
+        </ScrollView>
       )}
-      {movie?.coming?.data && movie?.coming?.data?.length > 0 && (
-        <Panel
-          title="即将上映"
-          subtitle={`${movie?.coming?.total}部`}
-          to={{ path: 'Coming' }}
-        >
-          <Category movie={movie?.coming?.data} />
-        </Panel>
-      )}
-      {movie?.today?.data && movie?.today?.data?.length > 0 && (
-        <Panel
-          title="那年今日"
-          subtitle={`${movie?.today?.total}部`}
-          to={{ path: 'Today' }}
-        >
-          <Category movie={movie?.today?.data} />
-        </Panel>
-      )}
-    </ScrollView>
+    </>
   );
 }
 
