@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
-import { phoneCode, register } from '@/api/user';
+import { register, getCaptcha, filedCaptcha, filedPhoneCode } from '@/api/user';
 import type { TextInputEvent, ResponseType } from '@/types/index';
 import type { LoginParams } from '@/api/user';
+import PicutreCode from '@/components/picture-code/PicutreCode';
 
 function RegisterForm(): React.ReactElement {
   const [formData, setFormData] = useState<LoginParams>({
@@ -49,26 +50,83 @@ function RegisterForm(): React.ReactElement {
     };
   }, []);
 
-  // 获取验证码
-  const getPhoneCode = () => {
-    phoneCode({ phone: formData.account })
-      .then((res: ResponseType<unknown>) => {
+  const [captcha, setCaptcha] = useState({
+    visible: false,
+    img: ''
+  });
+
+  // 获取图片验证码
+  const handleGetCaptcha = () => {
+    getCaptcha()
+      .then((res: ResponseType<string>) => {
         if (res.code === 200) {
-          handleTimeText();
+          setCaptcha({ ...captcha, visible: true, img: res?.data || '' });
         } else {
-          Alert.alert('提示', '发送失败, 请重试', [{ text: '确认' }]);
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
         }
       })
       .catch(() => ({}));
   };
 
-  const submit = () => {
+  // 校验图片验证码并发送短信验证码
+  const handleCaptchaComplete = (code: string): void => {
+    filedCaptcha({
+      phone: formData.account,
+      code,
+      type: 'register'
+    })
+      .then((res: ResponseType<unknown>) => {
+        if (res.code === 200) {
+          setCaptcha({ ...captcha, visible: false });
+          handleTimeText();
+
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+        }
+
+        // 短信验证上限
+        if (res.code === 450) {
+          setCaptcha({ ...captcha, visible: false });
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+        } else {
+          handleGetCaptcha();
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+        }
+      })
+      .catch(() => ({}));
+  };
+
+  const handleCaptchaClose = (): void => {
+    setCaptcha({ ...captcha, visible: false });
+  };
+
+  // 校验短信验证码
+  const handleFiledPhoneCode = (): Promise<ResponseType<unknown>> => {
+    return new Promise(resolve => {
+      filedPhoneCode({ phone: formData.account, code: formData.code! })
+        .then((res: ResponseType<unknown>) => {
+          if (res.code === 200) {
+            resolve(res);
+          } else {
+            Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          }
+        })
+        .catch(() => ({}));
+    });
+  };
+
+  const submit = async (): Promise<boolean | undefined> => {
+    const filedCode = await handleFiledPhoneCode();
+    if (!filedCode.code) {
+      Alert.alert('提示', filedCode?.message, [{ text: '确认' }]);
+      return false;
+    }
+
     register({ ...formData })
       .then((res: ResponseType<unknown>) => {
         if (res.code === 200) {
-          Alert.alert('提示', '注册成功', [{ text: '确认' }]);
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
         } else {
-          Alert.alert('提示', '登录失败, 请检查用户名密码', [{ text: '确认' }]);
+          Alert.alert('提示', res?.message, [{ text: '确认' }]);
         }
       })
       .catch(() => ({}));
@@ -108,7 +166,7 @@ function RegisterForm(): React.ReactElement {
             placeholder="请输入验证码"
             style={styles.itemInput}
           />
-          <Text onPress={getPhoneCode} style={styles.codeText}>
+          <Text onPress={handleGetCaptcha} style={styles.codeText}>
             {codeTime.visible ? `${codeTime.time}s` : '获取验证码'}
           </Text>
         </View>
@@ -116,6 +174,13 @@ function RegisterForm(): React.ReactElement {
           <Button title="注 册" onPress={submit} />
         </View>
       </View>
+      {captcha.visible && (
+        <PicutreCode
+          img={captcha.img}
+          complete={handleCaptchaComplete}
+          close={handleCaptchaClose}
+        />
+      )}
     </>
   );
 }
