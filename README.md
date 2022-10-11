@@ -54,6 +54,10 @@ yarn android
 |---|---|---|---|
 |![](./src/assets/design-sketch/home.jpg)|![](./src/assets/design-sketch/movies.jpg)|![](./src/assets/design-sketch/videos.jpg)|![](./src/assets/design-sketch/mine.jpg)|
 
+|搜索|详情|登录|关于|
+|---|---|---|---|
+|![](./src/assets/design-sketch/search.jpg)|![](./src/assets/design-sketch/detail.jpg)|![](./src/assets/design-sketch/login.jpg)|![](./src/assets/design-sketch/author.jpg)|
+
 ## 写在最后
 
 * [The MIT License (MIT)](https://github.com/xlz122/react-native-movie/blob/master/LICENSE)
