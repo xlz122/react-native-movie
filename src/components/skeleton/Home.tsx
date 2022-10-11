@@ -8,7 +8,7 @@ function HomeSkeleton(): React.ReactElement {
       <View style={styles.search} />
       <View style={styles.banner} />
       <View style={styles.nav}>
-        {[0, 1, 2, 3].map((item, index) => {
+        {new Array(4).fill(0).map((item, index) => {
           return (
             <View key={index} style={styles.navItem}>
               <View style={styles.navItemIcon} />
@@ -17,12 +17,12 @@ function HomeSkeleton(): React.ReactElement {
           );
         })}
       </View>
-      {[0, 1].map((item, index) => {
+      {new Array(3).fill(0).map((item, index) => {
         return (
           <View key={index} style={styles.panel}>
             <View style={styles.panelTitle} />
             <View style={styles.panelContent}>
-              {[0, 1, 2, 3].map((i, ind) => {
+              {new Array(10).fill(0).map((i, ind) => {
                 return (
                   <View key={ind} style={styles.item}>
                     <View style={styles.itemImage} />
