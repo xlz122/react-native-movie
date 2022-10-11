@@ -57,6 +57,15 @@ function RegisterForm(): React.ReactElement {
 
   // 获取图片验证码
   const handleGetCaptcha = () => {
+    if (!formData.account) {
+      Alert.alert('提示', '请先输入手机号', [{ text: '确认' }]);
+      return false;
+    }
+    if (!formData.password) {
+      Alert.alert('提示', '请先输入密码', [{ text: '确认' }]);
+      return false;
+    }
+
     getCaptcha()
       .then((res: ResponseType<string>) => {
         if (res.code === 200) {
