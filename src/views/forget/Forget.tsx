@@ -123,16 +123,18 @@ function Forget(): React.ReactElement {
           handleTimeText();
 
           Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          return false;
         }
 
         // 短信验证上限
         if (res.code === 450) {
           setCaptcha({ ...captcha, visible: false });
           Alert.alert('提示', res?.message, [{ text: '确认' }]);
-        } else {
-          handleGetCaptcha();
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          return false;
         }
+
+        handleGetCaptcha();
+        Alert.alert('提示', res?.message, [{ text: '确认' }]);
       })
       .catch(() => ({}));
   };
@@ -147,6 +149,11 @@ function Forget(): React.ReactElement {
       .then((res: ResponseType) => {
         if (res.code === 200) {
           setProgress(3);
+
+          store.dispatch({
+            type: 'routine/setToken',
+            payload: res?.data?.token
+          });
         } else {
           Alert.alert('提示', res?.message, [{ text: '确认' }]);
         }
