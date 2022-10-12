@@ -122,6 +122,10 @@ function Nav(props: Props): React.ReactElement {
   }
 
   useEffect(() => {
+    if (category.categories.length === 0) {
+      return;
+    }
+
     props.onChange(categoryParams);
   }, [categoryParams]);
 
