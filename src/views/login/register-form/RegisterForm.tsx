@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { register, getCaptcha, filedCaptcha, filedPhoneCode } from '@/api/user';
-import type { TextInputEvent, ResponseType } from '@/types/index';
+import type { Navigation, TextInputEvent, ResponseType } from '@/types/index';
 import type { LoginParams } from '@/api/user';
 import PicutreCode from '@/components/picture-code/PicutreCode';
 
 function RegisterForm(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const [formData, setFormData] = useState<LoginParams>({
     account: '',
     password: '',
@@ -90,16 +93,18 @@ function RegisterForm(): React.ReactElement {
           handleTimeText();
 
           Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          return false;
         }
 
         // 短信验证上限
         if (res.code === 450) {
           setCaptcha({ ...captcha, visible: false });
           Alert.alert('提示', res?.message, [{ text: '确认' }]);
-        } else {
-          handleGetCaptcha();
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          return false;
         }
+
+        handleGetCaptcha();
+        Alert.alert('提示', res?.message, [{ text: '确认' }]);
       })
       .catch(() => ({}));
   };
@@ -134,6 +139,7 @@ function RegisterForm(): React.ReactElement {
       .then((res: ResponseType<unknown>) => {
         if (res.code === 200) {
           Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          navigation.replace('Login');
         } else {
           Alert.alert('提示', res?.message, [{ text: '确认' }]);
         }
