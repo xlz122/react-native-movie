@@ -52,7 +52,7 @@ export const fieldAccount = ({ account }: { account: string }) => {
 };
 
 /**
- * @description 获取图片验证码
+ * @description 图片验证码
  */
 export const getCaptcha = () => {
   return axios.request({

@@ -1,7 +1,7 @@
 import axios from '@/utils/axios';
 
 /**
- * @description 获取影人详情
+ * @description 影人详情
  * @param { Number } id - 影人id
  */
 export const actorsDetail = ({ id }: { id: number }) => {

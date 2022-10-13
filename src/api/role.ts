@@ -1,7 +1,7 @@
 import axios from '@/utils/axios';
 
 /**
- * @description 获取角色详情
+ * @description 角色详情
  * @param { Number } id - 角色id
  */
 export const roleDetail = ({ id }: { id: number }) => {
