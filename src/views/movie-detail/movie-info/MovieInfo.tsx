@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { movieWish } from '@/api/movie-detail';
+import { movieWish } from '@/api/movies';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
 import type { ActorItemType } from '../movie-actor/MovieActor';

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { timeStampToDuration } from '@/utils/utils';
 import { videosList } from '@/api/videos';
 import type { ListRenderItemInfo } from 'react-native';
-import type { ResponseType } from '@/types/index';
+import type { Navigation, ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 import styles from './videos.css';
 
@@ -22,6 +23,8 @@ type ItemType = {
 };
 
 function Videos(): React.ReactElement {
+  const navigation: Navigation = useNavigation();
+
   const getVideosList = ({
     page,
     per_page
@@ -43,7 +46,10 @@ function Videos(): React.ReactElement {
   };
 
   const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
-    <TouchableOpacity activeOpacity={1}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => navigation.push('VideoDetail', { id: item.id })}
+    >
       <View style={styles.item}>
         <View style={styles.itemCover}>
           <Image
