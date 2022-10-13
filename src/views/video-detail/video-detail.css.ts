@@ -3,7 +3,7 @@ import { viewHeight } from '@/utils/screen';
 
 const styles = StyleSheet.create({
   page: {
-    height: viewHeight - 42 - 44,
+    height: viewHeight - 42 - 216 - 44,
     backgroundColor: '#fff'
   },
   comment: {
