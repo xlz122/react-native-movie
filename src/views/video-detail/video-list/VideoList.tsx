@@ -14,7 +14,8 @@ import type { ListRenderItemInfo } from 'react-native';
 import type { ResponseType } from '@/types/index';
 
 type Props = {
-  id?: number;
+  detailId?: number;
+  movieId?: number;
 };
 
 type Detail = {
@@ -25,6 +26,7 @@ type ItemType = {
   type: string;
   count: number;
   children: {
+    id: number;
     title: string;
     poster: string;
     duration: number;
@@ -40,7 +42,7 @@ function VideoList(props: Props): React.ReactElement {
   });
 
   const getVideoList = () => {
-    videosDetailList({ id: props.id! })
+    videosDetailList({ id: props.movieId! })
       .then((res: ResponseType<Detail>) => {
         if (res.code === 200) {
           setDetail(res.data!);
@@ -50,12 +52,12 @@ function VideoList(props: Props): React.ReactElement {
   };
 
   useEffect(() => {
-    if (!props.id) {
+    if (!props.movieId) {
       return;
     }
 
     getVideoList();
-  }, [props.id]);
+  }, [props.movieId]);
 
   const [navIndex, setNavIndex] = useState(0);
 
@@ -101,6 +103,11 @@ function VideoList(props: Props): React.ReactElement {
                   <Text style={styles.coverText}>
                     {timeStampToDuration(item.duration)}
                   </Text>
+                  {item.id === props.detailId && (
+                    <View style={styles.coverMask}>
+                      <Text style={styles.coverMaskText}>播放中</Text>
+                    </View>
+                  )}
                 </View>
                 <View style={styles.itemInfo}>
                   <Text style={styles.infoTitle}>{item.title}</Text>
@@ -167,7 +174,27 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 47,
     right: 6,
+    zIndex: 2,
     fontSize: 9,
+    color: '#fff'
+  },
+  coverMask: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1,
+    width: 122,
+    height: 70,
+    backgroundColor: 'rgba(0, 0, 0, .45)'
+  },
+  coverMaskText: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    zIndex: 2,
+    marginTop: -8,
+    marginLeft: -11.5,
+    fontSize: 10,
     color: '#fff'
   },
   itemInfo: {

@@ -70,7 +70,7 @@ function VideoDetail(): React.ReactElement {
       <Video data={detail} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         <VideoInfo data={detail} refreshDetail={refreshDetail} />
-        <VideoList id={detail.movie?.id} />
+        <VideoList detailId={detail.id} movieId={detail.movie?.id} />
       </ScrollView>
       <View style={styles.comment}>
         <View style={styles.review}>
