@@ -63,11 +63,15 @@ function Mine(props: Props): React.ReactElement {
       <MineCount />
       {isLogin && (
         <View style={styles.cell}>
-          <View style={styles.cellItem}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => props?.navigation?.push('User')}
+            style={styles.cellItem}
+          >
             <Text style={styles.cellItemIcon}>{'\ue6c8'}</Text>
             <Text style={styles.cellItemText}>我的资料</Text>
             <Text style={styles.cellItemArrow}>{'\ue906'}</Text>
-          </View>
+          </TouchableOpacity>
           <View style={[styles.cellItem, styles.cellLastItem]}>
             <Text style={styles.cellItemIcon}>{'\ue611'}</Text>
             <Text style={styles.cellItemText}>影片收藏夹</Text>
