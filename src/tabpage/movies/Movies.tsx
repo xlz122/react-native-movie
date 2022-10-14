@@ -84,9 +84,10 @@ function Movies(): React.ReactElement {
     <>
       <Nav onChange={navChange} />
       <View style={styles.page}>
+        {/* 单项宽度105 */}
         <ScrollRefresh
           page={1}
-          pageSize={16}
+          pageSize={Math.floor(deviceWidth / 105) * 5}
           request={getMoviesList}
           initialNumToRender={6}
           numColumns={Math.floor(deviceWidth / 105)}
