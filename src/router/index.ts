@@ -129,6 +129,12 @@ const router: Router[] = [
     component: require('../views/project/Project').default
   },
   {
+    name: 'User',
+    title: '个人资料',
+    headerShown: true,
+    component: require('../views/user/User').default
+  },
+  {
     name: 'Author',
     title: '关于作者',
     headerShown: true,
