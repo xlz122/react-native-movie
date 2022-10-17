@@ -11,7 +11,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
-import { movieActor } from '@/api/movie-detail';
+import { movieActor } from '@/api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
 

@@ -1,7 +1,7 @@
 import axios from '@/utils/axios';
 
 /**
- * @description 获取我的收藏统计数据
+ * @description 我的收藏统计数据
  */
 export const userCount = () => {
   return axios.request({
@@ -16,7 +16,7 @@ export type CollectionParams = {
 };
 
 /**
- * @description 获取用户关注的影人
+ * @description 用户关注的影人
  */
 export const userActors = ({ page, per_page }: CollectionParams) => {
   const params = { page, per_page };
@@ -29,7 +29,7 @@ export const userActors = ({ page, per_page }: CollectionParams) => {
 };
 
 /**
- * @description 获取用户关注的角色
+ * @description 用户关注的角色
  */
 export const userRoles = ({ page, per_page }: CollectionParams) => {
   const params = { page, per_page };

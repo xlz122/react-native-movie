@@ -25,6 +25,7 @@ type MovieItemType = {
   id: number;
   poster: string;
   title: string;
+  category: string;
   year: number;
   genres: string;
   countries: string;
@@ -95,9 +96,18 @@ function SearchDetail(props: Props): React.ReactElement {
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemTitle}>
             {item.title}
           </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            {item.year}
-          </Text>
+          <View style={styles.itemTag}>
+            {item?.category && item?.category !== '电影' && (
+              <Text style={styles.tag}>{item?.category}</Text>
+            )}
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.itemText}
+            >
+              {item.year}
+            </Text>
+          </View>
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
             {item.genres}
           </Text>
@@ -226,6 +236,23 @@ const styles = StyleSheet.create({
     marginBottom: 1,
     fontSize: 13,
     color: '#333'
+  },
+  itemTag: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  tag: {
+    paddingVertical: 0.5,
+    paddingHorizontal: 1.8,
+    marginTop: 8.5,
+    marginRight: 5,
+    backgroundColor: 'rgba(254, 179, 0, .15)',
+    fontSize: 10,
+    color: '#feb300',
+    textAlign: 'center',
+    borderRadius: 2
   },
   itemText: {
     marginTop: 8,

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { movieWish } from '@/api/movie-detail';
+import { movieWish } from '@/api/movies';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
 import type { ActorItemType } from '../movie-actor/MovieActor';
@@ -28,6 +28,7 @@ export type MovieInfoType = {
   genres: string[];
   countries: string[];
   durations: string[];
+  episode_count: number;
   is_wish: boolean;
   rating: string;
   awards_nominate_count: number;
@@ -97,10 +98,21 @@ function MovieInfo(props: Props): React.ReactElement {
               <Text>{data?.countries?.join(' / ')}</Text>
               <Text>·</Text>
               <Text>{data?.year}</Text>
-              {data?.durations && data?.durations[0] && (
+              {data?.episode_count === 0 && (
                 <Text>{`·${data?.durations?.join(' / ')}`}</Text>
               )}
             </Text>
+            {data?.episode_count > 0 && (
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.descText}
+              >
+                <Text>{`共${data?.episode_count}集`}</Text>
+                <Text>·</Text>
+                <Text>{`每集${data?.durations[0]}分钟`}</Text>
+              </Text>
+            )}
           </View>
           <View style={styles.operate}>
             <TouchableOpacity activeOpacity={1} onPress={movieWishChange}>

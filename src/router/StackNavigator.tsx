@@ -32,21 +32,7 @@ function StackNavigator(): React.ReactElement {
             component={item.component}
             options={({ route }: { route: Route }) => ({
               title: getChildTitle(route) || item.title,
-              headerShown: item.headerShown, // 头部标题栏
-              headerStyle: [
-                {
-                  backgroundColor: '#fff',
-                  height: 40
-                },
-                item.headerStyle
-              ],
-              headerTitleStyle: [
-                {
-                  color: '#000',
-                  fontSize: 15
-                },
-                item.headerTitleStyle
-              ]
+              headerShown: item.headerShown // 头部标题栏
             })}
           />
         );

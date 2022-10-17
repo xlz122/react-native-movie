@@ -1,7 +1,7 @@
 import axios from '@/utils/axios';
 
 /**
- * @description 获取图片详情
+ * @description 图片详情
  * @param { Number } id - 图片id
  */
 export const photosDetail = ({ id }: { id: number }) => {
