@@ -24,7 +24,7 @@ Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/ic
 ## 项目使用技术栈
 
 * React
-* React Native 0.70.2
+* React Native 0.70.3
 * Redux
 * Typescript
 
