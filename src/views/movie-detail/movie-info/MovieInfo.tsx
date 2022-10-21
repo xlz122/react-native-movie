@@ -48,7 +48,7 @@ export type MovieInfoType = {
   akas: string[];
   languages: string[];
   category: string;
-  pubdates: string;
+  pubdates: string[];
   color: number;
   season_count: number;
 };
