@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { viewHeight } from '@/utils/screen';
 
 const styles = StyleSheet.create({
   page: {
-    flex: 1,
+    height: viewHeight - 60,
     backgroundColor: '#fff'
   },
   summary: {
@@ -23,7 +24,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
     paddingVertical: 8
   },
   itemLabel: {

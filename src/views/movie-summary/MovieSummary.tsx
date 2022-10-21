@@ -42,7 +42,9 @@ function MovieSummary(): React.ReactElement {
             </View>
             <View style={styles.summaryItem}>
               <Text style={styles.itemLabel}>上映: </Text>
-              <Text style={styles.itemValue}>{detail?.pubdates}</Text>
+              <Text style={styles.itemValue}>
+                {detail?.pubdates?.join(' / ')}
+              </Text>
             </View>
             {detail?.season_count > 0 && (
               <View style={styles.summaryItem}>
