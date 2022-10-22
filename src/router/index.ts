@@ -82,7 +82,7 @@ const router: Router[] = [
   },
   {
     name: 'VideoDetail',
-    title: '视频',
+    title: '',
     headerShown: true,
     component: require('../views/video-detail/VideoDetail').default
   },
@@ -112,7 +112,7 @@ const router: Router[] = [
   },
   {
     name: 'RoleDetail',
-    title: '角色',
+    title: '',
     headerShown: true,
     component: require('../views/role-detail/RoleDetail').default
   },
@@ -124,7 +124,7 @@ const router: Router[] = [
   },
   {
     name: 'ActorDetail',
-    title: '演员',
+    title: '',
     headerShown: true,
     component: require('../views/actor-detail/ActorDetail').default
   },
