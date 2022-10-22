@@ -22,7 +22,7 @@ const router: Router[] = [
   // 非tabbar页面
   {
     name: 'Login',
-    title: '',
+    title: '登录',
     headerShown: false,
     component: require('../views/login/Login').default
   },
@@ -40,7 +40,7 @@ const router: Router[] = [
   },
   {
     name: 'Search',
-    title: '',
+    title: '搜索',
     headerShown: false,
     component: require('../views/search/Search').default
   },
@@ -91,6 +91,12 @@ const router: Router[] = [
     title: '相册',
     headerShown: true,
     component: require('../views/photos/Photos').default
+  },
+  {
+    name: 'MovieSummary',
+    title: '剧情',
+    headerShown: false,
+    component: require('../views/movie-summary/MovieSummary').default
   },
   {
     name: 'Actor',

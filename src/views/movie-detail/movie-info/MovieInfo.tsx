@@ -45,6 +45,12 @@ export type MovieInfoType = {
   cast: ActorItemType[];
   role_count: number;
   roles: RoleItemType[];
+  akas: string[];
+  languages: string[];
+  category: string;
+  pubdates: string[];
+  color: number;
+  season_count: number;
 };
 
 function MovieInfo(props: Props): React.ReactElement {
@@ -189,6 +195,7 @@ function MovieInfo(props: Props): React.ReactElement {
       )}
       <Panel
         title="剧情"
+        to={{ path: 'MovieSummary', params: { detail: data } }}
         panelStyle={{ backgroundColor: 'transparent' }}
         headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
         lineStyle={{ display: 'none' }}

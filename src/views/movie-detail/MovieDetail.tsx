@@ -28,7 +28,7 @@ type Detail = {
   review_count: number;
   collection_count: number;
   comment_count: number;
-};
+} & MovieInfoType;
 
 function MovieDeail(): React.ReactElement {
   const navigation: Navigation = useNavigation();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Animated } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '@/utils/utils';
 import { indexData } from '@/api/home';
@@ -93,13 +93,49 @@ function Home(): React.ReactElement {
     handlerGradualChange(color);
   };
 
+  // 初始值
+  const spinValue = new Animated.Value(0);
+
+  // 插值(单位转换)
+  const spinInterpolate = spinValue.interpolate({
+    inputRange: [0, 150],
+    outputRange: ['transparent', '#fff'],
+    extrapolate: 'clamp' // 阻止输出值超过outputRange
+  });
+
+  const animatedEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          contentOffset: { y: spinValue }
+        }
+      }
+    ],
+    { useNativeDriver: false }
+  );
+
   return (
     <>
       {loading && <Skeleton />}
       {!loading && (
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          stickyHeaderIndices={[0]}
+          scrollEventThrottle={1}
+          onScroll={animatedEvent}
+          style={styles.page}
+        >
+          <View>
+            <Animated.View
+              style={{
+                height: 48,
+                backgroundColor: spinInterpolate
+              }}
+            >
+              <Search />
+            </Animated.View>
+          </View>
           <LinearGradinet colors={gradientColor} style={styles.bgcolor} />
-          <Search />
           <Banner banner={banner} onChange={bannerChange} />
           <Nav />
           {movie?.theater?.data && movie?.theater?.data?.length > 0 && (
