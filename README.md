@@ -23,12 +23,12 @@ Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/ic
 
 在react-native脚手架基础上搭建，可查看[web分支](https://github.com/xlz122/react-native-movie/tree/web)
 
-只有web端配置，可查看[web-webpack分支](https://github.com/xlz122/react-native-movie/tree/web-webpack)
+纯web端配置，可查看[web-webpack分支](https://github.com/xlz122/react-native-movie/tree/web-webpack)
 
 ## 项目使用技术栈
 
 * React
-* React Native 0.70.3
+* React Native 0.70.4
 * Redux
 * Typescript
 
