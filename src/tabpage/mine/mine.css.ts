@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingHorizontal: 17,
     height: 209,
+    paddingHorizontal: 17,
     backgroundColor: '#e54847'
   },
   avatar: {
@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
     borderRadius: 100
   },
   userText: {
-    marginLeft: 11,
     width: 62,
     height: 42,
     lineHeight: 42,
+    marginLeft: 11,
     color: '#fff'
   },
   userNameText: {

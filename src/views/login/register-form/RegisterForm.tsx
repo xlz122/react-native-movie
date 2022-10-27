@@ -218,8 +218,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingTop: 22,
     height: 68,
+    paddingTop: 22,
     borderBottomWidth: 0.4,
     borderStyle: 'solid',
     borderColor: '#eee'

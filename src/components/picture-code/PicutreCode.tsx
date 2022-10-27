@@ -108,9 +108,9 @@ const styles = StyleSheet.create({
     top: '25%',
     left: '50%',
     zIndex: 12,
+    width: 272,
     paddingTop: 15,
     marginLeft: -136,
-    width: 272,
     backgroundColor: '#fff',
     borderRadius: 4
   },
@@ -125,17 +125,17 @@ const styles = StyleSheet.create({
     color: '#80848f'
   },
   coverImage: {
-    marginTop: 10,
     width: 150,
-    height: 40
+    height: 40,
+    marginTop: 10
   },
   inputMain: {
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 21,
-    height: 35
+    height: 35,
+    marginTop: 21
   },
   inputItem: {
     width: 242,
@@ -168,10 +168,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 25,
     width: 272,
     height: 45,
     lineHeight: 45,
+    marginTop: 25,
     borderTopWidth: 0.45,
     borderStyle: 'solid',
     borderColor: '#ddd'

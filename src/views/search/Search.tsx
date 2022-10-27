@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    height: 40,
     paddingTop: 10,
-    paddingLeft: 10,
-    height: 40
+    paddingLeft: 10
   },
   input: {
     flex: 1,
@@ -174,8 +174,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    paddingLeft: 8,
     height: 45,
+    paddingLeft: 8,
     borderBottomWidth: 0.5,
     borderStyle: 'solid',
     borderColor: '#eee',

@@ -293,9 +293,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    height: 51,
     paddingHorizontal: 15,
     marginTop: 15,
-    height: 51,
     backgroundColor: '#fff'
   },
   itemText: {

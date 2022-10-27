@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
   descTitle: {
     marginTop: 1,
     marginBottom: 1,
+    fontWeight: '700',
     fontSize: 16,
-    color: '#fff',
-    fontWeight: '700'
+    color: '#fff'
   },
   descBrief: {
     marginTop: 7
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 18,
     width: 104,
     height: 26,
+    marginRight: 18,
     backgroundColor: 'rgba(0, 0, 0, .25)',
     borderRadius: 5
   },
@@ -68,10 +68,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    minHeight: 82,
     paddingVertical: 16,
     marginTop: 6,
     marginHorizontal: 12,
-    minHeight: 82,
     backgroundColor: 'rgba(0, 0, 0, .25)',
     borderRadius: 6
   },
