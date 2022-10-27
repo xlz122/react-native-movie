@@ -1,3 +1,5 @@
+## 当前分支(0.70.3)不再维护，请查看master分支(2022.10.27)
+
 Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/iconfont.md) | [项目插件](docs/plugin.md)
 
 ## 环境要求
