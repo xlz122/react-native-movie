@@ -137,10 +137,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 72,
     paddingLeft: 10,
     paddingRight: 10,
     margin: 10,
-    height: 72,
     backgroundColor: '#fff',
     borderRadius: 4
   },

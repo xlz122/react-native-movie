@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   close: {
-    paddingLeft: 16,
-    paddingTop: 16,
     width: 52,
-    height: 52
+    height: 52,
+    paddingLeft: 16,
+    paddingTop: 16
   },
   closeIcon: {
     fontFamily: 'iconfont',

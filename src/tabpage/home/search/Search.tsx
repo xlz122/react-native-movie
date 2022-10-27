@@ -29,9 +29,9 @@ function Search(props: Props): React.ReactElement {
 const styles = StyleSheet.create({
   search: {
     display: 'flex',
+    height: 48,
     paddingHorizontal: 10,
-    paddingVertical: 11,
-    height: 48
+    paddingVertical: 11
   },
   input: {
     flex: 1,

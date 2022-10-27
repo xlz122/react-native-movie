@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   web: {
-    height: height,
-    width: width
+    width: width,
+    height: height
   },
   loading: {
     position: 'absolute',

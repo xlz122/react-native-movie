@@ -146,14 +146,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
     width: '100%',
-    height: 45
+    height: 45,
+    paddingHorizontal: 10
   },
   itemHeaderSpot: {
-    marginRight: 5,
     width: 4,
     height: 4,
+    marginRight: 5,
     backgroundColor: '#f8a52d'
   },
   itemHeaderText: {

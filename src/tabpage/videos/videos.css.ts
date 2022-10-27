@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 11,
-    height: 49
+    height: 49,
+    paddingHorizontal: 11
   },
   author: {
     display: 'flex',
