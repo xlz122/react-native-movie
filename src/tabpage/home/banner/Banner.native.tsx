@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import GestureSwiper from '@/components/gesture-swiper/GestureSwiper';
 import Dot from './dot/Dot';
 
 type Props = {
   banner: BannerItem[];
-  onChange?: (index: number) => void;
+  onChange: (index: number) => void;
 };
 
 type BannerItem = {
@@ -12,17 +13,29 @@ type BannerItem = {
 };
 
 function Banner(props: Props): React.ReactElement {
+  const renderItem = ({ item }: { item: BannerItem }) => {
+    return (
+      <TouchableOpacity activeOpacity={1}>
+        <View style={styles.coverContainer}>
+          <View style={styles.cover}>
+            <Image
+              source={{ uri: item.banner }}
+              resizeMode={'stretch'}
+              style={styles.coverImage}
+            />
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.banner}>
-      <View style={styles.coverContainer}>
-        <View style={styles.cover}>
-          <Image
-            source={{ uri: props.banner[0] && props.banner[0].banner }}
-            resizeMode={'stretch'}
-            style={styles.coverImage}
-          />
-        </View>
-      </View>
+      <GestureSwiper
+        data={props?.banner || []}
+        renderItem={renderItem}
+        itemStyle={styles.coverContainer}
+      />
       <Dot list={props.banner} />
     </View>
   );
@@ -34,7 +47,7 @@ const styles = StyleSheet.create({
     height: 190
   },
   coverContainer: {
-    paddingHorizontal: 10
+    paddingHorizontal: 5
   },
   cover: {
     position: 'relative',
