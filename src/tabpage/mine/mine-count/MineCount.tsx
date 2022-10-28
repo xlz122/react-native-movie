@@ -108,9 +108,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 76,
     marginTop: -38,
     marginHorizontal: 17,
-    height: 76,
     backgroundColor: '#fff',
     borderRadius: 6
   },

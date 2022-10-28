@@ -77,9 +77,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   titleLine: {
-    marginRight: 4,
     width: 3,
     height: 14,
+    marginRight: 4,
     backgroundColor: '#e54847',
     borderRadius: 4
   },

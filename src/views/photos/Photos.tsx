@@ -129,10 +129,10 @@ const styles = StyleSheet.create({
   },
   tabItem: {
     position: 'relative',
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
     height: '100%'
   },
   itemText: {

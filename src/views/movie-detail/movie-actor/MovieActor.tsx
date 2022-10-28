@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
+    width: 94,
     paddingBottom: 7,
-    marginRight: 8,
-    width: 94
+    marginRight: 8
   },
   itemImage: {
     height: 130,

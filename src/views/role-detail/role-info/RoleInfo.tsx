@@ -81,10 +81,10 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   infoBrief: {
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    flex: 1,
     paddingLeft: 10
   },
   briefName: {
