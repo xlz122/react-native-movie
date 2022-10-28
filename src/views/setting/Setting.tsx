@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   logoutText: {
-    marginHorizontal: 8,
     height: 44,
     lineHeight: 44,
+    marginHorizontal: 8,
     backgroundColor: '#f56c6c',
     fontSize: 12,
     color: '#fff',

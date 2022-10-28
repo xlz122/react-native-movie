@@ -113,9 +113,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
+    width: 105,
     paddingBottom: 10,
     marginHorizontal: 5,
-    width: 105,
     textAlign: 'center'
   },
   itemImage: {

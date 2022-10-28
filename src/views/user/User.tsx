@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
     color: 'rgb(153, 153, 153)'
   },
   itemRightImage: {
-    marginLeft: 13,
     width: 31,
     height: 31,
+    marginLeft: 13,
     borderRadius: 22
   },
   cellLastItem: {

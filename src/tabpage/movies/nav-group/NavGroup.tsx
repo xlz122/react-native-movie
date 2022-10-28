@@ -55,16 +55,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingLeft: 10,
     height: 32,
+    paddingLeft: 10,
     backgroundColor: '#fff'
   },
   item: {
+    height: 20,
+    lineHeight: 18,
     paddingHorizontal: 10,
     marginVertical: 3,
     marginRight: 5,
-    height: 20,
-    lineHeight: 18,
     color: '#333',
     fontSize: 12
   },

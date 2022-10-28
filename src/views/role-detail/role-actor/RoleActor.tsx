@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     borderRadius: 3
   },
   itemText: {
-    marginTop: 5,
     width: 94,
+    marginTop: 5,
     color: '#333',
     fontSize: 12
   }

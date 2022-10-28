@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
     color: 'orange'
   },
   itemText: {
-    marginTop: 5,
     width: 94,
+    marginTop: 5,
     color: '#333',
     fontSize: 12
   },

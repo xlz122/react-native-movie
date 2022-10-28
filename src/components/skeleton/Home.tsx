@@ -45,26 +45,26 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   search: {
+    height: 29,
     marginHorizontal: 10,
     marginVertical: 11,
-    height: 29,
     backgroundColor: '#f5f5f5',
     borderRadius: 48
   },
   banner: {
-    marginHorizontal: 10,
     height: 190,
+    marginHorizontal: 10,
     backgroundColor: '#f5f5f5',
     borderRadius: 4
   },
   nav: {
     display: 'flex',
     flexDirection: 'row',
+    height: 66,
     paddingTop: 30,
     paddingBottom: 10,
     marginHorizontal: 10,
     marginBottom: 40,
-    height: 66,
     borderRadius: 6
   },
   navItem: {
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   navItemName: {
-    marginTop: 6,
     width: 50,
     height: 12,
+    marginTop: 6,
     backgroundColor: '#f5f5f5'
   },
   panel: {
@@ -89,10 +89,10 @@ const styles = StyleSheet.create({
     marginBottom: 28
   },
   panelTitle: {
-    marginTop: 6,
-    marginLeft: 10,
     width: 94,
     height: 13,
+    marginTop: 6,
+    marginLeft: 10,
     backgroundColor: '#f5f5f5'
   },
   panelContent: {
@@ -113,9 +113,9 @@ const styles = StyleSheet.create({
     borderRadius: 3
   },
   itemTitle: {
-    marginTop: 5,
     width: 94,
     height: 13,
+    marginTop: 5,
     backgroundColor: '#f5f5f5'
   }
 });
