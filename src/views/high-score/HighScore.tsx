@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
+    paddingRight: 15,
     marginLeft: 13
   },
   itemTitle: {
