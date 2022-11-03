@@ -42,6 +42,17 @@ function MineCount(): React.ReactElement {
     getUserCount();
   }, [isLogin]);
 
+  useEffect(() => {
+    // @ts-ignore
+    const unsubscribe = navigation.addListener('tabPress', () => {
+      if (isLogin) {
+        getUserCount();
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   // 跳转关注详情
   const jumpFlollowDetail = (path: string): boolean | undefined => {
     if (!isLogin) {

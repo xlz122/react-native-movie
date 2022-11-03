@@ -30,8 +30,8 @@ function VideoDetail(): React.ReactElement {
 
   const [detail, setDetail] = useState<Detail>({});
 
-  const getVideoDetail = () => {
-    videosDetail({ id: route.params.id })
+  const getVideoDetail = (id?: number) => {
+    videosDetail({ id: id || route.params.id })
       .then((res: ResponseType<Detail>) => {
         if (res.code === 200) {
           setDetail(res.data!);
@@ -65,12 +65,21 @@ function VideoDetail(): React.ReactElement {
     });
   }, []);
 
+  // 预告片列表刷新详情
+  const playChange = (id: number) => {
+    getVideoDetail(id);
+  };
+
   return (
     <>
       <Video data={detail} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         <VideoInfo data={detail} refreshDetail={refreshDetail} />
-        <VideoList detailId={detail.id} movieId={detail.movie?.id} />
+        <VideoList
+          detailId={detail.id}
+          movieId={detail.movie?.id}
+          playChange={playChange}
+        />
       </ScrollView>
       <View style={styles.comment}>
         <View style={styles.review}>
