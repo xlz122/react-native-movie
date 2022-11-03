@@ -25,10 +25,12 @@ export type MovieInfoType = {
   };
   year: number;
   release_status: number;
+  release_date: string;
   genres: string[];
   countries: string[];
   durations: string[];
   episode_count: number;
+  wish_count: number;
   is_wish: boolean;
   rating: string;
   awards_nominate_count: number;
@@ -74,6 +76,61 @@ function MovieInfo(props: Props): React.ReactElement {
         }
       })
       .catch(() => ({}));
+  };
+
+  // 即将上映/已上映
+  const RenderRating = (): React.ReactElement => {
+    // 即将上映
+    if (data?.release_status === 1) {
+      return (
+        <>
+          <View style={styles.ratingItem}>
+            <View style={styles.ratingWish}>
+              <Text style={styles.ratingWishCount}>{data?.wish_count}</Text>
+              <Text style={styles.ratingWishText}>人想看</Text>
+            </View>
+          </View>
+          <Text style={styles.ratingWishDesc}>{data?.release_date}上映</Text>
+        </>
+      );
+    }
+
+    // 已上映
+    return (
+      <>
+        {Boolean(data?.rating) && (
+          <View style={styles.ratingItem}>
+            <View style={styles.ratingCover}>
+              <Text style={styles.ratingText}>慕影评分</Text>
+              <View style={styles.ratingLine} />
+            </View>
+            <Text style={styles.ratingScore}>{data?.rating}</Text>
+            <Text style={styles.ratingText}>
+              {data?.awards_nominate_count}
+              <Text>人评</Text>
+            </Text>
+          </View>
+        )}
+        {Boolean(data?.thrid_rating?.douban?.rating) && (
+          <View style={styles.ratingItem}>
+            <View style={styles.ratingCover}>
+              <Text style={styles.ratingText}>豆瓣评分</Text>
+              <Text style={styles.ratingIcon}>{'\ue602'}</Text>
+            </View>
+            <Text style={styles.ratingScore}>
+              {data?.thrid_rating?.douban?.rating}
+            </Text>
+            <Text style={styles.ratingText}>
+              {data?.thrid_rating?.douban?.count}
+              <Text>人评</Text>
+            </Text>
+          </View>
+        )}
+        {!data?.rating && !data?.thrid_rating?.douban?.rating && (
+          <Text style={styles.noRating}>暂无评分</Text>
+        )}
+      </>
+    );
   };
 
   return (
@@ -144,37 +201,7 @@ function MovieInfo(props: Props): React.ReactElement {
         </View>
       </View>
       <View style={styles.rating}>
-        {Boolean(data?.rating) && (
-          <View style={styles.ratingItem}>
-            <View style={styles.ratingCover}>
-              <Text style={styles.ratingText}>慕影评分</Text>
-              <View style={styles.ratingLine} />
-            </View>
-            <Text style={styles.ratingScore}>{data?.rating}</Text>
-            <Text style={styles.ratingText}>
-              {data?.awards_nominate_count}
-              <Text>人评</Text>
-            </Text>
-          </View>
-        )}
-        {Boolean(data?.thrid_rating?.douban?.rating) && (
-          <View style={styles.ratingItem}>
-            <View style={styles.ratingCover}>
-              <Text style={styles.ratingText}>豆瓣评分</Text>
-              <Text style={styles.ratingIcon}>{'\ue602'}</Text>
-            </View>
-            <Text style={styles.ratingScore}>
-              {data?.thrid_rating?.douban?.rating}
-            </Text>
-            <Text style={styles.ratingText}>
-              {data?.thrid_rating?.douban?.count}
-              <Text>人评</Text>
-            </Text>
-          </View>
-        )}
-        {!data?.rating && !data?.thrid_rating?.douban?.rating && (
-          <Text style={styles.noRating}>暂无评分</Text>
-        )}
+        <RenderRating />
       </View>
       <View style={styles.tag}>
         {data?.tags?.map((item, index) => {

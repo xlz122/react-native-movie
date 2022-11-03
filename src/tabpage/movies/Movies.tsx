@@ -12,6 +12,7 @@ import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 type ItemType = {
   id: number;
   poster: string;
+  episode_count?: number;
   rating?: number;
   title: string;
 };
@@ -73,6 +74,9 @@ function Movies(): React.ReactElement {
         resizeMode={'stretch'}
         style={[styles.itemImage]}
       />
+      {Number(item?.episode_count) > 0 && (
+        <Text style={styles.itemEpisode}>全{item?.episode_count}集</Text>
+      )}
       {Number(item?.rating) > 0 && (
         <Text style={styles.itemRating}>{item?.rating}</Text>
       )}
@@ -124,6 +128,13 @@ const styles = StyleSheet.create({
     width: 105,
     height: 154,
     borderRadius: 3
+  },
+  itemEpisode: {
+    position: 'absolute',
+    left: 8,
+    bottom: 38,
+    fontSize: 11.2,
+    color: '#ccc'
   },
   itemRating: {
     position: 'absolute',
