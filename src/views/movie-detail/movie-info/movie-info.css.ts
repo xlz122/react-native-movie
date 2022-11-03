@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   rating: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -80,6 +81,28 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  ratingWish: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline'
+  },
+  ratingWishCount: {
+    fontWeight: '700',
+    fontSize: 22.5,
+    color: '#feb300'
+  },
+  ratingWishText: {
+    fontSize: 11,
+    color: '#fff'
+  },
+  ratingWishDesc: {
+    position: 'absolute',
+    right: 8,
+    bottom: 7,
+    zIndex: 10,
+    fontSize: 11.5,
+    color: '#e5e5e5'
   },
   ratingCover: {
     position: 'relative'
