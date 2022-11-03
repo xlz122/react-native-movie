@@ -16,6 +16,7 @@ import type { ResponseType } from '@/types/index';
 type Props = {
   detailId?: number;
   movieId?: number;
+  playChange: (id: number) => void;
 };
 
 type Detail = {
@@ -90,8 +91,9 @@ function VideoList(props: Props): React.ReactElement {
           detail?.videos[navIndex]?.children.map((item, index) => {
             return (
               <TouchableOpacity
-                activeOpacity={1}
                 key={index}
+                activeOpacity={1}
+                onPress={() => props?.playChange(item.id)}
                 style={styles.videoItem}
               >
                 <View style={styles.itemCover}>
