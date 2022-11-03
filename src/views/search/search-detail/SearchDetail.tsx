@@ -175,6 +175,13 @@ function SearchDetail(props: Props): React.ReactElement {
     </TouchableOpacity>
   );
 
+  // 无数据展示
+  const ListEmptyComponent = (): React.ReactElement => (
+    <View style={styles.noData}>
+      <Text style={styles.noDataText}>未找到相关内容</Text>
+    </View>
+  );
+
   return (
     <View style={styles.page}>
       <ScrollRefresh
@@ -195,6 +202,7 @@ function SearchDetail(props: Props): React.ReactElement {
 
           return <View />;
         }}
+        ListEmptyComponent={<ListEmptyComponent />}
         resetRefresh={resetRefresh}
       />
     </View>
@@ -269,6 +277,15 @@ const styles = StyleSheet.create({
   itemRatingWeight: {
     fontSize: 12,
     fontWeight: '700'
+  },
+  noData: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 140
+  },
+  noDataText: {
+    color: '#888'
   }
 });
 
