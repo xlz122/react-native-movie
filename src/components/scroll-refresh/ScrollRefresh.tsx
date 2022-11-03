@@ -22,9 +22,9 @@ type FlatListProps = {
   numColumns?: number;
   columnWrapperStyle?: ViewStyle;
   renderItem?: React.FunctionComponent<ListRenderItemInfo<any>>;
-  ListEmptyComponent?: React.FunctionComponent;
-  ListHeaderComponent?: React.FunctionComponent;
-  ListFooterComponent?: React.FunctionComponent;
+  ListEmptyComponent?: React.FunctionComponent | React.ReactElement;
+  ListHeaderComponent?: React.FunctionComponent | React.ReactElement;
+  ListFooterComponent?: React.FunctionComponent | React.ReactElement;
   onEndReachedThreshold?: number;
 };
 
@@ -36,6 +36,7 @@ type RefreshState = {
   isLoadMore: boolean;
   loadText: string;
   complete: boolean;
+  noData: boolean;
 };
 
 function ScrollRefresh(props: Props): React.ReactElement {
@@ -50,7 +51,9 @@ function ScrollRefresh(props: Props): React.ReactElement {
     // 加载文字
     loadText: '',
     // 数据是否加载完成
-    complete: false
+    complete: false,
+    // 是否没有数据
+    noData: false
   });
 
   const onRefresh = (): void => {
@@ -60,6 +63,7 @@ function ScrollRefresh(props: Props): React.ReactElement {
       data: [],
       isRefresh: true,
       complete: false,
+      noData: false,
       loadText: ''
     });
   };
@@ -126,6 +130,7 @@ function ScrollRefresh(props: Props): React.ReactElement {
         isRefresh: false,
         isLoadMore: false,
         complete: true,
+        noData: true,
         loadText: ''
       });
 
@@ -191,7 +196,9 @@ function ScrollRefresh(props: Props): React.ReactElement {
         columnWrapperStyle={props?.columnWrapperStyle}
         renderItem={props?.renderItem}
         // 空布局
-        ListEmptyComponent={props?.ListEmptyComponent}
+        ListEmptyComponent={
+          refreshState.noData ? props?.ListEmptyComponent : null
+        }
         // 头尾布局
         ListHeaderComponent={props?.ListHeaderComponent}
         ListFooterComponent={props?.ListFooterComponent || _createListFooter}
