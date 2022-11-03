@@ -104,7 +104,7 @@ function MovieInfo(props: Props): React.ReactElement {
               <Text>{data?.countries?.join(' / ')}</Text>
               <Text>·</Text>
               <Text>{data?.year}</Text>
-              {data?.episode_count === 0 && (
+              {data?.episode_count === 0 && data?.durations?.length > 0 && (
                 <Text>{`·${data?.durations?.join(' / ')}`}</Text>
               )}
             </Text>
