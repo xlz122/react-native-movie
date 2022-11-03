@@ -73,7 +73,9 @@ function Movies(): React.ReactElement {
         resizeMode={'stretch'}
         style={[styles.itemImage]}
       />
-      <Text style={styles.itemRating}>{item?.rating}</Text>
+      {Number(item?.rating) > 0 && (
+        <Text style={styles.itemRating}>{item?.rating}</Text>
+      )}
       <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
         {item.title}
       </Text>
