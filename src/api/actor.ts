@@ -18,7 +18,7 @@ export const actorsDetail = ({ id }: { id: number }) => {
  * @description 关注影人
  * @param { Number } id - 影人id
  */
-export const followActors = ({ id }: { id: number }) => {
+export const followActor = ({ id }: { id: number }) => {
   return axios.request({
     url: `/user/actors/${id}/collections`,
     method: 'post'
@@ -29,7 +29,7 @@ export const followActors = ({ id }: { id: number }) => {
  * @description 取消关注影人
  * @param { Number } id - 影人id
  */
-export const unFollowActors = ({ id }: { id: number }) => {
+export const unFollowActor = ({ id }: { id: number }) => {
   return axios.request({
     url: `/user/actors/${id}/collections`,
     method: 'delete'

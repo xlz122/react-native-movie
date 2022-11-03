@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import { followRole, unFollowRole } from '@/api/role';
 import type { RootState } from '@/store/index';
-import type { Navigation } from '@/types/index';
+import type { ResponseType, Navigation } from '@/types/index';
 
 type Props = {
   data: Partial<Info>;
@@ -25,10 +26,32 @@ function RoleInfo(props: Props): React.ReactElement {
   const { data } = props;
 
   // 收藏/取消收藏角色
-  const collectionChange = (): boolean | undefined => {
+  const collectionChange = (is_collection: number): boolean | undefined => {
     if (!isLogin) {
       navigation.push('Login');
       return false;
+    }
+
+    if (is_collection === 0) {
+      followRole({ id: data.id! })
+        .then((res: ResponseType) => {
+          if (res.code === 200) {
+            props.refreshDetail();
+            Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          }
+        })
+        .catch(() => ({}));
+    }
+
+    if (is_collection === 1) {
+      unFollowRole({ id: data.id! })
+        .then((res: ResponseType) => {
+          if (res.code === 200) {
+            props.refreshDetail();
+            Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          }
+        })
+        .catch(() => ({}));
     }
   };
 
@@ -47,7 +70,7 @@ function RoleInfo(props: Props): React.ReactElement {
           <Text style={styles.briefEnName}>{data?.name_en}</Text>
         </View>
         <Text
-          onPress={collectionChange}
+          onPress={() => collectionChange(data.is_collection!)}
           style={[
             styles.infoFocus,
             data?.is_collection === 1 ? styles.activeFoucus : styles.infoFocus

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { followActors, unFollowActors } from '@/api/actor';
+import { followActor, unFollowActor } from '@/api/actor';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
 
@@ -36,7 +36,7 @@ function ActorInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 0) {
-      followActors({ id: data.id! })
+      followActor({ id: data.id! })
         .then((res: ResponseType<unknown>) => {
           if (res.code === 200) {
             props.refreshDetail();
@@ -47,7 +47,7 @@ function ActorInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 1) {
-      unFollowActors({ id: data.id! })
+      unFollowActor({ id: data.id! })
         .then((res: ResponseType<unknown>) => {
           if (res.code === 200) {
             props.refreshDetail();
