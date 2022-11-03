@@ -78,6 +78,13 @@ function Actor(): React.ReactElement {
     </TouchableOpacity>
   );
 
+  // 无数据展示
+  const ListEmptyComponent = (): React.ReactElement => (
+    <View style={styles.noData}>
+      <Text style={styles.noDataText}>您还没有关注任何影人</Text>
+    </View>
+  );
+
   return (
     <View style={styles.page}>
       <ScrollRefresh
@@ -86,6 +93,7 @@ function Actor(): React.ReactElement {
         request={getUserActors}
         initialNumToRender={6}
         renderItem={renderItem}
+        ListEmptyComponent={<ListEmptyComponent />}
       />
     </View>
   );
@@ -95,7 +103,8 @@ const styles = StyleSheet.create({
   page: {
     paddingBottom: Platform.OS !== 'web' ? 10 : 0,
     width: '100%',
-    height: Platform.OS === 'web' ? viewHeight - 85 : viewHeight + 42 - 85,
+    // web端需要减去标题高度
+    height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
     backgroundColor: '#fff'
   },
   item: {
@@ -133,6 +142,16 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 11,
     color: '#999'
+  },
+  noData: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 280
+  },
+  noDataText: {
+    fontSize: 13.5,
+    color: '#aaa'
   }
 });
 
