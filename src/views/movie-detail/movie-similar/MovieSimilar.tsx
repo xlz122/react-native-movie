@@ -42,6 +42,9 @@ function MovieSimilar(props: Props): React.ReactElement {
         {item?.category && item?.category !== '电影' && (
           <Text style={styles.itemTag}>{item?.category}</Text>
         )}
+        {item?.rating !== null && Number(item?.rating) === 0 && (
+          <Text style={styles.itemRating}>暂无评分</Text>
+        )}
         {Number(item?.rating) > 0 && (
           <Text style={styles.itemRating}>{item?.rating}分</Text>
         )}

@@ -21,6 +21,7 @@ export type MovieItemType = {
   poster: string;
   category: string;
   rating: string;
+  wish_count: number;
   release_date: number;
 };
 
@@ -41,8 +42,14 @@ function Category(props: Props): React.ReactElement {
         {item?.category && item?.category !== '电影' && (
           <Text style={styles.itemTag}>{item?.category}</Text>
         )}
+        {item?.rating !== null && Number(item?.rating) === 0 && (
+          <Text style={styles.itemRating}>暂无评分</Text>
+        )}
         {Number(item?.rating) > 0 && (
           <Text style={styles.itemRating}>{item?.rating}分</Text>
+        )}
+        {Number(item?.wish_count) > 0 && (
+          <Text style={styles.itemWish}>{item?.wish_count} 想看</Text>
         )}
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
           {item.title}
@@ -109,6 +116,19 @@ const styles = StyleSheet.create({
     bottom: 34,
     fontSize: 10.5,
     color: 'orange'
+  },
+  itemWish: {
+    position: 'absolute',
+    left: 0,
+    bottom: 44,
+    width: 94,
+    height: 29,
+    paddingLeft: 4,
+    paddingTop: 10,
+    fontSize: 11,
+    color: '#fff',
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4
   },
   itemText: {
     width: 94,
