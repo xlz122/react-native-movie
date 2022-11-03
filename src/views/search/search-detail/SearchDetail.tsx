@@ -115,9 +115,11 @@ function SearchDetail(props: Props): React.ReactElement {
             {item.countries}
           </Text>
         </View>
-        <Text style={styles.itemRating}>
-          <Text style={styles.itemRatingWeight}>{item?.rating}</Text>分
-        </Text>
+        {Number(item?.rating) > 0 && (
+          <Text style={styles.itemRating}>
+            <Text style={styles.itemRatingWeight}>{item?.rating}</Text> 分
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
