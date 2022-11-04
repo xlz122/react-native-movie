@@ -1,100 +1,144 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
   Image,
   StyleSheet,
+  FlatList,
   TouchableOpacity,
   Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { movieComing } from '@/api/home';
-import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation, ResponseType } from '@/types/index';
-import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
+
+type ComingType = {
+  list: ItemType[];
+  stickyIndex: number[];
+};
 
 type ItemType = {
-  id: number;
-  poster: string;
-  title: string;
-  wish_count: number;
-  genres: string;
-  countries: string;
+  stickyTitle?: string;
+  id?: number;
+  poster?: string;
+  title?: string;
+  release_date?: string;
+  wish_count?: number;
+  genres?: string;
+  countries?: string;
 };
 
 function Coming(): React.ReactElement {
   const navigation: Navigation = useNavigation();
+  const [coming, setComing] = useState<ComingType>({
+    list: [],
+    stickyIndex: []
+  });
 
-  const getMovieComing = ({
-    page,
-    per_page
-  }: {
-    page: number;
-    per_page: number;
-  }): Promise<unknown[]> => {
-    return new Promise((resolve, reject) => {
-      movieComing({ page, per_page })
-        .then((res: ResponseType<unknown[]>) => {
-          if (res.code === 200) {
-            resolve(res.data!);
-          } else {
-            reject();
-          }
-        })
-        .catch(() => ({}));
-    });
+  const getMovieComing = (): void => {
+    movieComing({ page: 1, per_page: 100 })
+      .then((res: ResponseType<any[]>) => {
+        if (res.code === 200) {
+          const list: ItemType[] = [];
+          const stickyIndex: number[] = [];
+
+          res.data?.forEach(item => {
+            const isExist = list.find(
+              t => t.release_date === item.release_date
+            );
+
+            // 吸顶标题、索引
+            if (!isExist) {
+              list.push({ stickyTitle: item.release_date });
+              stickyIndex.push(list.length - 1);
+            }
+
+            // 电影项
+            list.push(item);
+          });
+
+          setComing({ list, stickyIndex });
+        }
+      })
+      .catch(() => ({}));
   };
 
-  const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
-    <TouchableOpacity
-      activeOpacity={1}
-      onPress={() => navigation.push('MovieDetail', { id: item.id })}
-    >
-      <View style={styles.item}>
-        <Image
-          source={{ uri: item.poster }}
-          resizeMode={'stretch'}
-          style={[styles.itemImage]}
-        />
-        <View style={styles.itemInfo}>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemTitle}>
-            {item.title}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            <Text style={styles.itemCountText}>{item.wish_count}</Text>
-            <Text>人想看</Text>
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            {item.genres}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            {item.countries}
-          </Text>
+  useEffect(() => {
+    getMovieComing();
+  }, []);
+
+  const renderItem = ({ item }: { item: ItemType }) => (
+    <>
+      {item.stickyTitle && (
+        <View style={styles.sticky}>
+          <Text style={styles.stickyText}>{item.stickyTitle}</Text>
         </View>
-      </View>
-    </TouchableOpacity>
+      )}
+      {!item.stickyTitle && (
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => navigation.push('MovieDetail', { id: item.id })}
+        >
+          <View style={styles.item}>
+            <Image
+              source={{ uri: item.poster }}
+              resizeMode={'stretch'}
+              style={[styles.itemImage]}
+            />
+            <View style={styles.itemInfo}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.itemTitle}
+              >
+                {item.title}
+              </Text>
+              <Text style={styles.itemText}>
+                <Text style={styles.itemCountText}>{item.wish_count}</Text>
+                <Text>人想看</Text>
+              </Text>
+              <Text style={styles.itemText}>{item.genres}</Text>
+              <Text style={styles.itemText}>{item.countries}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      )}
+    </>
   );
 
   return (
     <View style={styles.page}>
-      <ScrollRefresh
-        page={1}
-        pageSize={10}
-        request={getMovieComing}
-        initialNumToRender={6}
-        renderItem={renderItem}
-      />
+      {Boolean(coming.list.length) && (
+        <FlatList
+          stickyHeaderIndices={coming.stickyIndex}
+          data={coming.list}
+          renderItem={renderItem}
+        />
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   page: {
-    paddingBottom: Platform.OS !== 'web' ? 10 : 0,
+    paddingBottom: 10,
     // web端需要减去标题高度
     height: Platform.OS === 'web' ? viewHeight - 42 : viewHeight,
     backgroundColor: '#fff'
+  },
+  sticky: {
+    paddingHorizontal: 14,
+    backgroundColor: '#fff',
+    borderBottomWidth: 0.45,
+    borderStyle: 'solid',
+    borderColor: '#dedede'
+  },
+  stickyText: {
+    paddingVertical: 10,
+    fontWeight: '700',
+    fontSize: 14,
+    color: '#303133'
   },
   item: {
     display: 'flex',
