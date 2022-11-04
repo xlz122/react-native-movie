@@ -130,6 +130,15 @@ function RegisterForm(): React.ReactElement {
   };
 
   const submit = async (): Promise<boolean | undefined> => {
+    if (!formData.account) {
+      CustomAlert({ title: '提示', message: '请先输入手机号' });
+      return false;
+    }
+    if (!formData.password) {
+      CustomAlert({ title: '提示', message: '请先输入密码' });
+      return false;
+    }
+
     const filedCode = await handleFiledPhoneCode();
     if (!filedCode.code) {
       CustomAlert({ title: '提示', message: filedCode?.message });
