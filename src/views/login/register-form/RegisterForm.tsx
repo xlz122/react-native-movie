@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { register, getCaptcha, filedCaptcha, filedPhoneCode } from '@/api/user';
 import type { Navigation, TextInputEvent, ResponseType } from '@/types/index';
 import type { LoginParams } from '@/api/user';
+import CustomAlert from '@/components/custom-alert/CustomAlert';
 import PicutreCode from '@/components/picture-code/PicutreCode';
 
 function RegisterForm(): React.ReactElement {
@@ -61,11 +62,11 @@ function RegisterForm(): React.ReactElement {
   // 获取图片验证码
   const handleGetCaptcha = () => {
     if (!formData.account) {
-      Alert.alert('提示', '请先输入手机号', [{ text: '确认' }]);
+      CustomAlert({ title: '提示', message: '请先输入手机号' });
       return false;
     }
     if (!formData.password) {
-      Alert.alert('提示', '请先输入密码', [{ text: '确认' }]);
+      CustomAlert({ title: '提示', message: '请先输入密码' });
       return false;
     }
 
@@ -74,7 +75,7 @@ function RegisterForm(): React.ReactElement {
         if (res.code === 200) {
           setCaptcha({ ...captcha, visible: true, img: res?.data || '' });
         } else {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(() => ({}));
@@ -92,19 +93,19 @@ function RegisterForm(): React.ReactElement {
           setCaptcha({ ...captcha, visible: false });
           handleTimeText();
 
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
           return false;
         }
 
         // 短信验证上限
         if (res.code === 450) {
           setCaptcha({ ...captcha, visible: false });
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
           return false;
         }
 
         handleGetCaptcha();
-        Alert.alert('提示', res?.message, [{ text: '确认' }]);
+        CustomAlert({ title: '提示', message: res?.message });
       })
       .catch(() => ({}));
   };
@@ -121,7 +122,7 @@ function RegisterForm(): React.ReactElement {
           if (res.code === 200) {
             resolve(res);
           } else {
-            Alert.alert('提示', res?.message, [{ text: '确认' }]);
+            CustomAlert({ title: '提示', message: res?.message });
           }
         })
         .catch(() => ({}));
@@ -131,17 +132,17 @@ function RegisterForm(): React.ReactElement {
   const submit = async (): Promise<boolean | undefined> => {
     const filedCode = await handleFiledPhoneCode();
     if (!filedCode.code) {
-      Alert.alert('提示', filedCode?.message, [{ text: '确认' }]);
+      CustomAlert({ title: '提示', message: filedCode?.message });
       return false;
     }
 
     register({ ...formData })
       .then((res: ResponseType<unknown>) => {
         if (res.code === 200) {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
           navigation.replace('Login');
         } else {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(() => ({}));

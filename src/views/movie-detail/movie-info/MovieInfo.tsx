@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { movieWish } from '@/api/movies';
@@ -8,6 +8,7 @@ import type { ResponseType, Navigation } from '@/types/index';
 import type { ActorItemType } from '../movie-actor/MovieActor';
 import type { RoleItemType } from '../movie-roles/MovieRoles';
 import Panel from '@/components/panel/Panel';
+import CustomAlert from '@/components/custom-alert/CustomAlert';
 import MovieActor from '../movie-actor/MovieActor';
 import MovieRoles from '../movie-roles/MovieRoles';
 import styles from './movie-info.css';
@@ -72,7 +73,7 @@ function MovieInfo(props: Props): React.ReactElement {
       .then((res: ResponseType<unknown>) => {
         if (res.code === 200) {
           props.refreshDetail();
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(() => ({}));
