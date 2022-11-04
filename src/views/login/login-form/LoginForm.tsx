@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useStore } from 'react-redux';
 import { login, userinfo } from '@/api/user';
 import type { Navigation, TextInputEvent, ResponseType } from '@/types/index';
 import type { LoginParams } from '@/api/user';
+import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 function LoginForm(): React.ReactElement {
   const navigation: Navigation = useNavigation();
@@ -49,10 +50,12 @@ function LoginForm(): React.ReactElement {
 
   const submit = () => {
     if (!formData.account) {
-      return Alert.alert('提示', '请输入手机号', [{ text: '确认' }]);
+      CustomAlert({ title: '提示', message: '请输入手机号' });
+      return false;
     }
     if (!formData.password) {
-      return Alert.alert('提示', '请输入密码', [{ text: '确认' }]);
+      CustomAlert({ title: '提示', message: '请输入密码' });
+      return false;
     }
 
     login({ ...formData })
@@ -77,12 +80,12 @@ function LoginForm(): React.ReactElement {
             navigation.goBack();
           }
         } else {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(err => {
         if (err?.response?.data?.message) {
-          Alert.alert('提示', err?.response?.data?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: err?.response?.data?.message });
         }
       });
   };
