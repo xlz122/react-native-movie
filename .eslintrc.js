@@ -6,6 +6,7 @@ module.exports = {
     'no-param-reassign': [0],
     // 取消 { a, b, c } 多个变量需要换行
     'object-curly-newline': [0],
+    'no-alert': [0],
 
     // 禁用var，使用let、const
     'no-var': 2,
