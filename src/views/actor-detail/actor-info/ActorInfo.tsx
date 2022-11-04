@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { followActor, unFollowActor } from '@/api/actor';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
+import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 type Props = {
   data: Partial<Info>;
@@ -40,7 +41,7 @@ function ActorInfo(props: Props): React.ReactElement {
         .then((res: ResponseType<unknown>) => {
           if (res.code === 200) {
             props.refreshDetail();
-            Alert.alert('提示', res?.message, [{ text: '确认' }]);
+            CustomAlert({ title: '提示', message: res?.message });
           }
         })
         .catch(() => ({}));
@@ -51,7 +52,7 @@ function ActorInfo(props: Props): React.ReactElement {
         .then((res: ResponseType<unknown>) => {
           if (res.code === 200) {
             props.refreshDetail();
-            Alert.alert('提示', res?.message, [{ text: '确认' }]);
+            CustomAlert({ title: '提示', message: res?.message });
           }
         })
         .catch(() => ({}));

@@ -6,8 +6,7 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
-  Platform,
-  Alert
+  Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useStore } from 'react-redux';
@@ -20,6 +19,7 @@ import {
   modifyPassword
 } from '@/api/user';
 import type { Navigation, TextInputEvent, ResponseType } from '@/types/index';
+import CustomAlert from '@/components/custom-alert/CustomAlert';
 import PicutreCode from '@/components/picture-code/PicutreCode';
 
 function Forget(): React.ReactElement {
@@ -84,7 +84,7 @@ function Forget(): React.ReactElement {
         if (res.code === 200) {
           setProgress(1);
         } else {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(() => ({}));
@@ -102,7 +102,7 @@ function Forget(): React.ReactElement {
         if (res.code === 200) {
           setCaptcha({ ...captcha, visible: true, img: res?.data || '' });
         } else {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(() => ({}));
@@ -122,19 +122,19 @@ function Forget(): React.ReactElement {
           setCaptcha({ ...captcha, visible: false });
           handleTimeText();
 
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
           return false;
         }
 
         // 短信验证上限
         if (res.code === 450) {
           setCaptcha({ ...captcha, visible: false });
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
           return false;
         }
 
         handleGetCaptcha();
-        Alert.alert('提示', res?.message, [{ text: '确认' }]);
+        CustomAlert({ title: '提示', message: res?.message });
       })
       .catch(() => ({}));
   };
@@ -155,7 +155,7 @@ function Forget(): React.ReactElement {
             payload: res?.data?.token
           });
         } else {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(() => ({}));
@@ -166,14 +166,14 @@ function Forget(): React.ReactElement {
     modifyPassword({ password: formData.password })
       .then((res: ResponseType<unknown>) => {
         if (res.code === 200) {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
           store.dispatch({
             type: 'routine/setLogout',
             payload: ''
           });
           navigation.replace('Login');
         } else {
-          Alert.alert('提示', res?.message, [{ text: '确认' }]);
+          CustomAlert({ title: '提示', message: res?.message });
         }
       })
       .catch(() => ({}));
