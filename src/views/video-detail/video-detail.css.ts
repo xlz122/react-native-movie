@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#7f889b'
   },
+  activeIcon: {
+    color: '#e54847'
+  },
   toolItemText: {
     fontSize: 9,
     color: '#7f889b'
