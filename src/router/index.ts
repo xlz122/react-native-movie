@@ -111,6 +111,12 @@ const router: Router[] = [
     component: require('../views/role/Role').default
   },
   {
+    name: 'Video',
+    title: '收藏视频',
+    headerShown: true,
+    component: require('../views/video/Video').default
+  },
+  {
     name: 'RoleDetail',
     title: '',
     headerShown: true,

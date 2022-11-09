@@ -38,7 +38,7 @@ function ActorInfo(props: Props): React.ReactElement {
 
     if (is_collection === 0) {
       followActor({ id: data.id! })
-        .then((res: ResponseType<unknown>) => {
+        .then((res: ResponseType) => {
           if (res.code === 200) {
             props.refreshDetail();
             CustomAlert({ title: '提示', message: res?.message });
@@ -49,7 +49,7 @@ function ActorInfo(props: Props): React.ReactElement {
 
     if (is_collection === 1) {
       unFollowActor({ id: data.id! })
-        .then((res: ResponseType<unknown>) => {
+        .then((res: ResponseType) => {
           if (res.code === 200) {
             props.refreshDetail();
             CustomAlert({ title: '提示', message: res?.message });
