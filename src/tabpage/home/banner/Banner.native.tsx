@@ -1,7 +1,17 @@
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import GestureSwiper from '@/components/gesture-swiper/GestureSwiper';
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions
+} from 'react-native';
+import { useSharedValue } from 'react-native-reanimated';
+import Carousel from 'react-native-reanimated-carousel';
 import Dot from './dot/Dot';
+
+// 获取屏幕宽度
+const pageWidth = Dimensions.get('window').width;
 
 type Props = {
   banner: BannerItem[];
@@ -13,7 +23,10 @@ type BannerItem = {
 };
 
 function Banner(props: Props): React.ReactElement {
-  const renderItem = ({ item }: { item: BannerItem }) => {
+  // 轮播滚动值
+  const progressValue = useSharedValue<number>(0);
+
+  const RenderItem = ({ item }: { item: BannerItem }) => {
     return (
       <TouchableOpacity activeOpacity={1}>
         <View style={styles.coverContainer}>
@@ -31,12 +44,22 @@ function Banner(props: Props): React.ReactElement {
 
   return (
     <View style={styles.banner}>
-      <GestureSwiper
-        data={props?.banner || []}
-        renderItem={renderItem}
-        itemStyle={styles.coverContainer}
+      <Carousel
+        width={pageWidth}
+        height={styles.banner.height}
+        data={props.banner}
+        renderItem={({ item }) => <RenderItem item={item} />}
+        loop={true}
+        autoPlay={true}
+        autoPlayInterval={6000}
+        onProgressChange={(_, absoluteProgress) =>
+          (progressValue.value = absoluteProgress)
+        }
+        onSnapToItem={index => {
+          props.onChange(index);
+        }}
       />
-      <Dot list={props.banner} />
+      <Dot list={props.banner} progressValue={progressValue} />
     </View>
   );
 }
@@ -47,7 +70,7 @@ const styles = StyleSheet.create({
     height: 190
   },
   coverContainer: {
-    paddingHorizontal: 5
+    paddingHorizontal: 10
   },
   cover: {
     position: 'relative',

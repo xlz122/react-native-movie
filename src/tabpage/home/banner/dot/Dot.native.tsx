@@ -1,22 +1,80 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle
+} from 'react-native-reanimated';
+import type { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   list: unknown[];
+  progressValue?: SharedValue<number>;
+};
+
+type PaginationItemType = {
+  animValue: SharedValue<number>;
+  index: number;
+  length: number;
 };
 
 function Dot(props: Props): React.ReactElement {
+  const PaginationItem = ({ animValue, index, length }: PaginationItemType) => {
+    const width = 15;
+
+    const animStyle = useAnimatedStyle(() => {
+      let inputRange = [index - 1, index, index + 1];
+      let outputRange = [-width, 0, width];
+
+      if (index === 0 && animValue?.value > length - 1) {
+        inputRange = [length - 1, length, length + 1];
+        outputRange = [-width, 0, width];
+      }
+
+      return {
+        transform: [
+          {
+            translateX: interpolate(
+              animValue?.value,
+              inputRange,
+              outputRange,
+              Extrapolate.CLAMP
+            )
+          }
+        ],
+        backgroundColor: '#e54847'
+      };
+    }, [animValue, index, length]);
+
+    return (
+      <View
+        style={[
+          {
+            overflow: 'hidden',
+            transform: [
+              {
+                rotateZ: '0deg'
+              }
+            ]
+          },
+          styles.dotItem
+        ]}
+      >
+        <Animated.View style={[{ flex: 1 }, animStyle]} />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.dotContainer}>
       {props.list &&
         props.list.map((item, index) => {
           return (
-            <View
+            <PaginationItem
               key={index}
-              style={[
-                styles.dotItem,
-                index === 0 ? styles.dotActiveItem : styles.dotItem
-              ]}
+              animValue={props.progressValue!}
+              index={index}
+              length={props.list.length}
             />
           );
         })}
@@ -40,9 +98,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     backgroundColor: '#fff',
     borderRadius: 10
-  },
-  dotActiveItem: {
-    backgroundColor: '#e54847'
   }
 });
 

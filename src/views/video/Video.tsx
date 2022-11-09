@@ -8,23 +8,27 @@ import {
   Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { timeStampToDuration } from '@/utils/utils';
 import { viewHeight } from '@/utils/screen';
-import { userRoles } from '@/api/mine';
+import { userVideos } from '@/api/mine';
 import type { ListRenderItemInfo } from 'react-native';
-import type { Navigation, ResponseType } from '@/types/index';
+import type { ResponseType, Navigation } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
 type ItemType = {
   id: number;
-  avatar: string;
-  name: string;
-  name_en: string;
+  poster: string;
+  duration: number;
+  title: string;
+  like_count: number;
+  play_count: number;
+  created_at: string;
 };
 
-function Role(): React.ReactElement {
+function Video(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getUserRoles = ({
+  const getUserVideos = ({
     page,
     per_page
   }: {
@@ -32,7 +36,7 @@ function Role(): React.ReactElement {
     per_page: number;
   }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
-      userRoles({ page, per_page })
+      userVideos({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
           if (res.code === 200) {
             resolve(res.data!);
@@ -47,21 +51,31 @@ function Role(): React.ReactElement {
   const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => navigation.push('RoleDetail', { id: item.id })}
+      onPress={() => navigation.push('VideoDetail', { id: item.id })}
     >
       <View style={styles.item}>
-        <Image
-          source={{ uri: item.avatar }}
-          resizeMode={'stretch'}
-          style={[styles.itemImage]}
-        />
+        <View style={styles.itemCover}>
+          <Image
+            source={{ uri: item.poster }}
+            resizeMode={'stretch'}
+            style={[styles.itemImage]}
+          />
+          <Text style={styles.coverText}>
+            {timeStampToDuration(item.duration)}
+          </Text>
+        </View>
         <View style={styles.itemInfo}>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemTitle}>
-            {item.name}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
-            {item.name_en}
-          </Text>
+          <Text style={styles.infoTitle}>{item.title}</Text>
+          <View style={styles.infoDesc}>
+            <Text style={styles.descText}>
+              {item.like_count}
+              <Text>赞</Text>
+              <Text> · </Text>
+              {item.play_count}
+              <Text>播放</Text>
+            </Text>
+            <Text style={styles.descText}>{item.created_at?.slice(0, 10)}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -70,7 +84,7 @@ function Role(): React.ReactElement {
   // 无数据展示
   const ListEmptyComponent = (): React.ReactElement => (
     <View style={styles.noData}>
-      <Text style={styles.noDataText}>您还没有关注任何角色</Text>
+      <Text style={styles.noDataText}>您还没有收藏任何视频</Text>
     </View>
   );
 
@@ -79,7 +93,7 @@ function Role(): React.ReactElement {
       <ScrollRefresh
         page={1}
         pageSize={10}
-        request={getUserRoles}
+        request={getUserVideos}
         initialNumToRender={6}
         renderItem={renderItem}
         ListEmptyComponent={<ListEmptyComponent />}
@@ -100,28 +114,44 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     paddingTop: 16,
-    marginRight: -20,
     marginLeft: 16
   },
+  itemCover: {
+    position: 'relative'
+  },
   itemImage: {
-    width: 70,
-    height: 92,
+    width: 117,
+    height: 66,
     borderRadius: 3
+  },
+  coverText: {
+    position: 'absolute',
+    top: 47,
+    right: 6,
+    zIndex: 2,
+    fontSize: 9,
+    color: '#fff'
   },
   itemInfo: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    marginLeft: 13
+    justifyContent: 'space-between',
+    marginHorizontal: 10
   },
-  itemTitle: {
-    marginBottom: 1,
+  infoTitle: {
+    fontWeight: '700',
     fontSize: 13,
-    color: '#333'
+    color: '#303133'
   },
-  itemText: {
-    marginTop: 8,
-    fontSize: 11,
+  infoDesc: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  descText: {
+    fontSize: 10,
     color: '#999'
   },
   noData: {
@@ -136,4 +166,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Role;
+export default Video;
