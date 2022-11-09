@@ -11,7 +11,7 @@ type UserInfo = {
   birthday?: string | null;
 };
 
-function User(): React.ReactElement {
+function UserProfile(): React.ReactElement {
   const userinfo = useSelector(
     (state: RootState) => state.routine.userinfo
   ) as UserInfo;
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default User;
+export default UserProfile;
