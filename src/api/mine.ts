@@ -40,3 +40,16 @@ export const userRoles = ({ page, per_page }: CollectionParams) => {
     params
   });
 };
+
+/**
+ * @description 用户收藏的视频
+ */
+export const userVideos = ({ page, per_page }: CollectionParams) => {
+  const params = { page, per_page };
+
+  return axios.request({
+    url: '/user/collections/videos',
+    method: 'get',
+    params
+  });
+};

@@ -119,14 +119,6 @@ const styles = StyleSheet.create({
     height: 92,
     borderRadius: 3
   },
-  itemCoverText: {
-    position: 'absolute',
-    top: 1.6,
-    left: 5,
-    zIndex: 1,
-    fontSize: 10,
-    color: '#fff'
-  },
   itemInfo: {
     flex: 1,
     display: 'flex',

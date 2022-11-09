@@ -101,7 +101,7 @@ function MineCount(): React.ReactElement {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => jumpFlollowDetail('')}
+        onPress={() => jumpFlollowDetail('Video')}
         style={styles.countItem}
       >
         <Text style={styles.countItemCount}>
