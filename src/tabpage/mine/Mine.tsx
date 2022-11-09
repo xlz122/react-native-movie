@@ -65,7 +65,7 @@ function Mine(props: Props): React.ReactElement {
         <View style={styles.cell}>
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => props?.navigation?.push('User')}
+            onPress={() => props?.navigation?.push('UserProfile')}
             style={styles.cellItem}
           >
             <Text style={styles.cellItemIcon}>{'\ue6c8'}</Text>

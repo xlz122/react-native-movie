@@ -71,7 +71,7 @@ function MineCount(): React.ReactElement {
     <View style={styles.count}>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => jumpFlollowDetail('Actor')}
+        onPress={() => jumpFlollowDetail('UserActor')}
         style={styles.countItem}
       >
         <Text style={styles.countItemCount}>
@@ -81,7 +81,7 @@ function MineCount(): React.ReactElement {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => jumpFlollowDetail('Role')}
+        onPress={() => jumpFlollowDetail('UserRole')}
         style={styles.countItem}
       >
         <Text style={styles.countItemCount}>
@@ -101,7 +101,7 @@ function MineCount(): React.ReactElement {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => jumpFlollowDetail('Video')}
+        onPress={() => jumpFlollowDetail('UserVideo')}
         style={styles.countItem}
       >
         <Text style={styles.countItemCount}>

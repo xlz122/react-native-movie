@@ -8,27 +8,25 @@ import {
   Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { timeStampToDuration } from '@/utils/utils';
 import { viewHeight } from '@/utils/screen';
-import { userVideos } from '@/api/mine';
+import { userActors } from '@/api/mine';
 import type { ListRenderItemInfo } from 'react-native';
 import type { ResponseType, Navigation } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
 
 type ItemType = {
   id: number;
-  poster: string;
-  duration: number;
-  title: string;
-  like_count: number;
-  play_count: number;
-  created_at: string;
+  avatar: string;
+  name: string;
+  name_en: string;
+  gender: string;
+  country: string;
 };
 
-function Video(): React.ReactElement {
+function UserActor(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const getUserVideos = ({
+  const getUserActors = ({
     page,
     per_page
   }: {
@@ -36,7 +34,7 @@ function Video(): React.ReactElement {
     per_page: number;
   }): Promise<unknown[]> => {
     return new Promise((resolve, reject) => {
-      userVideos({ page, per_page })
+      userActors({ page, per_page })
         .then((res: ResponseType<unknown[]>) => {
           if (res.code === 200) {
             resolve(res.data!);
@@ -51,31 +49,30 @@ function Video(): React.ReactElement {
   const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => navigation.push('VideoDetail', { id: item.id })}
+      onPress={() => navigation.push('ActorDetail', { id: item.id })}
     >
       <View style={styles.item}>
-        <View style={styles.itemCover}>
-          <Image
-            source={{ uri: item.poster }}
-            resizeMode={'stretch'}
-            style={[styles.itemImage]}
-          />
-          <Text style={styles.coverText}>
-            {timeStampToDuration(item.duration)}
-          </Text>
-        </View>
+        <Image
+          source={{ uri: item.avatar }}
+          resizeMode={'stretch'}
+          style={[styles.itemImage]}
+        />
         <View style={styles.itemInfo}>
-          <Text style={styles.infoTitle}>{item.title}</Text>
-          <View style={styles.infoDesc}>
-            <Text style={styles.descText}>
-              {item.like_count}
-              <Text>赞</Text>
-              <Text> · </Text>
-              {item.play_count}
-              <Text>播放</Text>
-            </Text>
-            <Text style={styles.descText}>{item.created_at?.slice(0, 10)}</Text>
-          </View>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemTitle}>
+            {item.name}
+          </Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
+            {item.name_en}
+          </Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
+            {item.gender}
+            {Boolean(item?.country) && (
+              <>
+                <Text> · </Text>
+                {item?.country}
+              </>
+            )}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -84,7 +81,7 @@ function Video(): React.ReactElement {
   // 无数据展示
   const ListEmptyComponent = (): React.ReactElement => (
     <View style={styles.noData}>
-      <Text style={styles.noDataText}>您还没有收藏任何视频</Text>
+      <Text style={styles.noDataText}>您还没有关注任何影人</Text>
     </View>
   );
 
@@ -93,7 +90,7 @@ function Video(): React.ReactElement {
       <ScrollRefresh
         page={1}
         pageSize={10}
-        request={getUserVideos}
+        request={getUserActors}
         initialNumToRender={6}
         renderItem={renderItem}
         ListEmptyComponent={<ListEmptyComponent />}
@@ -114,44 +111,28 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     paddingTop: 16,
+    marginRight: -20,
     marginLeft: 16
   },
-  itemCover: {
-    position: 'relative'
-  },
   itemImage: {
-    width: 117,
-    height: 66,
+    width: 70,
+    height: 92,
     borderRadius: 3
-  },
-  coverText: {
-    position: 'absolute',
-    top: 47,
-    right: 6,
-    zIndex: 2,
-    fontSize: 9,
-    color: '#fff'
   },
   itemInfo: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginHorizontal: 10
+    marginLeft: 13
   },
-  infoTitle: {
-    fontWeight: '700',
+  itemTitle: {
+    marginBottom: 1,
     fontSize: 13,
-    color: '#303133'
+    color: '#333'
   },
-  infoDesc: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  descText: {
-    fontSize: 10,
+  itemText: {
+    marginTop: 8,
+    fontSize: 11,
     color: '#999'
   },
   noData: {
@@ -166,4 +147,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Video;
+export default UserActor;

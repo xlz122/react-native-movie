@@ -48,19 +48,19 @@ const router: Router[] = [
     name: 'Theater',
     title: '正在热映',
     headerShown: true,
-    component: require('../views/theater/Theater').default
+    component: require('../views/movie/theater/Theater').default
   },
   {
     name: 'Coming',
     title: '即将上映',
     headerShown: true,
-    component: require('../views/coming/Coming').default
+    component: require('../views/movie/coming/Coming').default
   },
   {
     name: 'HighScore',
     title: 'TOP 100',
     headerShown: true,
-    component: require('../views/high-score/HighScore').default
+    component: require('../views/movie/high-score/HighScore').default
   },
   {
     name: 'Awards',
@@ -72,7 +72,7 @@ const router: Router[] = [
     name: 'Today',
     title: '那年今日',
     headerShown: true,
-    component: require('../views/today/Today').default
+    component: require('../views/movie/today/Today').default
   },
   {
     name: 'MovieDetail',
@@ -81,10 +81,10 @@ const router: Router[] = [
     component: require('../views/movie-detail/MovieDetail').default
   },
   {
-    name: 'VideoDetail',
-    title: '',
-    headerShown: true,
-    component: require('../views/video-detail/VideoDetail').default
+    name: 'MovieSummary',
+    title: '剧情',
+    headerShown: false,
+    component: require('../views/movie-summary/MovieSummary').default
   },
   {
     name: 'Photos',
@@ -93,28 +93,10 @@ const router: Router[] = [
     component: require('../views/photos/Photos').default
   },
   {
-    name: 'MovieSummary',
-    title: '剧情',
-    headerShown: false,
-    component: require('../views/movie-summary/MovieSummary').default
-  },
-  {
-    name: 'Actor',
-    title: '关注影人',
+    name: 'VideoDetail',
+    title: '',
     headerShown: true,
-    component: require('../views/actor/Actor').default
-  },
-  {
-    name: 'Role',
-    title: '关注角色',
-    headerShown: true,
-    component: require('../views/role/Role').default
-  },
-  {
-    name: 'Video',
-    title: '收藏视频',
-    headerShown: true,
-    component: require('../views/video/Video').default
+    component: require('../views/video-detail/VideoDetail').default
   },
   {
     name: 'RoleDetail',
@@ -135,16 +117,34 @@ const router: Router[] = [
     component: require('../views/actor-detail/ActorDetail').default
   },
   {
+    name: 'UserActor',
+    title: '关注影人',
+    headerShown: true,
+    component: require('../views/user/user-actor/UserActor').default
+  },
+  {
+    name: 'UserRole',
+    title: '关注角色',
+    headerShown: true,
+    component: require('../views/user/user-role/UserRole').default
+  },
+  {
+    name: 'UserVideo',
+    title: '收藏视频',
+    headerShown: true,
+    component: require('../views/user/user-video/UserVideo').default
+  },
+  {
+    name: 'UserProfile',
+    title: '个人资料',
+    headerShown: true,
+    component: require('../views/user/user-profile/UserProfile').default
+  },
+  {
     name: 'Project',
     title: '关于项目',
     headerShown: true,
     component: require('../views/project/Project').default
-  },
-  {
-    name: 'User',
-    title: '个人资料',
-    headerShown: true,
-    component: require('../views/user/User').default
   },
   {
     name: 'Author',
