@@ -1,7 +1,6 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '@/utils/utils';
 import { deviceHeight } from '@/utils/screen';
