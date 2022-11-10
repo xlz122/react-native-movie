@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import type { ListRenderItemInfo } from 'react-native';
+import type { ViewStyle, ListRenderItemInfo } from 'react-native';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType } from '@/types/index';
 import ScrollRefresh from '@/components/scroll-refresh/ScrollRefresh';
@@ -12,6 +12,7 @@ type Route = RouteProp<{ params: { id: number } }>;
 type Props = {
   method: Function;
   close?: () => void;
+  commentStyle?: ViewStyle;
 };
 
 type ItemType = {
@@ -105,7 +106,7 @@ function Comment(props: Props): React.ReactElement {
   );
 
   return (
-    <View style={styles.page}>
+    <View style={[styles.page, props?.commentStyle]}>
       <TouchableOpacity activeOpacity={1} style={styles.mask} />
       <View style={styles.modal}>
         <View style={styles.modalHeader}>

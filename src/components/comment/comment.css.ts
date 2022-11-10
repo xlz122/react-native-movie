@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { deviceWidth, deviceHeight } from '@/utils/screen';
 
 const styles = StyleSheet.create({
@@ -8,26 +8,22 @@ const styles = StyleSheet.create({
     left: 0,
     zIndex: 10,
     width: deviceWidth,
-    // web端需要减去标题高度
-    height: Platform.OS === 'web' ? deviceHeight - 42 : deviceHeight
+    height: deviceHeight
   },
   mask: {
     position: 'absolute',
     top: 0,
     left: 0,
     zIndex: 11,
-    width: deviceWidth,
-    // web端需要减去标题高度
-    height: Platform.OS === 'web' ? deviceHeight - 42 : deviceHeight
+    width: '100%',
+    height: '100%'
   },
   modal: {
     position: 'absolute',
     bottom: 0,
     zIndex: 12,
     width: deviceWidth,
-    // web端需要减去标题高度
-    height:
-      Platform.OS === 'web' ? deviceHeight - 160 - 42 : deviceHeight - 160,
+    height: deviceHeight - 202,
     backgroundColor: '#fff',
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4
