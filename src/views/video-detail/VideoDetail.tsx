@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
@@ -8,13 +8,15 @@ import {
   videoLike,
   unVideoLike,
   followVideo,
-  unFollowVideo
+  unFollowVideo,
+  videoComment
 } from '@/api/videos';
 import type { RouteProp } from '@react-navigation/native';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
 import CustomHeader from '@/components/custom-header/CustomHeader';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
+import Comment from '@/components/comment/Comment';
 import Video from './video/Video';
 import VideoInfo from './video-info/VideoInfo';
 import VideoList from './video-list/VideoList';
@@ -142,6 +144,15 @@ function VideoDetail(): React.ReactElement {
     }
   };
 
+  // 评论
+  const [comment, setComment] = useState({
+    visible: false
+  });
+
+  const handleCommentClose = (): void => {
+    setComment({ ...comment, visible: false });
+  };
+
   return (
     <>
       <Video data={detail} />
@@ -198,16 +209,23 @@ function VideoDetail(): React.ReactElement {
                 : '收藏'}
             </Text>
           </TouchableOpacity>
-          <View style={styles.toolItem}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => setComment({ ...comment, visible: true })}
+            style={styles.toolItem}
+          >
             <Text style={styles.toolItemIcon}>{'\ue620'}</Text>
             <Text style={styles.toolItemText}>
               {detail?.comment_count && detail?.comment_count > 0
                 ? detail?.comment_count
                 : '评论'}
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
+      {comment.visible && (
+        <Comment method={videoComment} close={handleCommentClose} />
+      )}
     </>
   );
 }

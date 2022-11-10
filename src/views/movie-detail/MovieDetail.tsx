@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '@/utils/utils';
-import { moviesDetail } from '@/api/movies';
+import { moviesDetail, movieComment } from '@/api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
 import type { MovieInfoType } from './movie-info/MovieInfo';
 import type { ItemType } from './movie-similar/MovieSimilar';
 import CustomHeader from '@/components/custom-header/CustomHeader';
 import Panel from '@/components/panel/Panel';
+import Comment from '@/components/comment/Comment';
 import MovieInfo from './movie-info/MovieInfo';
 import MoviePhoto from './movie-photo/MoviePhoto';
 import MovieSimilar from './movie-similar/MovieSimilar';
@@ -118,6 +119,15 @@ function MovieDeail(): React.ReactElement {
     });
   }, [gradientColor]);
 
+  // 评论
+  const [comment, setComment] = useState({
+    visible: false
+  });
+
+  const handleCommentClose = (): void => {
+    setComment({ ...comment, visible: false });
+  };
+
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
@@ -161,16 +171,23 @@ function MovieDeail(): React.ReactElement {
                 : '收藏'}
             </Text>
           </View>
-          <View style={styles.toolItem}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => setComment({ ...comment, visible: true })}
+            style={styles.toolItem}
+          >
             <Text style={styles.toolItemIcon}>{'\ue620'}</Text>
             <Text style={styles.toolItemText}>
               {detail?.comment_count && detail?.comment_count > 0
                 ? detail?.comment_count
                 : '评论'}
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
+      {comment.visible && (
+        <Comment method={movieComment} close={handleCommentClose} />
+      )}
     </>
   );
 }

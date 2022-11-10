@@ -91,3 +91,25 @@ export const unFollowVideo = ({ id }: { id: number }) => {
     method: 'delete'
   });
 };
+
+type VideoCommentParams = {
+  id: number;
+  page: number;
+  per_page: number;
+};
+
+/**
+ * @description 视频详情 - 评论列表
+ * @param { Number } id - 视频id
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ */
+export const videoComment = ({ id, page, per_page }: VideoCommentParams) => {
+  const params = { id, page, per_page };
+
+  return axios.request({
+    url: `/videos/${id}/comments`,
+    method: 'get',
+    params
+  });
+};
