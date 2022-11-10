@@ -59,13 +59,6 @@ export const moviesDetail = ({ id }: { id: number }) => {
   });
 };
 
-export type MoviePhotosParams = {
-  id: number;
-  type: string;
-  page: number;
-  per_page: number;
-};
-
 /**
  * @description 影视详情 - 新增或删除我的想看
  * @param { Number } id - 影视id
@@ -91,6 +84,13 @@ export const movieActor = ({ id }: { id: number }) => {
   });
 };
 
+export type MoviePhotosParams = {
+  id: number;
+  type: string;
+  page: number;
+  per_page: number;
+};
+
 /**
  * @description 影视详情 - 相册列表
  * @param { Number } id - 影视id
@@ -108,6 +108,28 @@ export const moviePhotos = ({
 
   return axios.request({
     url: `/movies/${id}/photos`,
+    method: 'get',
+    params
+  });
+};
+
+type MovieCommentParams = {
+  id: number;
+  page: number;
+  per_page: number;
+};
+
+/**
+ * @description 影视详情 - 评论列表
+ * @param { Number } id - 影视id
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ */
+export const movieComment = ({ id, page, per_page }: MovieCommentParams) => {
+  const params = { id, page, per_page };
+
+  return axios.request({
+    url: `/movies/${id}/comments`,
     method: 'get',
     params
   });
