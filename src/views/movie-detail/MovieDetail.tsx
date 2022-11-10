@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '@/utils/utils';
+import { deviceHeight } from '@/utils/screen';
 import { moviesDetail, movieComment } from '@/api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
@@ -186,7 +187,11 @@ function MovieDeail(): React.ReactElement {
         </View>
       </View>
       {comment.visible && (
-        <Comment method={movieComment} close={handleCommentClose} />
+        <Comment
+          method={movieComment}
+          close={handleCommentClose}
+          commentStyle={{ height: deviceHeight - 42 }}
+        />
       )}
     </>
   );
