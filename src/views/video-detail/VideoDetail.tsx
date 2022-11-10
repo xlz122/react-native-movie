@@ -165,11 +165,15 @@ function VideoDetail(): React.ReactElement {
         />
       </ScrollView>
       <View style={styles.comment}>
-        <View style={styles.review}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => setComment({ ...comment, visible: true })}
+          style={styles.review}
+        >
           <View style={styles.reviewInput}>
             <Text style={styles.reviewInputText}>来点碎碎念...</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <View style={styles.tool}>
           <TouchableOpacity
             activeOpacity={1}
