@@ -8,8 +8,7 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { viewHeight } from '@/utils/screen';
 import { movieActor } from '@/api/movies';
 import type { RouteProp } from '@react-navigation/native';
