@@ -7,7 +7,7 @@ import {
   ScrollView,
   FlatList
 } from 'react-native';
-import { timeStampToDuration } from '@/utils/utils';
+import { timeStampToDuration, formatDate } from '@/utils/utils';
 import { videosDetailList } from '@/api/videos';
 import type { ListRenderItemInfo } from 'react-native';
 import type { ResponseType } from '@/types/index';
@@ -122,7 +122,7 @@ function VideoList(props: Props): React.ReactElement {
                       <Text>播放</Text>
                     </Text>
                     <Text style={styles.descText}>
-                      {item.created_at?.slice(0, 10)}
+                      {formatDate(item.created_at)}
                     </Text>
                   </View>
                 </View>

@@ -8,7 +8,7 @@ import {
   Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { timeStampToDuration } from '@/utils/utils';
+import { timeStampToDuration, formatDate } from '@/utils/utils';
 import { viewHeight } from '@/utils/screen';
 import { userVideos } from '@/api/mine';
 import type { ListRenderItemInfo } from 'react-native';
@@ -74,7 +74,7 @@ function UserVideo(): React.ReactElement {
               {item.play_count}
               <Text>播放</Text>
             </Text>
-            <Text style={styles.descText}>{item.created_at?.slice(0, 10)}</Text>
+            <Text style={styles.descText}>{formatDate(item.created_at)}</Text>
           </View>
         </View>
       </View>
