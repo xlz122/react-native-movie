@@ -126,6 +126,14 @@ const styles = StyleSheet.create({
   itemText: {
     color: '#333'
   },
+  itemDeleteText: {
+    maxWidth: 96,
+    paddingVertical: 1,
+    paddingHorizontal: 5,
+    backgroundColor: '#f5f5f5',
+    color: '#999',
+    borderRadius: 4
+  },
   itemInfo: {
     display: 'flex',
     flexDirection: 'row',

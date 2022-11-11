@@ -24,7 +24,7 @@ type ItemType = {
   content: string;
   created_at: string;
   like_count: number;
-  is_delete: boolean;
+  is_delete: number;
 };
 
 function Comment(props: Props): React.ReactElement {
@@ -86,7 +86,12 @@ function Comment(props: Props): React.ReactElement {
         </TouchableOpacity>
       </View>
       <View style={styles.itemContent}>
-        <Text style={styles.itemText}>{item.content}</Text>
+        {item.is_delete === 0 && (
+          <Text style={styles.itemText}>{item.content}</Text>
+        )}
+        {item.is_delete === 1 && (
+          <Text style={styles.itemDeleteText}>{item.content}</Text>
+        )}
       </View>
       <View style={styles.itemInfo}>
         <Text style={styles.infoText}>{item.created_at?.slice(0, 10)}</Text>
