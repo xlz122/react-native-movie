@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { formatDate } from '@/utils/utils';
 import type { ViewStyle, ListRenderItemInfo } from 'react-native';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType } from '@/types/index';
@@ -94,7 +95,7 @@ function Comment(props: Props): React.ReactElement {
         )}
       </View>
       <View style={styles.itemInfo}>
-        <Text style={styles.infoText}>{item.created_at?.slice(0, 10)}</Text>
+        <Text style={styles.infoText}>{formatDate(item.created_at)}</Text>
         <View style={styles.infoDesc}>
           <Text style={styles.descText}>{item.like_count}</Text>
           <Text style={styles.descIcon}>{'\ue669'}</Text>

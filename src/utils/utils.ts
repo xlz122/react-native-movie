@@ -67,3 +67,52 @@ export function timeStampToDuration(timeStamp: number): string {
 
   return ok;
 }
+
+/**
+ * @description 格式化日期字符串
+ * @return { String } 1分钟前/1小时前
+ */
+export function formatDate(datatime: string): string {
+  let dateTimeStamp = new Date(datatime).getTime();
+
+  let minute = 1000 * 60;
+  let hour = minute * 60;
+  let day = hour * 24;
+
+  let month = day * 30;
+  let year = month * 12;
+  let now = new Date().getTime();
+  let diffValue = now - dateTimeStamp;
+  let result = '';
+
+  if (diffValue < 0) {
+    return '';
+  }
+
+  let monthC = diffValue / month;
+  let weekC = diffValue / (7 * day);
+  let dayC = diffValue / day;
+  let hourC = diffValue / hour;
+  let minC = diffValue / minute;
+  let yearC = diffValue / year;
+
+  if (yearC >= 1) {
+    return '' + parseInt(String(yearC)) + '年前';
+  }
+
+  if (monthC >= 1) {
+    result = '' + parseInt(String(monthC)) + '月前';
+  } else if (weekC >= 1) {
+    result = '' + parseInt(String(weekC)) + '周前';
+  } else if (dayC >= 1) {
+    result = '' + parseInt(String(dayC)) + '天前';
+  } else if (hourC >= 1) {
+    result = '' + parseInt(String(hourC)) + '小时前';
+  } else if (minC >= 1) {
+    result = '' + parseInt(String(minC)) + '分钟前';
+  } else {
+    result = '刚刚';
+  }
+
+  return result;
+}
