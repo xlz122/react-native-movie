@@ -1,4 +1,4 @@
-Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/iconfont.md) | [项目插件](docs/plugin.md)
+Readme | [阿里字体图标](docs/iconfont.md) | [插件介绍](docs/plugin.md) | [平台差异对比](docs/difference.md) | [打包apk](docs/release.md) 
 
 ## 环境要求
 
@@ -28,7 +28,7 @@ Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/ic
 ## 项目使用技术栈
 
 * React
-* React Native 0.70.5
+* React Native 0.70.6
 * Redux
 * Typescript
 

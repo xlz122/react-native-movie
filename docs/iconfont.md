@@ -1,4 +1,4 @@
-[Readme.md](../README.md) | [平台差异对比](./difference.md) | 阿里字体图标 | [项目插件](./plugin.md)
+[Readme.md](../README.md) | 阿里字体图标 | [插件介绍](./plugin.md) | [平台差异对比](./difference.md) | [打包apk](./release.md) 
 
 ## 1.将iconfont图标文件放置在src/assets/fonts
 

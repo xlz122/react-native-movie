@@ -1,4 +1,4 @@
-[Readme.md](../README.md) | [平台差异对比](./difference.md) | [阿里字体图标](./iconfont.md) | 项目插件
+[Readme.md](../README.md) | [阿里字体图标](./iconfont.md) | 插件介绍 | [平台差异对比](./difference.md) | [打包apk](./release.md) 
 
 手势
 
