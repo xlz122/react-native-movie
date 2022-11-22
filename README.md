@@ -1,4 +1,4 @@
-Readme | [平台差异对比](docs/difference.md) | [阿里字体图标](docs/iconfont.md) | [项目插件](docs/plugin.md)
+Readme.md | [阿里字体图标](docs/iconfont.md) | [插件介绍](./plugin.md) | [平台差异对比](./difference.md) | [打包apk](./release.md) 
 
 ## 环境要求
 
