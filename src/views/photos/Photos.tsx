@@ -156,13 +156,14 @@ const styles = StyleSheet.create({
   list: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     flexWrap: 'wrap',
     padding: 10
   },
   item: {
     display: 'flex',
     flexDirection: 'row',
+    marginRight: 6,
     marginBottom: 10
   },
   itemImage: {
