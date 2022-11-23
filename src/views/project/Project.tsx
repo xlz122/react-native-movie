@@ -7,10 +7,10 @@ function Project(): React.ReactElement {
       <View style={styles.cell}>
         <View style={styles.cellItem}>
           <Text style={styles.itemText}>react native</Text>
-          <Text style={styles.itemRightText}>0.70.4</Text>
+          <Text style={styles.itemRightText}>0.70.6</Text>
         </View>
         <View style={[styles.cellItem, styles.cellLastItem]}>
-          <Text style={styles.itemText}>维护时间</Text>
+          <Text style={styles.itemText}>维护</Text>
           <Text style={styles.itemRightText}>长期维护</Text>
         </View>
       </View>
