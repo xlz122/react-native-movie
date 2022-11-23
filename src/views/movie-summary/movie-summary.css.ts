@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     color: '#666'
   },
   itemValue: {
+    flex: 1,
     fontSize: 13.8,
     color: '#333'
   },
