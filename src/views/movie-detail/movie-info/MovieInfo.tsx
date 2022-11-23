@@ -79,6 +79,12 @@ function MovieInfo(props: Props): React.ReactElement {
       .catch(() => ({}));
   };
 
+  const movieWatchChange = (): void => {
+    if (!isLogin) {
+      navigation.push('Login');
+    }
+  };
+
   // 即将上映/已上映
   const RenderRating = (): React.ReactElement => {
     // 即将上映
@@ -143,9 +149,7 @@ function MovieInfo(props: Props): React.ReactElement {
           style={[styles.infoImage]}
         />
         <View style={styles.infoDesc}>
-          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.descTitle}>
-            {data?.title}
-          </Text>
+          <Text style={styles.descTitle}>{data?.title}</Text>
           <View style={styles.descBrief}>
             <Text
               numberOfLines={1}
@@ -193,10 +197,12 @@ function MovieInfo(props: Props): React.ReactElement {
               </View>
             </TouchableOpacity>
             {data?.release_status !== 1 && (
-              <View style={styles.operateItem}>
-                <Text style={styles.operateIcon}>{'\ue911'}</Text>
-                <Text style={styles.operateText}>看过</Text>
-              </View>
+              <TouchableOpacity activeOpacity={1} onPress={movieWatchChange}>
+                <View style={styles.operateItem}>
+                  <Text style={styles.operateIcon}>{'\ue911'}</Text>
+                  <Text style={styles.operateText}>看过</Text>
+                </View>
+              </TouchableOpacity>
             )}
           </View>
         </View>
