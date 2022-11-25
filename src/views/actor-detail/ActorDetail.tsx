@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { actorsDetail } from '@/api/actor';
 import type { RouteProp } from '@react-navigation/native';
@@ -19,6 +19,11 @@ type Detail = {
   collection_count: number;
   works_count: number;
   role_count: number;
+  award?: {
+    poster: string;
+    title: string;
+  };
+  award_count: number;
   summary: string[];
   photos: {
     url: string;
@@ -87,6 +92,22 @@ function ActorDetail(): React.ReactElement {
           <Text style={styles.countItemLabel}>饰演角色</Text>
         </View>
       </View>
+      {Number(detail?.award_count) > 0 && (
+        <View style={styles.award}>
+          <Image
+            source={{ uri: detail?.award?.poster }}
+            resizeMode={'cover'}
+            style={[styles.awardImage]}
+          />
+          <Text style={styles.awardTitle}>{detail?.award?.title}</Text>
+          <View style={styles.awardCount}>
+            <Text style={styles.awardCountText}>
+              {`获奖${detail?.award_count}次`}
+            </Text>
+            <Text style={styles.awardCountIcon}>{'\ue906'}</Text>
+          </View>
+        </View>
+      )}
       <Panel title="个人简介" subtitle={'更多信息'}>
         {Boolean(detail?.summary) && (
           <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
@@ -128,8 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 72,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingVertical: 10,
     margin: 10,
     backgroundColor: '#fff',
     borderRadius: 4
@@ -155,6 +175,46 @@ const styles = StyleSheet.create({
   },
   countLastItem: {
     borderRightWidth: 0
+  },
+  award: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    height: 72,
+    paddingHorizontal: 10,
+    margin: 10,
+    marginTop: 0,
+    backgroundColor: '#fff',
+    borderRadius: 4
+  },
+  awardImage: {
+    width: 44,
+    height: 44,
+    borderRadius: 50
+  },
+  awardTitle: {
+    flex: 1,
+    paddingLeft: 9.5,
+    fontWeight: '700',
+    fontSize: 15,
+    color: '#303133'
+  },
+  awardCount: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  awardCountText: {
+    fontSize: 12.5,
+    color: '#999'
+  },
+  awardCountIcon: {
+    marginTop: 1.5,
+    fontFamily: 'iconfont',
+    fontSize: 12,
+    color: '#999'
   },
   summary: {
     paddingHorizontal: 10,
