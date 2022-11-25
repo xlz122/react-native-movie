@@ -2,32 +2,12 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { Navigation } from '@/types/index';
+import type { VideoDetailType } from '../VideoDetail';
 import styles from './video-info.css';
 
 type Props = {
-  detail: InfoType;
+  detail: Partial<VideoDetailType>;
   refreshDetail: () => void;
-};
-
-type InfoType = {
-  id?: number;
-  author?: {
-    avatar?: string;
-    username?: string;
-    video_count?: number;
-  };
-  title?: string;
-  created_at?: string;
-  play_count?: number;
-  movie?: {
-    id?: number;
-    poster?: string;
-    title?: string;
-    rating?: string;
-    year?: number;
-    countries?: string;
-    genres?: string;
-  };
 };
 
 function VideoInfo(props: Props): React.ReactElement {

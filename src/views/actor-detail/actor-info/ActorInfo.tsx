@@ -5,28 +5,12 @@ import { useSelector } from 'react-redux';
 import { followActor, unFollowActor } from '@/api/actor';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
+import type { ActorDetailType } from '../ActorDetail';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 type Props = {
-  detail: Partial<ActorInfoType>;
+  detail: Partial<ActorDetailType>;
   refreshDetail: () => void;
-};
-
-export type ActorInfoType = {
-  id: number;
-  avatar?: string;
-  name?: string;
-  name_en?: string;
-  gender?: string;
-  birthday?: string;
-  age?: string;
-  country?: string;
-  born_place?: string;
-  professions?: Array<string>;
-  constellation?: string;
-  height?: string;
-  summary?: string;
-  is_collection: number;
 };
 
 function ActorInfo(props: Props): React.ReactElement {

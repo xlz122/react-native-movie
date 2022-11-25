@@ -7,9 +7,9 @@ import { deviceHeight } from '@/utils/screen';
 import { moviesDetail, movieComment } from '@/api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
-import type { MovieInfoType } from './movie-info/MovieInfo';
 import type { ActorItemType } from './movie-actor/MovieActor';
 import type { ItemType } from './movie-similar/MovieSimilar';
+import type { RoleItemType } from './movie-roles/MovieRoles';
 import CustomHeader from '@/components/custom-header/CustomHeader';
 import Panel from '@/components/panel/Panel';
 import Comment from '@/components/comment/Comment';
@@ -22,7 +22,7 @@ import styles from './movie-detail.css';
 
 type Route = RouteProp<{ params: { id: number } }>;
 
-type Detail = {
+export type MovieDetailType = {
   bgcolor: string;
   cast: ActorItemType[];
   photos: {
@@ -32,17 +32,51 @@ type Detail = {
   review_count: number;
   collection_count: number;
   comment_count: number;
-} & MovieInfoType;
+  id: number;
+  title?: string;
+  poster: {
+    small: string;
+  };
+  year: number;
+  release_status: number;
+  release_date: string;
+  genres: string[];
+  countries: string[];
+  durations: string[];
+  episode_count: number;
+  wish_count: number;
+  is_wish: boolean;
+  rating: string;
+  awards_nominate_count: number;
+  thrid_rating: {
+    douban: {
+      count: string;
+      rating: string;
+    };
+  };
+  tags: string[];
+  egg_hunt: number;
+  summary: string;
+  cast_count: number;
+  role_count: number;
+  roles: RoleItemType[];
+  akas: string[];
+  languages: string[];
+  category: string;
+  pubdates: string[];
+  color: number;
+  season_count: number;
+};
 
 function MovieDeail(): React.ReactElement {
   const navigation: Navigation = useNavigation();
   const route: Route = useRoute();
 
-  const [detail, setDetail] = useState<Partial<Detail>>({});
+  const [detail, setDetail] = useState<Partial<MovieDetailType>>({});
 
   const getMovieDetail = () => {
     moviesDetail({ id: route.params.id })
-      .then((res: ResponseType<Partial<Detail>>) => {
+      .then((res: ResponseType<Partial<MovieDetailType>>) => {
         if (res.code === 200) {
           setDetail(res.data!);
         }
@@ -136,7 +170,7 @@ function MovieDeail(): React.ReactElement {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         <LinearGradinet colors={gradientColor}>
           <MovieInfo
-            detail={detail as MovieInfoType}
+            detail={detail as MovieDetailType}
             refreshDetail={refreshDetail}
           />
           <Panel

@@ -5,50 +5,13 @@ import { useSelector } from 'react-redux';
 import { movieWish } from '@/api/movies';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
-import type { RoleItemType } from '../movie-roles/MovieRoles';
+import type { MovieDetailType } from '../MovieDetail';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 import styles from './movie-info.css';
 
 type Props = {
-  detail: MovieInfoType;
+  detail: MovieDetailType;
   refreshDetail: () => void;
-};
-
-export type MovieInfoType = {
-  id: number;
-  title?: string;
-  poster: {
-    small: string;
-  };
-  year: number;
-  release_status: number;
-  release_date: string;
-  genres: string[];
-  countries: string[];
-  durations: string[];
-  episode_count: number;
-  wish_count: number;
-  is_wish: boolean;
-  rating: string;
-  awards_nominate_count: number;
-  thrid_rating: {
-    douban: {
-      count: string;
-      rating: string;
-    };
-  };
-  tags: string[];
-  egg_hunt: number;
-  summary: string;
-  cast_count: number;
-  role_count: number;
-  roles: RoleItemType[];
-  akas: string[];
-  languages: string[];
-  category: string;
-  pubdates: string[];
-  color: number;
-  season_count: number;
 };
 
 function MovieInfo(props: Props): React.ReactElement {
@@ -65,7 +28,7 @@ function MovieInfo(props: Props): React.ReactElement {
     }
 
     movieWish({ id: detail.id })
-      .then((res: ResponseType<unknown>) => {
+      .then((res: ResponseType) => {
         if (res.code === 200) {
           props.refreshDetail();
           CustomAlert({ title: '提示', message: res?.message });

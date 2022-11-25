@@ -3,10 +3,10 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import type { RouteProp } from '@react-navigation/native';
 import type { Navigation } from '@/types/index';
-import type { ActorInfoType } from '../actor-info/ActorInfo';
+import type { ActorDetailType } from '../ActorDetail';
 import styles from './actor-summary.css';
 
-type Route = RouteProp<{ params: { detail: ActorInfoType } }>;
+type Route = RouteProp<{ params: { detail: ActorDetailType } }>;
 
 function ActorSummary(): React.ReactElement {
   const navigation: Navigation = useNavigation();

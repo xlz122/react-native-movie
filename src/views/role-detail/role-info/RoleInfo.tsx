@@ -5,19 +5,12 @@ import { useSelector } from 'react-redux';
 import { followRole, unFollowRole } from '@/api/role';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
+import type { RoleDetailType } from '../RoleDetail';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 type Props = {
-  detail: Partial<Info>;
+  detail: Partial<RoleDetailType>;
   refreshDetail: () => void;
-};
-
-type Info = {
-  id?: number;
-  avatar?: string;
-  name?: string;
-  name_en?: string;
-  is_collection?: number;
 };
 
 function RoleInfo(props: Props): React.ReactElement {

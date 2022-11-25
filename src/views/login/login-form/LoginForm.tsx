@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useStore } from 'react-redux';
 import { login, userinfo } from '@/api/user';
 import type { Navigation, TextInputEvent, ResponseType } from '@/types/index';
-import type { LoginParams } from '@/api/user';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 function LoginForm(): React.ReactElement {
@@ -24,7 +23,7 @@ function LoginForm(): React.ReactElement {
     });
   };
 
-  const [formData, setFormData] = useState<LoginParams>({
+  const [formData, setFormData] = useState({
     account: '',
     password: ''
   });
@@ -37,7 +36,7 @@ function LoginForm(): React.ReactElement {
   const getUserInfo = () => {
     return new Promise((resolve, reject) => {
       userinfo()
-        .then((res: ResponseType<unknown>) => {
+        .then((res: ResponseType) => {
           if (res.code === 200) {
             resolve(res.data!);
           } else {

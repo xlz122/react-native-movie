@@ -3,10 +3,10 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import type { RouteProp } from '@react-navigation/native';
 import type { Navigation } from '@/types/index';
-import type { MovieInfoType } from '../movie-info/MovieInfo';
+import type { MovieDetailType } from '../MovieDetail';
 import styles from './movie-summary.css';
 
-type Route = RouteProp<{ params: { detail: MovieInfoType } }>;
+type Route = RouteProp<{ params: { detail: MovieDetailType } }>;
 
 function MovieSummary(): React.ReactElement {
   const navigation: Navigation = useNavigation();
