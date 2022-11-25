@@ -10,7 +10,7 @@ export const userCount = () => {
   });
 };
 
-export type CollectionParams = {
+export type BaseParams = {
   page: number;
   per_page: number;
 };
@@ -18,7 +18,7 @@ export type CollectionParams = {
 /**
  * @description 用户关注的影人
  */
-export const userActors = ({ page, per_page }: CollectionParams) => {
+export const userActors = ({ page, per_page }: BaseParams) => {
   const params = { page, per_page };
 
   return axios.request({
@@ -31,7 +31,7 @@ export const userActors = ({ page, per_page }: CollectionParams) => {
 /**
  * @description 用户关注的角色
  */
-export const userRoles = ({ page, per_page }: CollectionParams) => {
+export const userRoles = ({ page, per_page }: BaseParams) => {
   const params = { page, per_page };
 
   return axios.request({
@@ -44,7 +44,7 @@ export const userRoles = ({ page, per_page }: CollectionParams) => {
 /**
  * @description 用户收藏的视频
  */
-export const userVideos = ({ page, per_page }: CollectionParams) => {
+export const userVideos = ({ page, per_page }: BaseParams) => {
   const params = { page, per_page };
 
   return axios.request({

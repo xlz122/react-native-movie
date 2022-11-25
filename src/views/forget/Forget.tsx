@@ -80,7 +80,7 @@ function Forget(): React.ReactElement {
   // 验证手机号
   const handleFieldAccount = (): void => {
     fieldAccount({ account: formData.account })
-      .then((res: ResponseType<unknown>) => {
+      .then((res: ResponseType) => {
         if (res.code === 200) {
           setProgress(1);
         } else {
@@ -115,7 +115,7 @@ function Forget(): React.ReactElement {
       code,
       type: 'forget'
     })
-      .then((res: ResponseType<unknown>) => {
+      .then((res: ResponseType) => {
         if (res.code === 200) {
           setProgress(2);
 
@@ -164,7 +164,7 @@ function Forget(): React.ReactElement {
   // 修改密码
   const handleModifyPassword = () => {
     modifyPassword({ password: formData.password })
-      .then((res: ResponseType<unknown>) => {
+      .then((res: ResponseType) => {
         if (res.code === 200) {
           CustomAlert({ title: '提示', message: res?.message });
           store.dispatch({

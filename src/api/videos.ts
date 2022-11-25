@@ -1,6 +1,6 @@
 import axios from '@/utils/axios';
 
-export type VideoParams = {
+type VideoListParams = {
   page: number;
   per_page: number;
 };
@@ -10,7 +10,7 @@ export type VideoParams = {
  * @param { Number } page - 页数
  * @param { Number } per_page - 条数
  */
-export const videosList = ({ page, per_page }: VideoParams) => {
+export const videosList = ({ page, per_page }: VideoListParams) => {
   const params = { page, per_page };
 
   return axios.request({

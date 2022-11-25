@@ -16,8 +16,12 @@ import RoleActor from './role-actor/RoleActor';
 
 type Route = RouteProp<{ params: { id: number } }>;
 
-type Detail = {
+export type RoleDetailType = {
+  id?: number;
   avatar?: string;
+  name?: string;
+  name_en?: string;
+  is_collection?: number;
   collection_count: number;
   movie_count: number;
   actor_count: number;
@@ -31,11 +35,11 @@ function ActorDetail(): React.ReactElement {
   const navigation: Navigation = useNavigation();
   const route: Route = useRoute();
 
-  const [detail, setDetail] = useState<Partial<Detail>>({});
+  const [detail, setDetail] = useState<Partial<RoleDetailType>>({});
 
   const getRoleDetail = () => {
     roleDetail({ id: route.params.id })
-      .then((res: ResponseType<Partial<Detail>>) => {
+      .then((res: ResponseType<Partial<RoleDetailType>>) => {
         if (res.code === 200) {
           setDetail(res.data!);
         }
@@ -70,7 +74,7 @@ function ActorDetail(): React.ReactElement {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-      <RoleInfo data={detail} refreshDetail={refreshDetail} />
+      <RoleInfo detail={detail} refreshDetail={refreshDetail} />
       <View style={styles.count}>
         <View style={styles.countItem}>
           <Text style={styles.countItemValue}>

@@ -3,14 +3,13 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { register, getCaptcha, filedCaptcha, filedPhoneCode } from '@/api/user';
 import type { Navigation, TextInputEvent, ResponseType } from '@/types/index';
-import type { LoginParams } from '@/api/user';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 import PicutreCode from '@/components/picture-code/PicutreCode';
 
 function RegisterForm(): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const [formData, setFormData] = useState<LoginParams>({
+  const [formData, setFormData] = useState({
     account: '',
     password: '',
     code: ''
@@ -88,7 +87,7 @@ function RegisterForm(): React.ReactElement {
       code,
       type: 'register'
     })
-      .then((res: ResponseType<unknown>) => {
+      .then((res: ResponseType) => {
         if (res.code === 200) {
           setCaptcha({ ...captcha, visible: false });
           handleTimeText();
@@ -115,10 +114,10 @@ function RegisterForm(): React.ReactElement {
   };
 
   // 校验短信验证码
-  const handleFiledPhoneCode = (): Promise<ResponseType<unknown>> => {
+  const handleFiledPhoneCode = (): Promise<ResponseType> => {
     return new Promise(resolve => {
       filedPhoneCode({ phone: formData.account, code: formData.code! })
-        .then((res: ResponseType<unknown>) => {
+        .then((res: ResponseType) => {
           if (res.code === 200) {
             resolve(res);
           } else {
@@ -146,7 +145,7 @@ function RegisterForm(): React.ReactElement {
     }
 
     register({ ...formData })
-      .then((res: ResponseType<unknown>) => {
+      .then((res: ResponseType) => {
         if (res.code === 200) {
           CustomAlert({ title: '提示', message: res?.message });
           navigation.replace('Login');

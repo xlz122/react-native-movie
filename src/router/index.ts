@@ -84,13 +84,16 @@ const router: Router[] = [
     name: 'MovieSummary',
     title: '剧情',
     headerShown: false,
-    component: require('../views/movie-summary/MovieSummary').default
+    component: require('../views/movie-detail/movie-summary/MovieSummary')
+      .default
   },
   {
-    name: 'Photos',
+    name: 'MoviePhotoDetail',
     title: '相册',
     headerShown: true,
-    component: require('../views/photos/Photos').default
+    component:
+      require('../views/movie-detail/movie-photo-detail/MoviePhotoDetail')
+        .default
   },
   {
     name: 'VideoDetail',
@@ -115,6 +118,21 @@ const router: Router[] = [
     title: '',
     headerShown: true,
     component: require('../views/actor-detail/ActorDetail').default
+  },
+  {
+    name: 'ActorSummary',
+    title: '剧情',
+    headerShown: false,
+    component: require('../views/actor-detail/actor-summary/ActorSummary')
+      .default
+  },
+  {
+    name: 'ActorPhotoDetail',
+    title: '相册',
+    headerShown: true,
+    component:
+      require('../views/actor-detail/actor-photo-detail/ActorPhotoDetail')
+        .default
   },
   {
     name: 'UserActor',

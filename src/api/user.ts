@@ -1,9 +1,8 @@
 import axios from '@/utils/axios';
 
-export type LoginParams = {
+type LoginParams = {
   account: string;
   password: string;
-  code?: string;
 };
 
 /**
@@ -21,13 +20,19 @@ export const login = ({ account, password }: LoginParams) => {
   });
 };
 
+type RegisterParams = {
+  account: string;
+  password: string;
+  code: string;
+};
+
 /**
  * @description 注册
  * @param { String } account - 账号
  * @param { String } password - 密码
  * @param { String } code - 验证码
  */
-export const register = ({ account, password, code }: LoginParams) => {
+export const register = ({ account, password, code }: RegisterParams) => {
   const data = { account, password, code };
 
   return axios.request({

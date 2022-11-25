@@ -3,7 +3,7 @@ import { View, Image, StyleSheet } from 'react-native';
 import { deviceWidth } from '@/utils/screen';
 
 type Props = {
-  data: InfoType;
+  detail: InfoType;
 };
 
 type InfoType = {
@@ -11,12 +11,12 @@ type InfoType = {
 };
 
 function Video(props: Props): React.ReactElement {
-  const { data } = props;
+  const { detail } = props;
 
   return (
     <View style={styles.page}>
       <Image
-        source={{ uri: data.poster }}
+        source={{ uri: detail.poster }}
         resizeMode={'stretch'}
         style={[styles.coverImage]}
       />

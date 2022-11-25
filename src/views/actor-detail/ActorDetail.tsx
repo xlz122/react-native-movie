@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { actorsDetail } from '@/api/actor';
 import type { RouteProp } from '@react-navigation/native';
@@ -10,16 +10,32 @@ import Panel from '@/components/panel/Panel';
 import ActorInfo from './actor-info/ActorInfo';
 import ActorPhoto from './actor-photo/ActorPhoto';
 import ActorWorks from './actor-wroks/ActorWorks';
+import styles from './actor-detail.css';
 
 type Route = RouteProp<{ params: { id: number } }>;
 
-type Detail = {
+export type ActorDetailType = {
   id: number;
   avatar?: string;
+  name?: string;
+  name_en?: string;
+  gender?: string;
+  birthday?: string;
+  age?: string;
+  country?: string;
+  born_place?: string;
+  professions?: Array<string>;
+  constellation?: string;
+  height?: string;
   collection_count: number;
   works_count: number;
   role_count: number;
-  summary: string[];
+  award?: {
+    poster: string;
+    title: string;
+  };
+  award_count: number;
+  summary: string;
   photos: {
     url: string;
   }[];
@@ -31,11 +47,11 @@ function ActorDetail(): React.ReactElement {
   const navigation: Navigation = useNavigation();
   const route: Route = useRoute();
 
-  const [detail, setDetail] = useState<Partial<Detail>>({});
+  const [detail, setDetail] = useState<Partial<ActorDetailType>>({});
 
   const getActorDetail = () => {
     actorsDetail({ id: route.params.id })
-      .then((res: ResponseType<Partial<Detail>>) => {
+      .then((res: ResponseType<Partial<ActorDetailType>>) => {
         if (res.code === 200) {
           setDetail(res.data!);
         }
@@ -70,7 +86,7 @@ function ActorDetail(): React.ReactElement {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-      <ActorInfo data={detail} refreshDetail={refreshDetail} />
+      <ActorInfo detail={detail} refreshDetail={refreshDetail} />
       <View style={styles.count}>
         <View style={styles.countItem}>
           <Text style={styles.countItemValue}>
@@ -87,7 +103,27 @@ function ActorDetail(): React.ReactElement {
           <Text style={styles.countItemLabel}>饰演角色</Text>
         </View>
       </View>
-      <Panel title="个人简介" subtitle={'更多信息'}>
+      {Number(detail?.award_count) > 0 && (
+        <View style={styles.award}>
+          <Image
+            source={{ uri: detail?.award?.poster }}
+            resizeMode={'cover'}
+            style={[styles.awardImage]}
+          />
+          <Text style={styles.awardTitle}>{detail?.award?.title}</Text>
+          <View style={styles.awardCount}>
+            <Text style={styles.awardCountText}>
+              {`获奖${detail?.award_count}次`}
+            </Text>
+            <Text style={styles.awardCountIcon}>{'\ue906'}</Text>
+          </View>
+        </View>
+      )}
+      <Panel
+        title="个人简介"
+        subtitle={'更多信息'}
+        to={{ path: 'ActorSummary', params: { detail: detail } }}
+      >
         {Boolean(detail?.summary) && (
           <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
             {detail?.summary}
@@ -100,7 +136,11 @@ function ActorDetail(): React.ReactElement {
         )}
       </Panel>
       {detail?.photos && detail?.photos?.length > 0 && (
-        <Panel title="相册" subtitle={`全部${detail?.photos?.length}张`}>
+        <Panel
+          title="相册"
+          subtitle={`全部${detail?.photos?.length}张`}
+          to={{ path: 'ActorPhotoDetail', params: { id: route.params.id } }}
+        >
           <ActorPhoto photo={detail?.photos} />
         </Panel>
       )}
@@ -116,65 +156,5 @@ function ActorDetail(): React.ReactElement {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    backgroundColor: '#f5f5f5'
-  },
-  count: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: 72,
-    paddingLeft: 10,
-    paddingRight: 10,
-    margin: 10,
-    backgroundColor: '#fff',
-    borderRadius: 4
-  },
-  countItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    borderRightWidth: 0.5,
-    borderStyle: 'solid',
-    borderColor: '#e5e5e5'
-  },
-  countItemValue: {
-    fontWeight: '700',
-    fontSize: 14,
-    color: '#303133'
-  },
-  countItemLabel: {
-    fontSize: 12,
-    color: '#888'
-  },
-  countLastItem: {
-    borderRightWidth: 0
-  },
-  summary: {
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    color: '#303133'
-  },
-  noSummary: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    color: '#303133'
-  },
-  noSummaryText: {
-    height: 75,
-    lineHeight: 75,
-    fontSize: 12,
-    color: '#999'
-  }
-});
 
 export default ActorDetail;

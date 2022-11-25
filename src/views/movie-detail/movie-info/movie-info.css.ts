@@ -171,9 +171,6 @@ const styles = StyleSheet.create({
   eggText: {
     fontSize: 12,
     color: '#b0b3bb'
-  },
-  summary: {
-    color: '#f5f5f5'
   }
 });
 

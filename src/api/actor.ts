@@ -35,3 +35,32 @@ export const unFollowActor = ({ id }: { id: number }) => {
     method: 'delete'
   });
 };
+
+type ActorPhotosParams = {
+  id: number;
+  type: string;
+  page: number;
+  per_page: number;
+};
+
+/**
+ * @description 影人详情 - 相册列表
+ * @param { Number } id - 影人id
+ * @param { String } type - 照片类型(all全部, portrait写真, cut截图, other其它)
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ */
+export const actorPhotos = ({
+  id,
+  type,
+  page,
+  per_page
+}: ActorPhotosParams) => {
+  const params = { id, type, page, per_page };
+
+  return axios.request({
+    url: `/actors/${id}/photos`,
+    method: 'get',
+    params
+  });
+};
