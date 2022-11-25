@@ -141,7 +141,7 @@ function MovieDeail(): React.ReactElement {
           <Panel
             title="相册"
             subtitle={`全部${detail?.photos?.length}`}
-            to={{ path: 'Photos', params: { movieId: route.params.id } }}
+            to={{ path: 'MoviePhotoDetail', params: { id: route.params.id } }}
             panelStyle={{ marginTop: 10 }}
           >
             <MoviePhoto photo={detail?.photos} />

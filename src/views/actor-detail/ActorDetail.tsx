@@ -122,7 +122,11 @@ function ActorDetail(): React.ReactElement {
         )}
       </Panel>
       {detail?.photos && detail?.photos?.length > 0 && (
-        <Panel title="相册" subtitle={`全部${detail?.photos?.length}张`}>
+        <Panel
+          title="相册"
+          subtitle={`全部${detail?.photos?.length}张`}
+          to={{ path: 'ActorPhotoDetail', params: { id: route.params.id } }}
+        >
           <ActorPhoto photo={detail?.photos} />
         </Panel>
       )}

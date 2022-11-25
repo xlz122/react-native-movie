@@ -84,7 +84,7 @@ export const movieActor = ({ id }: { id: number }) => {
   });
 };
 
-export type MoviePhotosParams = {
+type MoviePhotosParams = {
   id: number;
   type: string;
   page: number;
