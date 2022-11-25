@@ -64,3 +64,32 @@ export const actorPhotos = ({
     params
   });
 };
+
+type ActorWorksParams = {
+  id: number;
+  sortby: string;
+  page: number;
+  per_page: number;
+};
+
+/**
+ * @description 影人详情 - 作品列表
+ * @param { Number } id - 影人id
+ * @param { String } sortby - 排序方式(hot热度, year时间, rating评分)
+ * @param { Number } page - 页数
+ * @param { Number } per_page - 条数
+ */
+export const actorWorks = ({
+  id,
+  sortby,
+  page,
+  per_page
+}: ActorWorksParams) => {
+  const params = { id, sortby, page, per_page };
+
+  return axios.request({
+    url: `/actors/${id}/works`,
+    method: 'get',
+    params
+  });
+};

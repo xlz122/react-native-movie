@@ -148,6 +148,7 @@ function ActorDetail(): React.ReactElement {
         <Panel
           title="影视作品"
           subtitle={`全部${detail?.works_count}部`}
+          to={{ path: 'ActorWorksList', params: { id: route.params.id } }}
           panelStyle={{ paddingBottom: 10 }}
         >
           <ActorWorks movie={detail?.works} />
