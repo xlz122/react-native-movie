@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     height: viewHeight - 42 - 44,
     backgroundColor: '#f5f5f5'
   },
+  summary: {
+    color: '#f5f5f5'
+  },
   comment: {
     display: 'flex',
     flexDirection: 'row',

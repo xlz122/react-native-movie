@@ -8,11 +8,14 @@ import { moviesDetail, movieComment } from '@/api/movies';
 import type { RouteProp } from '@react-navigation/native';
 import type { ResponseType, Navigation } from '@/types/index';
 import type { MovieInfoType } from './movie-info/MovieInfo';
+import type { ActorItemType } from './movie-actor/MovieActor';
 import type { ItemType } from './movie-similar/MovieSimilar';
 import CustomHeader from '@/components/custom-header/CustomHeader';
 import Panel from '@/components/panel/Panel';
 import Comment from '@/components/comment/Comment';
 import MovieInfo from './movie-info/MovieInfo';
+import MovieActor from './movie-actor/MovieActor';
+import MovieRoles from './movie-roles/MovieRoles';
 import MoviePhoto from './movie-photo/MoviePhoto';
 import MovieSimilar from './movie-similar/MovieSimilar';
 import styles from './movie-detail.css';
@@ -21,7 +24,7 @@ type Route = RouteProp<{ params: { id: number } }>;
 
 type Detail = {
   bgcolor: string;
-  cast: unknown[];
+  cast: ActorItemType[];
   photos: {
     url: string;
   }[];
@@ -136,6 +139,46 @@ function MovieDeail(): React.ReactElement {
             detail={detail as MovieInfoType}
             refreshDetail={refreshDetail}
           />
+          <Panel
+            title="剧情"
+            to={{ path: 'MovieSummary', params: { detail: detail } }}
+            panelStyle={{ backgroundColor: 'transparent' }}
+            headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
+            lineStyle={{ display: 'none' }}
+            titleTextStyle={{ color: '#fff' }}
+            moreIconStyle={{ color: '#fff' }}
+          >
+            <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
+              {detail?.summary}
+            </Text>
+          </Panel>
+          <Panel
+            title="演员"
+            subtitle={`全部${detail?.cast_count}`}
+            to={{ path: 'ActorList', params: { movieId: detail.id } }}
+            panelStyle={{ backgroundColor: 'transparent' }}
+            headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
+            lineStyle={{ display: 'none' }}
+            titleTextStyle={{ color: '#fff' }}
+            subTitleStyle={{ color: '#fff' }}
+            moreIconStyle={{ color: '#fff' }}
+          >
+            <MovieActor movie={detail?.cast || []} />
+          </Panel>
+          {detail?.roles && detail?.roles?.length > 0 && (
+            <Panel
+              title="角色"
+              subtitle={`全部${detail?.role_count}`}
+              panelStyle={{ backgroundColor: 'transparent' }}
+              headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
+              lineStyle={{ display: 'none' }}
+              titleTextStyle={{ color: '#fff' }}
+              subTitleStyle={{ color: '#fff' }}
+              moreIconStyle={{ color: '#fff' }}
+            >
+              <MovieRoles movie={detail?.roles} />
+            </Panel>
+          )}
         </LinearGradinet>
         {detail?.photos && detail?.photos?.length > 0 && (
           <Panel

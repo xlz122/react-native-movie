@@ -5,12 +5,8 @@ import { useSelector } from 'react-redux';
 import { movieWish } from '@/api/movies';
 import type { RootState } from '@/store/index';
 import type { ResponseType, Navigation } from '@/types/index';
-import type { ActorItemType } from '../movie-actor/MovieActor';
 import type { RoleItemType } from '../movie-roles/MovieRoles';
-import Panel from '@/components/panel/Panel';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
-import MovieActor from '../movie-actor/MovieActor';
-import MovieRoles from '../movie-roles/MovieRoles';
 import styles from './movie-info.css';
 
 type Props = {
@@ -45,7 +41,6 @@ export type MovieInfoType = {
   egg_hunt: number;
   summary: string;
   cast_count: number;
-  cast: ActorItemType[];
   role_count: number;
   roles: RoleItemType[];
   akas: string[];
@@ -228,46 +223,6 @@ function MovieInfo(props: Props): React.ReactElement {
             {`有${detail?.egg_hunt}个彩蛋,不要错过哦~ `}
           </Text>
         </View>
-      )}
-      <Panel
-        title="剧情"
-        to={{ path: 'MovieSummary', params: { detail: detail } }}
-        panelStyle={{ backgroundColor: 'transparent' }}
-        headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
-        lineStyle={{ display: 'none' }}
-        titleTextStyle={{ color: '#fff' }}
-        moreIconStyle={{ color: '#fff' }}
-      >
-        <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
-          {detail?.summary}
-        </Text>
-      </Panel>
-      <Panel
-        title="演员"
-        subtitle={`全部${detail?.cast_count}`}
-        to={{ path: 'ActorList', params: { movieId: detail.id } }}
-        panelStyle={{ backgroundColor: 'transparent' }}
-        headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
-        lineStyle={{ display: 'none' }}
-        titleTextStyle={{ color: '#fff' }}
-        subTitleStyle={{ color: '#fff' }}
-        moreIconStyle={{ color: '#fff' }}
-      >
-        <MovieActor movie={detail?.cast} />
-      </Panel>
-      {detail?.roles && detail?.roles?.length > 0 && (
-        <Panel
-          title="角色"
-          subtitle={`全部${detail?.role_count}`}
-          panelStyle={{ backgroundColor: 'transparent' }}
-          headerStyle={{ paddingLeft: 0, paddingRight: 2 }}
-          lineStyle={{ display: 'none' }}
-          titleTextStyle={{ color: '#fff' }}
-          subTitleStyle={{ color: '#fff' }}
-          moreIconStyle={{ color: '#fff' }}
-        >
-          <MovieRoles movie={detail?.roles} />
-        </Panel>
       )}
     </View>
   );
