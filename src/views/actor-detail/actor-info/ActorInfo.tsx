@@ -8,18 +8,24 @@ import type { ResponseType, Navigation } from '@/types/index';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 type Props = {
-  data: Partial<Info>;
+  data: Partial<ActorInfoType>;
   refreshDetail: () => void;
 };
 
-type Info = {
+export type ActorInfoType = {
   id: number;
   avatar?: string;
   name?: string;
   name_en?: string;
   gender?: string;
   birthday?: string;
+  age?: string;
   country?: string;
+  born_place?: string;
+  professions?: Array<string>;
+  constellation?: string;
+  height?: string;
+  summary?: string;
   is_collection: number;
 };
 

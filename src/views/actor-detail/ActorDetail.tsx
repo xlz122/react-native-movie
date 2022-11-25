@@ -25,7 +25,7 @@ type Detail = {
     title: string;
   };
   award_count: number;
-  summary: string[];
+  summary: string;
   photos: {
     url: string;
   }[];
@@ -109,7 +109,11 @@ function ActorDetail(): React.ReactElement {
           </View>
         </View>
       )}
-      <Panel title="个人简介" subtitle={'更多信息'}>
+      <Panel
+        title="个人简介"
+        subtitle={'更多信息'}
+        to={{ path: 'ActorSummary', params: { detail: detail } }}
+      >
         {Boolean(detail?.summary) && (
           <Text numberOfLines={4} ellipsizeMode="tail" style={styles.summary}>
             {detail?.summary}
