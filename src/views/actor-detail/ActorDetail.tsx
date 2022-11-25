@@ -76,7 +76,7 @@ function ActorDetail(): React.ReactElement {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-      <ActorInfo data={detail} refreshDetail={refreshDetail} />
+      <ActorInfo detail={detail} refreshDetail={refreshDetail} />
       <View style={styles.count}>
         <View style={styles.countItem}>
           <Text style={styles.countItemValue}>

@@ -154,9 +154,9 @@ function VideoDetail(): React.ReactElement {
 
   return (
     <>
-      <Video data={detail} />
+      <Video detail={detail} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-        <VideoInfo data={detail} refreshDetail={refreshDetail} />
+        <VideoInfo detail={detail} refreshDetail={refreshDetail} />
         <VideoList
           detailId={detail.id}
           movieId={detail.movie?.id}

@@ -5,7 +5,7 @@ import type { Navigation } from '@/types/index';
 import styles from './video-info.css';
 
 type Props = {
-  data: InfoType;
+  detail: InfoType;
   refreshDetail: () => void;
 };
 
@@ -33,38 +33,40 @@ type InfoType = {
 function VideoInfo(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
 
-  const { data } = props;
+  const { detail } = props;
 
   return (
     <View style={styles.page}>
       <View style={styles.authorWarp}>
         <View style={styles.author}>
           <Image
-            source={{ uri: data?.author?.avatar }}
+            source={{ uri: detail?.author?.avatar }}
             resizeMode={'stretch'}
             style={[styles.authorAvatar]}
           />
           <View style={styles.authorInfo}>
-            <Text style={styles.authorName}>{data?.author?.username}</Text>
+            <Text style={styles.authorName}>{detail?.author?.username}</Text>
             <Text style={styles.authorCount}>
-              上传视频 {data?.author?.video_count} 个
+              上传视频 {detail?.author?.video_count} 个
             </Text>
           </View>
         </View>
         <Text style={styles.reportBtn}>举报</Text>
       </View>
-      <Text style={styles.title}>{data.title}</Text>
+      <Text style={styles.title}>{detail.title}</Text>
       <View style={styles.otherWarp}>
-        <Text style={styles.otherText}>发布于 {data.created_at}</Text>
-        <Text style={styles.otherText}>{data.play_count} 次播放</Text>
+        <Text style={styles.otherText}>发布于 {detail.created_at}</Text>
+        <Text style={styles.otherText}>{detail.play_count} 次播放</Text>
       </View>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => navigation.push('MovieDetail', { id: data?.movie?.id })}
+        onPress={() =>
+          navigation.push('MovieDetail', { id: detail?.movie?.id })
+        }
         style={styles.movie}
       >
         <Image
-          source={{ uri: data?.movie?.poster }}
+          source={{ uri: detail?.movie?.poster }}
           resizeMode={'stretch'}
           style={[styles.movieImage]}
         />
@@ -75,16 +77,16 @@ function VideoInfo(props: Props): React.ReactElement {
               ellipsizeMode="tail"
               style={styles.titleText}
             >
-              {data.movie?.title}
+              {detail.movie?.title}
             </Text>
-            <Text style={styles.titleRating}>{data.movie?.rating}分</Text>
+            <Text style={styles.titleRating}>{detail.movie?.rating}分</Text>
           </View>
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.infoDesc}>
-            <Text>{data?.movie?.year}</Text>
+            <Text>{detail?.movie?.year}</Text>
             <Text>·</Text>
-            <Text>{data?.movie?.countries}</Text>
+            <Text>{detail?.movie?.countries}</Text>
             <Text>·</Text>
-            <Text>{data?.movie?.genres}</Text>
+            <Text>{detail?.movie?.genres}</Text>
           </Text>
         </View>
       </TouchableOpacity>

@@ -8,7 +8,7 @@ import type { ResponseType, Navigation } from '@/types/index';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 type Props = {
-  data: Partial<ActorInfoType>;
+  detail: Partial<ActorInfoType>;
   refreshDetail: () => void;
 };
 
@@ -33,7 +33,7 @@ function ActorInfo(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
   const isLogin = useSelector((state: RootState) => state.routine.isLogin);
 
-  const { data } = props;
+  const { detail } = props;
 
   // 关注/取消关注影人
   const collectionChange = (is_collection: number): boolean | undefined => {
@@ -43,7 +43,7 @@ function ActorInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 0) {
-      followActor({ id: data.id! })
+      followActor({ id: detail.id! })
         .then((res: ResponseType) => {
           if (res.code === 200) {
             props.refreshDetail();
@@ -54,7 +54,7 @@ function ActorInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 1) {
-      unFollowActor({ id: data.id! })
+      unFollowActor({ id: detail.id! })
         .then((res: ResponseType) => {
           if (res.code === 200) {
             props.refreshDetail();
@@ -68,38 +68,38 @@ function ActorInfo(props: Props): React.ReactElement {
   return (
     <View style={styles.page}>
       <Image
-        source={{ uri: data?.avatar }}
+        source={{ uri: detail?.avatar }}
         resizeMode={'cover'}
         style={[styles.infoImage]}
       />
       <View style={styles.info}>
         <View style={styles.infoBrief}>
-          <Text style={styles.briefName}>{data?.name}</Text>
-          <Text style={styles.briefEnName}>{data?.name_en}</Text>
+          <Text style={styles.briefName}>{detail?.name}</Text>
+          <Text style={styles.briefEnName}>{detail?.name_en}</Text>
           <Text style={styles.briefExtra}>
-            {data?.gender}
-            {Boolean(data?.birthday) && (
+            {detail?.gender}
+            {Boolean(detail?.birthday) && (
               <>
                 <Text> · </Text>
-                {data?.birthday}
+                {detail?.birthday}
               </>
             )}
-            {Boolean(data?.country) && (
+            {Boolean(detail?.country) && (
               <>
                 <Text> · </Text>
-                {data?.country}
+                {detail?.country}
               </>
             )}
           </Text>
         </View>
         <Text
-          onPress={() => collectionChange(data.is_collection!)}
+          onPress={() => collectionChange(detail.is_collection!)}
           style={[
             styles.infoFocus,
-            data?.is_collection === 1 ? styles.activeFoucus : styles.infoFocus
+            detail?.is_collection === 1 ? styles.activeFoucus : styles.infoFocus
           ]}
         >
-          {`${data?.is_collection === 1 ? '已关注' : '关注'}`}
+          {`${detail?.is_collection === 1 ? '已关注' : '关注'}`}
         </Text>
       </View>
     </View>

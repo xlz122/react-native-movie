@@ -133,7 +133,7 @@ function MovieDeail(): React.ReactElement {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         <LinearGradinet colors={gradientColor}>
           <MovieInfo
-            data={detail as MovieInfoType}
+            detail={detail as MovieInfoType}
             refreshDetail={refreshDetail}
           />
         </LinearGradinet>

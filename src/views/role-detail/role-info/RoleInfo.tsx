@@ -8,7 +8,7 @@ import type { ResponseType, Navigation } from '@/types/index';
 import CustomAlert from '@/components/custom-alert/CustomAlert';
 
 type Props = {
-  data: Partial<Info>;
+  detail: Partial<Info>;
   refreshDetail: () => void;
 };
 
@@ -24,7 +24,7 @@ function RoleInfo(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
   const isLogin = useSelector((state: RootState) => state.routine.isLogin);
 
-  const { data } = props;
+  const { detail } = props;
 
   // 收藏/取消收藏角色
   const collectionChange = (is_collection: number): boolean | undefined => {
@@ -34,7 +34,7 @@ function RoleInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 0) {
-      followRole({ id: data.id! })
+      followRole({ id: detail.id! })
         .then((res: ResponseType) => {
           if (res.code === 200) {
             props.refreshDetail();
@@ -45,7 +45,7 @@ function RoleInfo(props: Props): React.ReactElement {
     }
 
     if (is_collection === 1) {
-      unFollowRole({ id: data.id! })
+      unFollowRole({ id: detail.id! })
         .then((res: ResponseType) => {
           if (res.code === 200) {
             props.refreshDetail();
@@ -58,26 +58,26 @@ function RoleInfo(props: Props): React.ReactElement {
 
   return (
     <View style={styles.page}>
-      {data?.avatar && !data?.avatar?.includes('default') && (
+      {detail?.avatar && !detail?.avatar?.includes('default') && (
         <Image
-          source={{ uri: data?.avatar }}
+          source={{ uri: detail?.avatar }}
           resizeMode={'cover'}
           style={[styles.infoImage]}
         />
       )}
       <View style={styles.info}>
         <View style={styles.infoBrief}>
-          <Text style={styles.briefName}>{data?.name}</Text>
-          <Text style={styles.briefEnName}>{data?.name_en}</Text>
+          <Text style={styles.briefName}>{detail?.name}</Text>
+          <Text style={styles.briefEnName}>{detail?.name_en}</Text>
         </View>
         <Text
-          onPress={() => collectionChange(data.is_collection!)}
+          onPress={() => collectionChange(detail.is_collection!)}
           style={[
             styles.infoFocus,
-            data?.is_collection === 1 ? styles.activeFoucus : styles.infoFocus
+            detail?.is_collection === 1 ? styles.activeFoucus : styles.infoFocus
           ]}
         >
-          {`${data?.is_collection === 1 ? '已收藏' : '收藏'}`}
+          {`${detail?.is_collection === 1 ? '已收藏' : '收藏'}`}
         </Text>
       </View>
     </View>
