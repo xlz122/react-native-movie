@@ -135,6 +135,13 @@ const router: Router[] = [
         .default
   },
   {
+    name: 'ActorWorksList',
+    title: '影人作品',
+    headerShown: true,
+    component: require('../views/actor-detail/actor-works-list/ActorWorksList')
+      .default
+  },
+  {
     name: 'UserActor',
     title: '关注影人',
     headerShown: true,
