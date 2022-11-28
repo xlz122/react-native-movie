@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 72,
-    paddingVertical: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     margin: 10,
     backgroundColor: '#fff',
     borderRadius: 4
@@ -39,46 +40,6 @@ const styles = StyleSheet.create({
   },
   countLastItem: {
     borderRightWidth: 0
-  },
-  award: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    height: 72,
-    paddingHorizontal: 10,
-    margin: 10,
-    marginTop: 0,
-    backgroundColor: '#fff',
-    borderRadius: 4
-  },
-  awardImage: {
-    width: 44,
-    height: 44,
-    borderRadius: 50
-  },
-  awardTitle: {
-    flex: 1,
-    paddingLeft: 9.5,
-    fontWeight: '700',
-    fontSize: 15,
-    color: '#303133'
-  },
-  awardCount: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  awardCountText: {
-    fontSize: 12.5,
-    color: '#999'
-  },
-  awardCountIcon: {
-    marginTop: 1.5,
-    fontFamily: 'iconfont',
-    fontSize: 12,
-    color: '#999'
   },
   placeholder: {
     height: 1
