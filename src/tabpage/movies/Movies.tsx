@@ -95,7 +95,7 @@ function Movies(): React.ReactElement {
           page={1}
           pageSize={Math.floor(deviceWidth / 105) * 5}
           request={getMoviesList}
-          initialNumToRender={6}
+          initialNumToRender={15}
           numColumns={Math.floor(deviceWidth / 105)}
           columnWrapperStyle={{
             justifyContent: 'space-between'

@@ -23,17 +23,31 @@ import styles from './video-detail.css';
 
 type Route = RouteProp<{ params: { id: number } }>;
 
-type Detail = {
+export type VideoDetailType = {
   id?: number;
   poster?: string;
   movie?: {
     id?: number;
+    poster?: string;
+    title?: string;
+    rating?: string;
+    year?: number;
+    countries?: string;
+    genres?: string;
   };
   is_like?: boolean;
   like_count?: number;
   is_collection?: boolean;
   collection_count?: number;
   comment_count?: number;
+  author?: {
+    avatar?: string;
+    username?: string;
+    video_count?: number;
+  };
+  title?: string;
+  created_at?: string;
+  play_count?: number;
 };
 
 function VideoDetail(): React.ReactElement {
@@ -41,11 +55,11 @@ function VideoDetail(): React.ReactElement {
   const route: Route = useRoute();
   const isLogin = useSelector((state: RootState) => state.routine.isLogin);
 
-  const [detail, setDetail] = useState<Detail>({});
+  const [detail, setDetail] = useState<VideoDetailType>({});
 
   const getVideoDetail = (id?: number) => {
     videosDetail({ id: id || route.params.id })
-      .then((res: ResponseType<Detail>) => {
+      .then((res: ResponseType<VideoDetailType>) => {
         if (res.code === 200) {
           setDetail(res.data!);
         }
@@ -154,9 +168,9 @@ function VideoDetail(): React.ReactElement {
 
   return (
     <>
-      <Video data={detail} />
+      <Video detail={detail} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-        <VideoInfo data={detail} refreshDetail={refreshDetail} />
+        <VideoInfo detail={detail} refreshDetail={refreshDetail} />
         <VideoList
           detailId={detail.id}
           movieId={detail.movie?.id}
