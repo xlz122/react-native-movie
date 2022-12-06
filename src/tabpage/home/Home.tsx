@@ -102,9 +102,14 @@ function Home(): React.ReactElement {
     outputRange: ['transparent', '#fff'],
     extrapolate: 'clamp' // 阻止输出值超过outputRange
   });
-  const spinElevation = spinValue.interpolate({
+  const spinWidth = spinValue.interpolate({
     inputRange: [0, 150],
-    outputRange: [0, 1.5],
+    outputRange: [0, 0.38],
+    extrapolate: 'clamp' // 阻止输出值超过outputRange
+  });
+  const spinColor = spinValue.interpolate({
+    inputRange: [0, 150],
+    outputRange: ['transparent', '#dfdfdf'],
     extrapolate: 'clamp' // 阻止输出值超过outputRange
   });
 
@@ -134,7 +139,8 @@ function Home(): React.ReactElement {
             <Animated.View
               style={{
                 backgroundColor: spinBackgroundColor,
-                elevation: spinElevation
+                borderBottomWidth: spinWidth,
+                borderColor: spinColor
               }}
             >
               <Search />
