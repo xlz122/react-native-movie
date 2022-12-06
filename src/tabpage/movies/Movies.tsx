@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { deviceWidth } from '@/utils/screen';
@@ -30,10 +30,26 @@ function Movies(): React.ReactElement {
     year: '全部'
   });
 
+  const timer = useRef<NodeJS.Timeout>();
+
   const navChange = (categoryParams: Partial<MovieParams>) => {
-    setResetRefresh(true);
     setNavParams({ ...navParams, ...categoryParams });
+
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    timer.current = setTimeout(() => {
+      setResetRefresh(true);
+    }, 1000);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, []);
 
   const getMoviesList = ({
     page,
