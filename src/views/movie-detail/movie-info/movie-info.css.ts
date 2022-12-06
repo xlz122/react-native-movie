@@ -12,23 +12,27 @@ const styles = StyleSheet.create({
     height: 132,
     borderRadius: 3
   },
-  infoDesc: {
+  info: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
     marginLeft: 15
   },
-  descTitle: {
+  title: {
     marginTop: 1,
     marginBottom: 1,
     fontWeight: '700',
     fontSize: 16,
     color: '#fff'
   },
-  descBrief: {
+  subTitle: {
+    paddingVertical: 1,
+    color: '#e3e3e3'
+  },
+  brief: {
     marginTop: 7
   },
-  descText: {
+  briefText: {
     marginTop: 4,
     fontSize: 11,
     color: '#fff'
