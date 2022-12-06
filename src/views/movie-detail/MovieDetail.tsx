@@ -34,6 +34,7 @@ export type MovieDetailType = {
   comment_count: number;
   id: number;
   title?: string;
+  title_original?: string;
   poster: {
     small: string;
   };

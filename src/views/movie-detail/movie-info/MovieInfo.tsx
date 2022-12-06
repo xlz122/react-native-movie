@@ -106,20 +106,23 @@ function MovieInfo(props: Props): React.ReactElement {
           resizeMode={'stretch'}
           style={[styles.infoImage]}
         />
-        <View style={styles.infoDesc}>
-          <Text style={styles.descTitle}>{detail?.title}</Text>
-          <View style={styles.descBrief}>
+        <View style={styles.info}>
+          <Text style={styles.title}>{detail?.title}</Text>
+          {Boolean(detail?.title_original) && (
+            <Text style={styles.subTitle}>{detail?.title_original}</Text>
+          )}
+          <View style={styles.brief}>
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
-              style={styles.descText}
+              style={styles.briefText}
             >
               {detail?.genres?.join(' / ')}
             </Text>
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
-              style={styles.descText}
+              style={styles.briefText}
             >
               <Text>{detail?.countries?.join(' / ')}</Text>
               <Text>·</Text>
@@ -132,7 +135,7 @@ function MovieInfo(props: Props): React.ReactElement {
               <Text
                 numberOfLines={1}
                 ellipsizeMode="tail"
-                style={styles.descText}
+                style={styles.briefText}
               >
                 <Text>{`共${detail?.episode_count}集`}</Text>
                 <Text>·</Text>
